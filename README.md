@@ -7,5 +7,6 @@ This project has the following dependencies:
 * Jsoup 1.8.1: http://jsoup.org/
 * Netted by 10askinsw (unreleased and optional for certain available plugins)
 
-Thanks to Opim10 for the Yggdrasil authenticator
-Thanks to Jonalu and Godshawk for the LWJGL Scissor util class
+Appreciated help:
+* Thanks to Opim10 for the Yggdrasil authenticator
+* Thanks to Jonalu and Godshawk for the LWJGL Scissor util class
