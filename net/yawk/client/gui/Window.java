@@ -64,16 +64,16 @@ public class Window {
 		
 		//TOGGLE EXTENSION
 		if(extended){
-			GuiUtils.drawBorderedRect(posX+width-10, posY+2, posX+width-2, posY+height-2, 1, 0xFFFFFFFF, 0x99707070);
+			GuiUtils.drawBorderedRect(posX+width-10, posY+2, posX+width-2, posY+height-2, 1, 0x5FFFFFFF, 0x99707070);
 		}else{
-			GuiUtils.drawBorderedRect(posX+width-10, posY+2, posX+width-2, posY+height-2, 1, 0xFFFFFFFF, 0x99000000);
+			GuiUtils.drawBorderedRect(posX+width-10, posY+2, posX+width-2, posY+height-2, 1, 0x5FFFFFFF, 0x99000000);
 		}
 		
 		//TOGGLE PINNED
 		if(pinned){
-			GuiUtils.drawBorderedRect(posX+width-22, posY+2, posX+width-14, posY+height-2, 1, 0xFFFFFFFF, 0x99707070);
+			GuiUtils.drawBorderedRect(posX+width-22, posY+2, posX+width-14, posY+height-2, 1, 0x5FFFFFFF, 0x99707070);
 		}else{
-			GuiUtils.drawBorderedRect(posX+width-22, posY+2, posX+width-14, posY+height-2, 1, 0xFFFFFFFF, 0x99000000);
+			GuiUtils.drawBorderedRect(posX+width-22, posY+2, posX+width-14, posY+height-2, 1, 0x5FFFFFFF, 0x99000000);
 		}
 		
 		if(extended){

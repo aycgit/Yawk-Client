@@ -18,7 +18,7 @@ import com.darkmagician6.eventapi.EventTarget;
 public class DropAll implements Mod{
 		
 	public DropAll(){
-		
+		//TODO: Make this hack much better
 	}
 	
 	@Override

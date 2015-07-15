@@ -77,7 +77,7 @@ public class Backstab implements Mod{
         	}
         }
         
-        return tempEntity != null? (EntityPlayer)tempEntity : null;
+        return tempEntity;
     }
 	
 	private boolean isAttackable(EntityPlayer player){

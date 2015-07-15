@@ -16,7 +16,6 @@ import net.yawk.client.modmanager.*;
 
 public class GuiClickable extends GuiScreen {
 	
-	//TODO: MAKE THIS AN ARRAYLIST AND ADD A LIST ITERATOR
 	public CopyOnWriteArrayList<Window> windows = new CopyOnWriteArrayList<Window>();
 	
 	public GuiClickable(ModManager modManager){
@@ -105,6 +104,15 @@ public class GuiClickable extends GuiScreen {
 		for(Window w : windows){
 			w.mouseReleased(mouseX, mouseY, state);
 		}
+	}
+	
+	public Window getWindowByName(String name){
+		for(Window w : windows){
+			if(w.title.equals(name)){
+				return w;
+			}
+		}
+		return null;
 	}
 	
 	@Override

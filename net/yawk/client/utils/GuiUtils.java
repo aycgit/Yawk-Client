@@ -72,11 +72,11 @@ public class GuiUtils {
 	}
 	
 	public static void drawBorderedRect(int x, int y, int x1, int y1, int lw, int borderC, int insideC){
-		GuiUtils.drawRect(x, y - lw, x1, y, 0x5FFFFFFF);
-		GuiUtils.drawRect(x, y1, x1, y1 + lw, 0x5FFFFFFF);
+		GuiUtils.drawRect(x, y - lw, x1, y, borderC);
+		GuiUtils.drawRect(x, y1, x1, y1 + lw, borderC);
 		
-		GuiUtils.drawRect(x - lw, y - lw, x, y1 + lw, 0x5FFFFFFF);
-		GuiUtils.drawRect(x1, y - lw, x1 + lw, y1 + lw, 0x5FFFFFFF);
+		GuiUtils.drawRect(x - lw, y - lw, x, y1 + lw, borderC);
+		GuiUtils.drawRect(x1, y - lw, x1 + lw, y1 + lw, borderC);
 		
 		GuiUtils.drawRect(x, y, x1, y1, insideC);
 	}

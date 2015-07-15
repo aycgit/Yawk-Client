@@ -12,7 +12,7 @@ import com.darkmagician6.eventapi.EventTarget;
 public class HorseNameLag implements Mod{
 	
 	public HorseNameLag(){
-		
+		//TODO: Fix this mod
 	}
 	
 	@Override

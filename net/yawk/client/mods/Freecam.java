@@ -14,7 +14,6 @@ import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModData;
 import net.yawk.client.modmanager.ModType;
-import net.yawk.client.utils.FreecamEntity;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;

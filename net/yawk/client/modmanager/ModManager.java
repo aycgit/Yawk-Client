@@ -114,4 +114,14 @@ public class ModManager {
 		
 		return null;
 	}
+	
+	public Mod getModByName(String name){
+		for(Mod m : mods){
+			if(m.getName().equals(name)){
+				return m;
+			}
+		}
+		
+		return null;
+	}
 }

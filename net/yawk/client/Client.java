@@ -40,6 +40,7 @@ import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModData;
 import net.yawk.client.modmanager.ModManager;
 import net.yawk.client.mods.HideClient;
+import net.yawk.client.saving.FileManager;
 import net.yawk.client.utils.ClientSession;
 import net.yawk.client.utils.ClientUtils;
 
@@ -53,8 +54,9 @@ public class Client {
 	private ClientSession session;
 	private ModManager modManager;
 	private PluginManager pluginManager;
+	private FileManager fileManager;
 	
-	private int BUILD_NUMBER = 78;
+	private int BUILD_NUMBER = 80;
 	
 	public Client(final Minecraft mc){
 		
@@ -69,10 +71,13 @@ public class Client {
 		this.gui = new GuiClickable(modManager);
 		
 		this.pluginManager = new PluginManager();
+		this.fileManager = new FileManager();
 		
 		(new Thread(){
 			
 			public void run(){
+				
+				fileManager.load();
 				
 				try {
 					pluginManager.load();
@@ -94,6 +99,7 @@ public class Client {
 			public void run() {
 				System.out.println("Yawk shutdown hook running");
 				pluginManager.onMinecraftClose();
+				fileManager.save();
 			}
 		});
 	}
@@ -136,6 +142,10 @@ public class Client {
 	
 	public ClientSession getSession() {
 		return session;
+	}
+	
+	public FileManager getFileManager() {
+		return fileManager;
 	}
 	
 	public void keyPressed(int key){

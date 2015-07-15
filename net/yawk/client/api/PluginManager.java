@@ -77,6 +77,7 @@ public class PluginManager {
 			}
 			
 		}else{
+			//TODO: Move this to the file manager
 			
 			JSONArray arr1 = (JSONArray) JSONValue.parse(FileUtils.readFileFull(config));
 			
@@ -331,6 +332,7 @@ public class PluginManager {
 	/**
 	 * The method run by the ShutdownHook when the client quits, to save the data about our current plugins
 	 */
+	//TODO: Move this to the file manager
 	public void onMinecraftClose(){
 		
 		if(!config.exists()){

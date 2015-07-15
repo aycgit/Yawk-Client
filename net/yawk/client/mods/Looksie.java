@@ -15,7 +15,7 @@ import com.darkmagician6.eventapi.EventTarget;
 public class Looksie implements Mod{
 	
 	public Looksie(){
-		
+		//TODO: Fix this mod, it's broken
 	}
 	
 	@Override

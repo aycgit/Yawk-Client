@@ -22,7 +22,11 @@ public class AutoSoup implements Mod{
 	private long currentMS;
 	private long lastStack = -1;
 	private long stackThreshhold = 150L;
-
+	
+	public AutoSoup(){
+		//TODO: Make this mod better because chris made it and it isn't very good
+	}
+	
 	@Override
 	public String getName() {
 		return "AutoSoup";
@@ -40,7 +44,6 @@ public class AutoSoup implements Mod{
 			getSoup();
 			getBestWeapon();
 		}
-
 	}
 
 	@Override
@@ -57,9 +60,6 @@ public class AutoSoup implements Mod{
 	public void onDisable() {
 
 	}
-
-
-
 
 	private void getSoup()
 	{
@@ -135,8 +135,6 @@ public class AutoSoup implements Mod{
 		mc.thePlayer.inventory.currentItem = newItem;
 	}
 
-
-
 	private boolean timeHasPassed(long threshhold)
 	{
 		return currentMS - lastStack >= threshhold;
@@ -190,8 +188,5 @@ public class AutoSoup implements Mod{
 		}
 		stackSlot = -1; // reset the slot so it doesn't get stuck later on
 	}
-
-
-
 
 }
