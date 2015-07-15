@@ -15,8 +15,9 @@ public class FileManager {
 	
 	public FileManager(){
 		tasks = new DataTask[]{
-				new ModTask(),
-				new WindowTask(),
+				new ModDataTask(),
+				new WindowDataTask(),
+				new PluginDataTask(),
 		};
 	}
 	

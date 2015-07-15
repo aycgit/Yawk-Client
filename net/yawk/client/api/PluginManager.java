@@ -47,7 +47,7 @@ public class PluginManager {
 	
 	public ArrayList<PluginData> pluginData = new ArrayList<PluginData>();
 	private ConcurrentLinkedQueue<PluginData> downloadQueue = new ConcurrentLinkedQueue<PluginData>();
-	private HashMap<PluginData,Window> pluginWindows = new HashMap<PluginData,Window>();
+	public HashMap<PluginData,Window> pluginWindows = new HashMap<PluginData,Window>();
 	
 	private Thread downloadThread;
 	
@@ -64,31 +64,7 @@ public class PluginManager {
 		if(!plugins.exists()){
 			plugins.mkdir();
 		}
-		
-		//The list of the data saved on the previous shutdown. This tells us if we need an update or which plugins were previously enabled.
-		ArrayList<PluginData> lastInstalledData = new ArrayList<PluginData>();
-		
-		if(!config.exists()){
-			
-			try {
-				config.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}else{
-			//TODO: Move this to the file manager
-			
-			JSONArray arr1 = (JSONArray) JSONValue.parse(FileUtils.readFileFull(config));
-			
-			System.out.println("FILES: "+arr1.toJSONString());
-			
-			for(Object obj : arr1){
-				JSONObject json = (JSONObject) obj;
-				lastInstalledData.add(new PluginData(json.get("name").toString(), json.get("file").toString(), json.get("filename").toString(), Integer.parseInt(json.get("version").toString()), Boolean.parseBoolean(json.get("enabled").toString())));
-			}
-		}
-		
+				
 		//Get plugins from the website
 		try {
 			
@@ -115,33 +91,6 @@ public class PluginManager {
 				this.downloadPlugin(available);
 			}
 		}
-		
-		//Check if a new update is available
-		for(PluginData last : lastInstalledData){
-			
-			PluginData newData = getPluginDataByName(last.getName());
-			
-			if(newData != null){
-				if(last.getVersion() < newData.getVersion()){
-					//GET NEW VERSION DOWNLOADED
-					System.out.println("DOWNLOADING NEW VERSION: "+newData.getName()+" ("+newData.getVersion()+")");
-					new File(plugins, last.getName()).delete();
-					downloadPlugin(newData);
-				}
-			}
-		}
-		
-		//Load the previously enabled plugins
-		for(PluginData last : lastInstalledData){
-			if(last.getWasEnabled()){
-				
-				PluginData newData = getPluginDataByName(last.getName());
-				
-				if(newData != null){
-					addPlugin(newData);
-				}
-			}
-		}
 	}
 	
 	/**
@@ -149,7 +98,7 @@ public class PluginManager {
 	 * @param name
 	 * @return
 	 */
-	private PluginData getPluginDataByName(String name){
+	public PluginData getPluginDataByName(String name){
 		
 		for(PluginData data : pluginData){
 			if(data.getName().equals(name)){
@@ -328,40 +277,7 @@ public class PluginManager {
 		
 		pluginWindows.remove(plugin);
 	}
-	
-	/**
-	 * The method run by the ShutdownHook when the client quits, to save the data about our current plugins
-	 */
-	//TODO: Move this to the file manager
-	public void onMinecraftClose(){
 		
-		if(!config.exists()){
-			try {
-				config.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return;
-		}
-		
-		JSONArray arr = new JSONArray();
-		
-		for(PluginData data : pluginData){
-			
-			JSONObject json = new JSONObject();
-			
-			json.put("name", data.getName());
-			json.put("file", data.getFilePath());
-			json.put("filename", data.getFileName());
-			json.put("version", data.getVersion());
-			json.put("enabled", pluginWindows.containsKey(data));
-			
-			arr.add(json);
-		}
-		
-		FileUtils.writeFile(config, arr.toJSONString());
-	}
-	
 	private boolean developerMode = true;
 	
 	/**

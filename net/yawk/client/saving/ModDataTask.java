@@ -7,7 +7,7 @@ import net.yawk.client.modmanager.ModData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class ModTask implements DataTask{
+public class ModDataTask implements DataTask{
 
 	@Override
 	public String getFileName() {

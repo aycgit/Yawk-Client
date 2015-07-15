@@ -98,7 +98,6 @@ public class Client {
 			@Override
 			public void run() {
 				System.out.println("Yawk shutdown hook running");
-				pluginManager.onMinecraftClose();
 				fileManager.save();
 			}
 		});
