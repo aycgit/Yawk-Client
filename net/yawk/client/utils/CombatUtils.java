@@ -42,6 +42,12 @@ public class CombatUtils {
 		Client.getClient().getPlayer().rotationYaw = var12;
 	}
 	
+	/**
+	 * Begins to look towards an entity
+	 * @param e
+	 * @param move
+	 * @return whether you're now looking near to the entity
+	 */
 	public static boolean faceEntitySmooth(Entity e, boolean move)
 	{
 		double x = e.posX - Client.getClient().getMinecraft().thePlayer.posX;

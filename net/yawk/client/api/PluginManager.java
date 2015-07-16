@@ -64,7 +64,7 @@ public class PluginManager {
 		if(!plugins.exists()){
 			plugins.mkdir();
 		}
-				
+		
 		//Get plugins from the website
 		try {
 			
@@ -96,7 +96,7 @@ public class PluginManager {
 	/**
 	 * Finds the Plugin object with a particular name 
 	 * @param name
-	 * @return
+	 * @return the data of the plugin with that name
 	 */
 	public PluginData getPluginDataByName(String name){
 		
