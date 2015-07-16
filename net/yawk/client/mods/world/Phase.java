@@ -66,7 +66,7 @@ public class Phase implements Mod{
 	
 	@EventTarget
 	public void onPushOut(EventPushOut e){
-		e.shouldPush = false;
+		e.setCancelled(true);
 	}
 	
 	@EventTarget

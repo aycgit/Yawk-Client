@@ -24,7 +24,6 @@ public class PlayerControllerMPHook extends PlayerControllerMP{
 	public void updateController() {
 		super.updateController();
 		EventManager.call(tick);
-		blockHitDelay = 0;
 	}
 	
 	@Override

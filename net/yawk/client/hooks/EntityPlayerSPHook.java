@@ -30,12 +30,14 @@ public class EntityPlayerSPHook extends EntityPlayerSP{
 	@Override
 	protected boolean pushOutOfBlocks(double x, double y, double z) {
 		
-		boolean b = super.pushOutOfBlocks(x, y, z);
-		
-		EventPushOut e = new EventPushOut(b);
+		EventPushOut e = new EventPushOut(x, y, z);
 		EventManager.call(e);
 		
-		return e.shouldPush;
+		if(e.isCancelled()){
+			return false;
+		}else{
+			return super.pushOutOfBlocks(x, y, z);
+		}
 	}
 	
 	@Override
