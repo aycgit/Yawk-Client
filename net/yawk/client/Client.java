@@ -39,7 +39,7 @@ import net.yawk.client.hooks.EntityPlayerSPHook;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModData;
 import net.yawk.client.modmanager.ModManager;
-import net.yawk.client.mods.HideClient;
+import net.yawk.client.mods.world.HideClient;
 import net.yawk.client.saving.FileManager;
 import net.yawk.client.utils.ClientSession;
 import net.yawk.client.utils.ClientUtils;
