@@ -18,16 +18,20 @@ public class Speed extends Mod{
 	public Speed(){
 		
 	}
-		
+	
 	@EventTarget
 	public void onMove(EventMoveEntity e){
 		if(e.type == EventType.PRE){
 			
-			e.x *= 4f;
-			e.z *= 4f;
+			e.x *= 3f;
+			e.z *= 3f;
+			
+			if(e.y > 0){
+				e.y *= 2f;
+			}
 		}
 	}
-		
+	
 	@Override
 	public void onEnable() {
 		
