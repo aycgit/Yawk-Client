@@ -18,18 +18,18 @@ public class GuiIngameHook extends GuiIngame{
 		super(mc);
 		Client.init(mc);
 		
-		mod = Client.getClient().getHideClientMod();
+		hideClientMod = Client.getClient().getHideClientMod();
 	}
 	
-	private Mod mod;
+	private Mod hideClientMod;
 	
-	private EventGuiRender tick = new EventGuiRender();
+	private EventGuiRender eventGuiRender = new EventGuiRender();
 	
 	@Override
     public void func_175180_a(float p_175180_1_){
 		super.func_175180_a(p_175180_1_);
 		
-		if(!mod.isEnabled()){
+		if(!hideClientMod.isEnabled()){
 			Client.getClient().getFontRenderer().drawStringWithShadow("Yawk" + ChatColours.GREEN + " v2.5" + ChatColours.LIGHT_PURPLE + " ("+(Client.getClient().getSession().isPremium()? "Premium":"Beta")+")", 3, 2, 0xFFFFFFFF, true);
 		}
 		
@@ -41,6 +41,6 @@ public class GuiIngameHook extends GuiIngame{
 			}
 		}
 		
-		EventManager.call(tick);
+		EventManager.call(eventGuiRender);
 	}
 }

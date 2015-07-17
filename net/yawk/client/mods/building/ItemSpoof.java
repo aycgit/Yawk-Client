@@ -29,7 +29,7 @@ public class ItemSpoof extends Mod{
     @EventTarget
     public void onMotionUpdate(EventMotionUpdate event)
     {
-
+    	
     	if (event.type == EventType.PRE)
     	{
     		if (!reverse)
