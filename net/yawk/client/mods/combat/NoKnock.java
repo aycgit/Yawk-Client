@@ -11,7 +11,7 @@ import net.yawk.client.modmanager.ModDetails;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "NoKnock", defaultKey = 0, desc = "Reduces your knockback", type = Mod.Type.COMBAT)
+@ModDetails(name = "NoKnock", desc = "Reduces your knockback", type = Mod.Type.COMBAT)
 public class NoKnock extends Mod{
 	
 	public NoKnock(){

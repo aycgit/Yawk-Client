@@ -15,7 +15,8 @@ import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
-@ModDetails(name = "DropAll", defaultKey = 0, desc = "Drop all your items", type = Mod.Type.BUILDING)
+
+@ModDetails(name = "DropAll", desc = "Drop all your items", type = Mod.Type.BUILDING)
 public class DropAll extends Mod{
 		
 	public DropAll(){

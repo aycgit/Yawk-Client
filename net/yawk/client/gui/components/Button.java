@@ -43,7 +43,7 @@ public abstract class Button extends Component{
 		}
 	}
 	
-	private boolean mouseOverButton(int x, int y, int cx, int cy){
+	public boolean mouseOverButton(int x, int y, int cx, int cy){
 		return x > cx && x < cx+win.getWidth() && y > cy && y < cy+getHeight();
 	}
 	

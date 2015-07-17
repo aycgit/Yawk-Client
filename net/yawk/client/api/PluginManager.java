@@ -187,6 +187,11 @@ public class PluginManager {
 			
 			//This puts the plugin hacks into the module system and plugin window gui
 			for(Mod m : mods){
+				
+				if(m instanceof PluginMod){
+					((PluginMod) m).setPluginData(plugin);
+				}
+				
 				Client.getClient().getModManager().addMod(m, plugin);
 				w.components.add(new ModButton(w, m));
 			}
@@ -258,7 +263,7 @@ public class PluginManager {
 		System.out.println("REMOVING: "+plugin.getFileName());
 		
 		ModButton modButton = null;
-		PluginMod pluginMod = null;
+		ArrayList<PluginMod> pluginMods = new ArrayList<PluginMod>();
 		
 		for(Mod mod : Client.getClient().getModManager().mods){
 			if(mod instanceof PluginMod){
@@ -266,21 +271,21 @@ public class PluginManager {
 				PluginMod pl = ((PluginMod) mod);
 				
 				if(pl.getPluginData() == plugin){
-					pluginMod = pl;
-					break;
+					pluginMods.add(pl);
 				}
 			}
 		}
 		
-		Client.getClient().getModManager().mods.remove(pluginMod);
-		Client.getClient().getModManager().nameMap.remove(Client.getClient().getModManager().getModName(pluginMod));
-		EventManager.unregister(pluginMod);
+		for(PluginMod pluginMod : pluginMods){
+			Client.getClient().getModManager().mods.remove(pluginMod);
+			Client.getClient().getModManager().nameMap.remove(Client.getClient().getModManager().getModName(pluginMod));
+			EventManager.unregister(pluginMod);
+		}
 		
 		Client.getClient().getGui().windows.remove(this.pluginWindows.get(plugin));
-		
 		pluginWindows.remove(plugin);
 	}
-		
+	
 	private boolean developerMode = true;
 	
 	/**

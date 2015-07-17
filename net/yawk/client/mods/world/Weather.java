@@ -7,7 +7,7 @@ import net.yawk.client.modmanager.ModDetails;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Weather", defaultKey = 0, desc = "Hide rain and snow", type = Mod.Type.WORLD)
+@ModDetails(name = "Weather", desc = "Hide rain and snow", type = Mod.Type.WORLD)
 public class Weather extends Mod{
 	
 	public Weather(){

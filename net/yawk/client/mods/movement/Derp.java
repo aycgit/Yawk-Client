@@ -12,7 +12,7 @@ import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Derp", defaultKey = 0, desc = "Look stupid", type = Mod.Type.MOVEMENT)
+@ModDetails(name = "Derp", desc = "Look stupid", type = Mod.Type.MOVEMENT)
 public class Derp extends Mod{
 	
 	public Derp(){

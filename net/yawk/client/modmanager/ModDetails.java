@@ -11,7 +11,7 @@ public @interface ModDetails {
 	
 	String name();
 	String desc();
-	int defaultKey();
+	int defaultKey() default -1;
 	Mod.Type type();
 	
 }

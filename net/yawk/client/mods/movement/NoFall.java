@@ -9,7 +9,7 @@ import net.yawk.client.modmanager.ModDetails;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "NoFall", defaultKey = 0, desc = "Don't take fall damage", type = Mod.Type.MOVEMENT)
+@ModDetails(name = "NoFall", desc = "Don't take fall damage", type = Mod.Type.MOVEMENT)
 public class NoFall extends Mod{
 	
 	public NoFall(){

@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL13;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Tracers", defaultKey = 0, desc = "Draws lines to players", type = Mod.Type.WORLD)
+@ModDetails(name = "Tracers", desc = "Draws lines to players", type = Mod.Type.WORLD)
 public class Tracers extends Mod{
 
 	@Override

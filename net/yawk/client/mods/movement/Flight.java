@@ -10,7 +10,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Flight", defaultKey = 0, desc = "Fly in the air", type = Mod.Type.MOVEMENT)
+@ModDetails(name = "Flight", defaultKey = Keyboard.KEY_R, desc = "Fly in the air", type = Mod.Type.MOVEMENT)
 public class Flight extends Mod{
 			
 	@EventTarget

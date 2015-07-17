@@ -8,7 +8,7 @@ import net.yawk.client.modmanager.ModDetails;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "HorseNameLag", defaultKey = 0, desc = "Lag people with horse nametags", type = Mod.Type.WORLD)
+@ModDetails(name = "HorseNameLag", desc = "Lag people with horse nametags", type = Mod.Type.WORLD)
 public class HorseNameLag extends Mod{
 	
 	public HorseNameLag(){

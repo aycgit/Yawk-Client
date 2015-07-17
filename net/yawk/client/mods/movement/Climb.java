@@ -7,7 +7,7 @@ import net.yawk.client.modmanager.ModDetails;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Climb", defaultKey = 0, desc = "Climb up walls", type = Mod.Type.MOVEMENT)
+@ModDetails(name = "Climb", desc = "Climb up walls", type = Mod.Type.MOVEMENT)
 public class Climb extends Mod{
 	
 	public Climb(){

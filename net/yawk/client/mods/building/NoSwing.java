@@ -15,7 +15,7 @@ import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "NoSwing", defaultKey = 0, desc = "Don't swing your arm", type = Mod.Type.BUILDING)
+@ModDetails(name = "NoSwing", desc = "Don't swing your arm", type = Mod.Type.BUILDING)
 public class NoSwing extends Mod{
 	
 	public NoSwing(){

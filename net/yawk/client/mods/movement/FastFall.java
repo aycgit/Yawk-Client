@@ -7,7 +7,7 @@ import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
 
-@ModDetails(name = "FastFall", defaultKey = 0, desc = "Fall faster than usual", type = Mod.Type.MOVEMENT)
+@ModDetails(name = "FastFall", desc = "Fall faster than usual", type = Mod.Type.MOVEMENT)
 public class FastFall extends Mod{
 	Minecraft mc = Minecraft.getMinecraft();
 		

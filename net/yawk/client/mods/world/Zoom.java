@@ -9,7 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Zoom", defaultKey = 0, desc = "Magnify your view", type = Mod.Type.WORLD)
+@ModDetails(name = "Zoom", desc = "Magnify your view", type = Mod.Type.WORLD)
 public class Zoom extends Mod{
 	
 	private float prevFOV;

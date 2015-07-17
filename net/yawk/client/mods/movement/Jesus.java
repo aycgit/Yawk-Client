@@ -20,7 +20,7 @@ import net.yawk.client.utils.ClientUtils;
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "Jesus", defaultKey = 0, desc = "Walk on water", type = Mod.Type.MOVEMENT)
+@ModDetails(name = "Jesus", desc = "Walk on water", type = Mod.Type.MOVEMENT)
 public class Jesus extends Mod{
 	
 	public Jesus(){

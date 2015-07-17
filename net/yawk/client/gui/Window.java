@@ -68,17 +68,21 @@ public class Window {
 		}
 		
 		//TOGGLE EXTENSION
-		if(extended){
-			GuiUtils.drawBorderedRect(posX+width-10, posY+2, posX+width-2, posY+height-2, 1, 0x5FFFFFFF, 0x99707070);
-		}else{
-			GuiUtils.drawBorderedRect(posX+width-10, posY+2, posX+width-2, posY+height-2, 1, 0x5FFFFFFF, 0x99000000);
+		if(hasExtensionButton()){
+			if(extended){
+				GuiUtils.drawBorderedRect(posX+width-10, posY+2, posX+width-2, posY+height-2, 1, 0x5FFFFFFF, 0x99707070);
+			}else{
+				GuiUtils.drawBorderedRect(posX+width-10, posY+2, posX+width-2, posY+height-2, 1, 0x5FFFFFFF, 0x99000000);
+			}
 		}
 		
 		//TOGGLE PINNED
-		if(pinned){
-			GuiUtils.drawBorderedRect(posX+width-22, posY+2, posX+width-14, posY+height-2, 1, 0x5FFFFFFF, 0x99707070);
-		}else{
-			GuiUtils.drawBorderedRect(posX+width-22, posY+2, posX+width-14, posY+height-2, 1, 0x5FFFFFFF, 0x99000000);
+		if(hasPinnedButton()){
+			if(pinned){
+				GuiUtils.drawBorderedRect(posX+width-22, posY+2, posX+width-14, posY+height-2, 1, 0x5FFFFFFF, 0x99707070);
+			}else{
+				GuiUtils.drawBorderedRect(posX+width-22, posY+2, posX+width-14, posY+height-2, 1, 0x5FFFFFFF, 0x99000000);
+			}
 		}
 		
 		if(extended){
@@ -103,12 +107,10 @@ public class Window {
 	
 	public void mouseClicked(int x, int y){
 		
-		if(this.mouseOverToggleExtension(x, y)){
-			extended = !extended;
-			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
-		}else if(this.mouseOverTogglePinned(x, y)){
-			pinned = !pinned;
-			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
+		if(hasExtensionButton() && this.mouseOverToggleExtension(x, y)){
+			onExtensionToggle();
+		}else if(hasPinnedButton() && this.mouseOverTogglePinned(x, y)){
+			onPinnedToggle();
 		}else if(this.mouseOverTitle(x, y)){
 			dragging = true;
 			
@@ -126,6 +128,28 @@ public class Window {
 				h += c.getHeight();
 			}
 		}
+	}
+	
+	protected boolean hasExtensionButton(){
+		return true;
+	}
+	
+	protected boolean hasPinnedButton(){
+		return true;
+	}
+	
+	protected void onExtensionToggle(){
+		extended = !extended;
+		doClickSound();
+	}
+	
+	protected void onPinnedToggle(){
+		pinned = !pinned;
+		doClickSound();
+	}
+	
+	protected void doClickSound(){
+		Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
 	}
 	
 	protected void mouseReleased(int mouseX, int mouseY, int state) {

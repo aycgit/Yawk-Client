@@ -9,7 +9,7 @@ import net.yawk.client.modmanager.ModDetails;
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "HighJump", defaultKey = 0, desc = "Jump higher", type = Mod.Type.MOVEMENT)
+@ModDetails(name = "HighJump", desc = "Jump higher", type = Mod.Type.MOVEMENT)
 public class HighJump extends Mod{
 	
 	public HighJump(){
@@ -19,7 +19,7 @@ public class HighJump extends Mod{
 	@EventTarget
 	public void onJump(EventJump e){
 		if(e.type == EventType.POST){
-			Client.getClient().getPlayer().motionY = 1.5f;
+			Client.getClient().getPlayer().motionY = 1.2f;
 		}
 	}
 		

@@ -18,7 +18,7 @@ import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Nuker", defaultKey = 0, desc = "Break blocks around you", type = Mod.Type.BUILDING)
+@ModDetails(name = "Nuker", desc = "Break blocks around you", type = Mod.Type.BUILDING)
 public class Nuker extends Mod{
 	
 	private IBlockState block;

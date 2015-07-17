@@ -10,7 +10,7 @@ import net.yawk.client.utils.ESPUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "ChestESP", defaultKey = 0, desc = "See chests through walls", type = Mod.Type.WORLD)
+@ModDetails(name = "ChestESP", desc = "See chests through walls", type = Mod.Type.WORLD)
 public class ChestESP extends Mod{
 	
 	public ChestESP(){

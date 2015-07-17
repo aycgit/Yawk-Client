@@ -9,7 +9,7 @@ import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "AutoBlock", defaultKey = 0, desc = "Block with your sword automatically", type = Mod.Type.COMBAT)
+@ModDetails(name = "AutoBlock", desc = "Block with your sword automatically", type = Mod.Type.COMBAT)
 public class AutoBlock extends Mod{
 	
 	public AutoBlock(){

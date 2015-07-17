@@ -14,7 +14,8 @@ import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
-@ModDetails(name = "FastPlace", defaultKey = 0, desc = "Place blocks faster", type = Mod.Type.BUILDING)
+
+@ModDetails(name = "FastPlace", desc = "Place blocks faster", type = Mod.Type.BUILDING)
 public class FastPlace extends Mod{
 	
 	public FastPlace(){

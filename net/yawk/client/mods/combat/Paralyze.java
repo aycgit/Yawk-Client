@@ -9,7 +9,7 @@ import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Paralyze", defaultKey = 0, desc = "Freeze players inside you", type = Mod.Type.COMBAT)
+@ModDetails(name = "Paralyze", desc = "Freeze players inside you", type = Mod.Type.COMBAT)
 public class Paralyze extends Mod{
 	
 	@EventTarget

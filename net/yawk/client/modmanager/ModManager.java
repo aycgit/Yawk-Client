@@ -25,6 +25,7 @@ public class ModManager {
 	
 	public ModManager(){
 		
+		//TODO: Maybe scan the mod packages or something to get rid of this massive list
 		mods.add(new Flight());
 		mods.add(new Nuker());
 		mods.add(new Paralyze());
@@ -49,7 +50,7 @@ public class ModManager {
 		mods.add(new Projectiles());
 		mods.add(new ItemSpoof());
 		mods.add(new Sprint());
-		mods.add(new Zoom());
+		mods.add(new Zoom()); //TODO: move to meta
 		mods.add(new Phase());
 		mods.add(new AutoSoup());
 		mods.add(new NoKnock());
@@ -59,7 +60,7 @@ public class ModManager {
 		mods.add(new Derp());
 		mods.add(new SafeBlocks());
 		mods.add(new Backstab());
-		mods.add(new HideClient());
+		mods.add(new HideClient()); //TODO: move to meta
 		mods.add(new NoSwing());
 		mods.add(new FakeHacker());
 		mods.add(new Jesus());
@@ -73,9 +74,13 @@ public class ModManager {
 		mods.add(new NoFlinch());
 		mods.add(new Build());
 		mods.add(new Triggerbot());
+		//mods.add(new Description()); //TODO: make this and move it to meta
 		
 		for(Mod m : mods){
-			nameMap.put(m.getClass().getAnnotation(ModDetails.class).name(), m);
+			ModDetails details = m.getClass().getAnnotation(ModDetails.class);
+			nameMap.put(details.name(), m);
+			m.setKeybind(details.defaultKey());
+			EventManager.register(m);
 		}
 	}
 	
@@ -83,6 +88,7 @@ public class ModManager {
 		
 		mods.add(m);
 		nameMap.put(m.getClass().getAnnotation(ModDetails.class).name(), m);
+		EventManager.register(m);
 		
 		String type = getModType(m).getName();
 		
@@ -96,20 +102,19 @@ public class ModManager {
 	public void addMod(Mod m, PluginData data){
 		mods.add(m);
 		nameMap.put(m.getClass().getAnnotation(ModDetails.class).name(), m);
+		EventManager.register(m);
 	}
 	
 	public void toggle(Mod m){
 		
-		if(!m.isEnabled()){
-			EventManager.register(m);
+		if(m.isEnabled()){
+			m.setEnabled(false);
+			EventManager.call(new EventDisabled(m));
+			m.onDisable();
+		}else{
 			m.setEnabled(true);
 			EventManager.call(new EventEnabled(m));
 			m.onEnable();
-		}else{
-			m.setEnabled(false);
-			EventManager.unregister(m);
-			EventManager.call(new EventDisabled(m));
-			m.onDisable();
 		}
 	}
 	

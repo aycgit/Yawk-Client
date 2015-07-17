@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Projectiles", defaultKey = 0, desc = "See where arrows will land", type = Mod.Type.COMBAT)
+@ModDetails(name = "Projectiles", desc = "See where arrows will land", type = Mod.Type.COMBAT)
 public class Projectiles extends Mod{
 	
 	public Projectiles(){

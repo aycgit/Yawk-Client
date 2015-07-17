@@ -7,7 +7,7 @@ import net.yawk.client.modmanager.ModDetails;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "NoFlinch", defaultKey = 0, desc = "Don't flinch when hit", type = Mod.Type.COMBAT)
+@ModDetails(name = "NoFlinch", desc = "Don't flinch when hit", type = Mod.Type.COMBAT)
 public class NoFlinch extends Mod{
 	
 	public NoFlinch(){

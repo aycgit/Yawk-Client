@@ -20,7 +20,7 @@ import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Day", defaultKey = 0, desc = "Set the time to day", type = Mod.Type.WORLD)
+@ModDetails(name = "Day", desc = "Set the time to day", type = Mod.Type.WORLD)
 public class Day extends Mod{
 	
 	public Day(){

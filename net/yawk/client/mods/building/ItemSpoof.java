@@ -12,7 +12,7 @@ import net.yawk.client.utils.ClientUtils;
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "ItemSpoof", defaultKey = 0, desc = "Hides what item you're holding", type = Mod.Type.BUILDING)
+@ModDetails(name = "ItemSpoof", desc = "Hides what item you're holding", type = Mod.Type.BUILDING)
 public class ItemSpoof extends Mod{
 	
 	public ItemSpoof(){

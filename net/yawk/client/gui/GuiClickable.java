@@ -10,6 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import net.yawk.client.Client;
 import net.yawk.client.gui.components.*;
 import net.yawk.client.modmanager.*;
@@ -17,6 +18,7 @@ import net.yawk.client.modmanager.*;
 public class GuiClickable extends GuiScreen {
 	
 	public CopyOnWriteArrayList<Window> windows = new CopyOnWriteArrayList<Window>();
+	public boolean opened;
 	
 	public GuiClickable(ModManager modManager){
 		
@@ -117,7 +119,27 @@ public class GuiClickable extends GuiScreen {
 	
 	@Override
 	public void initGui() {
+		
 		Keyboard.enableRepeatEvents(true);
+		
+		if(!opened){
+			
+			ScaledResolution sr = new ScaledResolution(Client.getClient().getMinecraft(), Client.getClient().getMinecraft().displayWidth, Client.getClient().getMinecraft().displayHeight);
+			
+			Window popup = new WindowPopup(
+					"Welcome",
+					"Get help here:",
+					Client.getClient().getModManager(),
+					100,
+					sr.getScaledWidth(),
+					sr.getScaledHeight());
+			
+			popup.components.add(new LinkButton(popup, "Yawk Forums", "http://yawk.net/forums"));
+			
+			windows.add(popup);
+			
+			opened = true;
+		}
 	}
 	
 	@Override

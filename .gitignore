@@ -45,5 +45,4 @@ Temporary Items
 # Yawk client exclusions
 
 net/minecraft/
-com/
 Start.java

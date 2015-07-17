@@ -16,7 +16,7 @@ import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Step", defaultKey = 0, desc = "Jump up blocks automatically", type = Mod.Type.MOVEMENT)
+@ModDetails(name = "Step", desc = "Jump up blocks automatically", type = Mod.Type.MOVEMENT)
 public class Step extends Mod{
 	
 	@EventTarget

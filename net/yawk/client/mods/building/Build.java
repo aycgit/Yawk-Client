@@ -20,7 +20,7 @@ import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Build", defaultKey = 0, desc = "Automatically build structures", type = Mod.Type.BUILDING)
+@ModDetails(name = "Build", desc = "Automatically build structures", type = Mod.Type.BUILDING)
 public class Build extends Mod{
 	
 	@EventTarget

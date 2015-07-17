@@ -18,6 +18,7 @@ public class FileManager {
 				new ModDataTask(),
 				new WindowDataTask(),
 				new PluginDataTask(),
+				new ClientDataTask(),
 		};
 	}
 	
@@ -58,6 +59,6 @@ public class FileManager {
 	}
 	
 	private File getFile(DataTask task){
-		return new File(Client.getFullDir(), task.getFileName() + ".yawk");
+		return new File(Client.getFullDir(), task.getFileName() + ".json");
 	}
 }

@@ -3,12 +3,11 @@ package net.yawk.client.modmanager;
 import net.yawk.client.api.PluginData;
 
 public class PluginMod extends Mod{
-
-	private PluginData pluginData;
 	
-	public PluginMod(int keybind, PluginData pluginData) {
-		super(keybind);
-		this.pluginData = pluginData;
+	private PluginData pluginData = null;
+	
+	public PluginMod() {
+		super();
 	}
 	
 	public PluginData getPluginData() {

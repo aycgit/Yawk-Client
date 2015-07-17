@@ -23,7 +23,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Parkour", defaultKey = 0, desc = "See where you will jump", type = Mod.Type.WORLD)
+@ModDetails(name = "Parkour", desc = "See where you will jump", type = Mod.Type.WORLD)
 public class Parkour extends Mod{
 	
 	public Parkour(){

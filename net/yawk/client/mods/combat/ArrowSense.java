@@ -13,7 +13,7 @@ import net.yawk.client.modmanager.ModDetails;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "ArrowSense", defaultKey = 0, desc = "See where arrows will land", type = Mod.Type.COMBAT)
+@ModDetails(name = "ArrowSense", desc = "See where arrows will land", type = Mod.Type.COMBAT)
 public class ArrowSense extends Mod{
 	
 	public ArrowSense(){

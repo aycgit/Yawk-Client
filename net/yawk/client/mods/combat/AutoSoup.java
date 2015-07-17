@@ -12,7 +12,7 @@ import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
 
-@ModDetails(name = "AutoSoup", defaultKey = 0, desc = "Eat soup automatically", type = Mod.Type.COMBAT)
+@ModDetails(name = "AutoSoup", desc = "Eat soup automatically", type = Mod.Type.COMBAT)
 public class AutoSoup extends Mod{
 
 	Minecraft mc = Minecraft.getMinecraft();

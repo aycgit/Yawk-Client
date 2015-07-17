@@ -24,7 +24,7 @@ import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "ArmorStandKick", defaultKey = 0, desc = "Place armor stands to kick people", type = Mod.Type.WORLD)
+@ModDetails(name = "ArmorStandKick", desc = "Place armor stands to kick people", type = Mod.Type.WORLD)
 public class ArmorStandKick extends Mod{
 	
 	public ArmorStandKick(){

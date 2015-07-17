@@ -8,7 +8,7 @@ import net.yawk.client.modmanager.ModDetails;
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "SafeWalk", defaultKey = 0, desc = "Stops you falling off edges", type = Mod.Type.MOVEMENT)
+@ModDetails(name = "SafeWalk", desc = "Stops you falling off edges", type = Mod.Type.MOVEMENT)
 public class SafeWalk extends Mod{
 	
 	private boolean wasSneaking;

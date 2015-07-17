@@ -12,7 +12,7 @@ import net.yawk.client.modmanager.ModDetails;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "SafeBlocks", defaultKey = 0, desc = "Stops you falling in cacti or webs", type = Mod.Type.WORLD)
+@ModDetails(name = "SafeBlocks", desc = "Stops you falling in cacti or webs", type = Mod.Type.WORLD)
 public class SafeBlocks extends Mod{
 	
 	public SafeBlocks(){

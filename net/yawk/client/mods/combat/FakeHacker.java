@@ -20,7 +20,7 @@ import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "FakeHacker", defaultKey = 0, desc = "Make a player look like they're hacking", type = Mod.Type.COMBAT)
+@ModDetails(name = "FakeHacker", desc = "Make a player look like they're hacking", type = Mod.Type.COMBAT)
 public class FakeHacker extends Mod{
 	
 	public FakeHacker(){

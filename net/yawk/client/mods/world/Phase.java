@@ -22,7 +22,7 @@ import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.utils.ClientUtils;
 
-@ModDetails(name = "Phase", defaultKey = 0, desc = "Walk through transparent blocks", type = Mod.Type.WORLD)
+@ModDetails(name = "Phase", desc = "Walk through transparent blocks", type = Mod.Type.WORLD)
 public class Phase extends Mod{
 
 	public Phase(){
