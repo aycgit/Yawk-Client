@@ -15,13 +15,12 @@ import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "FakeHacker", defaultKey = 0, desc = "Make a player look like they're hacking", type = ModType.COMBAT)
+@ModDetails(name = "FakeHacker", defaultKey = 0, desc = "Make a player look like they're hacking", type = Mod.Type.COMBAT)
 public class FakeHacker extends Mod{
 	
 	public FakeHacker(){

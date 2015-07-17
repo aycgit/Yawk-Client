@@ -7,16 +7,15 @@ import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Retard", defaultKey = 0, desc = "Look stupid", type = ModType.MOVEMENT)
-public class Retard extends Mod{
+@ModDetails(name = "Derp", defaultKey = 0, desc = "Look stupid", type = Mod.Type.MOVEMENT)
+public class Derp extends Mod{
 	
-	public Retard(){
+	public Derp(){
 		
 	}
 	

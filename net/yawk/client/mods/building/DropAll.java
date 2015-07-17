@@ -11,12 +11,11 @@ import net.yawk.client.events.EventMoveEntity;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
-@ModDetails(name = "DropAll", defaultKey = 0, desc = "Drop all your items", type = ModType.BUILDING)
+@ModDetails(name = "DropAll", defaultKey = 0, desc = "Drop all your items", type = Mod.Type.BUILDING)
 public class DropAll extends Mod{
 		
 	public DropAll(){

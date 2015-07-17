@@ -45,4 +45,20 @@ public class Mod {
 	public void onDisable(){
 		
 	}
+	
+	public enum Type {
+		
+		COMBAT("Combat"), MOVEMENT("Movement"), WORLD("World"), BUILDING("Building"), PLUGIN("Plugin");
+		
+	    private final String name;
+	    
+		private Type(String name) {
+	        this.name = name;
+	    }
+		
+	    public String getName() {
+			return name;
+		}
+	}
 }
+

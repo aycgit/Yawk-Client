@@ -11,12 +11,11 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "RapidFire", defaultKey = 0, desc = "Shoot bows faster", type = ModType.COMBAT)
+@ModDetails(name = "RapidFire", defaultKey = 0, desc = "Shoot bows faster", type = Mod.Type.COMBAT)
 public class RapidFire extends Mod{
 	
 	public RapidFire(){

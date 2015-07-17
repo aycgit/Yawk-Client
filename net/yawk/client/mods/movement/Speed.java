@@ -8,12 +8,11 @@ import net.yawk.client.Client;
 import net.yawk.client.events.*;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "Speed", defaultKey = 0, desc = "Move faster", type = ModType.MOVEMENT)
+@ModDetails(name = "Speed", defaultKey = 0, desc = "Move faster", type = Mod.Type.MOVEMENT)
 public class Speed extends Mod{
 	
 	public Speed(){

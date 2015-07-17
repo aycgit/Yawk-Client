@@ -9,11 +9,10 @@ import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Looksie", defaultKey = 0, desc = "See if people are looking at you", type = ModType.COMBAT)
+@ModDetails(name = "Looksie", defaultKey = 0, desc = "See if people are looking at you", type = Mod.Type.COMBAT)
 public class Looksie extends Mod{
 	
 	public Looksie(){

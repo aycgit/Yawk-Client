@@ -8,14 +8,13 @@ import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.CombatUtils;
 import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Triggerbot", defaultKey = 0, desc = "Hit the player you're looking at", type = ModType.COMBAT)
+@ModDetails(name = "Triggerbot", defaultKey = 0, desc = "Hit the player you're looking at", type = Mod.Type.COMBAT)
 public class Triggerbot extends Mod{
 	
 	private HysteriaTimer timer = new HysteriaTimer().setDelay(12);

@@ -14,14 +14,13 @@ import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ChatColours;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Day", defaultKey = 0, desc = "Set the time to day", type = ModType.WORLD)
+@ModDetails(name = "Day", defaultKey = 0, desc = "Set the time to day", type = Mod.Type.WORLD)
 public class Day extends Mod{
 	
 	public Day(){

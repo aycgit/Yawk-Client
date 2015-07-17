@@ -4,14 +4,13 @@ import net.yawk.client.Client;
 import net.yawk.client.events.*;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.HysteriaTimer;
 
 import org.lwjgl.input.Keyboard;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Flight", defaultKey = 0, desc = "Fly in the air", type = ModType.MOVEMENT)
+@ModDetails(name = "Flight", defaultKey = 0, desc = "Fly in the air", type = Mod.Type.MOVEMENT)
 public class Flight extends Mod{
 			
 	@EventTarget

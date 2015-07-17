@@ -5,11 +5,10 @@ import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "HorseNameLag", defaultKey = 0, desc = "Lag people with horse nametags", type = ModType.WORLD)
+@ModDetails(name = "HorseNameLag", defaultKey = 0, desc = "Lag people with horse nametags", type = Mod.Type.WORLD)
 public class HorseNameLag extends Mod{
 	
 	public HorseNameLag(){

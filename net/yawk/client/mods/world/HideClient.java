@@ -4,11 +4,10 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "HideClient", defaultKey = 0, desc = "Hide the client's watermark", type = ModType.WORLD)
+@ModDetails(name = "HideClient", defaultKey = 0, desc = "Hide the client's watermark", type = Mod.Type.WORLD)
 public class HideClient extends Mod{
 	
 	public HideClient(){

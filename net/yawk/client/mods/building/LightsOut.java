@@ -10,11 +10,10 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "LightsOut", defaultKey = 0, desc = "Destroy torches and other one hit blocks", type = ModType.BUILDING)
+@ModDetails(name = "LightsOut", defaultKey = 0, desc = "Destroy torches and other one hit blocks", type = Mod.Type.BUILDING)
 public class LightsOut extends Mod{
 
 	public LightsOut(){

@@ -9,11 +9,10 @@ import net.yawk.client.events.EventBoundingBox;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "SafeBlocks", defaultKey = 0, desc = "Stops you falling in cacti or webs", type = ModType.WORLD)
+@ModDetails(name = "SafeBlocks", defaultKey = 0, desc = "Stops you falling in cacti or webs", type = Mod.Type.WORLD)
 public class SafeBlocks extends Mod{
 	
 	public SafeBlocks(){

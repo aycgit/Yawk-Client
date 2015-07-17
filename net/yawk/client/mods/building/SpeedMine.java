@@ -4,11 +4,10 @@ import net.yawk.client.Client;
 import net.yawk.client.events.*;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Speedmine", defaultKey = 0, desc = "Break blocks faster", type = ModType.BUILDING)
+@ModDetails(name = "Speedmine", defaultKey = 0, desc = "Break blocks faster", type = Mod.Type.BUILDING)
 public class SpeedMine extends Mod{
 	
 	@EventTarget

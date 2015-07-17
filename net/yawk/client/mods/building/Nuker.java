@@ -14,12 +14,11 @@ import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Nuker", defaultKey = 0, desc = "Break blocks around you", type = ModType.BUILDING)
+@ModDetails(name = "Nuker", defaultKey = 0, desc = "Break blocks around you", type = Mod.Type.BUILDING)
 public class Nuker extends Mod{
 	
 	private IBlockState block;

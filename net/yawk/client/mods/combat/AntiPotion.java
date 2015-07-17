@@ -7,11 +7,10 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "AntiPotion", defaultKey = 0, desc = "Get rid of bad potion effects", type = ModType.COMBAT)
+@ModDetails(name = "AntiPotion", defaultKey = 0, desc = "Get rid of bad potion effects", type = Mod.Type.COMBAT)
 public class AntiPotion extends Mod{
 	
 	Minecraft mc = Minecraft.getMinecraft();

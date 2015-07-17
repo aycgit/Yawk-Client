@@ -4,11 +4,10 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Climb", defaultKey = 0, desc = "Climb up walls", type = ModType.MOVEMENT)
+@ModDetails(name = "Climb", defaultKey = 0, desc = "Climb up walls", type = Mod.Type.MOVEMENT)
 public class Climb extends Mod{
 	
 	public Climb(){

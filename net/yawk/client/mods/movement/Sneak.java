@@ -6,13 +6,12 @@ import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventMotionUpdate;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "Sneak", defaultKey = 0, desc = "Look like you're sneaking to other players", type = ModType.MOVEMENT)
+@ModDetails(name = "Sneak", defaultKey = 0, desc = "Look like you're sneaking to other players", type = Mod.Type.MOVEMENT)
 public class Sneak extends Mod{
 	
 	Minecraft mc = Minecraft.getMinecraft();

@@ -6,13 +6,12 @@ import net.yawk.client.events.EventMoveEntity;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "Sprint", defaultKey = 0, desc = "Sprint automatically", type = ModType.MOVEMENT)
+@ModDetails(name = "Sprint", defaultKey = 0, desc = "Sprint automatically", type = Mod.Type.MOVEMENT)
 public class Sprint extends Mod{
 	
 	@EventTarget

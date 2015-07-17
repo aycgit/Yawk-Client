@@ -16,7 +16,6 @@ import net.yawk.client.events.EventRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ESPUtils;
 
 import org.lwjgl.input.Keyboard;
@@ -24,7 +23,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Parkour", defaultKey = 0, desc = "See where you will jump", type = ModType.WORLD)
+@ModDetails(name = "Parkour", defaultKey = 0, desc = "See where you will jump", type = Mod.Type.WORLD)
 public class Parkour extends Mod{
 	
 	public Parkour(){

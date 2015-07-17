@@ -1,7 +1,5 @@
 package net.yawk.client.mods.combat;
 
-import java.lang.reflect.Field;
-
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,11 +10,10 @@ import net.yawk.client.events.EventRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "ArrowSense", defaultKey = 0, desc = "See where arrows will land", type = ModType.COMBAT)
+@ModDetails(name = "ArrowSense", defaultKey = 0, desc = "See where arrows will land", type = Mod.Type.COMBAT)
 public class ArrowSense extends Mod{
 	
 	public ArrowSense(){

@@ -20,9 +20,9 @@ public class GuiClickable extends GuiScreen {
 	
 	public GuiClickable(ModManager modManager){
 		
-		for(ModType type : ModType.values()){
+		for(Mod.Type type : Mod.Type.values()){
 			
-			if(type != ModType.PLUGIN){
+			if(type != Mod.Type.PLUGIN){
 				
 				Window win;
 				windows.add(win = new Window(type.getName(), modManager));

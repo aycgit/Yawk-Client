@@ -56,7 +56,7 @@ public class ModManager {
 		mods.add(new RapidFire());
 		mods.add(new AutoBlock());
 		mods.add(new DropAll());
-		mods.add(new Retard());
+		mods.add(new Derp());
 		mods.add(new SafeBlocks());
 		mods.add(new Backstab());
 		mods.add(new HideClient());
@@ -113,13 +113,13 @@ public class ModManager {
 		}
 	}
 	
-	public ModType getModType(Mod m){
-		System.out.println("CHECKING TYPE: "+m.getClass().getName());
+	public Mod.Type getModType(Mod m){
+		//System.out.println("CHECKING TYPE: "+m.getClass().getName());
 		return m.getClass().getAnnotation(ModDetails.class).type();
 	}
 	
 	public String getModName(Mod m){
-		System.out.println("CHECKING NAME: "+m.getClass().getName());
+		//System.out.println("CHECKING NAME: "+m.getClass().getName());
 		return this.nameMap.inverse().get(m);
 	}
 	

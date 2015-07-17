@@ -11,14 +11,13 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.CombatUtils;
 import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "KillAura", defaultKey = 0, desc = "Kill people near you", type = ModType.COMBAT)
+@ModDetails(name = "KillAura", defaultKey = 0, desc = "Kill people near you", type = Mod.Type.COMBAT)
 public class KillAura extends Mod{
 	
 	private HysteriaTimer timer = new HysteriaTimer().setDelay(12);

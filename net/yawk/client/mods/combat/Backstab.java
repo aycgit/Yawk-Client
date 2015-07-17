@@ -11,11 +11,10 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Backstab", defaultKey = 0, desc = "Teleport behind people", type = ModType.COMBAT)
+@ModDetails(name = "Backstab", defaultKey = 0, desc = "Teleport behind people", type = Mod.Type.COMBAT)
 public class Backstab extends Mod{
 	
 	public Backstab(){

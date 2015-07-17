@@ -8,12 +8,11 @@ import net.yawk.client.events.EventMotionUpdate;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "Glide", defaultKey = 0, desc = "Glide when falling", type = ModType.MOVEMENT)
+@ModDetails(name = "Glide", defaultKey = 0, desc = "Glide when falling", type = Mod.Type.MOVEMENT)
 public class Glide extends Mod{
 	
 	private int updates;

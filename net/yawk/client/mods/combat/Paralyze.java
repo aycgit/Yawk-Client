@@ -5,12 +5,11 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Paralyze", defaultKey = 0, desc = "Freeze players inside you", type = ModType.COMBAT)
+@ModDetails(name = "Paralyze", defaultKey = 0, desc = "Freeze players inside you", type = Mod.Type.COMBAT)
 public class Paralyze extends Mod{
 	
 	@EventTarget

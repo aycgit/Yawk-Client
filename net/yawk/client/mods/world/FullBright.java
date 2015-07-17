@@ -4,11 +4,10 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "FullBright", defaultKey = 0, desc = "Make the world brighter", type = ModType.WORLD)
+@ModDetails(name = "FullBright", defaultKey = 0, desc = "Make the world brighter", type = Mod.Type.WORLD)
 public class FullBright extends Mod{
 	
 	private float prevGamma;

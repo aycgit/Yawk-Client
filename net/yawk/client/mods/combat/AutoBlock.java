@@ -5,12 +5,11 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "AutoBlock", defaultKey = 0, desc = "Block with your sword automatically", type = ModType.COMBAT)
+@ModDetails(name = "AutoBlock", defaultKey = 0, desc = "Block with your sword automatically", type = Mod.Type.COMBAT)
 public class AutoBlock extends Mod{
 	
 	public AutoBlock(){

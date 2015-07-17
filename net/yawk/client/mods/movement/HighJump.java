@@ -5,12 +5,11 @@ import net.yawk.client.events.EventJump;
 import net.yawk.client.events.EventMoveEntity;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "HighJump", defaultKey = 0, desc = "Jump higher", type = ModType.MOVEMENT)
+@ModDetails(name = "HighJump", defaultKey = 0, desc = "Jump higher", type = Mod.Type.MOVEMENT)
 public class HighJump extends Mod{
 	
 	public HighJump(){

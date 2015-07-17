@@ -6,14 +6,13 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventRender;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Tracers", defaultKey = 0, desc = "Draws lines to players", type = ModType.WORLD)
+@ModDetails(name = "Tracers", defaultKey = 0, desc = "Draws lines to players", type = Mod.Type.WORLD)
 public class Tracers extends Mod{
 
 	@Override

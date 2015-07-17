@@ -7,12 +7,11 @@ import net.yawk.client.events.EventRender;
 import net.yawk.client.events.EventRenderEntity;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ESPUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "PlayerESP", defaultKey = 0, desc = "See players through walls", type = ModType.WORLD)
+@ModDetails(name = "PlayerESP", defaultKey = 0, desc = "See players through walls", type = Mod.Type.WORLD)
 public class PlayerESP extends Mod{
 	
 	public PlayerESP(){
