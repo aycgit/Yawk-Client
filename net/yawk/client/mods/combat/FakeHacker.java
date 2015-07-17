@@ -14,26 +14,18 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class FakeHacker implements Mod{
+@ModDetails(name = "FakeHacker", defaultKey = 0, desc = "Make a player look like they're hacking", type = ModType.COMBAT)
+public class FakeHacker extends Mod{
 	
 	public FakeHacker(){
 		
-	}
-	
-	@Override
-	public String getName() {
-		return "FakeHacker";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Make a player look like they're hacking";
 	}
 	
 	private HysteriaTimer timer = new HysteriaTimer(12);
@@ -110,11 +102,6 @@ public class FakeHacker implements Mod{
 	
 	private boolean isAttackable(EntityPlayer player){
 		return Minecraft.getMinecraft().thePlayer.canEntityBeSeen(player) && player.getHealth() > 0 && !player.isInvisible() && player.ticksExisted > 60;
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.COMBAT;
 	}
 	
 	@Override

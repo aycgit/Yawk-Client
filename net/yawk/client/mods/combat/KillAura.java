@@ -10,6 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.CombatUtils;
@@ -17,20 +18,11 @@ import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class KillAura implements Mod{
+@ModDetails(name = "KillAura", defaultKey = 0, desc = "Kill people near you", type = ModType.COMBAT)
+public class KillAura extends Mod{
 	
 	private HysteriaTimer timer = new HysteriaTimer().setDelay(12);
 	private HysteriaTimer rotTimer = new HysteriaTimer().setDelay(4);
-	
-	@Override
-	public String getName() {
-		return "KillAura";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Kill players who are near you";
-	}
 	
 	@EventTarget
 	public void onTick(EventGuiRender e){
@@ -50,11 +42,6 @@ public class KillAura implements Mod{
 			if (player != null && rotTimer.output()) {
 				CombatUtils.faceEntitySmooth(player, true);
 			}
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.COMBAT;
 	}
 	
 	@Override

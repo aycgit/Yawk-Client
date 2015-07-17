@@ -3,33 +3,20 @@ package net.yawk.client.mods.world;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class FullBright implements Mod{
+@ModDetails(name = "FullBright", defaultKey = 0, desc = "Make the world brighter", type = ModType.WORLD)
+public class FullBright extends Mod{
 	
 	private float prevGamma;
 	
 	public FullBright(){
 		
 	}
-	
-	@Override
-	public String getName() {
-		return "FullBright";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Makes the world bright";
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
-	}
-	
+		
 	@Override
 	public void onEnable() {
 		prevGamma = Client.getClient().getMinecraft().gameSettings.gammaSetting;

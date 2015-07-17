@@ -10,24 +10,16 @@ import net.minecraft.util.MathHelper;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class Backstab implements Mod{
+@ModDetails(name = "Backstab", defaultKey = 0, desc = "Teleport behind people", type = ModType.COMBAT)
+public class Backstab extends Mod{
 	
 	public Backstab(){
 		
-	}
-	
-	@Override
-	public String getName() {
-		return "Backstab";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Teleport behind players";
 	}
 	
 	@EventTarget
@@ -83,12 +75,7 @@ public class Backstab implements Mod{
 	private boolean isAttackable(EntityPlayer player){
 		return !player.getDisplayName().getFormattedText().equalsIgnoreCase("GrapeKush") && Minecraft.getMinecraft().thePlayer.canEntityBeSeen(player) && player.getHealth() > 0 && !player.isInvisible() && player.ticksExisted > 60;
 	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.COMBAT;
-	}
-	
+		
 	@Override
 	public void onEnable() {
 		

@@ -3,24 +3,16 @@ package net.yawk.client.mods.combat;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class NoFlinch implements Mod{
+@ModDetails(name = "NoFlinch", defaultKey = 0, desc = "Don't flinch when hit", type = ModType.COMBAT)
+public class NoFlinch extends Mod{
 	
 	public NoFlinch(){
 		
-	}
-	
-	@Override
-	public String getName() {
-		return "NoFlinch";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Don't flinch when damaged";
 	}
 	
 	@EventTarget
@@ -29,11 +21,6 @@ public class NoFlinch implements Mod{
 		Client.getClient().getPlayer().hurtResistantTime = 0;
 	}
 	
-	@Override
-	public ModType getType() {
-		return ModType.COMBAT;
-	}
-
 	@Override
 	public void onEnable() {
 		

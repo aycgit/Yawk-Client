@@ -19,32 +19,19 @@ import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class ArmorStandKick implements Mod{
+@ModDetails(name = "ArmorStandKick", defaultKey = 0, desc = "Place armor stands to kick people", type = ModType.WORLD)
+public class ArmorStandKick extends Mod{
 	
 	public ArmorStandKick(){
 		//TODO: Move this to the exploit pack plugin
 	}
-	
-	@Override
-	public String getName() {
-		return "ArmorStandKick";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Kick people with armor stands";
-	}
-			
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
-	}
-	
+
 	@Override
 	public void onEnable() {
 		

@@ -13,6 +13,7 @@ import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ChatColours;
 import net.yawk.client.utils.ClientUtils;
@@ -20,30 +21,16 @@ import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class Day implements Mod{
+@ModDetails(name = "Day", defaultKey = 0, desc = "Set the time to day", type = ModType.WORLD)
+public class Day extends Mod{
 	
 	public Day(){
 		
 	}
 	
-	@Override
-	public String getName() {
-		return "Day";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Changes the time to day";
-	}
-	
 	@EventTarget
 	public void onTick(EventTick e){
 		Client.getClient().getMinecraft().theWorld.setWorldTime(1000);
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
 	}
 	
 	@Override

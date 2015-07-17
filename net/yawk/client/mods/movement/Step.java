@@ -11,22 +11,14 @@ import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class Step implements Mod{
-	
-	@Override
-	public String getName() {
-		return "Step";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Instantly teleport up blocks";
-	}
+@ModDetails(name = "Step", defaultKey = 0, desc = "Jump up blocks automatically", type = ModType.MOVEMENT)
+public class Step extends Mod{
 	
 	@EventTarget
 	public void onTick(EventTick e){
@@ -35,11 +27,6 @@ public class Step implements Mod{
 			//Client.getClient().getPlayer().setPosition(Client.getClient().getPlayer().posX, Client.getClient().getPlayer().posY + 0.51f, Client.getClient().getPlayer().posZ);
 			Client.getClient().getPlayer().setPosition(Client.getClient().getPlayer().posX, Client.getClient().getPlayer().posY+1.2, Client.getClient().getPlayer().posZ);
 		}
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.MOVEMENT;
 	}
 	
 	public void onEnable(){

@@ -5,24 +5,16 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class NoFall implements Mod{
-		
+@ModDetails(name = "NoFall", defaultKey = 0, desc = "Don't take fall damage", type = ModType.MOVEMENT)
+public class NoFall extends Mod{
+	
 	public NoFall(){
 
-	}
-
-	@Override
-	public String getName() {
-		return "NoFall";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Changes the time to day";
 	}
 
 	@EventTarget
@@ -30,11 +22,6 @@ public class NoFall implements Mod{
 		if(e.packet instanceof C03PacketPlayer){
 			((C03PacketPlayer)e.packet).field_149474_g = true;
 		}
-	}
-
-	@Override
-	public ModType getType() {
-		return ModType.MOVEMENT;
 	}
 
 	@Override

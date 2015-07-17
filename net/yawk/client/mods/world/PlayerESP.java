@@ -6,25 +6,17 @@ import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventRender;
 import net.yawk.client.events.EventRenderEntity;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ESPUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class PlayerESP implements Mod{
+@ModDetails(name = "PlayerESP", defaultKey = 0, desc = "See players through walls", type = ModType.WORLD)
+public class PlayerESP extends Mod{
 	
 	public PlayerESP(){
 		
-	}
-	
-	@Override
-	public String getName() {
-		return "PlayerESP";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Draws boxes round players";
 	}
 	
     @EventTarget
@@ -41,11 +33,6 @@ public class PlayerESP implements Mod{
     	}
     }
 	
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
-	}
-
 	@Override
 	public void onEnable() {
 		

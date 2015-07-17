@@ -1,9 +1,21 @@
 package net.yawk.client.modmanager;
 
-public abstract class PluginMod implements Mod{
+import net.yawk.client.api.PluginData;
+
+public class PluginMod extends Mod{
+
+	private PluginData pluginData;
 	
-	public final ModType getType(){
-		return ModType.PLUGIN;
+	public PluginMod(int keybind, PluginData pluginData) {
+		super(keybind);
+		this.pluginData = pluginData;
 	}
 	
+	public PluginData getPluginData() {
+		return pluginData;
+	}
+	
+	public void setPluginData(PluginData pluginData) {
+		this.pluginData = pluginData;
+	}
 }

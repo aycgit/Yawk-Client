@@ -1,4 +1,4 @@
-package net.yawk.client.mods.world;
+package net.yawk.client.mods.movement;
 
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.client.C0APacketAnimation;
@@ -6,27 +6,18 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-
-public class Retard implements Mod{
+@ModDetails(name = "Retard", defaultKey = 0, desc = "Look stupid", type = ModType.MOVEMENT)
+public class Retard extends Mod{
 	
 	public Retard(){
 		
-	}
-	
-	@Override
-	public String getName() {
-		return "Retard";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Makes you spin around";
 	}
 	
 	private int yaw;
@@ -54,11 +45,6 @@ public class Retard implements Mod{
 			p.yaw = yaw;
 			p.pitch = -180;
 		}
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
 	}
 	
 	@Override

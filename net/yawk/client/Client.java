@@ -37,7 +37,6 @@ import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.screens.XGuiMainMenu;
 import net.yawk.client.hooks.EntityPlayerSPHook;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModData;
 import net.yawk.client.modmanager.ModManager;
 import net.yawk.client.mods.world.HideClient;
 import net.yawk.client.saving.FileManager;
@@ -155,7 +154,7 @@ public class Client {
 		
 		if(mc.currentScreen == null){
 			for(Mod m : modManager.mods){
-				if(modManager.dataMap.get(m).getKeybind() == key){
+				if(m.getKeybind() == key){
 					modManager.toggle(m);
 				}
 			}

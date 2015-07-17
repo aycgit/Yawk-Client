@@ -1,28 +1,21 @@
 package net.yawk.client.mods.combat;
 
 import net.minecraft.client.Minecraft;
+
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ChatComponentTranslation;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class AntiPotion implements Mod{
+@ModDetails(name = "AntiPotion", defaultKey = 0, desc = "Get rid of bad potion effects", type = ModType.COMBAT)
+public class AntiPotion extends Mod{
 	
 	Minecraft mc = Minecraft.getMinecraft();
-	
-	@Override
-	public String getName() {
-		return "AntiPotion";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Tries to clear bad potion effects";
-	}
-	
+		
 	@EventTarget
 	public void onTick(EventGuiRender e){
 		 if(mc.thePlayer.isPotionActive(Potion.blindness.getId())){
@@ -64,11 +57,6 @@ public class AntiPotion implements Mod{
 		
 	}
 	
-	@Override
-	public ModType getType() {
-		return ModType.COMBAT;
-	}
-
 	@Override
 	public void onEnable() {
 		

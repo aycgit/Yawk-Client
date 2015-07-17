@@ -19,28 +19,15 @@ import net.minecraft.util.MathHelper;
 import net.yawk.client.Client;
 import net.yawk.client.events.*;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
-public class Phase implements Mod{
+@ModDetails(name = "Phase", defaultKey = 0, desc = "Walk through transparent blocks", type = ModType.WORLD)
+public class Phase extends Mod{
 
 	public Phase(){
 		
-	}
-
-	@Override
-	public String getName() {
-		return "Phase";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Go through blocks";
-	}
-
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
 	}
 	
 	@Override

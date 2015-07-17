@@ -14,28 +14,20 @@ import net.yawk.client.events.EventJump;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-public class Jesus implements Mod{
+@ModDetails(name = "Jesus", defaultKey = 0, desc = "Walk on water", type = ModType.MOVEMENT)
+public class Jesus extends Mod{
 	
 	public Jesus(){
 		
 	}
-	
-	@Override
-	public String getName() {
-		return "Jesus";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Walk on water";
-	}
-	
+
 	@EventTarget
 	public void onBB(EventBoundingBox e){
 		if(Client.getClient().getMinecraft().theWorld.getBlockState(e.pos).getBlock().getMaterial().isLiquid()){
@@ -86,11 +78,6 @@ public class Jesus implements Mod{
 		}
 				
 		return hasLiquid;
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.MOVEMENT;
 	}
 	
 	@Override

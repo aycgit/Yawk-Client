@@ -3,6 +3,7 @@ package net.yawk.client.mods.movement;
 import net.yawk.client.Client;
 import net.yawk.client.events.*;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.HysteriaTimer;
 
@@ -10,19 +11,9 @@ import org.lwjgl.input.Keyboard;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-
-public class Flight implements Mod{
-		
-	@Override
-	public String getName() {
-		return "Flight";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Fly around in the air";
-	}
-		
+@ModDetails(name = "Flight", defaultKey = 0, desc = "Fly in the air", type = ModType.MOVEMENT)
+public class Flight extends Mod{
+			
 	@EventTarget
 	public void onTick(EventTick e){
 		fly();
@@ -83,11 +74,6 @@ public class Flight implements Mod{
 			Client.getClient().getPlayer().motionY = 0;
 		}
 
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.MOVEMENT;
 	}
 
 	@Override

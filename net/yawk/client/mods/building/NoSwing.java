@@ -10,25 +10,17 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class NoSwing implements Mod{
+@ModDetails(name = "NoSwing", defaultKey = 0, desc = "Don't swing your arm", type = ModType.BUILDING)
+public class NoSwing extends Mod{
 	
 	public NoSwing(){
 		
-	}
-	
-	@Override
-	public String getName() {
-		return "NoSwing";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Don't swing your arm";
 	}
 	
 	@EventTarget
@@ -36,11 +28,6 @@ public class NoSwing implements Mod{
 		if(e.packet instanceof C0APacketAnimation){
 			e.setCancelled(true);
 		}
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.BUILDING;
 	}
 	
 	@Override

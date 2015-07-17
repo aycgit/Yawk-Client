@@ -3,13 +3,18 @@ package net.yawk.client.hooks;
 import com.darkmagician6.eventapi.EventManager;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.network.NetHandlerPlayClient;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Vec3;
 import net.yawk.client.events.EventClickBlock;
 import net.yawk.client.events.EventDamageBlock;
 import net.yawk.client.events.EventGuiRender;
+import net.yawk.client.events.EventPlaceBlock;
 import net.yawk.client.events.EventUpdateController;
 
 public class PlayerControllerMPHook extends PlayerControllerMP{
@@ -24,6 +29,22 @@ public class PlayerControllerMPHook extends PlayerControllerMP{
 	public void updateController() {
 		super.updateController();
 		EventManager.call(tick);
+	}
+	
+	@Override
+	public boolean onBlockPlacement(EntityPlayerSP player,
+			WorldClient world, ItemStack itemstack,
+			BlockPos pos, EnumFacing facing, Vec3 vec) {
+		
+		EventPlaceBlock e = new EventPlaceBlock(pos, facing, itemstack, vec);
+		EventManager.call(e);
+		
+		if(e.isCancelled()){
+			return false;
+		}else{
+			return super.onBlockPlacement(player, world, itemstack,
+					pos, facing, vec);
+		}
 	}
 	
 	@Override

@@ -25,17 +25,17 @@ public class GuiClickable extends GuiScreen {
 			if(type != ModType.PLUGIN){
 				
 				Window win;
-				windows.add(win = new Window(type.getName()));
+				windows.add(win = new Window(type.getName(), modManager));
 				
 				for(Mod m : modManager.mods){
-					if(m.getType() == type){
+					if(modManager.getModType(m) == type){
 						win.components.add(new ModButton(win, m));
 					}
 				}
 			}
 		}
 		
-		Window keybindWindow = new Window("Keybinds", 100, 12);
+		Window keybindWindow = new Window("Keybinds", modManager, 100, 12);
 		windows.add(keybindWindow);
 		
 		ScrollPane pane;
@@ -46,13 +46,13 @@ public class GuiClickable extends GuiScreen {
 			pane.components.add(system.add(new KeybindButton(keybindWindow, m, system)));
 		}
 		
-		Window enabledMods = new Window("Enabled");
+		Window enabledMods = new Window("Enabled", modManager);
 		windows.add(enabledMods);
 		enabledMods.components.add(new EnabledModsDisplay(enabledMods));
 		
 		//PLUGIN DOWNLOAD WINDOW
 		
-		Window plugins = new Window("Get Plugins", 120, 12);
+		Window plugins = new Window("Get Plugins", modManager, 120, 12);
 		windows.add(plugins);
 		
 		SelectorSystem<SelectorButton> pluginSystem = new SelectorSystem<SelectorButton>();

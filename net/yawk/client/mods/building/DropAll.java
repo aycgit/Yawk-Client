@@ -1,6 +1,7 @@
 package net.yawk.client.mods.building;
 
 import net.minecraft.client.Minecraft;
+
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C09PacketHeldItemChange;
 import net.minecraft.util.BlockPos;
@@ -9,31 +10,17 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventMoveEntity;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.HysteriaTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
-
-public class DropAll implements Mod{
+@ModDetails(name = "DropAll", defaultKey = 0, desc = "Drop all your items", type = ModType.BUILDING)
+public class DropAll extends Mod{
 		
 	public DropAll(){
 		//TODO: Make this hack much better
-	}
-	
-	@Override
-	public String getName() {
-		return "DropAll";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Makes the world bright";
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.BUILDING;
 	}
 	
 	private int slotProgress;

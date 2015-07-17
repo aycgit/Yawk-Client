@@ -10,9 +10,11 @@ import net.minecraft.network.play.client.C09PacketHeldItemChange;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
-public class AutoSoup implements Mod{
+@ModDetails(name = "AutoSoup", defaultKey = 0, desc = "Eat soup automatically", type = ModType.COMBAT)
+public class AutoSoup extends Mod{
 
 	Minecraft mc = Minecraft.getMinecraft();
 	private boolean inInventory;
@@ -27,16 +29,6 @@ public class AutoSoup implements Mod{
 		//TODO: Make this mod better because chris made it and it isn't very good
 	}
 	
-	@Override
-	public String getName() {
-		return "AutoSoup";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Automatically eat soup";
-	}
-
 	@EventTarget
 	public void onTick(EventTick e){
 		if (mc.thePlayer != null && mc.thePlayer.getHealth() <= 13.0F)
@@ -45,12 +37,7 @@ public class AutoSoup implements Mod{
 			getBestWeapon();
 		}
 	}
-
-	@Override
-	public ModType getType() {
-		return ModType.COMBAT;
-	}
-
+	
 	@Override
 	public void onEnable() {
 

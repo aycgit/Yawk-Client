@@ -5,27 +5,19 @@ import net.minecraft.network.play.client.C0BPacketEntityAction;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventMotionUpdate;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-public class Sneak implements Mod{
+@ModDetails(name = "Sneak", defaultKey = 0, desc = "Look like you're sneaking to other players", type = ModType.MOVEMENT)
+public class Sneak extends Mod{
 	
 	Minecraft mc = Minecraft.getMinecraft();
 	
 	private boolean wasSneaking;
-	
-	@Override
-	public String getName() {
-		return "Sneak";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Walk fast while sneaking";
-	}
 	
 	@EventTarget
     private void onMotionUpdate(EventMotionUpdate e) {
@@ -47,11 +39,6 @@ public class Sneak implements Mod{
 		
 		wasSneaking = mc.thePlayer.isSneaking();
 	}*/
-	
-	@Override
-	public ModType getType() {
-		return ModType.MOVEMENT;
-	}
 	
 	public void onEnable(){
 		//sneak(true);

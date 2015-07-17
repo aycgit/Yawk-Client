@@ -15,13 +15,16 @@ import net.yawk.client.mods.movement.*;
 import net.yawk.client.mods.world.*;
 
 import com.darkmagician6.eventapi.EventManager;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 public class ModManager {
 	
 	public ArrayList<Mod> mods = new ArrayList<Mod>();
-	public HashMap<Mod, ModData> dataMap = new HashMap<Mod, ModData>();
+	public BiMap<String, Mod> nameMap = HashBiMap.create();
 	
 	public ModManager(){
+		
 		mods.add(new Flight());
 		mods.add(new Nuker());
 		mods.add(new Paralyze());
@@ -68,19 +71,23 @@ public class ModManager {
 		mods.add(new ArmorStandKick());
 		mods.add(new ChestESP());
 		mods.add(new NoFlinch());
+		mods.add(new Build());
+		mods.add(new Triggerbot());
 		
 		for(Mod m : mods){
-			dataMap.put(m, new ModData(-1));
+			nameMap.put(m.getClass().getAnnotation(ModDetails.class).name(), m);
 		}
 	}
 	
 	public void addMod(Mod m){
 		
 		mods.add(m);
-		dataMap.put(m, new ModData(-1));
+		nameMap.put(m.getClass().getAnnotation(ModDetails.class).name(), m);
+		
+		String type = getModType(m).getName();
 		
 		for(Window w : Client.getClient().getGui().windows){
-			if(w.title == m.getType().getName()){
+			if(w.title == type){
 				w.components.add(new ModButton(w, m));
 			}
 		}
@@ -88,24 +95,32 @@ public class ModManager {
 	
 	public void addMod(Mod m, PluginData data){
 		mods.add(m);
-		dataMap.put(m, new ModData(-1, data));
+		nameMap.put(m.getClass().getAnnotation(ModDetails.class).name(), m);
 	}
 	
 	public void toggle(Mod m){
 		
-		ModData data = dataMap.get(m);
-		
-		if(!data.isEnabled){
+		if(!m.isEnabled()){
 			EventManager.register(m);
-			data.isEnabled = true;
+			m.setEnabled(true);
 			EventManager.call(new EventEnabled(m));
 			m.onEnable();
 		}else{
-			data.isEnabled = false;
+			m.setEnabled(false);
 			EventManager.unregister(m);
 			EventManager.call(new EventDisabled(m));
 			m.onDisable();
 		}
+	}
+	
+	public ModType getModType(Mod m){
+		System.out.println("CHECKING TYPE: "+m.getClass().getName());
+		return m.getClass().getAnnotation(ModDetails.class).type();
+	}
+	
+	public String getModName(Mod m){
+		System.out.println("CHECKING NAME: "+m.getClass().getName());
+		return this.nameMap.inverse().get(m);
 	}
 	
 	public Mod getMod(Class clazz){
@@ -120,7 +135,7 @@ public class ModManager {
 	
 	public Mod getModByName(String name){
 		for(Mod m : mods){
-			if(m.getName().equals(name)){
+			if(getModName(m).equals(name)){
 				return m;
 			}
 		}

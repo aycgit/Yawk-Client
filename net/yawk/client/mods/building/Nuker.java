@@ -13,24 +13,16 @@ import net.yawk.client.events.EventDamageBlock;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class Nuker implements Mod{
+@ModDetails(name = "Nuker", defaultKey = 0, desc = "Break blocks around you", type = ModType.BUILDING)
+public class Nuker extends Mod{
 	
 	private IBlockState block;
-	
-	@Override
-	public String getName() {
-		return "Nuker";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Break blocks around you";
-	}
 	
 	@EventTarget
 	public void onClickBlock(EventClickBlock e){
@@ -73,11 +65,6 @@ public class Nuker implements Mod{
 		}
 	}
 	
-	@Override
-	public ModType getType() {
-		return ModType.BUILDING;
-	}
-
 	@Override
 	public void onEnable() {
 		block = null;

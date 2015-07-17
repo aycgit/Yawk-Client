@@ -6,33 +6,20 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventMotionUpdate;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-public class ItemSpoof implements Mod{
+@ModDetails(name = "ItemSpoof", defaultKey = 0, desc = "Hides what item you're holding", type = ModType.BUILDING)
+public class ItemSpoof extends Mod{
 	
 	public ItemSpoof(){
 		
 	}
 	
-	@Override
-	public String getName() {
-		return "ItemSpoof";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Hides what item you're holding";
-	}
-		
-	@Override
-	public ModType getType() {
-		return ModType.BUILDING;
-	}
-
 	@Override
 	public void onEnable() {
 		

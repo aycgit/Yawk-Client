@@ -15,7 +15,7 @@ public class ModButton extends Button{
 
 	@Override
 	public boolean isEnabled() {
-		return Client.getClient().getModManager().dataMap.get(mod).isEnabled;
+		return mod.isEnabled();
 	}
 	
 	@Override
@@ -25,7 +25,7 @@ public class ModButton extends Button{
 	
 	@Override
 	public String getText() {
-		return mod.getName();
+		return Client.getClient().getModManager().getModName(mod);
 	}
 	
 	@Override

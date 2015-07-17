@@ -7,29 +7,21 @@ import net.yawk.client.events.EventJump;
 import net.yawk.client.events.EventMotionUpdate;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-public class Glide implements Mod{
+@ModDetails(name = "Glide", defaultKey = 0, desc = "Glide when falling", type = ModType.MOVEMENT)
+public class Glide extends Mod{
 	
 	private int updates;
 	
 	public Glide(){
 		
 	}
-	
-	@Override
-	public String getName() {
-		return "Glide";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Fall more slowly";
-	}
-	
+		
 	@EventTarget
 	public void onTick(EventTick e){
 		if(!Client.getClient().getPlayer().onGround){
@@ -70,11 +62,6 @@ public class Glide implements Mod{
 				Client.getClient().getPlayer().motionY = 0.0D;
 			}		
 		}
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.MOVEMENT;
 	}
 	
 	@Override

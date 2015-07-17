@@ -24,8 +24,8 @@ public class EnabledModsDisplay extends Component {
 		height = 0;
 		
 		for(Mod m : Client.getClient().getModManager().mods){
-			if(Client.getClient().getModManager().dataMap.get(m).isEnabled){
-				Client.getClient().getFontRenderer().drawStringWithShadow(m.getName(), cx + 3, cy + height*12 + 2, 0xFFFFFFFF, true);
+			if(m.isEnabled()){
+				Client.getClient().getFontRenderer().drawStringWithShadow(Client.getClient().getModManager().getModName(m), cx + 3, cy + height*12 + 2, 0xFFFFFFFF, true);
 				height++;
 			}
 		}

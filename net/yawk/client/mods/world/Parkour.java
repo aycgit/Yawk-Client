@@ -15,6 +15,7 @@ import net.yawk.client.events.EventKeyPress;
 import net.yawk.client.events.EventRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ESPUtils;
 
@@ -23,22 +24,13 @@ import org.lwjgl.opengl.GL11;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class Parkour implements Mod{
+@ModDetails(name = "Parkour", defaultKey = 0, desc = "See where you will jump", type = ModType.WORLD)
+public class Parkour extends Mod{
 	
 	public Parkour(){
 		
 	}
-	
-	@Override
-	public String getName() {
-		return "JumpPredict";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Jump across ledges accurately";
-	}
-	
+		
 	private float xArea = 0.3f;
 	private boolean specialJump;
 	
@@ -234,11 +226,6 @@ public class Parkour implements Mod{
 			Client.getClient().getPlayer().jump();
 			specialJump = true;
 		}
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
 	}
 	
 	@Override

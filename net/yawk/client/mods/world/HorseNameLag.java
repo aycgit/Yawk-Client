@@ -4,37 +4,23 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-
-public class HorseNameLag implements Mod{
+@ModDetails(name = "HorseNameLag", defaultKey = 0, desc = "Lag people with horse nametags", type = ModType.WORLD)
+public class HorseNameLag extends Mod{
 	
 	public HorseNameLag(){
 		//TODO: Fix this mod and move it to the exploit pack plugin
-	}
-	
-	@Override
-	public String getName() {
-		return "HorseNameLag";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Lag people by naming a horse";
 	}
 	
 	@EventTarget
 	public void onTick(EventSendPacket e){
 		System.out.println(e.packet.getClass());
 	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
-	}
-	
+		
 	@Override
 	public void onEnable() {
 		

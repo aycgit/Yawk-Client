@@ -8,24 +8,16 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class Looksie implements Mod{
+@ModDetails(name = "Looksie", defaultKey = 0, desc = "See if people are looking at you", type = ModType.COMBAT)
+public class Looksie extends Mod{
 	
 	public Looksie(){
 		//TODO: Fix this mod, it's broken
-	}
-	
-	@Override
-	public String getName() {
-		return "Looksie";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "See whether people are looking at you";
 	}
 	
 	@EventTarget
@@ -93,11 +85,6 @@ public class Looksie implements Mod{
     	int difference = Math.abs(outof-angle);
     	return difference / outof;
     }
-	
-	@Override
-	public ModType getType() {
-		return ModType.COMBAT;
-	}
 	
 	@Override
 	public void onEnable() {

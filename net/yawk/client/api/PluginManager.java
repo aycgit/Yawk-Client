@@ -25,7 +25,7 @@ import net.yawk.client.gui.Window;
 import net.yawk.client.gui.components.Component;
 import net.yawk.client.gui.components.ModButton;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModData;
+import net.yawk.client.modmanager.PluginMod;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.FileUtils;
 
@@ -179,7 +179,7 @@ public class PluginManager {
 			
 			//This adds the window that will contain the plugin gui
 			Window w;
-			pluginWindows.put(plugin, w = new Window(plugin.getName(), reg.getWidth()));
+			pluginWindows.put(plugin, w = new Window(plugin.getName(), Client.getClient().getModManager(), reg.getWidth()));
 			Client.getClient().getGui().windows.add(w);
 			
 			//This allows the plugin to add it's own components
@@ -258,19 +258,22 @@ public class PluginManager {
 		System.out.println("REMOVING: "+plugin.getFileName());
 		
 		ModButton modButton = null;
-		Mod pluginMod = null;
+		PluginMod pluginMod = null;
 		
-		for(Mod mod : Client.getClient().getModManager().dataMap.keySet()){
-			
-			ModData data = Client.getClient().getModManager().dataMap.get(mod);
-			
-			if(data.getPlugin() == plugin){
-				pluginMod = mod;
+		for(Mod mod : Client.getClient().getModManager().mods){
+			if(mod instanceof PluginMod){
+				
+				PluginMod pl = ((PluginMod) mod);
+				
+				if(pl.getPluginData() == plugin){
+					pluginMod = pl;
+					break;
+				}
 			}
 		}
 		
 		Client.getClient().getModManager().mods.remove(pluginMod);
-		Client.getClient().getModManager().dataMap.remove(pluginMod);
+		Client.getClient().getModManager().nameMap.remove(Client.getClient().getModManager().getModName(pluginMod));
 		EventManager.unregister(pluginMod);
 		
 		Client.getClient().getGui().windows.remove(this.pluginWindows.get(plugin));

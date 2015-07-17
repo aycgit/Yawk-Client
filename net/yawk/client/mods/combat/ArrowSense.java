@@ -11,26 +11,18 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class ArrowSense implements Mod{
+@ModDetails(name = "ArrowSense", defaultKey = 0, desc = "See where arrows will land", type = ModType.COMBAT)
+public class ArrowSense extends Mod{
 	
 	public ArrowSense(){
 		
 	}
-	
-	@Override
-	public String getName() {
-		return "ArrowSense";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "See where mid-air arrows will land";
-	}
-	
+		
 	@EventTarget
 	public void onRender(EventRender e){
     	for(Object obj : Client.getClient().getMinecraft().theWorld.loadedEntityList){
@@ -94,11 +86,6 @@ public class ArrowSense implements Mod{
 				&& !arrow.isDead
 				&& arrow.getDistanceToEntity(Client.getClient().getPlayer()) < 250
 				&& Client.getClient().getMinecraft().theWorld.loadedEntityList.contains(arrow);
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
 	}
 	
 	@Override

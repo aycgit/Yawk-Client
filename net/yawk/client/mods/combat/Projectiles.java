@@ -11,6 +11,7 @@ import net.minecraft.util.Vec3;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventRender;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ESPUtils;
 
@@ -18,22 +19,13 @@ import org.lwjgl.opengl.GL11;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class Projectiles implements Mod{
+@ModDetails(name = "Projectiles", defaultKey = 0, desc = "See where arrows will land", type = ModType.COMBAT)
+public class Projectiles extends Mod{
 	
 	public Projectiles(){
 		
 	}
-	
-	@Override
-	public String getName() {
-		return "Projectiles";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "See where a projectile will land";
-	}
-	
+		
 	@EventTarget
 	public void onRender(EventRender e){
 		
@@ -145,12 +137,7 @@ public class Projectiles implements Mod{
 		return item instanceof ItemBow || item instanceof ItemSnowball
 				|| item instanceof ItemEgg || item instanceof ItemEnderPearl;
 	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.COMBAT;
-	}
-	
+		
 	@Override
 	public void onEnable() {
 		

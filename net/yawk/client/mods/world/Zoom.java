@@ -3,34 +3,20 @@ package net.yawk.client.mods.world;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModData;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import org.lwjgl.input.Keyboard;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class Zoom implements Mod{
+@ModDetails(name = "Zoom", defaultKey = 0, desc = "Magnify your view", type = ModType.WORLD)
+public class Zoom extends Mod{
 	
 	private float prevFOV;
 	
 	public Zoom(){
 		
-	}
-	
-	@Override
-	public String getName() {
-		return "Zoom";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Magnifies the world";
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
 	}
 	
 	@Override

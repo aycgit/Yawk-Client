@@ -1,6 +1,7 @@
 package net.yawk.client.mods.building;
 
 import net.minecraft.block.Block;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.util.BlockPos;
@@ -8,32 +9,24 @@ import net.minecraft.util.EnumFacing;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class LightsOut implements Mod{
+@ModDetails(name = "LightsOut", defaultKey = 0, desc = "Destroy torches and other one hit blocks", type = ModType.BUILDING)
+public class LightsOut extends Mod{
 
 	public LightsOut(){
-
+		
 	}
-
-	@Override
-	public String getName() {
-		return "LightsOut";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Destroy torches and other one hit blocks";
-	}
-
+	
 	private BlockPos blockPos;
 	private Block blockType;
-
+	
 	@EventTarget
 	public void onTick(EventTick tick){
-
+		
 		for(int ix = -3; ix<4; ix++)
 		{
 			for(int iy = -3; iy<4; iy++)
@@ -52,7 +45,7 @@ public class LightsOut implements Mod{
 					{
 						C07PacketPlayerDigging.Action nuke1 = C07PacketPlayerDigging.Action.START_DESTROY_BLOCK;
 						C07PacketPlayerDigging.Action nuke2 = C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK;
-
+						
 						Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C07PacketPlayerDigging(nuke1,blockPos,EnumFacing.UP));
 						Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C07PacketPlayerDigging(nuke2,blockPos,EnumFacing.UP));
 					}
@@ -60,12 +53,7 @@ public class LightsOut implements Mod{
 			}
 		}
 	}
-
-	@Override
-	public ModType getType() {
-		return ModType.BUILDING;
-	}
-
+	
 	@Override
 	public void onEnable() {
 

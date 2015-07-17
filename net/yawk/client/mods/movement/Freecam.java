@@ -12,13 +12,14 @@ import net.yawk.client.events.EventMotionUpdate;
 import net.yawk.client.events.EventMoveEntity;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModData;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-public class Freecam implements Mod{
+@ModDetails(name = "Freecam", defaultKey = 0, desc = "Move independently of your player", type = ModType.MOVEMENT)
+public class Freecam extends Mod{
 	
 	private Vector3d prevPosition;
 	private Vector2f prevRotation;
@@ -26,30 +27,15 @@ public class Freecam implements Mod{
 	private Vector3d freecamPosition;
 	private Vector2f freecamRotation;
 	
-	private ModData flightModData;
+	private Mod flightMod;
 	
 	public Freecam(){
 		
 	}
-	
-	@Override
-	public String getName() {
-		return "Freecam";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Move independant of your body";
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.MOVEMENT;
-	}
-	
+
 	@EventTarget
 	public void onTick(EventTick e){
-		if(!flightModData.isEnabled){
+		if(!flightMod.isEnabled()){
 			Flight.fly();
 		}
 	}
@@ -75,7 +61,7 @@ public class Freecam implements Mod{
 		prevRotation = new Vector2f(Client.getClient().getPlayer().rotationYaw, Client.getClient().getPlayer().rotationPitch);
 		Client.getClient().getPlayer().noClip = true;
 		
-		flightModData = Client.getClient().getModManager().dataMap.get(Client.getClient().getModManager().getMod(Flight.class));
+		flightMod = Client.getClient().getModManager().getMod(Flight.class);
 		
 		EntityOtherPlayerMP yawk = new EntityOtherPlayerMP(Client.getClient().getMinecraft().theWorld, Client.getClient().getPlayer().getGameProfile());
 		yawk.inventory = Client.getClient().getPlayer().inventory;

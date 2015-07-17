@@ -3,6 +3,8 @@ package net.yawk.client.utils;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.yawk.client.Client;
@@ -28,8 +30,31 @@ public class CombatUtils {
         return tempEntity;
     }
 	
+	public static void hit(Entity entity){
+		Client.getClient().getMinecraft().playerController.attackEntity(Client.getClient().getPlayer(), entity);
+		Client.getClient().getPlayer().swingItem();
+	}
+	
+	public static boolean isAttackable(Entity entity){
+		return entity instanceof EntityLiving && isAttackable((EntityLiving)entity);
+	}
+	
+	//TODO: make this more sophisticated
+	public static boolean isAttackable(EntityLivingBase entity){
+		return isAttackableBase(entity);
+	}
+	
+	//TODO: add some stuff to the player check
 	public static boolean isAttackable(EntityPlayer player){
-		return Client.getClient().getMinecraft().thePlayer.canEntityBeSeen(player) && player.getHealth() > 0 && !player.isInvisible() && player.ticksExisted > 60;
+		return isAttackableBase(player);
+	}
+	
+	private static boolean isAttackableBase(EntityLivingBase entity){
+		return Client.getClient().getMinecraft().thePlayer.canEntityBeSeen(entity) 
+				&& entity.getHealth() > 0 
+				&& !entity.isInvisible() 
+				&& entity.ticksExisted > 60 
+				&& Client.getClient().getPlayer().getDistanceToEntity(entity) <= 4.2;
 	}
 	
 	public static void faceEntity(Entity e){

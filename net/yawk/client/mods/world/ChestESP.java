@@ -5,25 +5,17 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.modmanager.ModType;
 import net.yawk.client.utils.ESPUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-public class ChestESP implements Mod{
+@ModDetails(name = "ChestESP", defaultKey = 0, desc = "See chests through walls", type = ModType.WORLD)
+public class ChestESP extends Mod{
 	
 	public ChestESP(){
 		
-	}
-	
-	@Override
-	public String getName() {
-		return "ChestESP";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Highlights any chests in the world";
 	}
 	
 	@EventTarget
@@ -38,11 +30,6 @@ public class ChestESP implements Mod{
     			ESPUtils.drawRawBlockESP(x - Client.getClient().getMinecraft().renderManager.renderPosX, y - Client.getClient().getMinecraft().renderManager.renderPosY, z - Client.getClient().getMinecraft().renderManager.renderPosZ, 0, 0, 1, true);
     		}
     	}
-	}
-	
-	@Override
-	public ModType getType() {
-		return ModType.WORLD;
 	}
 	
 	@Override

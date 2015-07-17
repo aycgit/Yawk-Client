@@ -6,6 +6,7 @@ import net.yawk.client.Client;
 import net.yawk.client.gui.components.Button;
 import net.yawk.client.gui.components.Component;
 import net.yawk.client.gui.components.ScrollPane;
+import net.yawk.client.modmanager.ModManager;
 import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.GuiUtils;
 
@@ -17,25 +18,29 @@ public class Window {
 	public int posX, posY, mouseXOffset, mouseYOffset, colour = 0x99000000, borderColour = 0x20FFFFFF;
 	public boolean dragging, extended, pinned;
 	public ArrayList<Component> components = new ArrayList<Component>();
+	private ModManager modManager;
 	
 	public static int TITLE_COMPONENT_SPACE = 2;
 	
 	private int width, height;
 	
-	public Window(String title){
-		this(title, 85, 12);
+	public Window(String title, ModManager modManager){
+		this(title, modManager, 85, 12);
+		this.modManager = modManager;
 	}
 	
-	public Window(String title, int width){
+	public Window(String title, ModManager modManager, int width){
 		this.title = title;
 		this.width = width;
 		this.height = 12;
+		this.modManager = modManager;
 	}
 	
-	public Window(String title, int width, int height){
+	public Window(String title, ModManager modManager, int width, int height){
 		this.title = title;
 		this.width = width;
 		this.height = height;
+		this.modManager = modManager;
 	}
 	
 	public void draw(int x, int y){
@@ -150,5 +155,13 @@ public class Window {
 	
 	public int getHeight() {
 		return height;
+	}
+	
+	public ModManager getModManager() {
+		return modManager;
+	}
+
+	public void setModManager(ModManager modManager) {
+		this.modManager = modManager;
 	}
 }
