@@ -2,6 +2,7 @@ package net.yawk.client.modmanager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;
@@ -77,32 +78,39 @@ public class ModManager {
 		//mods.add(new Description()); //TODO: make this and move it to meta
 		
 		for(Mod m : mods){
-			ModDetails details = m.getClass().getAnnotation(ModDetails.class);
-			nameMap.put(details.name(), m);
-			m.setKeybind(details.defaultKey());
+			initMod(m);
 			EventManager.register(m);
 		}
 	}
 	
-	public void addMod(Mod m){
-		
+	public void addPluginMod(Mod m, PluginData data){
+		initMod(m);
 		mods.add(m);
-		nameMap.put(m.getClass().getAnnotation(ModDetails.class).name(), m);
 		EventManager.register(m);
-		
-		String type = getModType(m).getName();
-		
-		for(Window w : Client.getClient().getGui().windows){
-			if(w.title == type){
-				w.components.add(new ModButton(w, m));
-			}
-		}
 	}
 	
-	public void addMod(Mod m, PluginData data){
-		mods.add(m);
-		nameMap.put(m.getClass().getAnnotation(ModDetails.class).name(), m);
-		EventManager.register(m);
+	private void initMod(Mod m){
+		RegisterMod details = m.getClass().getAnnotation(RegisterMod.class);
+		nameMap.put(details.name(), m);
+		m.setKeybind(details.defaultKey());
+		m.setName(details.name());
+		m.setType(details.type());
+	}
+	
+	public void removePluginMods(PluginData data){
+		
+		Iterator<Mod> it = mods.iterator();
+		
+		while(it.hasNext()){
+			
+			Mod m = it.next();
+			
+			if(m instanceof PluginMod && ((PluginMod) m).getPluginData() == data){
+				Client.getClient().getModManager().mods.remove(m);
+				Client.getClient().getModManager().nameMap.remove(m.getName());
+				EventManager.unregister(m);
+			}
+		}
 	}
 	
 	public void toggle(Mod m){
@@ -117,20 +125,10 @@ public class ModManager {
 			m.onEnable();
 		}
 	}
-	
-	public Mod.Type getModType(Mod m){
-		//System.out.println("CHECKING TYPE: "+m.getClass().getName());
-		return m.getClass().getAnnotation(ModDetails.class).type();
-	}
-	
-	public String getModName(Mod m){
-		//System.out.println("CHECKING NAME: "+m.getClass().getName());
-		return this.nameMap.inverse().get(m);
-	}
-	
-	public Mod getMod(Class clazz){
+		
+	public Mod getMod(Class modClass){
 		for(Mod m : mods){
-			if(m.getClass().equals(clazz)){
+			if(m.getClass().equals(modClass)){
 				return m;
 			}
 		}
@@ -139,12 +137,6 @@ public class ModManager {
 	}
 	
 	public Mod getModByName(String name){
-		for(Mod m : mods){
-			if(getModName(m).equals(name)){
-				return m;
-			}
-		}
-		
-		return null;
+		return this.nameMap.get(name);
 	}
 }

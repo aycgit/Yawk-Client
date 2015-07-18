@@ -5,12 +5,12 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientRenderer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "ChestESP", desc = "See chests through walls", type = Mod.Type.WORLD)
+@RegisterMod(name = "ChestESP", desc = "See chests through walls", type = Mod.Type.WORLD)
 public class ChestESP extends Mod{
 	
 	public ChestESP(){

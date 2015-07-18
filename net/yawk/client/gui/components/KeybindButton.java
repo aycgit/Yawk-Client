@@ -11,13 +11,13 @@ public class KeybindButton extends SelectorButton implements ISelector{
 	private Mod mod;
 	
 	public KeybindButton(Window win, Mod mod, SelectorSystem system) {
-		super(win, win.getModManager().getModName(mod), system);
+		super(win, mod.getName(), system);
 		this.mod = mod;
 	}
 	
 	@Override
 	public String getText() {
-		return Client.getClient().getModManager().getModName(mod)+": "+(isSelected? "...":mod.getKeyName());
+		return mod.getName()+": "+(isSelected? "...":mod.getKeyName());
 	}
 	
 	@Override

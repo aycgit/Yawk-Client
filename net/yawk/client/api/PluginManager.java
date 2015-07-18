@@ -193,7 +193,7 @@ public class PluginManager {
 					((PluginMod) m).setPluginData(plugin);
 				}
 				
-				Client.getClient().getModManager().addMod(m, plugin);
+				Client.getClient().getModManager().addPluginMod(m, plugin);
 				w.components.add(new ModButton(w, m));
 			}
 			
@@ -263,25 +263,7 @@ public class PluginManager {
 		
 		System.out.println("REMOVING: "+plugin.getFileName());
 		
-		ModButton modButton = null;
-		ArrayList<PluginMod> pluginMods = new ArrayList<PluginMod>();
-		
-		for(Mod mod : Client.getClient().getModManager().mods){
-			if(mod instanceof PluginMod){
-				
-				PluginMod pl = ((PluginMod) mod);
-				
-				if(pl.getPluginData() == plugin){
-					pluginMods.add(pl);
-				}
-			}
-		}
-		
-		for(PluginMod pluginMod : pluginMods){
-			Client.getClient().getModManager().mods.remove(pluginMod);
-			Client.getClient().getModManager().nameMap.remove(Client.getClient().getModManager().getModName(pluginMod));
-			EventManager.unregister(pluginMod);
-		}
+		Client.getClient().getModManager().removePluginMods(plugin);
 		
 		Client.getClient().getGui().windows.remove(this.pluginWindows.get(plugin));
 		pluginWindows.remove(plugin);

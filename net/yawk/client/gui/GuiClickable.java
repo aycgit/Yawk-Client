@@ -30,7 +30,7 @@ public class GuiClickable extends GuiScreen {
 				windows.add(win = new Window(type.getName(), modManager));
 				
 				for(Mod m : modManager.mods){
-					if(modManager.getModType(m) == type){
+					if(m.getType() == type){
 						win.components.add(new ModButton(win, m));
 					}
 				}

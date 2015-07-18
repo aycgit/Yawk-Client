@@ -10,14 +10,14 @@ import net.minecraft.util.MathHelper;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.CombatUtils;
 import net.yawk.client.utils.MillisecondTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "KillAura", desc = "Kill people near you", type = Mod.Type.COMBAT)
+@RegisterMod(name = "KillAura", desc = "Kill people near you", type = Mod.Type.COMBAT)
 public class KillAura extends Mod{
 	
 	private MillisecondTimer timer = new MillisecondTimer(120);

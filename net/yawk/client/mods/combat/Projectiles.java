@@ -11,13 +11,13 @@ import net.minecraft.util.Vec3;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventRender;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 
 import org.lwjgl.opengl.GL11;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Projectiles", desc = "See where arrows will land", type = Mod.Type.COMBAT)
+@RegisterMod(name = "Projectiles", desc = "See where arrows will land", type = Mod.Type.COMBAT)
 public class Projectiles extends Mod{
 	
 	public Projectiles(){

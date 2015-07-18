@@ -4,18 +4,14 @@ import org.lwjgl.input.Keyboard;
 
 public class Mod {
 	
-	private int keybind;
-	
-	private boolean enabled;
+	protected int keybind;
+	protected boolean enabled;
+	protected Type type;
+	protected String name;
 	
 	public Mod() {
 		super();
 		this.keybind = -1;
-	}
-	
-	public Mod(int keybind) {
-		super();
-		this.keybind = keybind;
 	}
 	
 	public final String getKeyName(){
@@ -44,6 +40,22 @@ public class Mod {
 	
 	public void onDisable(){
 		
+	}
+	
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public enum Type {

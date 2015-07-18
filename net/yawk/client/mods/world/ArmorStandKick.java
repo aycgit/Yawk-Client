@@ -19,12 +19,12 @@ import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "ArmorStandKick", desc = "Place armor stands to kick people", type = Mod.Type.WORLD)
+@RegisterMod(name = "ArmorStandKick", desc = "Place armor stands to kick people", type = Mod.Type.WORLD)
 public class ArmorStandKick extends Mod{
 	
 	public ArmorStandKick(){

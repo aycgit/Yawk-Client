@@ -43,7 +43,7 @@ public class ModDataTask implements DataTask{
 		
 		for(Mod mod : Client.getClient().getModManager().mods){
 			JsonObject save = new JsonObject();
-			save.addProperty("name", Client.getClient().getModManager().getModName(mod));
+			save.addProperty("name", mod.getName());
 			save.addProperty("enabled", mod.isEnabled()? "true":"false");
 			save.addProperty("keybind", mod.getKeybind());
 			arr.add(save);

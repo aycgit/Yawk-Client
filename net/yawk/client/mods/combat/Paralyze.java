@@ -4,12 +4,12 @@ import net.minecraft.network.play.client.C03PacketPlayer;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Paralyze", desc = "Freeze players inside you", type = Mod.Type.COMBAT)
+@RegisterMod(name = "Paralyze", desc = "Freeze players inside you", type = Mod.Type.COMBAT)
 public class Paralyze extends Mod{
 	
 	@EventTarget

@@ -3,12 +3,12 @@ package net.yawk.client.mods.movement;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventMoveEntity;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "SafeWalk", desc = "Stops you falling off edges", type = Mod.Type.MOVEMENT)
+@RegisterMod(name = "SafeWalk", desc = "Stops you falling off edges", type = Mod.Type.MOVEMENT)
 public class SafeWalk extends Mod{
 	
 	private boolean wasSneaking;

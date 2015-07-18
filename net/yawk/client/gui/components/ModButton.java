@@ -25,7 +25,7 @@ public class ModButton extends Button{
 	
 	@Override
 	public String getText() {
-		return Client.getClient().getModManager().getModName(mod);
+		return mod.getName();
 	}
 	
 	@Override

@@ -10,12 +10,12 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "NoSwing", desc = "Don't swing your arm", type = Mod.Type.BUILDING)
+@RegisterMod(name = "NoSwing", desc = "Don't swing your arm", type = Mod.Type.BUILDING)
 public class NoSwing extends Mod{
 	
 	public NoSwing(){

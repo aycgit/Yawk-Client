@@ -10,9 +10,9 @@ import net.minecraft.network.play.client.C09PacketHeldItemChange;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 
-@ModDetails(name = "AutoSoup", desc = "Eat soup automatically", type = Mod.Type.COMBAT)
+@RegisterMod(name = "AutoSoup", desc = "Eat soup automatically", type = Mod.Type.COMBAT)
 public class AutoSoup extends Mod{
 
 	Minecraft mc = Minecraft.getMinecraft();

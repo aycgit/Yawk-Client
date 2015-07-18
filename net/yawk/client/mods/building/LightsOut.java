@@ -9,11 +9,11 @@ import net.minecraft.util.EnumFacing;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "LightsOut", desc = "Destroy torches and other one hit blocks", type = Mod.Type.BUILDING)
+@RegisterMod(name = "LightsOut", desc = "Destroy torches and other one hit blocks", type = Mod.Type.BUILDING)
 public class LightsOut extends Mod{
 
 	public LightsOut(){

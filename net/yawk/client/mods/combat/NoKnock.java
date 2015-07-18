@@ -7,11 +7,11 @@ import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.events.EventSetHealth;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "NoKnock", desc = "Reduces your knockback", type = Mod.Type.COMBAT)
+@RegisterMod(name = "NoKnock", desc = "Reduces your knockback", type = Mod.Type.COMBAT)
 public class NoKnock extends Mod{
 	
 	public NoKnock(){

@@ -12,12 +12,12 @@ import net.yawk.client.events.EventMotionUpdate;
 import net.yawk.client.events.EventMoveEntity;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "Freecam", desc = "Move independently of your player", type = Mod.Type.MOVEMENT)
+@RegisterMod(name = "Freecam", desc = "Move independently of your player", type = Mod.Type.MOVEMENT)
 public class Freecam extends Mod{
 	
 	private Vector3d prevPosition;

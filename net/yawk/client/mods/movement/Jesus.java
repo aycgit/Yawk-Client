@@ -14,13 +14,13 @@ import net.yawk.client.events.EventJump;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "Jesus", desc = "Walk on water", type = Mod.Type.MOVEMENT)
+@RegisterMod(name = "Jesus", desc = "Walk on water", type = Mod.Type.MOVEMENT)
 public class Jesus extends Mod{
 	
 	public Jesus(){

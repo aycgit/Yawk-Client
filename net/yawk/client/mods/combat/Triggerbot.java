@@ -7,14 +7,14 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.CombatUtils;
 import net.yawk.client.utils.MillisecondTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Triggerbot", desc = "Hit the player you're looking at", type = Mod.Type.COMBAT)
+@RegisterMod(name = "Triggerbot", desc = "Hit the player you're looking at", type = Mod.Type.COMBAT)
 public class Triggerbot extends Mod{
 	
 	private MillisecondTimer timer = new MillisecondTimer(120);

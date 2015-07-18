@@ -5,14 +5,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventRender;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Tracers", desc = "Draws lines to players", type = Mod.Type.WORLD)
+@RegisterMod(name = "Tracers", desc = "Draws lines to players", type = Mod.Type.WORLD)
 public class Tracers extends Mod{
 
 	@Override

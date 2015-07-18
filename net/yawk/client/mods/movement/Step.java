@@ -11,12 +11,12 @@ import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Step", desc = "Jump up blocks automatically", type = Mod.Type.MOVEMENT)
+@RegisterMod(name = "Step", desc = "Jump up blocks automatically", type = Mod.Type.MOVEMENT)
 public class Step extends Mod{
 	
 	@EventTarget

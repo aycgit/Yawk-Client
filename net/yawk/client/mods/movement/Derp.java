@@ -6,13 +6,13 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.MillisecondTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Derp", desc = "Look stupid", type = Mod.Type.MOVEMENT)
+@RegisterMod(name = "Derp", desc = "Look stupid", type = Mod.Type.MOVEMENT)
 public class Derp extends Mod{
 	
 	public Derp(){

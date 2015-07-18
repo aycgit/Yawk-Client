@@ -7,12 +7,12 @@ import net.minecraft.network.play.client.C09PacketHeldItemChange;
 import net.yawk.client.Client;
 import net.yawk.client.events.*;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 
-@ModDetails(name = "Speed", desc = "Move faster", type = Mod.Type.MOVEMENT)
+@RegisterMod(name = "Speed", desc = "Move faster", type = Mod.Type.MOVEMENT)
 public class Speed extends Mod{
 	
 	public Speed(){

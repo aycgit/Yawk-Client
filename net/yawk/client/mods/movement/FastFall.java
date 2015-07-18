@@ -5,9 +5,9 @@ import com.darkmagician6.eventapi.EventTarget;
 import net.minecraft.client.Minecraft;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 
-@ModDetails(name = "FastFall", desc = "Fall faster than usual", type = Mod.Type.MOVEMENT)
+@RegisterMod(name = "FastFall", desc = "Fall faster than usual", type = Mod.Type.MOVEMENT)
 public class FastFall extends Mod{
 	Minecraft mc = Minecraft.getMinecraft();
 		

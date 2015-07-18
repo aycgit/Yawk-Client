@@ -19,10 +19,10 @@ import net.minecraft.util.MathHelper;
 import net.yawk.client.Client;
 import net.yawk.client.events.*;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 
-@ModDetails(name = "Phase", desc = "Walk through transparent blocks", type = Mod.Type.WORLD)
+@RegisterMod(name = "Phase", desc = "Walk through transparent blocks", type = Mod.Type.WORLD)
 public class Phase extends Mod{
 
 	public Phase(){

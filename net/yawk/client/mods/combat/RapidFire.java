@@ -10,12 +10,12 @@ import net.minecraft.util.EnumFacing;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "RapidFire", desc = "Shoot bows faster", type = Mod.Type.COMBAT)
+@RegisterMod(name = "RapidFire", desc = "Shoot bows faster", type = Mod.Type.COMBAT)
 public class RapidFire extends Mod{
 	
 	public RapidFire(){

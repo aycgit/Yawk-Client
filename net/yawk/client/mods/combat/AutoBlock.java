@@ -4,12 +4,12 @@ import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "AutoBlock", desc = "Block with your sword automatically", type = Mod.Type.COMBAT)
+@RegisterMod(name = "AutoBlock", desc = "Block with your sword automatically", type = Mod.Type.COMBAT)
 public class AutoBlock extends Mod{
 	
 	public AutoBlock(){
