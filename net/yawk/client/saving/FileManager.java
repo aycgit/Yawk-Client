@@ -6,6 +6,9 @@ import java.io.IOException;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import net.yawk.client.Client;
 import net.yawk.client.utils.FileUtils;
 
@@ -28,9 +31,9 @@ public class FileManager {
 			File file = getFile(task);
 			
 			if(file.exists()){
-				JSONObject obj = new JSONObject();
+				JsonObject obj = new JsonObject();
 				task.write(obj);
-				FileUtils.writeFile(file, obj.toJSONString());
+				FileUtils.writeFile(file, obj.toString());
 			}else{
 				try {
 					file.createNewFile();
@@ -47,7 +50,7 @@ public class FileManager {
 			File file = getFile(task);
 			
 			if(file.exists()){
-				task.read((JSONObject) JSONValue.parse(FileUtils.readFileFull(file)));
+				task.read((JsonObject) new JsonParser().parse(FileUtils.readFileFull(file)));
 			}else{
 				try {
 					file.createNewFile();

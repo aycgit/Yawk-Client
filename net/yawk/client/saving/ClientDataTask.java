@@ -5,6 +5,8 @@ import net.yawk.client.Client;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.google.gson.JsonObject;
+
 public class ClientDataTask implements DataTask{
 
 	@Override
@@ -13,12 +15,12 @@ public class ClientDataTask implements DataTask{
 	}
 
 	@Override
-	public void read(JSONObject obj) {
-		Client.getClient().getGui().opened = (Boolean) obj.get("opened-gui");
+	public void read(JsonObject obj) {
+		Client.getClient().getGui().opened = obj.get("opened-gui").getAsBoolean();
 	}
 
 	@Override
-	public void write(JSONObject obj) {
-		obj.put("opened-gui", Client.getClient().getGui().opened);
+	public void write(JsonObject obj) {
+		obj.addProperty("opened-gui", Client.getClient().getGui().opened);
 	}
 }

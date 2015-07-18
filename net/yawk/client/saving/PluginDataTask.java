@@ -12,6 +12,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 public class PluginDataTask implements DataTask{
 
 	@Override
@@ -20,16 +24,16 @@ public class PluginDataTask implements DataTask{
 	}
 
 	@Override
-	public void read(JSONObject obj) {
+	public void read(JsonObject obj) {
 		
 		//The list of the data saved on the previous shutdown. This tells us if we need an update or which plugins were previously enabled.
 		ArrayList<PluginData> lastInstalledData = new ArrayList<PluginData>();
 		
-		JSONArray arr = (JSONArray) obj.get("plugins");
+		JsonArray arr = (JsonArray) obj.get("plugins");
 		
-		for(Object o : arr){
-			JSONObject json = (JSONObject) o;
-			lastInstalledData.add(new PluginData(json.get("name").toString(), json.get("file").toString(), json.get("filename").toString(), Integer.parseInt(json.get("version").toString()), Boolean.parseBoolean(json.get("enabled").toString())));
+		for(JsonElement el : arr){
+			JsonObject json = (JsonObject) el;
+			lastInstalledData.add(new PluginData(json.get("name").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), json.get("enabled").getAsBoolean()));
 		}
 		
 		//Check if a new update is available
@@ -71,24 +75,24 @@ public class PluginDataTask implements DataTask{
 	}
 
 	@Override
-	public void write(JSONObject obj) {
+	public void write(JsonObject obj) {
 		
-		JSONArray arr = new JSONArray();
+		JsonArray arr = new JsonArray();
 		
 		for(PluginData data : Client.getClient().getPluginManager().pluginData){
 			
-			JSONObject json = new JSONObject();
+			JsonObject json = new JsonObject();
 			
-			json.put("name", data.getName());
-			json.put("file", data.getFilePath());
-			json.put("filename", data.getFileName());
-			json.put("version", data.getVersion());
-			json.put("enabled", Client.getClient().getPluginManager().pluginWindows.containsKey(data));
+			json.addProperty("name", data.getName());
+			json.addProperty("file", data.getFilePath());
+			json.addProperty("filename", data.getFileName());
+			json.addProperty("version", data.getVersion());
+			json.addProperty("enabled", Client.getClient().getPluginManager().pluginWindows.containsKey(data));
 			
 			arr.add(json);
 		}
 		
-		obj.put("plugins", arr);
+		obj.addProperty("plugins", arr.toString());
 	}
 
 }

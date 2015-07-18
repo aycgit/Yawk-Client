@@ -6,6 +6,10 @@ import net.yawk.client.modmanager.Mod;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 public class ModDataTask implements DataTask{
 
 	@Override
@@ -14,38 +18,41 @@ public class ModDataTask implements DataTask{
 	}
 
 	@Override
-	public void read(JSONObject obj) {
-		JSONArray arr = (JSONArray) obj.get("mods");
+	public void read(JsonObject obj) {
 		
-		for(Object o : arr){
+		JsonArray arr = (JsonArray) obj.get("mods");
+		
+		for(JsonElement el : arr){
 			
-			JSONObject save = (JSONObject) o;
-			Mod mod = Client.getClient().getModManager().getModByName((String) save.get("name"));
+			JsonObject save = (JsonObject) el;
+			
+			Mod mod = Client.getClient().getModManager().getModByName(save.get("name").getAsString());
 			
 			if(mod != null){
 				
-				if(save.get("enabled").equals("true")){
+				if(save.get("enabled").getAsBoolean()){
 					Client.getClient().getModManager().toggle(mod);
 				}
 				
-				mod.setKeybind(((Long) save.get("keybind")).intValue());
+				mod.setKeybind(save.get("keybind").getAsInt());
 			}
 		}
 	}
 
 	@Override
-	public void write(JSONObject obj) {
-		JSONArray arr = new JSONArray();
+	public void write(JsonObject obj) {
+		
+		JsonArray arr = new JsonArray();
 		
 		for(Mod mod : Client.getClient().getModManager().mods){
-			JSONObject save = new JSONObject();
-			save.put("name", Client.getClient().getModManager().getModName(mod));
-			save.put("enabled", mod.isEnabled()? "true":"false");
-			save.put("keybind", mod.getKeybind());
+			JsonObject save = new JsonObject();
+			save.addProperty("name", Client.getClient().getModManager().getModName(mod));
+			save.addProperty("enabled", mod.isEnabled()? "true":"false");
+			save.addProperty("keybind", mod.getKeybind());
 			arr.add(save);
 		}
 		
-		obj.put("mods", arr);
+		obj.addProperty("mods", arr.toString());
 	}
 	
 }

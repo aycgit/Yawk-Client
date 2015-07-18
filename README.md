@@ -5,7 +5,6 @@ This project uses modified code from DarkMagician6's Event API: https://bitbucke
 Unfortunately this has to be done through direct editing due to how the Event API works so you'll find the modified version on this repo
 
 This project has the following dependencies:
-* JSON.simple: https://code.google.com/p/json-simple/
 * Jsoup 1.8.1: http://jsoup.org/
 * Netted by 10askinsw (unreleased and optional for certain available plugins)
 
