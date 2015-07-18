@@ -90,11 +90,15 @@ public class ModManager {
 	}
 	
 	private void initMod(Mod m){
-		RegisterMod details = m.getClass().getAnnotation(RegisterMod.class);
-		nameMap.put(details.name(), m);
-		m.setKeybind(details.defaultKey());
-		m.setName(details.name());
-		m.setType(details.type());
+		if(m.getClass().isAnnotationPresent(RegisterMod.class)){
+			RegisterMod details = m.getClass().getAnnotation(RegisterMod.class);
+			nameMap.put(details.name(), m);
+			m.setKeybind(details.defaultKey());
+			m.setName(details.name());
+			m.setType(details.type());
+		}else{
+			Client.getClient().log("Error - RegisterMod class not found: "+m.getClass().getName());
+		}
 	}
 	
 	public void removePluginMods(PluginData data){

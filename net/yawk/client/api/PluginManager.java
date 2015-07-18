@@ -39,7 +39,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 /**
  * Handles all plugin data and plugin loading
- * @author RandomAmazingGuy
+ * @author 10askinsw
  */
 public class PluginManager {
 	
@@ -71,7 +71,7 @@ public class PluginManager {
 			
 			Document doc = Jsoup.connect("http://www.yawk.net/mods/list.php").userAgent(ClientUtils.USER_AGENT).get();
 			
-			JsonArray arr = (JsonArray) new JsonParser().parse(doc.text());
+			JsonArray arr = new JsonParser().parse(doc.text()).getAsJsonArray();
 			
 			for(JsonElement el : arr){
 				
@@ -152,7 +152,7 @@ public class PluginManager {
 		
 		File jar = new File(plugins, plugin.getFileName());
 		
-		System.out.println("ADDING PLUGIN: "+jar.getPath());
+		Client.getClient().log("ADDING PLUGIN: "+jar.getPath());
 		
 		if(jar.isDirectory()){
 			return;
@@ -160,7 +160,7 @@ public class PluginManager {
 		
 		if(isValid(jar)){
 			
-			System.out.println("LOADING VALID JAR: "+jar.getName());
+			Client.getClient().log("LOADING VALID JAR: "+jar.getName());
 			
 			URI uri = jar.toURI();
 			URL url = uri.toURL();
@@ -198,7 +198,7 @@ public class PluginManager {
 			}
 			
 		}else{
-			System.out.println("INVALID JAR: "+jar.getName());
+			Client.getClient().log("INVALID JAR: "+jar.getName());
 		}
 	}
 	
@@ -208,7 +208,7 @@ public class PluginManager {
 	 */
 	public void downloadPlugin(PluginData plugin){
 		
-		System.out.println("DOWNLOADING: "+plugin.getFileName());
+		Client.getClient().log("DOWNLOADING: "+plugin.getFileName());
 		
 		if(downloadThread != null && downloadThread.isAlive()){
 			
@@ -240,9 +240,7 @@ public class PluginManager {
 				            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 				            fos.close();
 				            rbc.close();
-				            
-				    		//System.out.println("DOWNLOADED: "+pluginFile.getName());
-				    		
+				            				    		
 				        } catch (IOException e) {
 				            e.printStackTrace();
 				        }
@@ -261,7 +259,7 @@ public class PluginManager {
 	 */
 	public void removePlugin(PluginData plugin) {
 		
-		System.out.println("REMOVING: "+plugin.getFileName());
+		Client.getClient().log("REMOVING: "+plugin.getFileName());
 		
 		Client.getClient().getModManager().removePluginMods(plugin);
 		
@@ -292,7 +290,7 @@ public class PluginManager {
 	 * @return
 	 */
 	private boolean isValid(File jar) {
-				
+		
 		if(developerMode){
 			return true;
 		}
@@ -300,10 +298,10 @@ public class PluginManager {
 		try {
 			
 			String hash = getHash(jar);
-			System.out.println("HASH: "+hash);
-			System.out.println("NAME: "+ClientUtils.stripExtension(jar.getName()));
+			Client.getClient().log("HASH: "+hash);
+			Client.getClient().log("NAME: "+ClientUtils.stripExtension(jar.getName()));
 			Document doc = Jsoup.connect("http://www.yawk.net/mods/valid.php?&name="+ClientUtils.stripExtension(jar.getName())+"&hash="+hash).userAgent(ClientUtils.USER_AGENT).get();
-			System.out.println("RESPONSE: "+doc.text());
+			Client.getClient().log("RESPONSE: "+doc.text());
 			
 			return doc.text().equalsIgnoreCase("true");
 			

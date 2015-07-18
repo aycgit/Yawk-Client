@@ -5,6 +5,7 @@ import net.yawk.client.gui.Window;
 import net.yawk.client.modmanager.Mod;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class WindowDataTask implements DataTask{
@@ -16,11 +17,11 @@ public class WindowDataTask implements DataTask{
 
 	@Override
 	public void read(JsonObject obj) {
-		JsonArray arr = (JsonArray) obj.get("windows");
+		JsonArray arr = obj.get("windows").getAsJsonArray();
 		
-		for(Object o : arr){
+		for(JsonElement el : arr){
 			
-			JsonObject save = (JsonObject) o;
+			JsonObject save = el.getAsJsonObject();
 			Window w = Client.getClient().getGui().getWindowByName(save.get("title").getAsString());
 			
 			if(w != null){
@@ -49,7 +50,7 @@ public class WindowDataTask implements DataTask{
 			arr.add(save);
 		}
 		
-		obj.addProperty("windows", arr.toString());
+		obj.add("windows", arr);
 	}
 
 }

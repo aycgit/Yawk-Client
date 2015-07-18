@@ -3,6 +3,7 @@ package net.yawk.client;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.logging.Logger;
 
 import org.apache.commons.codec.binary.Base64;
 import org.jsoup.Jsoup;
@@ -53,6 +54,7 @@ public class Client {
 	private ModManager modManager;
 	private PluginManager pluginManager;
 	private FileManager fileManager;
+	private Logger logger;
 	
 	private int BUILD_NUMBER = 80;
 	
@@ -61,6 +63,8 @@ public class Client {
 		//TODO: READ USERNAME AND PASSWORD FROM FILE
 		//TODO: CLIENT AUTHENTICATION
 		session = new ClientSession("Name", "348443568", false);
+		
+		logger = Logger.getGlobal();
 		
 		this.mc = mc;
 		this.fontRenderer = mc.fontRendererObj;
@@ -99,6 +103,10 @@ public class Client {
 				fileManager.save();
 			}
 		});
+	}
+	
+	public void log(String print){
+		logger.info(print);
 	}
 	
 	public Mod getHideClientMod(){

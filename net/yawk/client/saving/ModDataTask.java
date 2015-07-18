@@ -17,11 +17,11 @@ public class ModDataTask implements DataTask{
 	@Override
 	public void read(JsonObject obj) {
 		
-		JsonArray arr = (JsonArray) obj.get("mods");
+		JsonArray arr = obj.get("mods").getAsJsonArray();
 		
 		for(JsonElement el : arr){
 			
-			JsonObject save = (JsonObject) el;
+			JsonObject save = el.getAsJsonObject();
 			
 			Mod mod = Client.getClient().getModManager().getModByName(save.get("name").getAsString());
 			
@@ -49,7 +49,7 @@ public class ModDataTask implements DataTask{
 			arr.add(save);
 		}
 		
-		obj.addProperty("mods", arr.toString());
+		obj.add("mods", arr);
 	}
 	
 }

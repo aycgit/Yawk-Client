@@ -25,10 +25,10 @@ public class PluginDataTask implements DataTask{
 		//The list of the data saved on the previous shutdown. This tells us if we need an update or which plugins were previously enabled.
 		ArrayList<PluginData> lastInstalledData = new ArrayList<PluginData>();
 		
-		JsonArray arr = (JsonArray) obj.get("plugins");
+		JsonArray arr = obj.get("plugins").getAsJsonArray();
 		
 		for(JsonElement el : arr){
-			JsonObject json = (JsonObject) el;
+			JsonObject json = el.getAsJsonObject();
 			lastInstalledData.add(new PluginData(json.get("name").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), json.get("enabled").getAsBoolean()));
 		}
 		
@@ -88,7 +88,7 @@ public class PluginDataTask implements DataTask{
 			arr.add(json);
 		}
 		
-		obj.addProperty("plugins", arr.toString());
+		obj.add("plugins", arr);
 	}
 
 }
