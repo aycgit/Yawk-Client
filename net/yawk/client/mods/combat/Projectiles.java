@@ -12,7 +12,6 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventRender;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.utils.ESPUtils;
 
 import org.lwjgl.opengl.GL11;
 

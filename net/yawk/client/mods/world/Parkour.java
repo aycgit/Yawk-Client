@@ -16,14 +16,14 @@ import net.yawk.client.events.EventRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.utils.ESPUtils;
+import net.yawk.client.utils.ClientRenderer;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.darkmagician6.eventapi.EventTarget;
 
-@ModDetails(name = "Parkour", desc = "See where you will jump", type = Mod.Type.WORLD)
+@ModDetails(name = "Parkour", desc = "Predict where you will jump", type = Mod.Type.WORLD)
 public class Parkour extends Mod{
 	
 	public Parkour(){
@@ -93,7 +93,9 @@ public class Parkour extends Mod{
 		
 		while(vertexCounter++ < 300) {
 			
-			GL11.glVertex3d(x * 1.0D - Client.getClient().getMinecraft().renderManager.renderPosX, y * 1.0D - Client.getClient().getMinecraft().renderManager.renderPosY, z * 1.0D - Client.getClient().getMinecraft().renderManager.renderPosZ);
+			GL11.glVertex3d(x - Client.getClient().getMinecraft().renderManager.renderPosX,
+					y - Client.getClient().getMinecraft().renderManager.renderPosY,
+					z - Client.getClient().getMinecraft().renderManager.renderPosZ);
 			
 			x += motionX;
 			y += motionY;
@@ -106,11 +108,7 @@ public class Parkour extends Mod{
 					|| Client.getClient().getMinecraft().theWorld.getBlockState(new BlockPos(x-xArea, y, z-xArea)).getBlock().getMaterial() != Material.air){
 				
 				hitBlock = true;
-				
-				System.out.println("1: "+y);
-				System.out.println("2: "+(int)y);
-				System.out.println("3: "+((int)y - y));
-				
+								
 				double f = ((int)y - y);
 				
 				if((f < -0.99 && f > -1) || (f < -0.92 && f > -0.93)){
@@ -177,11 +175,13 @@ public class Parkour extends Mod{
 		GL11.glEnd();
 		
 		if(hitBlock){
-			if(flat){
-				ESPUtils.drawFloorESP(x - xArea, y + 0.1f, z - xArea, 0, 1, 0, false, xArea);
-			}else{
-				ESPUtils.drawFloorESP(x - xArea, y + 0.1f, z - xArea, 1, 0, 0, false, xArea);
-			}
+			ClientRenderer.drawFloorESP(x - Client.getClient().getMinecraft().renderManager.renderPosX,
+					y - Client.getClient().getMinecraft().renderManager.renderPosY,
+					z - Client.getClient().getMinecraft().renderManager.renderPosZ,
+					flat? 0:1,
+					flat? 1:0,
+					0,
+					xArea);
 		}
 		
 		GL11.glDisable(3042);
@@ -190,12 +190,6 @@ public class Parkour extends Mod{
 		GL11.glEnable(GL11.GL_LIGHTING);
 		
 		GL11.glPopMatrix();
-		
-		//System.out.println("1: "+Client.getClient().getPlayer().sprintingTicksLeft);
-		//System.out.println("2: "+Client.getClient().getPlayer().sprintToggleTimer);
-		//System.out.println("3: "+Client.getClient().getPlayer().moveForward);
-		//System.out.println("4: "+Client.getClient().getPlayer().movementInput.moveForward);
-		//System.out.println("5: "+Client.getClient().getPlayer().movementInput.updatePlayerMoveState(););
 	}
 	
 	@EventTarget

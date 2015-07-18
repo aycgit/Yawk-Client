@@ -6,7 +6,7 @@ import net.yawk.client.events.EventRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
-import net.yawk.client.utils.ESPUtils;
+import net.yawk.client.utils.ClientRenderer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
@@ -26,7 +26,7 @@ public class ChestESP extends Mod{
     			int y = chest.getPos().getY();
     			int z = chest.getPos().getZ();
     			
-    			ESPUtils.drawRawBlockESP(x - Client.getClient().getMinecraft().renderManager.renderPosX, y - Client.getClient().getMinecraft().renderManager.renderPosY, z - Client.getClient().getMinecraft().renderManager.renderPosZ, 0, 0, 1, true);
+    			ClientRenderer.drawBlockESP(x - Client.getClient().getMinecraft().renderManager.renderPosX, y - Client.getClient().getMinecraft().renderManager.renderPosY, z - Client.getClient().getMinecraft().renderManager.renderPosZ, 0, 0, 1);
     		}
     	}
 	}
