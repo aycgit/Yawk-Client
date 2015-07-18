@@ -4,9 +4,6 @@ import net.yawk.client.Client;
 import net.yawk.client.gui.Window;
 import net.yawk.client.modmanager.Mod;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 

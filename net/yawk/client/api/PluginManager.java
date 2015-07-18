@@ -29,13 +29,14 @@ import net.yawk.client.modmanager.PluginMod;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.FileUtils;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.darkmagician6.eventapi.EventManager;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 /**
  * Handles all plugin data and plugin loading
  * @author RandomAmazingGuy
@@ -70,12 +71,12 @@ public class PluginManager {
 			
 			Document doc = Jsoup.connect("http://www.yawk.net/mods/list.php").userAgent(ClientUtils.USER_AGENT).get();
 			
-			JSONArray arr = (JSONArray) JSONValue.parse(doc.text());
+			JsonArray arr = (JsonArray) new JsonParser().parse(doc.text());
 			
-			for(Object obj : arr){
+			for(JsonElement el : arr){
 				
-				JSONObject json = (JSONObject) obj;
-				pluginData.add(new PluginData(json.get("name").toString(), json.get("file").toString(), json.get("filename").toString(), Integer.parseInt(json.get("version").toString()), false));
+				JsonObject json = (JsonObject) el;
+				pluginData.add(new PluginData(json.get("name").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), false));
 			}
 			
 		} catch (IOException e) {

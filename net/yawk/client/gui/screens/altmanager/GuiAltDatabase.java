@@ -11,11 +11,12 @@ import net.yawk.client.Client;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.YawkWebsiteUtils;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.lwjgl.input.Keyboard;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class GuiAltDatabase extends GuiScreen {
 	
@@ -102,7 +103,7 @@ public class GuiAltDatabase extends GuiScreen {
     				
 					System.out.println(text);
 					
-					JSONObject json = (JSONObject) JSONValue.parse(text);
+					JsonObject json = (JsonObject) new JsonParser().parse(text);
 					
 					if(text.contains("ForbiddenOperationException")){
 						isGettingAccount = false;
@@ -110,16 +111,16 @@ public class GuiAltDatabase extends GuiScreen {
 						return;
 					}
 					
-					if(json.containsKey("accessToken") && json.containsKey("selectedProfile")){	
+					if(json.has("accessToken") && json.has("selectedProfile")){	
 						
-						JSONObject profile = (JSONObject) json.get("selectedProfile");
+						JsonObject profile = (JsonObject) json.get("selectedProfile");
 						
-						Client.getClient().getMinecraft().session = new Session((String)profile.get("name"), (String)profile.get("id"), (String)json.get("accessToken"), "mojang");
+						Client.getClient().getMinecraft().session = new Session(profile.get("name").getAsString(), profile.get("id").getAsString(), json.get("accessToken").getAsString(), "mojang");
 						
 						lastMessage = EnumChatFormatting.GREEN+"Logged in!";
 						
-					}else if(json.containsKey("reason")){
-						lastMessage = EnumChatFormatting.RED+"Failed: " + json.get("reason");
+					}else if(json.has("reason")){
+						lastMessage = EnumChatFormatting.RED+"Failed: " + json.get("reason").getAsString();
 					}
 					
     			} catch (Exception e) {

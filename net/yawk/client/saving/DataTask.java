@@ -1,7 +1,5 @@
 package net.yawk.client.saving;
 
-import org.json.simple.JSONObject;
-
 import com.google.gson.JsonObject;
 
 public interface DataTask {

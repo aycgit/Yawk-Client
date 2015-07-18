@@ -2,9 +2,6 @@ package net.yawk.client.saving;
 
 import net.yawk.client.Client;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import com.google.gson.JsonObject;
 
 public class ClientDataTask implements DataTask{

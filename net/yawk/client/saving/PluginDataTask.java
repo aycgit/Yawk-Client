@@ -8,10 +8,6 @@ import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;
 import net.yawk.client.utils.FileUtils;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

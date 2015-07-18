@@ -3,9 +3,6 @@ package net.yawk.client.saving;
 import net.yawk.client.Client;
 import net.yawk.client.modmanager.Mod;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

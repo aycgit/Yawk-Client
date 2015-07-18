@@ -44,6 +44,7 @@ public class Window {
 	}
 	
 	public void draw(int x, int y){
+		
 		if(dragging){
 			posX = x+mouseXOffset;
 			posY = y+mouseYOffset;
@@ -67,7 +68,7 @@ public class Window {
 			GuiUtils.drawBottomNodusRect(posX, posY+height+TITLE_COMPONENT_SPACE, posX+width, posY+height+TITLE_COMPONENT_SPACE+h);
 		}
 		
-		//TOGGLE EXTENSION
+		//Toggle extension
 		if(hasExtensionButton()){
 			if(extended){
 				GuiUtils.drawBorderedRect(posX+width-10, posY+2, posX+width-2, posY+height-2, 1, 0x5FFFFFFF, 0x99707070);
@@ -76,7 +77,7 @@ public class Window {
 			}
 		}
 		
-		//TOGGLE PINNED
+		//Toggle pinned
 		if(hasPinnedButton()){
 			if(pinned){
 				GuiUtils.drawBorderedRect(posX+width-22, posY+2, posX+width-14, posY+height-2, 1, 0x5FFFFFFF, 0x99707070);
