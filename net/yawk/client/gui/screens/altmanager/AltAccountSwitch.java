@@ -23,9 +23,9 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.*;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Session;
 import net.yawk.client.Client;
-import net.yawk.client.utils.ChatColours;
 import net.yawk.client.utils.yggdrasil.YggdrasilAuthenticator;
 
 public class AltAccountSwitch extends GuiScreen {
@@ -70,7 +70,7 @@ public class AltAccountSwitch extends GuiScreen {
 		searchField = new GuiTextField(1, Client.getClient().getFontRenderer(), 5, height - 28, 75, 20);
 		
 		buttonList.add(new GuiButton(7, width - 75, height - 28, 70, 20,
-				ChatColours.GREEN+"Alt Database"));
+				EnumChatFormatting.GREEN+"Alt Database"));
 		
 		boolean flag = selectedAccount >= 0
 				&& selectedAccount < accountSlotContainer.getSize();

@@ -9,7 +9,6 @@ public class PluginData {
 	private boolean wasEnabled;
 	
 	public PluginData(String name, String filePath, String fileName, int version, boolean wasEnabled) {
-		super();
 		this.name = name;
 		this.filePath = filePath;
 		this.fileName = fileName;

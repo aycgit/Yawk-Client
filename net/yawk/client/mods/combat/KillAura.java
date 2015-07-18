@@ -13,15 +13,15 @@ import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.CombatUtils;
-import net.yawk.client.utils.HysteriaTimer;
+import net.yawk.client.utils.MillisecondTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
 @ModDetails(name = "KillAura", desc = "Kill people near you", type = Mod.Type.COMBAT)
 public class KillAura extends Mod{
 	
-	private HysteriaTimer timer = new HysteriaTimer().setDelay(12);
-	private HysteriaTimer rotTimer = new HysteriaTimer().setDelay(4);
+	private MillisecondTimer timer = new MillisecondTimer(120);
+	private MillisecondTimer rotTimer = new MillisecondTimer(40);
 	
 	@EventTarget
 	public void onTick(EventGuiRender e){

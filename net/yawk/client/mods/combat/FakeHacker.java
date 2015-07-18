@@ -16,7 +16,7 @@ import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.utils.ClientUtils;
-import net.yawk.client.utils.HysteriaTimer;
+import net.yawk.client.utils.MillisecondTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
@@ -27,7 +27,7 @@ public class FakeHacker extends Mod{
 		
 	}
 	
-	private HysteriaTimer timer = new HysteriaTimer(12);
+	private MillisecondTimer timer = new MillisecondTimer(12);
 	private float health;
 	
 	@EventTarget

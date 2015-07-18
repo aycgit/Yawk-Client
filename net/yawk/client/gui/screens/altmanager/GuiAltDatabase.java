@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Session;
 import net.yawk.client.Client;
-import net.yawk.client.utils.ChatColours;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.YawkWebsiteUtils;
 
@@ -42,7 +42,7 @@ public class GuiAltDatabase extends GuiScreen {
     	
         Keyboard.enableRepeatEvents(true);
         buttonList.clear();
-        buttonList.add(new GuiButton(2, width / 2 - 100, height / 4 + 108, ChatColours.AQUA+"Need an account? Register here"));
+        buttonList.add(new GuiButton(2, width / 2 - 100, height / 4 + 108, EnumChatFormatting.AQUA+"Need an account? Register here"));
         buttonList.add(new GuiButton(0, width / 2 - 100, height / 4 + 132, "Get Alt Account"));
         buttonList.add(new GuiButton(1, width / 2 - 100, height / 4 + 156, "Done"));
                 
@@ -93,7 +93,7 @@ public class GuiAltDatabase extends GuiScreen {
 			public void run(){
 				
     			isGettingAccount = true;
-				lastMessage = ChatColours.AQUA+"Getting account...";
+				lastMessage = EnumChatFormatting.AQUA+"Getting account...";
 				
     			try {
     				
@@ -106,7 +106,7 @@ public class GuiAltDatabase extends GuiScreen {
 					
 					if(text.contains("ForbiddenOperationException")){
 						isGettingAccount = false;
-						lastMessage = ChatColours.RED+"Bad Account Picked - Please Retry";
+						lastMessage = EnumChatFormatting.RED+"Bad Account Picked - Please Retry";
 						return;
 					}
 					
@@ -116,15 +116,15 @@ public class GuiAltDatabase extends GuiScreen {
 						
 						Client.getClient().getMinecraft().session = new Session((String)profile.get("name"), (String)profile.get("id"), (String)json.get("accessToken"), "mojang");
 						
-						lastMessage = ChatColours.GREEN+"Logged in!";
+						lastMessage = EnumChatFormatting.GREEN+"Logged in!";
 						
 					}else if(json.containsKey("reason")){
-						lastMessage = ChatColours.RED+"Failed: " + json.get("reason");
+						lastMessage = EnumChatFormatting.RED+"Failed: " + json.get("reason");
 					}
 					
     			} catch (Exception e) {
 					e.printStackTrace();
-					lastMessage = ChatColours.RED+"Error! Please retry!";
+					lastMessage = EnumChatFormatting.RED+"Error! Please retry!";
 	    			isGettingAccount = false;
 				}
     			

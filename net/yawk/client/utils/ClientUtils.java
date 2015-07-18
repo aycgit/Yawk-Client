@@ -10,24 +10,7 @@ public class ClientUtils {
 	
 	public static Random random = new Random();
 	public static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
-	
-	public static String getRainbow(String toTranslate){
 		
-		char[] chars = toTranslate.toCharArray();
-		
-		String newStr = getRandomChatColour();
-		
-		for(char character : chars){
-			newStr = newStr+getRandomChatColour()+character;
-		}
-		
-		return newStr;
-	}
-	
-	public static String getRandomChatColour(){
-		return ChatColours.niceColours[random.nextInt(ChatColours.niceColours.length-1)];
-	}
-	
 	public static void sendPacket(Packet p)
 	{
 		Client.getClient().getPlayer().sendQueue.addToSendQueue(p);

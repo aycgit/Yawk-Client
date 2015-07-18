@@ -8,7 +8,7 @@ import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
 import net.yawk.client.utils.ClientUtils;
-import net.yawk.client.utils.HysteriaTimer;
+import net.yawk.client.utils.MillisecondTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
@@ -20,17 +20,17 @@ public class Derp extends Mod{
 	}
 	
 	private int yaw;
-	private HysteriaTimer timer = new HysteriaTimer(15);
-	private HysteriaTimer timer1 = new HysteriaTimer(2);
+	private MillisecondTimer lookTimer = new MillisecondTimer(150);
+	private MillisecondTimer hitTimer = new MillisecondTimer(20);
 	
 	@EventTarget
 	public void onTick(EventTick e){
 		
-		if(timer.output()){
+		if(lookTimer.output()){
 			ClientUtils.sendPacket(new C03PacketPlayer.C05PacketPlayerLook(yaw, -180, true));
 		}
 		
-		if(timer1.output()){
+		if(hitTimer.output()){
 			yaw += 72;
 			ClientUtils.sendPacket(new C0APacketAnimation());
 		}

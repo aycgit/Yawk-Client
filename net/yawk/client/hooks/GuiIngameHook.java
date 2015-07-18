@@ -4,12 +4,12 @@ import com.darkmagician6.eventapi.EventManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.gui.Window;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.mods.world.HideClient;
-import net.yawk.client.utils.ChatColours;
 import net.yawk.client.utils.Colours;
 
 public class GuiIngameHook extends GuiIngame{
@@ -30,7 +30,7 @@ public class GuiIngameHook extends GuiIngame{
 		super.func_175180_a(p_175180_1_);
 		
 		if(!hideClientMod.isEnabled()){
-			Client.getClient().getFontRenderer().drawStringWithShadow("Yawk" + ChatColours.GREEN + " v2.5" + ChatColours.LIGHT_PURPLE + " ("+(Client.getClient().getSession().isPremium()? "Premium":"Beta")+")", 3, 2, 0xFFFFFFFF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow("Yawk" + EnumChatFormatting.GREEN + " v2.5" + EnumChatFormatting.LIGHT_PURPLE + " ("+(Client.getClient().getSession().isPremium()? "Premium":"Beta")+")", 3, 2, 0xFFFFFFFF, true);
 		}
 		
 		if(Client.getClient().getMinecraft().currentScreen == null){

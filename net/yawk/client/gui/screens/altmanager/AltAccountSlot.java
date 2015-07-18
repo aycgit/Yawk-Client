@@ -5,9 +5,9 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.yawk.client.Client;
-import net.yawk.client.utils.ChatColours;
 
 public class AltAccountSlot extends GuiSlot {
     final AltAccountSwitch parentScreen;
@@ -54,6 +54,6 @@ public class AltAccountSlot extends GuiSlot {
         boolean hasRep = account.length >= 3;
         FontRenderer f = Client.getClient().getMinecraft().fontRendererObj;
         f.drawString(name , var2 + 2, var3 + 1, 0xffffff);
-        f.drawString(cracked ? ChatColours.DARK_GRAY+"Non-Premium" : ChatColours.GRAY+"Premium", var2 + 2, var3 + 12, cracked ? 0x303030 : 0x808080);
+        f.drawString(cracked ? EnumChatFormatting.DARK_GRAY+"Non-Premium" : EnumChatFormatting.GRAY+"Premium", var2 + 2, var3 + 12, cracked ? 0x303030 : 0x808080);
 	}
 }

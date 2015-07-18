@@ -11,6 +11,7 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModDetails;
+import net.yawk.client.utils.CombatUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
@@ -24,7 +25,7 @@ public class Backstab extends Mod{
 	@EventTarget
 	public void onTick(EventTick e){
 		
-		EntityPlayer p = getClosestPlayer(4);
+		EntityPlayer p = CombatUtils.getClosestPlayer(4);
 		
 		if(p != null){
 			
@@ -51,30 +52,7 @@ public class Backstab extends Mod{
 		
 		return -1;
 	}
-	
-	private EntityPlayer getClosestPlayer(double range) {
-        double distance = range;
-        EntityPlayer tempEntity = null;
-        
-        for (EntityPlayer entity : (List<EntityPlayer>) Minecraft.getMinecraft().theWorld.playerEntities) {
-        	if(entity != Client.getClient().getPlayer() && isAttackable(entity)){
-        		
-        		double curDistance = Client.getClient().getPlayer().getDistanceToEntity(entity);
-        		if (curDistance <= distance) {
-        			distance = curDistance;
-        			tempEntity = entity;
-        		}
-        		
-        	}
-        }
-        
-        return tempEntity;
-    }
-	
-	private boolean isAttackable(EntityPlayer player){
-		return !player.getDisplayName().getFormattedText().equalsIgnoreCase("GrapeKush") && Minecraft.getMinecraft().thePlayer.canEntityBeSeen(player) && player.getHealth() > 0 && !player.isInvisible() && player.ticksExisted > 60;
-	}
-		
+			
 	@Override
 	public void onEnable() {
 		

@@ -22,7 +22,7 @@ import com.darkmagician6.eventapi.EventTarget;
 public class Projectiles extends Mod{
 	
 	public Projectiles(){
-		
+		//TODO: Probably delete this and replace it, chris did it and it's not very good
 	}
 		
 	@EventTarget

@@ -8,9 +8,9 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 import net.minecraft.client.gui.*;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Session;
 import net.yawk.client.Client;
-import net.yawk.client.utils.ChatColours;
 import net.yawk.client.utils.yggdrasil.YggdrasilAuthenticator;
 
 import org.lwjgl.input.Keyboard;
@@ -89,12 +89,12 @@ public class GuiLogin extends GuiScreen {
  
         public void drawScreen(int i, int j, float f) {
                 drawDefaultBackground();
-                drawString(fontRenderer, ChatColours.AQUA+"Username:", width / 2 - 100, 63, 0xa0a0a0);
-                drawString(fontRenderer, ChatColours.AQUA+"Password (Optional):", width / 2 - 100, 104, 0xa0a0a0);
+                drawString(fontRenderer, EnumChatFormatting.AQUA+"Username:", width / 2 - 100, 63, 0xa0a0a0);
+                drawString(fontRenderer, EnumChatFormatting.AQUA+"Password (Optional):", width / 2 - 100, 104, 0xa0a0a0);
                 usernameTextField.drawTextBox();
                 passwordTextField.drawTextBox();
                 if (error != null) {
-                        drawCenteredString(fontRenderer, (new StringBuilder(ChatColours.AQUA+"Login Failed:")).append(error).toString(), width / 2, height / 4 + 72 + 12, 0xffffff);
+                        drawCenteredString(fontRenderer, (new StringBuilder(EnumChatFormatting.AQUA+"Login Failed:")).append(error).toString(), width / 2, height / 4 + 72 + 12, 0xffffff);
                 }
                 super.drawScreen(i, j, f);
         }

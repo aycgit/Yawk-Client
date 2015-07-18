@@ -34,7 +34,6 @@ import net.minecraft.util.ResourceLocation;
 import net.yawk.client.api.PluginManager;
 import net.yawk.client.events.EventKeyPress;
 import net.yawk.client.gui.GuiClickable;
-import net.yawk.client.gui.screens.XGuiMainMenu;
 import net.yawk.client.hooks.EntityPlayerSPHook;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModManager;
