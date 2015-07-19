@@ -28,13 +28,11 @@ public class SelectorButton extends Button implements ISelector{
 	}
 	
 	@Override
-	public String getText() 
-	{
+	public String getText() {
 		return text;
 	}
 	
-	public String getStaticText() 
-	{
+	public String getStaticText() {
 		return text;
 	}
 	

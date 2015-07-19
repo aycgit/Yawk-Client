@@ -1,15 +1,76 @@
 package net.yawk.client.gui.components;
 
+import net.yawk.client.Client;
+import net.yawk.client.gui.ColourType;
 import net.yawk.client.gui.Window;
 
-public class ArrayBox<T> extends Button{
+//TODO: Maybe merge this with the NumberSelector
+public class ArrayBox<T> extends Component{
 	
 	private T[] options;
 	private int index;
+	private Window win;
 	
 	public ArrayBox(Window win, T[] options) {
-		super(win);
+		super();
+		this.win = win;
 		this.options = options;
+	}
+	
+	@Override
+	public void draw(int x, int y, int cx, int cy) {
+		
+		Client.getClient().getFontRenderer().drawStringWithShadow("<",
+				cx + 3,
+				cy + 2,
+				mouseOverLeft(x,y,cx,cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
+				true);
+		
+		Client.getClient().getFontRenderer().drawStringWithShadow(">",
+				cx + win.getWidth() - 3 - Client.getClient().getFontRenderer().getStringWidth(">"),
+				cy + 2,
+				mouseOverRight(x,y,cx,cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
+				true);
+		
+		String whole = options[index].toString();
+		
+		Client.getClient().getFontRenderer().drawStringWithShadow(whole,
+				cx + win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(whole)/2,
+				cy + 2,
+				ColourType.TEXT.getColour(),
+				true);
+	}
+	
+	@Override
+	public void mouseClicked(int x, int y, int cx, int cy) {
+		if(mouseOverLeft(x, y, cx, cy)){
+			
+			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
+			
+			index--;
+			
+			if(index < 0){
+				index = options.length-1;
+			}
+			
+		}else if(mouseOverRight(x, y, cx, cy)){
+			
+			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
+			
+			index++;
+			
+			if(index >= options.length){
+				index = 0;
+			}
+		}
+	}
+	
+	private boolean mouseOverLeft(int x, int y, int cx, int cy){
+		return x > cx && x < cx+win.getWidth()/2 && y > cy && y < cy+getHeight();
+	}
+	
+	private boolean mouseOverRight(int x, int y, int cx, int cy){
+		return x > cx+win.getWidth()/2 && x < cx+win.getWidth() && y > cy && y < cy+getHeight();
 	}
 	
 	public T[] getOptions() {
@@ -25,27 +86,7 @@ public class ArrayBox<T> extends Button{
 	}
 	
 	@Override
-	public boolean isEnabled() {
-		return false;
-	}
-	
-	@Override
-	public void toggle() {
-		
-		index++;
-		
-		if(index >= options.length){
-			index = 0;
-		}
-	}
-	
-	@Override
-	public String getText() {
-		return "< " + options[index].toString() + " >";
-	}
-	
-	@Override
-	public boolean isCentered() {
-		return true;
+	public int getHeight() {
+		return 12;
 	}
 }

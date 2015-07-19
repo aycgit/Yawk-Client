@@ -12,5 +12,6 @@ Appreciated help:
 * Thanks to Arnold for helping to co-develop the client
 * Thanks to Sparks for some tips on the event api
 * Thanks to LordPankake for getting me to change the mod system and other tips
+* Thanks to Temper for the ReflectionUtils class
 * Thanks to Opim10 for the Yggdrasil authenticator
 * Thanks to Jonalu and Godshawk for the LWJGL Scissor util class

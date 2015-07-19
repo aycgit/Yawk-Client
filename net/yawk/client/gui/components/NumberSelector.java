@@ -38,11 +38,19 @@ public class NumberSelector extends Component{
 	@Override
 	public void draw(int x, int y, int cx, int cy) {
 		
-		//TODO: Change this to use the right colours rather than the chat formatting colours
+		Client.getClient().getFontRenderer().drawStringWithShadow("<",
+				cx + 3,
+				cy + 2,
+				mouseOverLeft(x,y,cx,cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
+				true);
 		
-		String left = (mouseOverLeft(x,y,cx,cy)? EnumChatFormatting.GREEN +"< "+EnumChatFormatting.WHITE:"< ");
-		String right = (mouseOverRight(x,y,cx,cy)? EnumChatFormatting.GREEN+" >"+EnumChatFormatting.WHITE:" >");
-		String whole = left + name + ": " + number + unit + right;
+		Client.getClient().getFontRenderer().drawStringWithShadow(">",
+				cx + win.getWidth() - 3 - Client.getClient().getFontRenderer().getStringWidth(">"),
+				cy + 2,
+				mouseOverRight(x,y,cx,cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
+				true);
+		
+		String whole = name + ": " + number + unit;
 		
 		Client.getClient().getFontRenderer().drawStringWithShadow(whole,
 				cx + win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(whole)/2,
@@ -54,6 +62,7 @@ public class NumberSelector extends Component{
 	@Override
 	public void mouseClicked(int x, int y, int cx, int cy) {
 		if(mouseOverLeft(x, y, cx, cy)){
+			
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
 			
 			number-=increment;
@@ -63,6 +72,7 @@ public class NumberSelector extends Component{
 			}
 			
 		}else if(mouseOverRight(x, y, cx, cy)){
+			
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
 			
 			number+=increment;
