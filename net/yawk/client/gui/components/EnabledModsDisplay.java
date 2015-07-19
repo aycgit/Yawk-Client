@@ -1,6 +1,7 @@
 package net.yawk.client.gui.components;
 
 import net.yawk.client.Client;
+import net.yawk.client.gui.ColourType;
 import net.yawk.client.gui.Window;
 import net.yawk.client.modmanager.Mod;
 
@@ -25,7 +26,7 @@ public class EnabledModsDisplay extends Component {
 		
 		for(Mod m : Client.getClient().getModManager().mods){
 			if(m.isEnabled()){
-				Client.getClient().getFontRenderer().drawStringWithShadow(m.getName(), cx + 3, cy + height*12 + 2, 0xFFFFFFFF, true);
+				Client.getClient().getFontRenderer().drawStringWithShadow(m.getName(), cx + 3, cy + height*12 + 2, ColourType.TEXT.getColour(), true);
 				height++;
 			}
 		}

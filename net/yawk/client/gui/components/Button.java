@@ -1,6 +1,7 @@
 package net.yawk.client.gui.components;
 
 import net.yawk.client.Client;
+import net.yawk.client.gui.ColourType;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.GuiUtils;
@@ -18,19 +19,19 @@ public abstract class Button extends Component{
 	@Override
 	public void draw(int x, int y, int cx, int cy) {
 		
-		//GuiUtils.drawRect(cx, cy, cx+Window.TITLE_WIDTH, cy+getHeight(), mouseOverButton(x, y, cx, cy) ? 0x5F00A6FF:0x5FDDFF00);
+		//GuiUtils.drawGradientBorderedRect(cx, cy, cx+win.getWidth(), cy+getHeight(), 1, 0xFF000000, 0xFF0095FF, 0xFF0C53E8);
 		
 		if(isEnabled()){
 			Client.getClient().getFontRenderer().drawStringWithShadow(getText(),
 					cx + (isCentered() ? (win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(getText())/2):3),
 					cy + getHeight()/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
-					mouseOverButton(x, y, cx, cy)? 0xFF6AFF6D:Colours.BRIGHT_TEXT,
+					mouseOverButton(x, y, cx, cy)? ColourType.HIGHLIGHT.getModifiedColour():ColourType.HIGHLIGHT.getColour(),
 							true);
 		}else{
 			Client.getClient().getFontRenderer().drawStringWithShadow(getText(),
 					cx + (isCentered() ? (win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(getText())/2):3),
 					cy + getHeight()/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
-					mouseOverButton(x, y, cx, cy)? 0xFF9FFF9F:0xFFFFFFFF,
+					mouseOverButton(x, y, cx, cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
 							true);
 		}
 	}

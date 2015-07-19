@@ -37,7 +37,7 @@ public class GuiClickable extends GuiScreen {
 			}
 		}
 		
-		Window keybindWindow = new Window("Keybinds", modManager, 100, 12);
+		Window keybindWindow = new Window("Keybinds", modManager, 100);
 		windows.add(keybindWindow);
 		
 		ScrollPane pane;
@@ -54,17 +54,27 @@ public class GuiClickable extends GuiScreen {
 		
 		//PLUGIN DOWNLOAD WINDOW
 		
-		Window plugins = new Window("Get Plugins", modManager, 120, 12);
+		Window plugins = new Window("Get Plugins", modManager, 120);
 		windows.add(plugins);
 		
 		SelectorSystem<SelectorButton> pluginSystem = new SelectorSystem<SelectorButton>();
 		plugins.components.add(new PluginScrollPane(plugins, 72, pluginSystem));
 		plugins.components.add(new PluginDownloadButton(plugins, pluginSystem));
 		
+		//COLOUR PICKER WINDOW
+		
+		Window colours = new Window("Colours", modManager);
+		
+		for(ColourType colourType : ColourType.values()){
+			colours.components.add(new ColourPicker(colours, colourType, this));
+		}
+		
+		windows.add(colours);
+		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();
 	}
-	
+		
 	private void moveWindows(){
 		
 		int line = 0;
@@ -109,11 +119,13 @@ public class GuiClickable extends GuiScreen {
 	}
 	
 	public Window getWindowByName(String name){
+		
 		for(Window w : windows){
 			if(w.title.equals(name)){
 				return w;
 			}
 		}
+		
 		return null;
 	}
 	
@@ -153,13 +165,17 @@ public class GuiClickable extends GuiScreen {
 	}
 	
 	public void setDragging(Window dragging){
+		
 		for(Window win : windows){
 			if(win != dragging){
 				win.dragging = false;
 			}
 		}
+		
+		windows.remove(dragging);
+		windows.add(windows.size(), dragging);
 	}
-
+	
 	@Override
 	public boolean doesGuiPauseGame() {
 		return false;

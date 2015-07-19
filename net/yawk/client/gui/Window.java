@@ -55,7 +55,7 @@ public class Window {
 		Client.getClient().getFontRenderer().drawStringWithShadow(title,
 				posX + 3,
 				posY + height/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
-				Colours.BRIGHT_TEXT,
+				ColourType.TITLE_TEXT.getColour(),
 				true);
 		
 		int h = 0;
@@ -87,6 +87,7 @@ public class Window {
 		}
 		
 		if(extended){
+			
 			h = 0;
 			
 			for(Component c : components){

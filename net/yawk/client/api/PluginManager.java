@@ -47,7 +47,6 @@ import com.google.gson.JsonParser;
 public class PluginManager {
 	
 	private File plugins = new File(Client.getFullDir(), "plugins");
-	private File config = new File(plugins, "settings.json");
 	
 	public ArrayList<PluginData> pluginData = new ArrayList<PluginData>();
 	private ConcurrentLinkedQueue<PluginData> downloadQueue = new ConcurrentLinkedQueue<PluginData>();
@@ -121,7 +120,7 @@ public class PluginManager {
 	private PluginData getPluginDataFromFile(File jar){
 		
 		String name = ClientUtils.stripExtension(jar.getName());
-				
+		
 		for(PluginData data : pluginData){
 			System.out.println("NAME: "+data.getName());
 			if(data.getName().equals(name)){
@@ -296,7 +295,7 @@ public class PluginManager {
 		pluginWindows.remove(plugin);
 	}
 	
-	private boolean developerMode = false;
+	private boolean developerMode = true;
 	
 	/**
 	 * This method is designed to stop people adding their own plugins which aren't approved by the website yawk.net
@@ -352,11 +351,11 @@ public class PluginManager {
 	 */
 	private String getHash(File jar) throws NoSuchAlgorithmException, IOException{
 		
-		MessageDigest md = MessageDigest.getInstance("SHA512");
+		MessageDigest md = MessageDigest.getInstance("SHA-512");
 		FileInputStream fis = new FileInputStream(jar);
 		byte[] dataBytes = new byte[1024];
 		
-		int nread = 0; 
+		int nread = 0;
 		
 		while ((nread = fis.read(dataBytes)) != -1) {
 			md.update(dataBytes, 0, nread);

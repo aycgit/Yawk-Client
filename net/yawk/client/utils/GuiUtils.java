@@ -2,6 +2,7 @@ package net.yawk.client.utils;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.yawk.client.gui.ColourType;
 
 import org.lwjgl.opengl.GL11;
 
@@ -40,13 +41,11 @@ public class GuiUtils {
 	}
 	
 	public static void drawNodusBorder(int x, int y, int x1, int y1) {
-		drawBorder(x, y, x1, y1, 2, 0x5FFFFFFF);
+		drawBorder(x, y, x1, y1, 2, ColourType.BORDER.getModifiedColour());
 	}
 	
 	public static void drawTopNodusRect(int x, int y, int x1, int y1) {
-		//GuiUtils.drawRect(par1 - 2.0F, par2 - 2.0F, par3 + 2.0F, par4 /*+ 2.0F*/, 0x5FFFFFFF);
-		
-		GuiUtils.drawBorderedRect(x, y, x1, y1, 2, 0x5FFFFFFF, 0xFF001000);
+		GuiUtils.drawBorderedRect(x, y, x1, y1, 2, ColourType.BORDER.getModifiedColour(), ColourType.TITLE.getColour());
 	}
 	
 	public static void drawBottomNodusRect(float x, float y, float x1, float y1) {		
@@ -57,18 +56,18 @@ public class GuiUtils {
 		
 		//Cuts off the top border
 		//GuiUtils.drawRect(x, y - lw, x1, y, 0x5FFFFFFF);
-		GuiUtils.drawRect(x, y1, x1, y1 + lw, 0x5FFFFFFF);
+		GuiUtils.drawRect(x, y1, x1, y1 + lw, ColourType.BORDER.getModifiedColour());
 		
-		GuiUtils.drawRect(x - lw, y, x, y1 + lw, 0x5FFFFFFF);
-		GuiUtils.drawRect(x1, y, x1 + lw, y1 + lw, 0x5FFFFFFF);
+		GuiUtils.drawRect(x - lw, y, x, y1 + lw, ColourType.BORDER.getModifiedColour());
+		GuiUtils.drawRect(x1, y, x1 + lw, y1 + lw, ColourType.BORDER.getModifiedColour());
 	}
 	
 	public static void drawBorder(int x, int y, int x1, int y1, int lw, int borderC){
-		GuiUtils.drawRect(x, y - lw, x1, y, 0x5FFFFFFF);
-		GuiUtils.drawRect(x, y1, x1, y1 + lw, 0x5FFFFFFF);
+		GuiUtils.drawRect(x, y - lw, x1, y, ColourType.BORDER.getModifiedColour());
+		GuiUtils.drawRect(x, y1, x1, y1 + lw, ColourType.BORDER.getModifiedColour());
 		
-		GuiUtils.drawRect(x - lw, y - lw, x, y1 + lw, 0x5FFFFFFF);
-		GuiUtils.drawRect(x1, y - lw, x1 + lw, y1 + lw, 0x5FFFFFFF);
+		GuiUtils.drawRect(x - lw, y - lw, x, y1 + lw, ColourType.BORDER.getModifiedColour());
+		GuiUtils.drawRect(x1, y - lw, x1 + lw, y1 + lw, ColourType.BORDER.getModifiedColour());
 	}
 	
 	public static void drawBorderedRect(int x, int y, int x1, int y1, int lw, int borderC, int insideC){
@@ -93,4 +92,46 @@ public class GuiUtils {
         wr.addVertexWithUV(x, y, 0, 0, 0);
         tes.draw();
     }
+    
+	public static void drawGradientBorderedRect(int x, int y, int x1, int y1, int lw, int borderC, int start, int end){
+				
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glEnable(GL11.GL_LINE_SMOOTH);
+		GL11.glShadeModel(GL11.GL_SMOOTH);
+		
+		float f = (float)(start >> 24 & 0xFF) / 255F;
+		float f1 = (float)(start >> 16 & 0xFF) / 255F;
+		float f2 = (float)(start >> 8 & 0xFF) / 255F;
+		float f3 = (float)(start & 0xFF) / 255F;
+		
+		float f4 = (float)(end >> 24 & 0xFF) / 255F;
+		float f5 = (float)(end >> 16 & 0xFF) / 255F;
+		float f6 = (float)(end >> 8 & 0xFF) / 255F;
+		float f7 = (float)(end & 0xFF) / 255F;
+		
+		GL11.glPushMatrix();
+		GL11.glBegin(GL11.GL_QUADS);
+		GL11.glColor4f(f1, f2, f3, f);
+		GL11.glVertex2d(x1, y);
+		GL11.glVertex2d(x, y);
+		
+		GL11.glColor4f(f5, f6, f7, f4);
+		GL11.glVertex2d(x, y1);
+		GL11.glVertex2d(x1, y1);
+		GL11.glEnd();
+		GL11.glPopMatrix();
+		
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_LINE_SMOOTH);
+		GL11.glShadeModel(GL11.GL_FLAT);
+		
+		GuiUtils.drawRect(x, y - lw, x1, y, borderC);
+		GuiUtils.drawRect(x, y1, x1, y1 + lw, borderC);
+		
+		GuiUtils.drawRect(x - lw, y - lw, x, y1 + lw, borderC);
+		GuiUtils.drawRect(x1, y - lw, x1 + lw, y1 + lw, borderC);
+	}
 }

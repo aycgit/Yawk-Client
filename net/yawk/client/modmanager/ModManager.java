@@ -14,6 +14,7 @@ import net.yawk.client.mods.building.*;
 import net.yawk.client.mods.combat.*;
 import net.yawk.client.mods.movement.*;
 import net.yawk.client.mods.world.*;
+import net.yawk.client.utils.ReflectionUtils;
 
 import com.darkmagician6.eventapi.EventManager;
 import com.google.common.collect.BiMap;
@@ -26,56 +27,7 @@ public class ModManager {
 	
 	public ModManager(){
 		
-		//TODO: Maybe scan the mod packages or something to get rid of this massive list
-		mods.add(new Flight());
-		mods.add(new Nuker());
-		mods.add(new Paralyze());
-		mods.add(new SpeedMine());
-		mods.add(new PlayerESP());
-		mods.add(new Climb());
-		mods.add(new Speed());
-		mods.add(new SafeWalk());
-		mods.add(new FullBright());
-		mods.add(new Day());
-		mods.add(new Freecam());
-		mods.add(new Tracers());
-		mods.add(new AntiPotion());
-		mods.add(new Sneak());
-		mods.add(new Step());
-		mods.add(new KillAura());
-		mods.add(new HighJump());
-		mods.add(new Glide());
-		mods.add(new FastFall());
-		mods.add(new Parkour());
-		mods.add(new ArrowSense());
-		mods.add(new Projectiles());
-		mods.add(new ItemSpoof());
-		mods.add(new Sprint());
-		mods.add(new Zoom()); //TODO: move to meta
-		mods.add(new Phase());
-		mods.add(new AutoSoup());
-		mods.add(new NoKnock());
-		mods.add(new RapidFire());
-		mods.add(new AutoBlock());
-		mods.add(new DropAll());
-		mods.add(new Derp());
-		mods.add(new SafeBlocks());
-		mods.add(new Backstab());
-		mods.add(new HideClient()); //TODO: move to meta
-		mods.add(new NoSwing());
-		mods.add(new FakeHacker());
-		mods.add(new Jesus());
-		mods.add(new FastPlace());
-		mods.add(new Weather());
-		mods.add(new Looksie());
-		mods.add(new NoFall());
-		mods.add(new LightsOut());
-		mods.add(new ArmorStandKick());
-		mods.add(new ChestESP());
-		mods.add(new NoFlinch());
-		mods.add(new Build());
-		mods.add(new Triggerbot());
-		//mods.add(new Description()); //TODO: make this and move it to meta
+		addClassesFromPackage("net.yawk.client.mods");
 		
 		for(Mod m : mods){
 			initMod(m);
@@ -83,6 +35,20 @@ public class ModManager {
 		}
 	}
 	
+    public void addClassesFromPackage(String packageName){
+    	
+        for (Class<?> clazz : ReflectionUtils.getClasses(packageName)) {
+            try {
+                Object obj = clazz.newInstance();
+                if (obj instanceof Mod) {
+                    mods.add((Mod) obj);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
 	public void addPluginMod(Mod m, PluginData data){
 		initMod(m);
 		mods.add(m);
@@ -129,7 +95,7 @@ public class ModManager {
 			m.onEnable();
 		}
 	}
-		
+	
 	public Mod getMod(Class modClass){
 		for(Mod m : mods){
 			if(m.getClass().equals(modClass)){
