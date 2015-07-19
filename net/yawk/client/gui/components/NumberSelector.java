@@ -2,6 +2,7 @@ package net.yawk.client.gui.components;
 
 import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
+import net.yawk.client.gui.ColourType;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.Colours;
 
@@ -37,6 +38,8 @@ public class NumberSelector extends Component{
 	@Override
 	public void draw(int x, int y, int cx, int cy) {
 		
+		//TODO: Change this to use the right colours rather than the chat formatting colours
+		
 		String left = (mouseOverLeft(x,y,cx,cy)? EnumChatFormatting.GREEN +"< "+EnumChatFormatting.WHITE:"< ");
 		String right = (mouseOverRight(x,y,cx,cy)? EnumChatFormatting.GREEN+" >"+EnumChatFormatting.WHITE:" >");
 		String whole = left + name + ": " + number + unit + right;
@@ -44,7 +47,7 @@ public class NumberSelector extends Component{
 		Client.getClient().getFontRenderer().drawStringWithShadow(whole,
 				cx + win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(whole)/2,
 				cy + 2,
-				0xFFFFFFFF,
+				ColourType.TEXT.getColour(),
 				true);
 	}
 	

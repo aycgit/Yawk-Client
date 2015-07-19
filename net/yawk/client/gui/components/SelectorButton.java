@@ -30,11 +30,7 @@ public class SelectorButton extends Button implements ISelector{
 	@Override
 	public String getText() 
 	{
-		if(isSelected){
-			return EnumChatFormatting.GREEN+text;
-		}else{
-			return text;
-		}
+		return text;
 	}
 	
 	public String getStaticText() 
