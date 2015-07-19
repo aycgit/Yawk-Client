@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -19,6 +20,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import net.yawk.client.Client;
 import net.yawk.client.gui.Window;
@@ -75,7 +78,7 @@ public class PluginManager {
 			
 			for(JsonElement el : arr){
 				
-				JsonObject json = (JsonObject) el;
+				JsonObject json = el.getAsJsonObject();
 				pluginData.add(new PluginData(json.get("name").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), false));
 			}
 			
@@ -118,9 +121,7 @@ public class PluginManager {
 	private PluginData getPluginDataFromFile(File jar){
 		
 		String name = ClientUtils.stripExtension(jar.getName());
-		
-		//System.out.println("CHECK FOR: "+name);
-		
+				
 		for(PluginData data : pluginData){
 			System.out.println("NAME: "+data.getName());
 			if(data.getName().equals(name)){
@@ -162,13 +163,41 @@ public class PluginManager {
 			
 			Client.getClient().log("LOADING VALID JAR: "+jar.getName());
 			
+			JarFile jarFile = null;
+			
+			try {
+				jarFile = new JarFile(jar);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if(jarFile == null){
+				Client.getClient().log("Error - jar file null");
+			}
+			
+			JarEntry entry = jarFile.getJarEntry("plugin.json");
+			
+			InputStream stream = null;
+			
+			try {
+				stream = jarFile.getInputStream(entry);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if(stream == null){
+				Client.getClient().log("Error - stream null");
+			}
+			
+			String pluginText = FileUtils.getStringFromInputStream(stream);
+			JsonObject json = new JsonParser().parse(pluginText).getAsJsonObject();
+			
 			URI uri = jar.toURI();
 			URL url = uri.toURL();
 			URL[] urls = new URL[]{url};
 			
 			ClassLoader cl = new URLClassLoader(urls);
-			//TODO: Change how we find the path of the plugin class. Add a JSON file in the plugin jar to say where it is located.
-			Class register = Class.forName("net.yawk.mods.Plugin", true, cl);
+			Class register = Class.forName(json.get("main").getAsString(), true, cl);
 			
 			PluginRegister reg = (PluginRegister) register.newInstance();
 			cl.clearAssertionStatus();
@@ -267,7 +296,7 @@ public class PluginManager {
 		pluginWindows.remove(plugin);
 	}
 	
-	private boolean developerMode = true;
+	private boolean developerMode = false;
 	
 	/**
 	 * This method is designed to stop people adding their own plugins which aren't approved by the website yawk.net
@@ -315,7 +344,7 @@ public class PluginManager {
 	}
 	
 	/**
-	 * Gets an SHA-1 hash from the file given. This is used to check the hash against the website's saved hash
+	 * Gets an SHA-512 hash from the file given. This is used to check the hash against the website's saved hash
 	 * @param jar
 	 * @return
 	 * @throws NoSuchAlgorithmException
@@ -323,7 +352,7 @@ public class PluginManager {
 	 */
 	private String getHash(File jar) throws NoSuchAlgorithmException, IOException{
 		
-		MessageDigest md = MessageDigest.getInstance("SHA1");
+		MessageDigest md = MessageDigest.getInstance("SHA512");
 		FileInputStream fis = new FileInputStream(jar);
 		byte[] dataBytes = new byte[1024];
 		

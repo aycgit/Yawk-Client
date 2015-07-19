@@ -56,8 +56,6 @@ public class Client {
 	private FileManager fileManager;
 	private Logger logger;
 	
-	private int BUILD_NUMBER = 80;
-	
 	public Client(final Minecraft mc){
 		
 		//TODO: READ USERNAME AND PASSWORD FROM FILE
