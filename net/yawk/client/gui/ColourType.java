@@ -1,10 +1,12 @@
 package net.yawk.client.gui;
 
+import com.google.gson.JsonObject;
+
 import net.yawk.client.utils.Colours;
 
 public enum ColourType {
 	
-	TEXT("Text", 2, 0x00C000C0, false), HIGHLIGHT("Highlight", 0, 0x00C000C0, false), BORDER("Border", 2, 0xAF000000, false), TITLE("Title", 3), TITLE_TEXT("Title Text", 0);
+	TEXT("Text", 2, 0x00C000C0, false), HIGHLIGHT("Highlight", 0, 0x00C000C0, false), BORDER("Border", 2, 0x8F000000, false), TITLE("Title", 3), TITLE_TEXT("Title Text", 0);
 	
 	private String name;
 	private int colour;
@@ -65,5 +67,16 @@ public enum ColourType {
 		}
 		
 		setColour(Colours.options[index]);
+	}
+	
+	public static ColourType getTypeByName(String name){
+		
+		for(ColourType col : values()){
+			if(col.getName().equalsIgnoreCase(name)){
+				return col;
+			}
+		}
+		
+		return null;
 	}
 }

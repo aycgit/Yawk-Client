@@ -10,9 +10,11 @@ public class Colours {
 		Colours.BRIGHT_TEXT,
 		Colours.ALTERNATIVE_TEXT,
 		0xFFFFFFFF,
-		0xFF000000,
+		0xFF002000,
 		0xFFA4C744,
 		0xFFFF7AD1,
 		0xFFFF2929,
+		0xFF0C478A,
+		0xFF595959,
 	};
 }

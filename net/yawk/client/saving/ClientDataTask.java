@@ -5,7 +5,7 @@ import net.yawk.client.Client;
 import com.google.gson.JsonObject;
 
 public class ClientDataTask implements DataTask{
-
+	
 	@Override
 	public String getFileName() {
 		return "client";

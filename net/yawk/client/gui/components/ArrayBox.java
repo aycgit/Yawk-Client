@@ -43,6 +43,7 @@ public class ArrayBox<T> extends Component{
 	
 	@Override
 	public void mouseClicked(int x, int y, int cx, int cy) {
+		
 		if(mouseOverLeft(x, y, cx, cy)){
 			
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);

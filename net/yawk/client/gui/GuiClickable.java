@@ -74,7 +74,7 @@ public class GuiClickable extends GuiScreen {
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();
 	}
-		
+	
 	private void moveWindows(){
 		
 		int line = 0;
