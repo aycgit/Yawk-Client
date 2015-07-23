@@ -35,6 +35,7 @@ import net.minecraft.util.ResourceLocation;
 import net.yawk.client.api.PluginManager;
 import net.yawk.client.events.EventKeyPress;
 import net.yawk.client.gui.GuiClickable;
+import net.yawk.client.gui.hub.GuiHub;
 import net.yawk.client.hooks.EntityPlayerSPHook;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModManager;
@@ -48,6 +49,7 @@ public class Client {
 	private static Client client;
 	
 	public GuiClickable gui;
+	public GuiHub hub;
 	private FontRenderer fontRenderer;
 	private Minecraft mc;
 	private ClientSession session;
@@ -67,6 +69,7 @@ public class Client {
 		this.mc = mc;
 		this.fontRenderer = mc.fontRendererObj;
 		this.modManager = new ModManager();
+		this.hub = new GuiHub();
 		
 		this.gui = new GuiClickable(modManager);
 		
@@ -105,6 +108,10 @@ public class Client {
 	
 	public void log(String print){
 		logger.info(print);
+	}
+	
+	public GuiHub getHub() {
+		return hub;
 	}
 	
 	public Mod getHideClientMod(){
@@ -155,6 +162,10 @@ public class Client {
 		
 		if(key == Keyboard.KEY_Y){
 			mc.displayGuiScreen(gui);
+		}
+		
+		if(key == Keyboard.KEY_X){
+			mc.displayGuiScreen(hub);
 		}
 		
 		if(mc.currentScreen == null){

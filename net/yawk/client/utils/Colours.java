@@ -6,9 +6,12 @@ public class Colours {
 	
 	public static int ALTERNATIVE_TEXT = 0xFFAFA4FF;
 	
+	public static int GRAY = 0xFFAFAFAF;
+	
 	public static int[] options = new int[]{
-		Colours.BRIGHT_TEXT,
-		Colours.ALTERNATIVE_TEXT,
+		BRIGHT_TEXT,
+		ALTERNATIVE_TEXT,
+		GRAY,
 		0xFFFFFFFF,
 		0xFF002000,
 		0xFFA4C744,
