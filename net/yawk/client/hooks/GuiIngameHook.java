@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
+import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.Window;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.mods.world.HideClient;
@@ -36,7 +37,7 @@ public class GuiIngameHook extends GuiIngame{
 		if(Client.getClient().getMinecraft().currentScreen == null){
 			for(Window win : Client.getClient().gui.windows){
 				if(win.pinned){
-					win.draw(0, 0);
+					GuiClickable.theme.getWindowRenderer().renderWindow(win, 0, 0);
 				}
 			}
 		}

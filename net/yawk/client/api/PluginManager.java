@@ -208,7 +208,7 @@ public class PluginManager {
 			
 			//This adds the window that will contain the plugin gui
 			Window w;
-			pluginWindows.put(plugin, w = new Window(plugin.getName(), Client.getClient().getModManager(), reg.getWidth()));
+			pluginWindows.put(plugin, w = new Window(plugin.getName(), Client.getClient().getModManager(), reg.getWidth(), 12));
 			Client.getClient().getGui().windows.add(w);
 			
 			//This allows the plugin to add it's own components

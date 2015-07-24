@@ -13,12 +13,16 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.yawk.client.Client;
 import net.yawk.client.gui.components.*;
+import net.yawk.client.gui.themes.Theme;
+import net.yawk.client.gui.themes.huzuni.ThemeHuzuni;
 import net.yawk.client.modmanager.*;
 
 public class GuiClickable extends GuiScreen {
 	
 	public CopyOnWriteArrayList<Window> windows = new CopyOnWriteArrayList<Window>();
 	public boolean opened;
+	//TODO: make this better, currently only testing purposes
+	public static Theme theme = new ThemeHuzuni();
 	
 	public GuiClickable(ModManager modManager){
 		
@@ -27,7 +31,7 @@ public class GuiClickable extends GuiScreen {
 			if(type != Mod.Type.PLUGIN){
 				
 				Window win;
-				windows.add(win = new Window(type.getName(), modManager));
+				windows.add(win = new Window(type.getName(), modManager, 85, 12));
 				
 				for(Mod m : modManager.mods){
 					if(m.getType() == type){
@@ -37,7 +41,7 @@ public class GuiClickable extends GuiScreen {
 			}
 		}
 		
-		Window keybindWindow = new Window("Keybinds", modManager, 100);
+		Window keybindWindow = new Window("Keybinds", modManager, 100, 12);
 		windows.add(keybindWindow);
 		
 		ScrollPane pane;
@@ -45,16 +49,16 @@ public class GuiClickable extends GuiScreen {
 		SelectorSystem<KeybindButton> system = new SelectorSystem<KeybindButton>();
 		
 		for(Mod m : modManager.mods){
-			pane.components.add(system.add(new KeybindButton(keybindWindow, m, system)));
+			pane.components.add(system.add(new KeybindButton(pane, m, system)));
 		}
 		
-		Window enabledMods = new Window("Enabled", modManager);
+		Window enabledMods = new Window("Enabled", modManager, 85, 12);
 		windows.add(enabledMods);
 		enabledMods.components.add(new EnabledModsDisplay(enabledMods));
 		
 		//PLUGIN DOWNLOAD WINDOW
 		
-		Window plugins = new Window("Get Plugins", modManager, 120);
+		Window plugins = new Window("Get Plugins", modManager, 120, 12);
 		windows.add(plugins);
 		
 		SelectorSystem<SelectorButton> pluginSystem = new SelectorSystem<SelectorButton>();
@@ -62,14 +66,16 @@ public class GuiClickable extends GuiScreen {
 		plugins.components.add(new PluginDownloadButton(plugins, pluginSystem));
 		
 		//COLOUR PICKER WINDOW
-		
+		/*
 		Window colours = new Window("Colours", modManager);
 		
 		for(ColourType colourType : ColourType.values()){
 			colours.components.add(new ColourPicker(colours, colourType, this));
 		}
 		
-		windows.add(colours);
+		windows.add(colours);*/
+		
+		
 		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();
@@ -89,7 +95,7 @@ public class GuiClickable extends GuiScreen {
 	public void drawScreen(int x, int y, float f){
 		
 		for(Window w : windows){
-			w.draw(x, y);
+			GuiClickable.theme.getWindowRenderer().renderWindow(w, x, y);
 		}
 		
 	}
@@ -107,7 +113,7 @@ public class GuiClickable extends GuiScreen {
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
 		for(Window w : windows){
-			w.mouseClicked(mouseX, mouseY);
+			GuiClickable.theme.getWindowRenderer().mouseClicked(w, mouseX, mouseY);
 		}
 	}
 	

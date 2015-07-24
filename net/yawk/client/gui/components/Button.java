@@ -2,6 +2,8 @@ package net.yawk.client.gui.components;
 
 import net.yawk.client.Client;
 import net.yawk.client.gui.ColourType;
+import net.yawk.client.gui.GuiClickable;
+import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.GuiUtils;
@@ -10,34 +12,15 @@ import org.lwjgl.opengl.GL11;
 
 public abstract class Button extends Component{
 	
-	protected Window win;
+	protected IPanel win;
 	
-	public Button(Window win){
+	public Button(IPanel win){
 		this.win = win;
 	}
 	
 	@Override
 	public void draw(int x, int y, int cx, int cy) {
-		
-		//GuiUtils.drawGradientBorderedRect(cx, cy, cx+win.getWidth(), cy+getHeight(), 1, 0xFF000000, 0xFF0095FF, 0xFF0C53E8);
-		
-		if(isEnabled()){
-			renderText(getText(),
-					cx + (isCentered() ? (win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(getText())/2):3),
-					cy + getHeight()/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
-					mouseOverButton(x, y, cx, cy)? ColourType.HIGHLIGHT.getModifiedColour():ColourType.HIGHLIGHT.getColour(),
-							true);
-		}else{
-			renderText(getText(),
-					cx + (isCentered() ? (win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(getText())/2):3),
-					cy + getHeight()/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
-					mouseOverButton(x, y, cx, cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
-							true);
-		}
-	}
-	
-	protected void renderText(String text, float x, float y, int colour, boolean shadow){
-		Client.getClient().getFontRenderer().drawStringWithShadow(text, x, y, colour, shadow);
+		GuiClickable.theme.getButtonRenderer().renderButton(win, this, x, y, cx, cy);
 	}
 	
 	@Override
@@ -54,7 +37,7 @@ public abstract class Button extends Component{
 	
 	@Override
 	public int getHeight() {
-		return 12;
+		return GuiClickable.theme.getButtonRenderer().getThemeHeight();
 	}
 	
 	public abstract boolean isCentered();

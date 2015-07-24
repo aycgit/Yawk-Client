@@ -25,7 +25,7 @@ public class PluginScrollPane extends ScrollPane{
 		if(!hasFoundPlugins){
 			if(Client.getClient().getPluginManager().pluginData.size() > 0){
 				for(PluginData plugin : Client.getClient().getPluginManager().pluginData){
-					components.add(system.add(new PluginSelectorButton(win, plugin.getName(), system, plugin)));
+					components.add(system.add(new PluginSelectorButton(this, plugin.getName(), system, plugin)));
 					hasFoundPlugins = true;
 				}
 			}

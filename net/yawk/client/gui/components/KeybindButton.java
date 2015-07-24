@@ -1,6 +1,7 @@
 package net.yawk.client.gui.components;
 
 import net.yawk.client.Client;
+import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.Window;
 import net.yawk.client.modmanager.Mod;
 
@@ -10,7 +11,7 @@ public class KeybindButton extends SelectorButton implements ISelector{
 	
 	private Mod mod;
 	
-	public KeybindButton(Window win, Mod mod, SelectorSystem system) {
+	public KeybindButton(IPanel win, Mod mod, SelectorSystem system) {
 		super(win, mod.getName(), system);
 		this.mod = mod;
 	}

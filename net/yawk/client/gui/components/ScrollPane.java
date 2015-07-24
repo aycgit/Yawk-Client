@@ -2,13 +2,14 @@ package net.yawk.client.gui.components;
 
 import java.util.ArrayList;
 
+import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.GuiUtils;
 import net.yawk.client.utils.Scissor;
 
 import org.lwjgl.opengl.GL11;
 
-public class ScrollPane extends Component{
+public class ScrollPane extends Component implements IPanel{
 	
 	public ArrayList<Component> components = new ArrayList<Component>();
 	private int height, dragged, mouseYOffset, BAR_HEIGHT = 12, BAR_WIDTH = 4;
@@ -134,4 +135,8 @@ public class ScrollPane extends Component{
 		return height;
 	}
 	
+	@Override
+	public int getWidth() {
+		return win.getWidth() - BAR_WIDTH - 1;
+	}
 }

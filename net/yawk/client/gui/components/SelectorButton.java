@@ -2,6 +2,7 @@ package net.yawk.client.gui.components;
 
 import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
+import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.Window;
 import net.yawk.client.modmanager.Mod;
 
@@ -11,7 +12,7 @@ public class SelectorButton extends Button implements ISelector{
 	protected boolean isSelected;
 	private SelectorSystem<SelectorButton> system;
 	
-	public SelectorButton(Window win, String mod, SelectorSystem system) {
+	public SelectorButton(IPanel win, String mod, SelectorSystem system) {
 		super(win);
 		this.text = mod;
 		this.system = system;
