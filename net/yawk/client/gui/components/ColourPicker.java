@@ -20,7 +20,7 @@ public class ColourPicker extends Button{
 	@Override
 	public void draw(int x, int y, int cx, int cy) {
 		super.draw(x, y, cx, cy);
-		GuiUtils.drawBorderedRect(cx + win.getWidth() - 11, cy + 1, cx + win.getWidth() - 1, cy + 11, 1, Colours.GRAY, col.getColour());
+		GuiUtils.drawBorderedRect(cx + win.getWidth() - 10, cy + 2, cx + win.getWidth() - 2, cy + 10, 1, Colours.GRAY, col.getColour());
 	}
 	
 	@Override
