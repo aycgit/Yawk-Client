@@ -81,7 +81,7 @@ public class GuiHub extends GuiScreen {
 				renderSlate(x, y, slates[slateIndex], transition + width);
 			}
 			
-			if(Math.abs(transition) >= width){
+			if(Math.abs(transition) >= width-20){
 				transition = 0;
 				lastSlate = null;
 			}
