@@ -1,4 +1,4 @@
-package net.yawk.client.gui.components;
+package net.yawk.client.gui.components.selectors;
 
 import net.yawk.client.Client;
 import net.yawk.client.gui.IPanel;
@@ -7,7 +7,7 @@ import net.yawk.client.modmanager.Mod;
 
 import org.lwjgl.input.Keyboard;
 
-public class KeybindButton extends SelectorButton implements ISelector{
+public class KeybindButton extends SelectorButton{
 	
 	private Mod mod;
 	

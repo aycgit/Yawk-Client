@@ -5,6 +5,8 @@ import java.net.MalformedURLException;
 import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;
 import net.yawk.client.gui.Window;
+import net.yawk.client.gui.components.selectors.SelectorButton;
+import net.yawk.client.gui.components.selectors.SelectorSystem;
 
 public class PluginDownloadButton extends Button{
 	

@@ -20,7 +20,20 @@ public abstract class Button extends Component{
 	
 	@Override
 	public void draw(int x, int y, int cx, int cy) {
-		GuiClickable.theme.getButtonRenderer().renderButton(win, this, x, y, cx, cy);
+		
+		if(isEnabled()){
+			Client.getClient().getFontRenderer().drawStringWithShadow(getText(),
+					cx + (isCentered() ? (win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(getText())/2):3),
+					cy + getHeight()/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
+					mouseOverButton(x, y, cx, cy)? ColourType.HIGHLIGHT.getModifiedColour():ColourType.HIGHLIGHT.getColour(),
+							true);
+		}else{
+			Client.getClient().getFontRenderer().drawStringWithShadow(getText(),
+					cx + (isCentered() ? (win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(getText())/2):3),
+					cy + getHeight()/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
+					mouseOverButton(x, y, cx, cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
+							true);
+		}
 	}
 	
 	@Override
@@ -37,7 +50,7 @@ public abstract class Button extends Component{
 	
 	@Override
 	public int getHeight() {
-		return GuiClickable.theme.getButtonRenderer().getThemeHeight();
+		return 12;
 	}
 	
 	public abstract boolean isCentered();

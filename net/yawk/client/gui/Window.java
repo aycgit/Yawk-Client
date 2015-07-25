@@ -31,7 +31,92 @@ public class Window implements IPanel{
 		this.height = height;
 		this.modManager = modManager;
 	}
+	
+	public void renderWindow(int x, int y) {
 		
+		if(dragging){
+			posX = x+mouseXOffset;
+			posY = y+mouseYOffset;
+		}
+		
+		drawHeader(posX, posY, posX+width, posY+height);
+		
+		Client.getClient().getFontRenderer().drawStringWithShadow(title,
+				posX + 3,
+				posY + height/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
+				ColourType.TITLE_TEXT.getColour(),
+				true);
+		
+		int h = 0;
+		
+		for(Component c : components){
+			h += c.getHeight();
+		}
+		
+		if(extended){
+			drawBodyRect(posX, posY+height+Window.TITLE_COMPONENT_SPACE, posX+width, posY+height+TITLE_COMPONENT_SPACE+h);
+		}
+		
+		//Toggle extension
+		if(hasExtensionButton()){
+			drawButton(posX+width-10, posY+2, posX+width-2, posY+height-2, extended);
+		}
+		
+		//Toggle pinned
+		if(hasPinnedButton()){
+			drawButton(posX+width-22, posY+2, posX+width-14, posY+height-2, pinned);
+		}
+		
+		if(extended){
+			
+			h = 0;
+			
+			for(Component c : components){
+				c.draw(x, y, posX, posY+height+TITLE_COMPONENT_SPACE+h);
+				h += c.getHeight();
+			}
+		}
+	}
+	
+	protected void drawButton(int x, int y, int x1, int y1, boolean enabled){
+		GuiUtils.drawBorderedRect(x, y, x1, y1, 1, 0x5FFFFFFF, enabled? 0x99707070:0x99000000);
+	}
+	
+	protected void drawHeader(int x, int y, int x1, int y1){
+		GuiUtils.drawTopNodusRect(posX, posY, posX+width, posY+height);
+	}
+	
+	protected void drawBodyRect(int x, int y, int x1, int y1){
+		GuiUtils.drawBottomNodusRect(x, y, x1, y1);
+	}
+	
+	public void mouseClicked(int x, int y) {
+		
+		if(hasExtensionButton() && mouseOverToggleExtension(x, y)){
+			onExtensionToggle();
+		}else if(hasPinnedButton() && mouseOverTogglePinned(x, y)){
+			onPinnedToggle();
+		}else if(mouseOverTitle(x, y)){
+			
+			dragging = true;
+			
+			mouseXOffset = posX - x;
+			mouseYOffset = posY - y;
+			
+			Client.getClient().gui.setDragging(this);
+		}
+		
+		if(extended){
+			
+			int h = 0;
+			
+			for(Component c : components){
+				c.mouseClicked(x, y, posX, posY+height+h);
+				h += c.getHeight();
+			}
+		}
+	}
+	
 	public void onGuiClosed(){
 		this.dragging = false;
 	}

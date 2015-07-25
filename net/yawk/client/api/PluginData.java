@@ -35,4 +35,8 @@ public class PluginData {
 	public boolean getWasEnabled() {
 		return wasEnabled;
 	}
+	
+	public String getPluginIdentifier(){
+		return name + "/" + version;
+	}
 }

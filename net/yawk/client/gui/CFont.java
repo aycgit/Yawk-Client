@@ -1,4 +1,4 @@
-package net.yawk.client.gui.themes.huzuni;
+package net.yawk.client.gui;
 
 import static org.lwjgl.opengl.GL11.GL_NICEST;
 import static org.lwjgl.opengl.GL11.GL_POLYGON_SMOOTH_HINT;

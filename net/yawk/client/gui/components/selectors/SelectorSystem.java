@@ -1,8 +1,10 @@
-package net.yawk.client.gui.components;
+package net.yawk.client.gui.components.selectors;
 
 import java.util.ArrayList;
 
-public class SelectorSystem<T extends Component & ISelector> {
+import net.yawk.client.gui.components.Component;
+
+public class SelectorSystem<T extends SelectorButton> {
 	
 	public ArrayList<T> buttons = new ArrayList<T>();
 	public T selectedButton;

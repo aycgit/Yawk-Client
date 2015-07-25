@@ -1,4 +1,4 @@
-package net.yawk.client.gui.themes.huzuni;
+package net.yawk.client.gui;
 
 import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_LINES;
@@ -59,7 +59,7 @@ public class CFontRenderer {
     	drawStringWithShadow(s, x - getStringWidth(s) / 2, y, color);
     }
 	
-	private void drawString(String text, double x, double y, int color, boolean shadow) {
+    public void drawString(String text, double x, double y, int color, boolean shadow) {
 		if(text == null)
 			return;
 		glPushMatrix();

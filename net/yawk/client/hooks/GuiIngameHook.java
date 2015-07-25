@@ -37,7 +37,7 @@ public class GuiIngameHook extends GuiIngame{
 		if(Client.getClient().getMinecraft().currentScreen == null){
 			for(Window win : Client.getClient().gui.windows){
 				if(win.pinned){
-					GuiClickable.theme.getWindowRenderer().renderWindow(win, 0, 0);
+					win.renderWindow(0, 0);
 				}
 			}
 		}

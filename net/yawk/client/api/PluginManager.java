@@ -162,6 +162,8 @@ public class PluginManager {
 			
 			Client.getClient().log("LOADING VALID JAR: "+jar.getName());
 			
+			String mainClass = "";
+			
 			JarFile jarFile = null;
 			
 			try {
@@ -176,27 +178,34 @@ public class PluginManager {
 			
 			JarEntry entry = jarFile.getJarEntry("plugin.json");
 			
-			InputStream stream = null;
-			
-			try {
-				stream = jarFile.getInputStream(entry);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if(entry != null){
+				
+				InputStream stream = null;
+				
+				try {
+					stream = jarFile.getInputStream(entry);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				String pluginText = FileUtils.getStringFromInputStream(stream);
+				JsonObject json = new JsonParser().parse(pluginText).getAsJsonObject();
+				
+				mainClass = json.get("main").getAsString();
+				
+			}else{
+				mainClass = "net.yawk.mods.Plugin";
+				Client.getClient().log("Error! Plugin manifest not found: "+plugin.getPluginIdentifier());
 			}
 			
-			if(stream == null){
-				Client.getClient().log("Error - stream null");
-			}
-			
-			String pluginText = FileUtils.getStringFromInputStream(stream);
-			JsonObject json = new JsonParser().parse(pluginText).getAsJsonObject();
+			Client.getClient().log("Loading " + plugin.getPluginIdentifier() + " using main class "+mainClass);
 			
 			URI uri = jar.toURI();
 			URL url = uri.toURL();
 			URL[] urls = new URL[]{url};
 			
 			ClassLoader cl = new URLClassLoader(urls);
-			Class register = Class.forName(json.get("main").getAsString(), true, cl);
+			Class register = Class.forName(mainClass, true, cl);
 			
 			PluginRegister reg = (PluginRegister) register.newInstance();
 			cl.clearAssertionStatus();

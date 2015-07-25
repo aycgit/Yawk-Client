@@ -7,6 +7,8 @@ import net.minecraft.network.play.server.S02PacketChat;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.gui.Window;
+import net.yawk.client.gui.components.selectors.SelectorButton;
+import net.yawk.client.gui.components.selectors.SelectorSystem;
 
 import com.darkmagician6.eventapi.EventManager;
 import com.darkmagician6.eventapi.EventTarget;

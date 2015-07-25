@@ -1,4 +1,4 @@
-package net.yawk.client.gui.components;
+package net.yawk.client.gui.components.selectors;
 
 import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;

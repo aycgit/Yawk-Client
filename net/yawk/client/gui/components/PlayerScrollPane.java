@@ -8,6 +8,8 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.yawk.client.Client;
 import net.yawk.client.gui.Window;
+import net.yawk.client.gui.components.selectors.SelectorButton;
+import net.yawk.client.gui.components.selectors.SelectorSystem;
 
 public class PlayerScrollPane extends ScrollPane{
 	

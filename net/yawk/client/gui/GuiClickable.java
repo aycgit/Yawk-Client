@@ -13,16 +13,15 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.yawk.client.Client;
 import net.yawk.client.gui.components.*;
-import net.yawk.client.gui.themes.Theme;
-import net.yawk.client.gui.themes.huzuni.ThemeHuzuni;
+import net.yawk.client.gui.components.selectors.KeybindButton;
+import net.yawk.client.gui.components.selectors.SelectorButton;
+import net.yawk.client.gui.components.selectors.SelectorSystem;
 import net.yawk.client.modmanager.*;
 
 public class GuiClickable extends GuiScreen {
 	
 	public CopyOnWriteArrayList<Window> windows = new CopyOnWriteArrayList<Window>();
 	public boolean opened;
-	//TODO: make this better, currently only testing purposes
-	public static Theme theme = new ThemeHuzuni();
 	
 	public GuiClickable(ModManager modManager){
 		
@@ -95,7 +94,7 @@ public class GuiClickable extends GuiScreen {
 	public void drawScreen(int x, int y, float f){
 		
 		for(Window w : windows){
-			GuiClickable.theme.getWindowRenderer().renderWindow(w, x, y);
+			w.renderWindow(x, y);
 		}
 		
 	}
@@ -113,7 +112,7 @@ public class GuiClickable extends GuiScreen {
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
 		for(Window w : windows){
-			GuiClickable.theme.getWindowRenderer().mouseClicked(w, mouseX, mouseY);
+			w.mouseClicked(mouseX, mouseY);
 		}
 	}
 	

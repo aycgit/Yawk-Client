@@ -1,12 +1,12 @@
-package net.yawk.client.gui.themes.huzuni;
+package net.yawk.client.gui;
 
 import java.awt.Color;
 import java.awt.Font;
 
 import net.yawk.client.Client;
-import net.yawk.client.gui.themes.ThemeFontRenderer;
 
-public class HuzuniFontRendererWrapper extends ThemeFontRenderer{
+//TODO: Do something with this
+public class HuzuniFontRendererWrapper{
 	
 	public HuzuniFontRendererWrapper(){
 		
@@ -18,12 +18,10 @@ public class HuzuniFontRendererWrapper extends ThemeFontRenderer{
 		font.drawString(text, x, y, colour);
 	}
 	
-	@Override
 	public int getStringHeight() {
 		return font.getHeight();
 	}
 	
-	@Override
 	public int getStringWidth(String text) {
 		return font.getStringWidth(text);
 	}
