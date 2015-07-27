@@ -46,11 +46,6 @@ public class GuiHub extends GuiScreen {
 		
 		options = new Canvas(width/2 - 100, 0, 200, 50);
 		options.components.add(new Slider(options, scaleSlider));
-		
-		if(!loading && slates.size() == 0){
-			Thread thread = new Thread(new HubLoadingThread(this));
-			thread.start();
-		}
 	}
 	
 	@Override
@@ -150,6 +145,14 @@ public class GuiHub extends GuiScreen {
 		Client.getClient().getFontRenderer().drawStringWithShadow(name, width/2 - Client.getClient().getFontRenderer().getStringWidth(name)/2, 2, 0xFFFFFFFF, true);
 		
 		options.draw(x, y);
+	}
+	
+	@Override
+	public void initGui() {
+		if(!loading && slates.size() == 0){
+			Thread thread = new Thread(new HubLoadingThread(this));
+			thread.start();
+		}
 	}
 	
 	@Override
