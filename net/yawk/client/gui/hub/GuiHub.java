@@ -6,7 +6,14 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.yawk.client.Client;
+import net.yawk.client.gui.Canvas;
+import net.yawk.client.gui.components.Slider;
+import net.yawk.client.modmanager.values.SliderValue;
+import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.GuiUtils;
+import net.yawk.client.utils.MillisecondTimer;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL12.*;
 
 public class GuiHub extends GuiScreen {
 	
@@ -19,8 +26,12 @@ public class GuiHub extends GuiScreen {
 	private int transition;
 	private Slate lastSlate;
 	private boolean direction;
-	
 	private int slateIndex;
+	
+	private int rotation;
+	private boolean loading = true;
+	private String trail = "";
+	private MillisecondTimer timer = new MillisecondTimer(5);
 	
 	private SquareCell[] example = new SquareCell[]{
 			new SquareCell("Admin Mode", 0x5FCF0000, "Add, remove or modify plugins and files"),
@@ -64,8 +75,63 @@ public class GuiHub extends GuiScreen {
 			new Slate(example2),
 	};
 	
+	private Canvas options;
+	private SliderValue scaleSlider;
+	
+	public GuiHub(){
+		
+		scaleSlider = new SliderValue(1, 5, 2);
+		
+		options = new Canvas(width/2 - 100, 0, 200, 50);
+		options.components.add(new Slider(options, scaleSlider));
+	}
+	
 	@Override
 	public void drawScreen(int x, int y, float f){
+		
+		if(loading){
+			
+			if(timer.output()){
+				
+				rotation+=2;
+				
+				if(rotation % 50 == 0){
+					updateTrail();
+				}
+			}
+			
+			int posX = width/2;
+			int posY = height/2;
+			int size = 10;
+			
+			glTranslatef(posX, posY, 0);
+			glRotatef(rotation, 0, 0, 1);
+			
+			GuiUtils.drawRect(-size, -size, size, size, 0xFF58B4ED);
+			
+			glRotatef(-rotation, 0, 0, 1);
+			glTranslatef(-posX, -posY, 0);
+			
+			String loading = "Loading"+trail;
+			Client.getClient().getFontRenderer().drawString(loading, posX - Client.getClient().getFontRenderer().getStringWidth(loading)/2, posY + 30, 0xFFFFFFFF);
+			
+		}else{
+			renderSlates(x, y);
+		}
+	}
+	
+	private void updateTrail() {
+		
+		if(trail.length() >= 3){
+			trail = "";
+			return;
+		}
+		
+		trail += ".";
+	}
+	
+	//TODO: Move to another GUI screen
+	public void renderSlates(int x, int y){
 		
 		if(lastSlate != null){
 			
@@ -115,6 +181,8 @@ public class GuiHub extends GuiScreen {
 		
 		String name = "Yawk Media Center";
 		Client.getClient().getFontRenderer().drawStringWithShadow(name, width/2 - Client.getClient().getFontRenderer().getStringWidth(name)/2, 2, 0xFFFFFFFF, true);
+		
+		options.draw(x, y);
 	}
 	
 	@Override
@@ -147,6 +215,13 @@ public class GuiHub extends GuiScreen {
 			direction = false;
 			transition = 0;
 		}
+		
+		options.mouseClicked(x, y);
+	}
+	
+	@Override
+	protected void mouseReleased(int x, int y, int state) {
+		options.mouseReleased(x, y, state);
 	}
 	
 	@Override

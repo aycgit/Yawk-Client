@@ -3,7 +3,7 @@ package net.yawk.client.utils;
 public class MillisecondTimer {
 	
 	private int delay;
-	private int lastTime;
+	private long lastTime;
 	
 	public MillisecondTimer(){
 		this.delay = 1000;
@@ -33,7 +33,7 @@ public class MillisecondTimer {
 		return done;
 	}
 	
-	public int elapsedTime(){
+	public long elapsedTime(){
 		return getCurrentTime() - lastTime;
 	}
 	
@@ -46,7 +46,7 @@ public class MillisecondTimer {
 		return this;
 	}
 	
-	public int getCurrentTime(){
-		return (int) System.currentTimeMillis();
+	public long getCurrentTime(){
+		return System.currentTimeMillis();
 	}
 }

@@ -65,14 +65,13 @@ public class GuiClickable extends GuiScreen {
 		plugins.components.add(new PluginDownloadButton(plugins, pluginSystem));
 		
 		//COLOUR PICKER WINDOW
-		/*
-		Window colours = new Window("Colours", modManager);
+		Window colours = new Window("Colours", modManager, 85, 12);
 		
 		for(ColourType colourType : ColourType.values()){
 			colours.components.add(new ColourPicker(colours, colourType, this));
 		}
 		
-		windows.add(colours);*/
+		windows.add(colours);
 		
 		
 		

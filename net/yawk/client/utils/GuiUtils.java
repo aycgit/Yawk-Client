@@ -40,6 +40,19 @@ public class GuiUtils {
 		GL11.glClear(256);
 	}
 	
+    public static void drawTextureRect(double x, double y, double x1, double y1)
+    {
+        Tessellator tes = Tessellator.getInstance();
+        WorldRenderer wr = tes.getWorldRenderer();
+        
+        wr.startDrawing(GL11.GL_QUADS);
+        wr.addVertexWithUV(x, y1, 0, 0, 0);
+        wr.addVertexWithUV(x1, y1, 0, 1, 0);
+        wr.addVertexWithUV(x1, y, 0, 1, 1);
+        wr.addVertexWithUV(x, y, 0, 0, 1);
+        tes.draw();
+    }
+    
 	public static void drawNodusBorder(int x, int y, int x1, int y1) {
 		drawBorder(x, y, x1, y1, 2, ColourType.BORDER.getModifiedColour());
 	}
@@ -99,6 +112,35 @@ public class GuiUtils {
 		GL11.glVertex2d(0, 0 - 4);
 		GL11.glVertex2d(0 - 4, 0 + 2);
 		GL11.glVertex2d(0 + 4, 0 + 2);
+		
+		GL11.glEnd( );
+		GL11.glDisable( GL11.GL_LINE_SMOOTH );
+		GL11.glEnable( 3553 );
+		GL11.glDisable( 3042 );
+		GL11.glRotated( -rotation, 0F, 0F, 1.0F );
+		
+		GL11.glPopMatrix( );
+	}
+	
+	public static void drawSmallTriangle(double cx, double cy, double rotation, int c) {
+		
+		GL11.glPushMatrix( );
+		GL11.glTranslated( cx, cy, 0 );
+		GL11.glRotated( rotation, 0F, 0F, 1.0F );
+		float f = ( ( c >> 24 ) & 0xff ) / 255F;
+		float f1 = ( ( c >> 16 ) & 0xff ) / 255F;
+		float f2 = ( ( c >> 8 ) & 0xff ) / 255F;
+		float f3 = ( c & 0xff ) / 255F;
+		GL11.glColor4f( f1, f2, f3, f );
+		GL11.glEnable( 3042 );
+		GL11.glDisable( 3553 );
+		GL11.glEnable( GL11.GL_LINE_SMOOTH );
+		GL11.glBlendFunc( 770, 771 );
+		GL11.glBegin( GL11.GL_TRIANGLES );
+		
+		GL11.glVertex2d(0, 0 - 2);
+		GL11.glVertex2d(0 - 2, 0 + 3);
+		GL11.glVertex2d(0 + 2, 0 + 3);
 		
 		GL11.glEnd( );
 		GL11.glDisable( GL11.GL_LINE_SMOOTH );
