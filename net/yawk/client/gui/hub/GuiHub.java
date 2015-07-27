@@ -1,6 +1,8 @@
 package net.yawk.client.gui.hub;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -29,51 +31,11 @@ public class GuiHub extends GuiScreen {
 	private int slateIndex;
 	
 	private int rotation;
-	private boolean loading = true;
+	private boolean loading;
 	private String trail = "";
 	private MillisecondTimer timer = new MillisecondTimer(5);
 	
-	private SquareCell[] example = new SquareCell[]{
-			new SquareCell("Admin Mode", 0x5FCF0000, "Add, remove or modify plugins and files"),
-			new SquareCell("Blog", 0x5F00CF00, "Currently overhauling the Yawk Client GUI"),
-			new SquareCell("News", 0x5F0000CF, "Nothing happened"),
-			new SquareCell("ESPXL", 0x5FC0C000, "Better ESP!"),
-			new SquareCell("Throwables", 0x5F00C0C0, "Throw stuff"),
-			new SquareCell("Website Down", 0x5F5050C0, "Currently fixing a few problems with it"),
-			new SquareCell("Plugins", 0x5FC000C0, "Over 30 brand new plugins have been approved for Yawk Client. Install them in the \"Get Plugins\" window of the Yawk GUI."),
-			new SquareCell("Flying", 0x5F50C050, "Up in the air"),
-			new SquareCell("NCP NoFall", 0x5F000050, "It exists now"),
-			new SquareCell("YawkBot", 0x5F500050, "Spam a server with tons of accounts at the same time. Great if you want to get revenge on some people."),
-	};
-	
-	private SquareCell[] example1 = new SquareCell[]{
-			new SquareCell("Throwables", 0x5F50C0C0, "Throw stuff"),
-			new SquareCell("Test", 0x5FCF0000, "This is a test guys"),
-			new SquareCell("Website Down", 0x5F5C50C0, "(Maintainence)"),
-			new SquareCell("Flying", 0x5F55C055, "Up in the air"),
-			new SquareCell("Plugins", 0x5FC500C0, "They're nice"),
-			new SquareCell("Blog", 0x5F05CF00, "Stuff happened"),
-			new SquareCell("News", 0x5F0500CF, "Nothing happened"),
-			new SquareCell("JSON.simple", 0x5FC0C000, "It's gone"),
-	};
-	
-	private SquareCell[] example2 = new SquareCell[]{
-			new SquareCell("Plugins", 0x5F00C0C0, "They're nice"),
-			new SquareCell("Website Down", 0x5F5050C0, "(Maintainence)"),
-			new SquareCell("Blog", 0x5F00CF00, "Stuff happened"),
-			new SquareCell("News", 0x5F5000CF, "Grexit oh noes"),
-			new SquareCell("Google GSON", 0x5FCF50C0, "Fancy"),
-			new SquareCell("Flying", 0x5FC0C050, "Up in the air"),
-			new SquareCell("JSON.simple", 0x5FC0C000, "It's gone"),
-			new SquareCell("YawkBot", 0x5FC0C000, "It's nice"),
-			new SquareCell("Throwables", 0x5FC0C0C0, "Throw stuff"),
-	};
-	
-	private Slate[] slates = new Slate[]{
-			new Slate(example),
-			new Slate(example1),
-			new Slate(example2),
-	};
+	public ArrayList<Slate> slates = new ArrayList<Slate>();
 	
 	private Canvas options;
 	private SliderValue scaleSlider;
@@ -84,6 +46,11 @@ public class GuiHub extends GuiScreen {
 		
 		options = new Canvas(width/2 - 100, 0, 200, 50);
 		options.components.add(new Slider(options, scaleSlider));
+		
+		if(!loading && slates.size() == 0){
+			Thread thread = new Thread(new HubLoadingThread(this));
+			thread.start();
+		}
 	}
 	
 	@Override
@@ -140,11 +107,11 @@ public class GuiHub extends GuiScreen {
 			if(direction){
 				transition+=20;
 				renderSlate(x, y, lastSlate, transition);
-				renderSlate(x, y, slates[slateIndex], transition - width);
+				renderSlate(x, y, slates.get(slateIndex), transition - width);
 			}else{
 				transition-=20;
 				renderSlate(x, y, lastSlate, transition);
-				renderSlate(x, y, slates[slateIndex], transition + width);
+				renderSlate(x, y, slates.get(slateIndex), transition + width);
 			}
 			
 			if(Math.abs(transition) >= width-20){
@@ -176,7 +143,7 @@ public class GuiHub extends GuiScreen {
 				}
 			}
 			
-			renderSlate(x, y, slates[slateIndex], 0);
+			renderSlate(x, y, slates.get(slateIndex), 0);
 		}
 		
 		String name = "Yawk Media Center";
@@ -189,12 +156,12 @@ public class GuiHub extends GuiScreen {
 	protected void mouseClicked(int x, int y, int b) throws IOException {
 		if(needsLeft() && mouseOverLeft(x,y)){
 			
-			lastSlate = slates[slateIndex];
+			lastSlate = slates.get(slateIndex);
 			
 			slateIndex++;
 			
-			if(slateIndex >= slates.length){
-				slateIndex = slates.length - 1;
+			if(slateIndex >= slates.size()){
+				slateIndex = slates.size() - 1;
 				lastSlate = null;
 			}
 			
@@ -203,7 +170,7 @@ public class GuiHub extends GuiScreen {
 			
 		}else if(needsRight() && mouseOverRight(x,y)){
 			
-			lastSlate = slates[slateIndex];
+			lastSlate = slates.get(slateIndex);
 			
 			slateIndex--;
 			
@@ -233,7 +200,7 @@ public class GuiHub extends GuiScreen {
 		
 		int alignXMiddle = width/2 - (5*cellSize)/2;
 		
-		int lineNum = slates.length / 5;
+		int lineNum = slates.size() / 5;
 		int alignYMiddle = height/2 - ((lineNum+2)*cellSize)/2;
 		
 		int num = 0;
@@ -282,10 +249,18 @@ public class GuiHub extends GuiScreen {
 	}
 	
 	private boolean needsLeft(){
-		return slateIndex < slates.length-1;
+		return slateIndex < slates.size()-1;
 	}
 	
 	private boolean needsRight(){
 		return slateIndex > 0;
+	}
+	
+	public boolean isLoading() {
+		return loading;
+	}
+
+	public void setLoading(boolean loading) {
+		this.loading = loading;
 	}
 }

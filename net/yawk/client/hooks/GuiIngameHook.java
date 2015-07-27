@@ -27,7 +27,7 @@ public class GuiIngameHook extends GuiIngame{
 	
 	private EventGuiRender eventGuiRender = new EventGuiRender();
 	
-	private Minimap map = new Minimap();
+	//private Minimap map = new Minimap();
 	
 	@Override
     public void func_175180_a(float p_175180_1_){
@@ -48,6 +48,6 @@ public class GuiIngameHook extends GuiIngame{
 		
 		EventManager.call(eventGuiRender);
 		
-		map.draw();
+		//map.draw();
 	}
 }
