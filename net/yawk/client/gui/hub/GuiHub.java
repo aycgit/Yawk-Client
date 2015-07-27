@@ -85,7 +85,7 @@ public class GuiHub extends GuiScreen {
 			
 			glTranslatef(posX, posY, 0);
 			
-			GuiUtils.drawRect(-size, -size, size, size, 0xFFFFEDED);
+			GuiUtils.drawRect(-size, -size, size, size, 0xFFFF0000);
 			
 			glTranslatef(-posX, -posY, 0);
 			
@@ -243,7 +243,7 @@ public class GuiHub extends GuiScreen {
 	private void renderCell(SquareCell cell, int x, int y, int xPos, int yPos, int w, int h){
 		
 		if(mouseOverButton(x, y, xPos, yPos, xPos+w, yPos+h)){
-			GuiUtils.drawRect(xPos, yPos, xPos+w, yPos+h, cell.getColour() + 0x30303030);
+			GuiUtils.drawRect(xPos, yPos, xPos+w, yPos+h, cell.getColour() + 0x00303030);
 		}else{
 			GuiUtils.drawRect(xPos, yPos, xPos+w, yPos+h, cell.getColour());
 		}

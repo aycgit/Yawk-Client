@@ -28,7 +28,7 @@ public class HubLoadingThread implements Runnable {
 		hub.slates.clear();
 		
 		try {
-			
+						
 			Document doc = Jsoup.connect("http://yawk.net/news.php").userAgent(ClientUtils.USER_AGENT).get();
 			JsonArray array = (JsonArray) new JsonParser().parse(doc.text());
 			
@@ -50,7 +50,7 @@ public class HubLoadingThread implements Runnable {
 			
 			hub.setState(State.CONNECTED);
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			hub.setState(State.FAILED);
 		}
