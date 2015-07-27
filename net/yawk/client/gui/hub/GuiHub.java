@@ -31,7 +31,7 @@ public class GuiHub extends GuiScreen {
 	private int slateIndex;
 	
 	private int rotation;
-	private boolean loading;
+	private State state = State.IDLE;
 	private String trail = "";
 	private MillisecondTimer timer = new MillisecondTimer(5);
 	
@@ -51,7 +51,7 @@ public class GuiHub extends GuiScreen {
 	@Override
 	public void drawScreen(int x, int y, float f){
 		
-		if(loading){
+		if(this.state == State.LOADING){
 			
 			if(timer.output()){
 				
@@ -77,7 +77,22 @@ public class GuiHub extends GuiScreen {
 			String loading = "Loading"+trail;
 			Client.getClient().getFontRenderer().drawString(loading, posX - Client.getClient().getFontRenderer().getStringWidth(loading)/2, posY + 30, 0xFFFFFFFF);
 			
-		}else{
+		}else if(this.state == State.FAILED){
+			
+			int posX = width/2;
+			int posY = height/2;
+			int size = 10;
+			
+			glTranslatef(posX, posY, 0);
+			
+			GuiUtils.drawRect(-size, -size, size, size, 0xFFFFEDED);
+			
+			glTranslatef(-posX, -posY, 0);
+			
+			String failed = "Failed";
+			Client.getClient().getFontRenderer().drawString(failed, posX - Client.getClient().getFontRenderer().getStringWidth(failed)/2, posY + 30, 0xFFFFFFFF);
+			
+		}else if(this.state == State.CONNECTED){
 			renderSlates(x, y);
 		}
 	}
@@ -149,7 +164,8 @@ public class GuiHub extends GuiScreen {
 	
 	@Override
 	public void initGui() {
-		if(!loading && slates.size() == 0){
+		if(this.state == State.IDLE && slates.size() == 0){
+			this.state = State.LOADING;
 			Thread thread = new Thread(new HubLoadingThread(this));
 			thread.start();
 		}
@@ -259,11 +275,15 @@ public class GuiHub extends GuiScreen {
 		return slateIndex > 0;
 	}
 	
-	public boolean isLoading() {
-		return loading;
+	public State getState() {
+		return state;
 	}
 
-	public void setLoading(boolean loading) {
-		this.loading = loading;
+	public void setState(State state) {
+		this.state = state;
 	}
+}
+
+enum State{
+	IDLE, CONNECTED, LOADING, FAILED;
 }

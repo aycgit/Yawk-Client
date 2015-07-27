@@ -1,5 +1,7 @@
 package net.yawk.client.gui.hub;
 
+import net.yawk.client.utils.ClientUtils;
+
 public class SquareCell {
 	
 	private String title;
@@ -9,9 +11,20 @@ public class SquareCell {
 	public SquareCell(String title, int colour, String contents) {
 		super();
 		this.title = title;
-		this.colour = colour;
+		this.colour = colours[colour];
 		this.contents = contents;
 	}
+	
+	private static int[] colours = new int[]{
+		0x5FFF0000,
+		0x5F00FF00,
+		0x5F0000FF,
+		0x5F404000,
+		0x5F004040,
+		0x5F400040,
+		0x5F202020,
+		0x5F305010
+	};
 	
 	public String getTitle() {
 		return title;

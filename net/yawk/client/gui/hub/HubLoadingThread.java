@@ -24,9 +24,7 @@ public class HubLoadingThread implements Runnable {
 	
 	@Override
 	public void run() {
-		
-		hub.setLoading(true);
-		
+				
 		hub.slates.clear();
 		
 		try {
@@ -50,10 +48,11 @@ public class HubLoadingThread implements Runnable {
 				hub.slates.add(new Slate(slate.get("header").getAsString(), cells.toArray(new SquareCell[cells.size()])));
 			}
 			
+			hub.setState(State.CONNECTED);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
+			hub.setState(State.FAILED);
 		}
-		
-		hub.setLoading(false);
-	}
+ 	}
 }
