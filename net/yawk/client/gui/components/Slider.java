@@ -1,17 +1,19 @@
 package net.yawk.client.gui.components;
 
+import net.yawk.client.Client;
 import net.yawk.client.gui.IPanel;
+import net.yawk.client.modmanager.values.SliderValue;
 import net.yawk.client.modmanager.values.Value;
 import net.yawk.client.utils.GuiUtils;
 
 public class Slider extends Component{
 	
 	private IPanel panel;
-	private Value<Integer> val;
+	private SliderValue val;
 	private int slide, mouseXOffset;
 	private boolean dragging;
 	
-	public Slider(IPanel panel, Value<Integer> val) {
+	public Slider(IPanel panel, SliderValue val) {
 		this.panel = panel;
 		this.val = val;
 	}
@@ -20,26 +22,37 @@ public class Slider extends Component{
 	public void draw(int x, int y, int cx, int cy) {
 		
 		if(dragging){
-			slide = x-(cx+slide)+mouseXOffset;
+			
+			slide = x + mouseXOffset;
+			
+			double factor = (slide - cx)/(double)panel.getWidth();
+			double range = val.getUpperBound() - val.getLowerBound();
+			double addition = range*factor;
+			
+			val.setValue(addition+val.getLowerBound());
 		}
 		
-		if(slide > panel.getWidth()-20){
-			slide = panel.getWidth()-20;
+		if(slide > cx+panel.getWidth()-15){
+			slide = cx+panel.getWidth()-15;
 		}
 		
-		if(slide < 0){
-			slide = 0;
+		if(slide < cx){
+			slide = cx;
 		}
 		
-		GuiUtils.drawRect(cx, cy, cx+panel.getWidth(), cy+getHeight(), 0xFFFFFFFF);
-		GuiUtils.drawRect(cx+slide, cy, cx+slide+20, cy+getHeight(), 0xFF000000);
+		GuiUtils.drawRect(cx, cy, cx+panel.getWidth(), cy+getHeight(), 0x2FDFDFDF);
+		GuiUtils.drawRect(slide, cy, slide+15, cy+getHeight(), 0x7F9F9F9F);
+		
+		String displayString = val.getName()+": "+val.getValue();
+		
+		Client.getClient().getFontRenderer().drawString(displayString, cx + panel.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(displayString)/2, cy + 2, 0xFFFFFFFF);
 	}
 	
 	@Override
 	public void mouseClicked(int x, int y, int cx, int cy) {
 		if(mouseOverSlider(x, y, cx, cy)){
 			dragging = true;
-			mouseXOffset = x - (cx+slide);
+			mouseXOffset = slide - x;
 		}
 	}
 	
@@ -49,7 +62,7 @@ public class Slider extends Component{
 	}
 	
 	protected boolean mouseOverSlider(int x, int y, int cx, int cy){
-		return x > cx+slide && x < cx+slide+15 && y > cy && y < cy+panel.getHeight();
+		return x > slide && x < slide+15 && y > cy && y < cy+panel.getHeight();
 	}
 	
 	@Override

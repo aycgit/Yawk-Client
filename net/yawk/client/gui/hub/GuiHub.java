@@ -36,16 +36,9 @@ public class GuiHub extends GuiScreen {
 	private MillisecondTimer timer = new MillisecondTimer(5);
 	
 	public ArrayList<Slate> slates = new ArrayList<Slate>();
-	
-	private Canvas options;
-	private SliderValue scaleSlider;
-	
+		
 	public GuiHub(){
 		
-		scaleSlider = new SliderValue(1, 5, 2);
-		
-		options = new Canvas(50, 0, 200, 50);
-		options.components.add(new Slider(options, scaleSlider));
 	}
 	
 	@Override
@@ -156,14 +149,15 @@ public class GuiHub extends GuiScreen {
 			renderSlate(x, y, slates.get(slateIndex), 0);
 		}
 		
+		/*
 		String name = "Yawk Media Center";
 		Client.getClient().getFontRenderer().drawStringWithShadow(name, width/2 - Client.getClient().getFontRenderer().getStringWidth(name)/2, 2, 0xFFFFFFFF, true);
-		
-		options.draw(x, y);
+		*/
 	}
 	
 	@Override
 	public void initGui() {
+		
 		if(this.state == State.IDLE && slates.size() == 0){
 			this.state = State.LOADING;
 			Thread thread = new Thread(new HubLoadingThread(this));
@@ -201,13 +195,11 @@ public class GuiHub extends GuiScreen {
 			direction = false;
 			transition = 0;
 		}
-		
-		options.mouseClicked(x, y);
 	}
 	
 	@Override
 	protected void mouseReleased(int x, int y, int state) {
-		options.mouseReleased(x, y, state);
+		
 	}
 	
 	@Override
