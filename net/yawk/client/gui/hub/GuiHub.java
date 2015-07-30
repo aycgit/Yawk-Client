@@ -44,7 +44,7 @@ public class GuiHub extends GuiScreen {
 		
 		scaleSlider = new SliderValue(1, 5, 2);
 		
-		options = new Canvas(width/2 - 100, 0, 200, 50);
+		options = new Canvas(50, 0, 200, 50);
 		options.components.add(new Slider(options, scaleSlider));
 	}
 	
@@ -224,15 +224,16 @@ public class GuiHub extends GuiScreen {
 		
 		int num = 0;
 		
+		int w = cellSize - cellPadding;
+		int h = cellSize - cellPadding;
+		
 		for(SquareCell s : slate.getCells()){
 			
-			int onLine = num % 5;
-			int line = num / 5;
+			int column = num % 5;
+			int row = num / 5;
 			
-			int xPos = xOffset + onLine*cellSize + alignXMiddle + cellPadding;
-			int yPos = alignYMiddle + line*cellSize + cellPadding;
-			int w = cellSize - cellPadding;
-			int h = cellSize - cellPadding;
+			int xPos = xOffset + column*cellSize + alignXMiddle + cellPadding;
+			int yPos = alignYMiddle + row*cellSize + cellPadding;
 			
 			renderCell(s, x, y, xPos, yPos, w, h);
 			

@@ -8,7 +8,7 @@ public class Slider extends Component{
 	
 	private IPanel panel;
 	private Value<Integer> val;
-	private int slide = 0;
+	private int slide, mouseXOffset;
 	private boolean dragging;
 	
 	public Slider(IPanel panel, Value<Integer> val) {
@@ -20,18 +20,18 @@ public class Slider extends Component{
 	public void draw(int x, int y, int cx, int cy) {
 		
 		if(dragging){
-			slide = x-(cx+slide);
+			slide = x-(cx+slide)+mouseXOffset;
 		}
 		
-		if(slide > panel.getWidth()-15){
-			slide = panel.getWidth()-15;
+		if(slide > panel.getWidth()-20){
+			slide = panel.getWidth()-20;
 		}
 		
 		if(slide < 0){
 			slide = 0;
 		}
 		
-		GuiUtils.drawRect(cx, cy, cx+panel.getWidth(), cy+getHeight(), 0xFF909090);
+		GuiUtils.drawRect(cx, cy, cx+panel.getWidth(), cy+getHeight(), 0xFFFFFFFF);
 		GuiUtils.drawRect(cx+slide, cy, cx+slide+20, cy+getHeight(), 0xFF000000);
 	}
 	
@@ -39,6 +39,7 @@ public class Slider extends Component{
 	public void mouseClicked(int x, int y, int cx, int cy) {
 		if(mouseOverSlider(x, y, cx, cy)){
 			dragging = true;
+			mouseXOffset = x - (cx+slide);
 		}
 	}
 	
