@@ -1,4 +1,4 @@
-package net.yawk.client.gui.components;
+package net.yawk.client.gui.components.buttons;
 
 import java.net.MalformedURLException;
 

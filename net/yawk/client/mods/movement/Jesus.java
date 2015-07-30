@@ -59,9 +59,7 @@ public class Jesus extends Mod{
 					AxisAlignedBB box = new AxisAlignedBB(Client.getClient().getPlayer().posX+x, Client.getClient().getPlayer().posY+y, Client.getClient().getPlayer().posZ+z, Client.getClient().getPlayer().posX+x+1, Client.getClient().getPlayer().posY+y+1, Client.getClient().getPlayer().posZ+z+1);
 					
 					if(box.intersectsWith(playerBox)){
-						
-						System.out.println("intersect");
-						
+												
 						IBlockState block = Client.getClient().getMinecraft().theWorld.getBlockState(new BlockPos(Client.getClient().getPlayer().posX+x, Client.getClient().getPlayer().posY+y, Client.getClient().getPlayer().posZ+z));
 						
 						if(block.getBlock().getMaterial() == Material.air){

@@ -9,7 +9,7 @@ import net.yawk.client.api.PluginData;
 import net.yawk.client.events.EventDisabled;
 import net.yawk.client.events.EventEnabled;
 import net.yawk.client.gui.Window;
-import net.yawk.client.gui.components.ModButton;
+import net.yawk.client.gui.components.buttons.ModButton;
 import net.yawk.client.mods.building.*;
 import net.yawk.client.mods.combat.*;
 import net.yawk.client.mods.movement.*;

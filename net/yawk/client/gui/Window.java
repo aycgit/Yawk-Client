@@ -3,9 +3,9 @@ package net.yawk.client.gui;
 import java.util.ArrayList;
 
 import net.yawk.client.Client;
-import net.yawk.client.gui.components.Button;
 import net.yawk.client.gui.components.Component;
 import net.yawk.client.gui.components.ScrollPane;
+import net.yawk.client.gui.components.buttons.Button;
 import net.yawk.client.modmanager.ModManager;
 import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.GuiUtils;
@@ -79,15 +79,15 @@ public class Window implements IPanel{
 	}
 	
 	protected void drawButton(int x, int y, int x1, int y1, boolean enabled){
-		GuiUtils.drawBorderedRect(x, y, x1, y1, 1, 0x5FFFFFFF, enabled? 0x99707070:0x99000000);
+		GuiUtils.drawRect(x, y, x1, y1, enabled? 0x9FFFFFFF:0x4FFFFFFF);
 	}
 	
 	protected void drawHeader(int x, int y, int x1, int y1){
-		GuiUtils.drawTopNodusRect(posX, posY, posX+width, posY+height);
+		GuiUtils.drawRect(x, y, x1, y1, ColourType.TITLE.getOverlayColour());
 	}
 	
 	protected void drawBodyRect(int x, int y, int x1, int y1){
-		GuiUtils.drawBottomNodusRect(x, y, x1, y1);
+		GuiUtils.drawRect(x, y, x1, y1, ColourType.BODY.getOverlayColour());
 	}
 	
 	public void mouseClicked(int x, int y) {

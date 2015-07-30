@@ -3,6 +3,7 @@ package net.yawk.client.gui.components;
 import net.yawk.client.gui.ColourType;
 import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.Window;
+import net.yawk.client.gui.components.buttons.Button;
 import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.GuiUtils;
 

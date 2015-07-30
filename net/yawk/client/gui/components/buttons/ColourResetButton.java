@@ -1,17 +1,13 @@
-package net.yawk.client.gui.components;
+package net.yawk.client.gui.components.buttons;
 
+import net.yawk.client.gui.ColourType;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.ClientUtils;
 
-public class LinkButton extends Button{
-
-	private String text;
-	private String link;
+public class ColourResetButton extends Button{
 	
-	public LinkButton(Window win, String text, String link) {
+	public ColourResetButton(Window win) {
 		super(win);
-		this.text = text;
-		this.link = link;
 	}
 
 	@Override
@@ -26,12 +22,14 @@ public class LinkButton extends Button{
 
 	@Override
 	public void toggle() {
-		ClientUtils.openBrowserWindow(link);
+		for(ColourType col : ColourType.values()){
+			col.setIndex(col.getDefaultIndex());
+		}
 	}
 
 	@Override
 	public String getText() {
-		return text;
+		return "Reset Colours";
 	}
 
 }

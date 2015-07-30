@@ -1,4 +1,4 @@
-package net.yawk.client.gui.components;
+package net.yawk.client.gui.components.buttons;
 
 import net.yawk.client.Client;
 import net.yawk.client.gui.Window;

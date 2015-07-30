@@ -4,7 +4,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
 import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.Window;
-import net.yawk.client.gui.components.Button;
+import net.yawk.client.gui.components.buttons.Button;
 import net.yawk.client.modmanager.Mod;
 
 public class SelectorButton extends Button{

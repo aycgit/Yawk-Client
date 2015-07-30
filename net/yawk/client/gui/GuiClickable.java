@@ -13,6 +13,9 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.yawk.client.Client;
 import net.yawk.client.gui.components.*;
+import net.yawk.client.gui.components.buttons.LinkButton;
+import net.yawk.client.gui.components.buttons.ModButton;
+import net.yawk.client.gui.components.buttons.PluginDownloadButton;
 import net.yawk.client.gui.components.selectors.KeybindButton;
 import net.yawk.client.gui.components.selectors.SelectorButton;
 import net.yawk.client.gui.components.selectors.SelectorSystem;
@@ -72,8 +75,6 @@ public class GuiClickable extends GuiScreen {
 		}
 		
 		windows.add(colours);
-		
-		
 		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();

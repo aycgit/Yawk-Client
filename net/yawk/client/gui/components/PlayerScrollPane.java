@@ -30,14 +30,12 @@ public class PlayerScrollPane extends ScrollPane{
 		for(SelectorButton b : system.buttons){
 			if(!players.contains(b.getStaticText())){
 				offline.add(b);
-				System.out.println("LEFT: "+b.getStaticText());
 			}
 		}
 		
 		for(String p : players){
 			if(playerNotFound(p)){
 				newPlayers.add(p);
-				System.out.println("NEW: "+p);
 			}
 		}
 		

@@ -6,13 +6,14 @@ import net.yawk.client.utils.Colours;
 
 public enum ColourType {
 	
-	TEXT("Text", 2, 0x00C000C0, false), HIGHLIGHT("Highlight", 0, 0x00C000C0, false), BORDER("Border", 2, 0x8F000000, false), TITLE("Title", 3), TITLE_TEXT("Title Text", 0);
+	TEXT("Text", 2, 0x00C000C0, false), HIGHLIGHT("Highlight", 0, 0x00C000C0, false), BODY("Body", 0, 0x00C000C0, false), BORDER("Border", 2, 0x8F000000, false), TITLE("Title", 0), TITLE_TEXT("Title Text", 0);
 	
 	private String name;
 	private int colour;
 	private int modifiedColour;
 	private int modifier;
 	private int index;
+	private int defaultIndex;
 	private boolean combine;
 	
 	private ColourType(String name, int index){
@@ -23,6 +24,7 @@ public enum ColourType {
 		this.name = name;
 		this.modifier = modifier;
 		this.combine = combine;
+		this.defaultIndex = index;
 		setIndex(index);
 	}
 	
@@ -36,6 +38,10 @@ public enum ColourType {
 	
 	public int getModifiedColour() {
 		return modifiedColour;
+	}
+	
+	public int getOverlayColour() {
+		return colour - 0x5F000000;
 	}
 	
 	public void setColour(int colour) {
@@ -56,6 +62,10 @@ public enum ColourType {
 	public void setIndex(int index) {
 		this.index = index;
 		setColour(Colours.options[index]);
+	}
+	
+	public int getDefaultIndex() {
+		return defaultIndex;
 	}
 	
 	public void cycleIndex() {
