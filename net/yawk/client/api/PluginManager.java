@@ -24,8 +24,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import net.yawk.client.Client;
+import net.yawk.client.gui.Component;
 import net.yawk.client.gui.Window;
-import net.yawk.client.gui.components.Component;
 import net.yawk.client.gui.components.buttons.ModButton;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.PluginMod;

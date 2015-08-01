@@ -1,4 +1,4 @@
-package net.yawk.client.gui.components;
+package net.yawk.client.gui;
 
 public abstract class Component {
 

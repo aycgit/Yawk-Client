@@ -2,8 +2,6 @@ package net.yawk.client.gui;
 
 import java.util.ArrayList;
 
-import net.yawk.client.gui.components.Component;
-
 public class Canvas implements IPanel{
 	
 	private int posX, posY, width, height;

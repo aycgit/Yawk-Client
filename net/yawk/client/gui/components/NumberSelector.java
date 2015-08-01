@@ -3,6 +3,7 @@ package net.yawk.client.gui.components;
 import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
 import net.yawk.client.gui.ColourType;
+import net.yawk.client.gui.Component;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.Colours;
 

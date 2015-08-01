@@ -1,7 +1,8 @@
-package net.yawk.client.gui.components;
+package net.yawk.client.gui.components.scrolling;
 
 import java.util.ArrayList;
 
+import net.yawk.client.gui.Component;
 import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.GuiUtils;

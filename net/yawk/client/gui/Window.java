@@ -3,9 +3,8 @@ package net.yawk.client.gui;
 import java.util.ArrayList;
 
 import net.yawk.client.Client;
-import net.yawk.client.gui.components.Component;
-import net.yawk.client.gui.components.ScrollPane;
 import net.yawk.client.gui.components.buttons.Button;
+import net.yawk.client.gui.components.scrolling.ScrollPane;
 import net.yawk.client.modmanager.ModManager;
 import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.GuiUtils;

@@ -78,7 +78,7 @@ public class Minimap {
 		Scissor.disableScissoring();
 		
 		GuiUtils.drawSmallTriangle(width/2, height/2, 0, 0xFFFF0000);
-				
+		
 		//glDisable(GL_STENCIL_TEST);
 		
 		//TODO: FIX TEXT RENDERING AFTER DRAWING MINIMAP

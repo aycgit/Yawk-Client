@@ -1,6 +1,7 @@
 package net.yawk.client.gui.components;
 
 import net.yawk.client.Client;
+import net.yawk.client.gui.Component;
 import net.yawk.client.gui.IPanel;
 import net.yawk.client.modmanager.values.SliderValue;
 import net.yawk.client.modmanager.values.Value;

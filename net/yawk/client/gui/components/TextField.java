@@ -10,6 +10,7 @@ import org.lwjgl.input.Keyboard;
 
 import net.minecraft.util.ChatAllowedCharacters;
 import net.yawk.client.Client;
+import net.yawk.client.gui.Component;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.GuiUtils;
