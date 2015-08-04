@@ -2,14 +2,16 @@ package net.yawk.client.gui.components.buttons;
 
 import net.yawk.client.gui.Window;
 import net.yawk.client.gui.components.FriendScrollPane;
+import net.yawk.client.gui.components.selectors.SelectorButton;
+import net.yawk.client.gui.components.selectors.SelectorSystem;
 
 public class FriendsExecuteButton extends Button{
 	
-	private FriendScrollPane pane;
+	private SelectorSystem<SelectorButton> system;
 	
-	public FriendsExecuteButton(Window win, FriendScrollPane pane) {
+	public FriendsExecuteButton(Window win, SelectorSystem<SelectorButton> system) {
 		super(win);
-		this.pane = pane;
+		this.system = system;
 	}
 
 	@Override
@@ -29,7 +31,7 @@ public class FriendsExecuteButton extends Button{
 
 	@Override
 	public String getText() {
-		return "";
+		return system.selectedButton != null? "Remove":"Add";
 	}
 
 }

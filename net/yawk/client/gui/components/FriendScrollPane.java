@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 import net.yawk.client.gui.Window;
+import net.yawk.client.gui.components.scrolling.ScrollPane;
 import net.yawk.client.gui.components.selectors.SelectorButton;
 import net.yawk.client.gui.components.selectors.SelectorSystem;
 

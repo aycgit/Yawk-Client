@@ -86,7 +86,9 @@ public class GuiClickable extends GuiScreen {
 		Window friends = new Window("Friends", modManager, 85, 12);
 		
 		friends.components.add(friendsPane = new FriendScrollPane(friends, 72, friendsSystem));
-		friends.components.add(new FriendsExecuteButton(friends, friendsPane));
+		friends.components.add(new FriendsExecuteButton(friends, friendsSystem));
+		
+		windows.add(friends);
 		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();
