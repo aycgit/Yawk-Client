@@ -226,6 +226,8 @@ public class PluginManager {
 			//This puts the plugin hacks into the module system and plugin window gui
 			for(Mod m : mods){
 				
+				Client.getClient().log("LOADING MOD: "+m.getName());
+				
 				if(m instanceof PluginMod){
 					((PluginMod) m).setPluginData(plugin);
 				}

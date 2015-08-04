@@ -26,6 +26,7 @@ public class ScrollPane extends Component implements IPanel{
 	public void draw(int x, int y, int cx, int cy) {
 		
 		if(dragging){
+			
 			dragged = y - cy + mouseYOffset + 2;
 			
 			if(dragged > height-BAR_HEIGHT){

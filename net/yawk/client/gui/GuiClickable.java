@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.yawk.client.Client;
 import net.yawk.client.gui.components.*;
+import net.yawk.client.gui.components.buttons.FriendsExecuteButton;
 import net.yawk.client.gui.components.buttons.LinkButton;
 import net.yawk.client.gui.components.buttons.ModButton;
 import net.yawk.client.gui.components.buttons.PluginDownloadButton;
@@ -70,6 +71,7 @@ public class GuiClickable extends GuiScreen {
 		plugins.components.add(new PluginDownloadButton(plugins, pluginSystem));
 		
 		//COLOUR PICKER WINDOW
+		
 		Window colours = new Window("Colours", modManager, 85, 12);
 		
 		for(ColourType colourType : ColourType.values()){
@@ -77,6 +79,14 @@ public class GuiClickable extends GuiScreen {
 		}
 		
 		windows.add(colours);
+		
+		//FRIENDS WINDOW
+		SelectorSystem<SelectorButton> friendsSystem = new SelectorSystem<SelectorButton>();
+		FriendScrollPane friendsPane;
+		Window friends = new Window("Friends", modManager, 85, 12);
+		
+		friends.components.add(friendsPane = new FriendScrollPane(friends, 72, friendsSystem));
+		friends.components.add(new FriendsExecuteButton(friends, friendsPane));
 		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();

@@ -16,22 +16,27 @@ public class ModDataTask implements DataTask{
 
 	@Override
 	public void read(JsonObject obj) {
-		
+
 		JsonArray arr = obj.get("mods").getAsJsonArray();
-		
+
 		for(JsonElement el : arr){
-			
+
 			JsonObject save = el.getAsJsonObject();
-			
-			Mod mod = Client.getClient().getModManager().getModByName(save.get("name").getAsString());
-			
-			if(mod != null){
+
+			JsonElement modElement = save.get("name");
+
+			if(!modElement.isJsonNull()){
 				
-				if(save.get("enabled").getAsBoolean()){
-					Client.getClient().getModManager().toggle(mod);
+				Mod mod = Client.getClient().getModManager().getModByName(modElement.getAsString());
+				
+				if(mod != null){
+
+					if(save.get("enabled").getAsBoolean()){
+						Client.getClient().getModManager().toggle(mod);
+					}
+
+					mod.setKeybind(save.get("keybind").getAsInt());
 				}
-				
-				mod.setKeybind(save.get("keybind").getAsInt());
 			}
 		}
 	}

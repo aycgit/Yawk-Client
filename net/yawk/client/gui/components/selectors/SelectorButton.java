@@ -13,9 +13,9 @@ public class SelectorButton extends Button{
 	protected boolean isSelected;
 	private SelectorSystem<SelectorButton> system;
 	
-	public SelectorButton(IPanel win, String mod, SelectorSystem system) {
+	public SelectorButton(IPanel win, String text, SelectorSystem system) {
 		super(win);
-		this.text = mod;
+		this.text = text;
 		this.system = system;
 	}
 	

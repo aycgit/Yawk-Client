@@ -64,6 +64,7 @@ public class FileManager {
 			File file = getFile(task);
 			
 			if(file.exists()){
+				System.out.println("LOADING TASK: "+task.getFileName());
 				task.read((JsonObject) new JsonParser().parse(FileUtils.readFileFull(file)));
 			}else{
 				try {
