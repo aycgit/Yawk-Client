@@ -1,16 +1,6 @@
 package net.yawk.client.utils;
 
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
-import static org.lwjgl.opengl.GL11.GL_LIGHTING;
-import static org.lwjgl.opengl.GL11.GL_LINE_SMOOTH;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glColor4f;
-import static org.lwjgl.opengl.GL11.glDepthMask;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glLineWidth;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
@@ -221,7 +211,7 @@ public class ClientRenderer {
 	    tes.draw();
 	}
 	
-	private static void startDrawing(){
+	public static void startDrawing(){
 		glPushMatrix();
 		glEnable(GL_BLEND);
 		glDisable(GL_TEXTURE_2D);
@@ -231,7 +221,7 @@ public class ClientRenderer {
 		glDisable(GL_DEPTH_TEST);
 	}
 	
-	private static void stopDrawing(){
+	public static void stopDrawing(){
 		glEnable(GL_DEPTH_TEST);
 		glDepthMask(true);
 		glDisable(GL_LINE_SMOOTH);
@@ -239,5 +229,16 @@ public class ClientRenderer {
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
 		GL11.glPopMatrix();
+	}
+	
+	public static void drawLine(double x, double y, double z, double x1, double y1, double z1){
+		
+		Tessellator tes = Tessellator.getInstance();
+        WorldRenderer wr = tes.getWorldRenderer();
+        
+        wr.startDrawing(GL_LINES);
+        wr.addVertex(x, y, z);
+        wr.addVertex(x1, y1, z1);
+        tes.draw();
 	}
 }

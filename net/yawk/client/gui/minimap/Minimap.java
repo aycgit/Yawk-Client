@@ -3,6 +3,7 @@ package net.yawk.client.gui.minimap;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
@@ -50,39 +51,41 @@ public class Minimap {
 		}
 		
 		float rot = mc.thePlayer.rotationYaw+90;
+		double distX = mc.thePlayer.posX - lastX;
+		double distZ = mc.thePlayer.posZ - lastZ;
 		
-		Scissor.enableScissoring();
-		Scissor.scissor(width/2 - 50, height/2 - 50, 100, 100);
+		//Scissor.enableScissoring();
+		//Scissor.scissor(width/2 - 50, height/2 - 50, 100, 100);
 		
 		//System.out.println(mc.thePlayer.posX - lastX);
 		
 		double x = height/2;
 		double z = width/2;
 		
-		glTranslated(x, z, 0);
+		glTranslated(x+distX, z+distZ, 0);
 		glRotatef(-rot, 0, 0, 1);
+		
 		bind();
 		
 		glColor4f(1, 1, 1, 1);
 		glClear(256);
 		
-		//GL11.glStencilOp(7680, 7680, 7680);
-		//GL11.glStencilFunc(514, 1, -1);
+		//glEnable(GL_STENCIL_TEST);
+		//glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+		//glStencilFunc(GL_ALWAYS, 1, -1);
 		
 		GuiUtils.drawTextureRect(-width/2, -height/2, width/2, height/2);
 		
 		unbind();
-		glRotatef(rot, 0, 0, 1);
-		glTranslated(-x, -z, 0);
 		
-		Scissor.disableScissoring();
+		glRotatef(rot, 0, 0, 1);
+		glTranslated(-(x+distX), -(z+distZ), 0);
+		
+		//Scissor.disableScissoring();
 		
 		GuiUtils.drawSmallTriangle(width/2, height/2, 0, 0xFFFF0000);
 		
 		//glDisable(GL_STENCIL_TEST);
-		
-		//TODO: FIX TEXT RENDERING AFTER DRAWING MINIMAP
-		Client.getClient().getMinecraft().renderEngine.bindTexture(Client.getClient().getFontRenderer().locationFontTexture);
 	}
 	
 	private int getTexture(){
