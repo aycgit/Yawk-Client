@@ -93,62 +93,70 @@ public class GuiUtils {
 		GuiUtils.drawRect(x, y, x1, y1, insideC);
 	}
 	
-	public static void drawTriangle(double cx, double cy, double rotation, int c) {
+	public static void drawTriangle(double x, double y, double rotation, int paramColor) {
 		
-		GL11.glPushMatrix( );
-		GL11.glTranslated( cx, cy, 0 );
-		GL11.glRotated( rotation, 0F, 0F, 1.0F );
-		float f = ( ( c >> 24 ) & 0xff ) / 255F;
-		float f1 = ( ( c >> 16 ) & 0xff ) / 255F;
-		float f2 = ( ( c >> 8 ) & 0xff ) / 255F;
-		float f3 = ( c & 0xff ) / 255F;
-		GL11.glColor4f( f1, f2, f3, f );
-		GL11.glEnable( 3042 );
-		GL11.glDisable( 3553 );
-		GL11.glEnable( GL11.GL_LINE_SMOOTH );
-		GL11.glBlendFunc( 770, 771 );
-		GL11.glBegin( GL11.GL_TRIANGLES );
+		float alpha = (float)(paramColor >> 24 & 0xFF) / 255F;
+		float red = (float)(paramColor >> 16 & 0xFF) / 255F;
+		float green = (float)(paramColor >> 8 & 0xFF) / 255F;
+		float blue = (float)(paramColor & 0xFF) / 255F;
 		
+		GL11.glClear(256);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glEnable(GL11.GL_LINE_SMOOTH);
+		
+		GL11.glTranslated(x, y, 0);
+		GL11.glRotated(rotation, 0F, 0F, 1.0F);
+		
+		GL11.glPushMatrix();
+		
+		GL11.glBegin(GL11.GL_TRIANGLES);
 		GL11.glVertex2d(0, 0 - 4);
 		GL11.glVertex2d(0 - 4, 0 + 2);
 		GL11.glVertex2d(0 + 4, 0 + 2);
+		GL11.glEnd();
 		
-		GL11.glEnd( );
-		GL11.glDisable( GL11.GL_LINE_SMOOTH );
-		GL11.glEnable( 3553 );
-		GL11.glDisable( 3042 );
-		GL11.glRotated( -rotation, 0F, 0F, 1.0F );
+		GL11.glPopMatrix();
 		
-		GL11.glPopMatrix( );
+		GL11.glRotated(-rotation, 0F, 0F, 1.0F);
+		
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_LINE_SMOOTH);
 	}
 	
-	public static void drawSmallTriangle(double cx, double cy, double rotation, int c) {
+	public static void drawSmallTriangle(double x, double y, double rotation, int paramColor) {
 		
-		GL11.glPushMatrix( );
-		GL11.glTranslated( cx, cy, 0 );
-		GL11.glRotated( rotation, 0F, 0F, 1.0F );
-		float f = ( ( c >> 24 ) & 0xff ) / 255F;
-		float f1 = ( ( c >> 16 ) & 0xff ) / 255F;
-		float f2 = ( ( c >> 8 ) & 0xff ) / 255F;
-		float f3 = ( c & 0xff ) / 255F;
-		GL11.glColor4f( f1, f2, f3, f );
-		GL11.glEnable( 3042 );
-		GL11.glDisable( 3553 );
-		GL11.glEnable( GL11.GL_LINE_SMOOTH );
-		GL11.glBlendFunc( 770, 771 );
-		GL11.glBegin( GL11.GL_TRIANGLES );
+		float alpha = (float)(paramColor >> 24 & 0xFF) / 255F;
+		float red = (float)(paramColor >> 16 & 0xFF) / 255F;
+		float green = (float)(paramColor >> 8 & 0xFF) / 255F;
+		float blue = (float)(paramColor & 0xFF) / 255F;
 		
+		GL11.glClear(256);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glEnable(GL11.GL_LINE_SMOOTH);
+		
+		GL11.glTranslated(x, y, 0);
+		GL11.glRotated(rotation, 0F, 0F, 1.0F);
+		
+		GL11.glPushMatrix();
+		
+		GL11.glBegin(GL11.GL_TRIANGLES);
 		GL11.glVertex2d(0, 0 - 2);
 		GL11.glVertex2d(0 - 2, 0 + 3);
 		GL11.glVertex2d(0 + 2, 0 + 3);
+		GL11.glEnd();
 		
-		GL11.glEnd( );
-		GL11.glDisable( GL11.GL_LINE_SMOOTH );
-		GL11.glEnable( 3553 );
-		GL11.glDisable( 3042 );
-		GL11.glRotated( -rotation, 0F, 0F, 1.0F );
+		GL11.glPopMatrix();
 		
-		GL11.glPopMatrix( );
+		GL11.glRotated(-rotation, 0F, 0F, 1.0F);
+		
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_LINE_SMOOTH);
 	}
 	
     public static void drawCorrectTexturedModalRect(double x, double y, double x1, double y1)
@@ -163,46 +171,4 @@ public class GuiUtils {
         wr.addVertexWithUV(x, y, 0, 0, 0);
         tes.draw();
     }
-    
-	public static void drawGradientBorderedRect(int x, int y, int x1, int y1, int lw, int borderC, int start, int end){
-				
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glEnable(GL11.GL_LINE_SMOOTH);
-		GL11.glShadeModel(GL11.GL_SMOOTH);
-		
-		float f = (float)(start >> 24 & 0xFF) / 255F;
-		float f1 = (float)(start >> 16 & 0xFF) / 255F;
-		float f2 = (float)(start >> 8 & 0xFF) / 255F;
-		float f3 = (float)(start & 0xFF) / 255F;
-		
-		float f4 = (float)(end >> 24 & 0xFF) / 255F;
-		float f5 = (float)(end >> 16 & 0xFF) / 255F;
-		float f6 = (float)(end >> 8 & 0xFF) / 255F;
-		float f7 = (float)(end & 0xFF) / 255F;
-		
-		GL11.glPushMatrix();
-		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glColor4f(f1, f2, f3, f);
-		GL11.glVertex2d(x1, y);
-		GL11.glVertex2d(x, y);
-		
-		GL11.glColor4f(f5, f6, f7, f4);
-		GL11.glVertex2d(x, y1);
-		GL11.glVertex2d(x1, y1);
-		GL11.glEnd();
-		GL11.glPopMatrix();
-		
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glDisable(GL11.GL_LINE_SMOOTH);
-		GL11.glShadeModel(GL11.GL_FLAT);
-		
-		GuiUtils.drawRect(x, y - lw, x1, y, borderC);
-		GuiUtils.drawRect(x, y1, x1, y1 + lw, borderC);
-		
-		GuiUtils.drawRect(x - lw, y - lw, x, y1 + lw, borderC);
-		GuiUtils.drawRect(x1, y - lw, x1 + lw, y1 + lw, borderC);
-	}
 }

@@ -21,7 +21,7 @@ public class FriendsExecuteButton extends Button{
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return system.selectedButton != null;
 	}
 
 	@Override
@@ -31,7 +31,11 @@ public class FriendsExecuteButton extends Button{
 
 	@Override
 	public String getText() {
-		return system.selectedButton != null? "Remove":"Add";
+		if(system.selectedButton != null){
+			return "Remove";
+		}else{
+			return "Select a friend";
+		}
 	}
 
 }
