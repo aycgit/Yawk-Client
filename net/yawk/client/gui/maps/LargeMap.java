@@ -34,13 +34,14 @@ import net.yawk.client.utils.Scissor;
 
 public class LargeMap {
 	
-	private int vID = -1, width = 170, height = 170;
+	private int width = 170, height = 170;
 	private double lastX, lastY, lastZ;
 	private Minecraft mc;
 	private ColourModifier colourModifier;
 	private EventListener listener;
 	private HashMap<String,Integer> factionColours;
 	private BiMap<String,List<ChunkData>> factionChunkMap;
+	private int vID = -1, fontRendererID;
 	
 	public LargeMap(ColourModifier colourModifier){
 		
@@ -49,6 +50,8 @@ public class LargeMap {
 		factionColours = new HashMap<String,Integer>();
 		factionChunkMap = HashBiMap.create();
 		createFactionListener();
+		
+		fontRendererID =  mc.getTextureManager().getTexture(mc.fontRendererObj.locationFontTexture).getGlTextureId();
 	}
 	
 	public void draw(int x, int y, double scale){
@@ -91,13 +94,16 @@ public class LargeMap {
 		unbind();
 		
 		glScaled(1/scale, 1/scale, 1/scale);
-		
+				
 		GuiUtils.drawSmallTriangle(0, 0, rot, 0xFFFF0000);
 		
 		//glRotatef(rot, 0, 0, 1);
 		glTranslated(-x, -y, 0);
 		
 		//Scissor.disableScissoring();
+		
+		//TODO: fix rendering text after drawing the texture
+		glBindTexture(GL_TEXTURE_2D, fontRendererID);
 	}
 	
 	private int getTexture(){
@@ -169,8 +175,6 @@ public class LargeMap {
 						try{
 							
 							String faction = msg.split(" ~ ")[1].split(" ")[0];
-							
-							System.out.println("FACTION:"+faction);
 							
 							int chunkX = ClientUtils.roundTo16((int)Client.getClient().getPlayer().posX);
 							int chunkZ = ClientUtils.roundTo16((int)Client.getClient().getPlayer().posZ);

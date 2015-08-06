@@ -1,5 +1,6 @@
 package net.yawk.client.utils;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 import net.minecraft.network.Packet;
@@ -10,6 +11,7 @@ public class ClientUtils {
 	
 	public static Random random = new Random();
 	public static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
+	public static DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 	
 	public static void sendPacket(Packet p)
 	{

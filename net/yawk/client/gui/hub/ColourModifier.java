@@ -9,7 +9,7 @@ public class ColourModifier {
 	private HashMap<Integer, Integer> darkColours = new HashMap<Integer, Integer>();
 	
 	public int getMergedColour(int paramColour, int extraColour){
-				
+		
 		//float a = (float)(paramColor >> 24 & 0xFF) / 255F;
 		int r = paramColour >> 16 & 0xFF;
 		int g = paramColour >> 8 & 0xFF;
@@ -19,9 +19,9 @@ public class ColourModifier {
 		int g1 = extraColour >> 8 & 0xFF;
 		int b1 = extraColour & 0xFF;
 		
-		r += r1 * 0.3;
-		g += g1 * 0.3;
-		b += b1 * 0.3;
+		r += r1 * 0.5;
+		g += g1 * 0.5;
+		b += b1 * 0.5;
 		
 		r = MathHelper.clamp_int(r, 0, 255);
 		g = MathHelper.clamp_int(g, 0, 255);
