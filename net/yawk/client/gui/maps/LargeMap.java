@@ -2,6 +2,7 @@ package net.yawk.client.gui.maps;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -151,7 +152,7 @@ public class LargeMap {
 		
 		return id;
 	}
-		
+	
 	private void createFactionListener(){
 		
 		listener = new EventListener(){
@@ -182,6 +183,12 @@ public class LargeMap {
 							
 							List<ChunkData> chunks = factionChunkMap.get(faction);
 							
+							if(chunks == null){
+								chunks = new ArrayList<ChunkData>();
+								chunks.add(chunk);
+								factionChunkMap.put(faction, chunks);
+							}
+							
 							if(!chunks.contains(chunk)){
 								chunks.add(chunk);
 							}
@@ -200,8 +207,19 @@ public class LargeMap {
 	}
 	
 	private String getChunkOwner(int x, int z){
-		ChunkData chunk = new ChunkData(x, z);
-		return this.factionChunkMap.inverse().get(chunk);
+		
+		for(String faction : factionChunkMap.keySet()){
+			
+			List<ChunkData> chunks = factionChunkMap.get(faction);
+			
+			for(ChunkData chunk : chunks){
+				if(chunk.containsPoint(x, z)){
+					return faction;
+				}
+			}
+		}
+		
+		return null;
 	}
 	
 	public void bind(){
