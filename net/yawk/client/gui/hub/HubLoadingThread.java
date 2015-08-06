@@ -47,6 +47,7 @@ public class HubLoadingThread implements Runnable {
 			}
 			
 			hub.setState(State.CONNECTED);
+			hub.postConnection();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

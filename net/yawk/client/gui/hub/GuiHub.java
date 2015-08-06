@@ -179,7 +179,11 @@ public class GuiHub extends GuiScreen {
 			slates.add(new MapSlate(this));
 		}
 	}
-
+	
+	public void postConnection() {
+		slates.get(slateIndex).init();
+	}
+	
 	@Override
 	protected void mouseClicked(int x, int y, int b) throws IOException {
 		
