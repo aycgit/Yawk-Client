@@ -1,14 +1,15 @@
 package net.yawk.client.gui.maps;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+
+import com.darkmagician6.eventapi.EventTarget;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
@@ -16,34 +17,32 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.init.Blocks;
+import net.minecraft.network.play.server.S02PacketChat;
 import net.minecraft.util.BlockPos;
 import net.yawk.client.Client;
+import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.gui.hub.ColourModifier;
-import net.yawk.client.modmanager.ChatListener;
+import net.yawk.client.modmanager.EventListener;
 import net.yawk.client.utils.GuiUtils;
 import net.yawk.client.utils.Scissor;
 
-public class Map {
+public class LargeMap {
 	
 	private int vID = -1, width = 170, height = 170;
 	private double lastX, lastY, lastZ;
 	private Minecraft mc;
 	private ColourModifier colourModifier;
-	private ChatListener listener;
+	private EventListener listener;
+	private HashMap<String,Integer> factionColours;
+	private HashMap<ChunkData,String> chunkFactionMap;
 	
-	public Map(ColourModifier colourModifier){
+	public LargeMap(ColourModifier colourModifier){
 		
 		this.mc = Client.getClient().getMinecraft();
 		this.colourModifier = colourModifier;
-		
-		listener = new ChatListener(){
-			
-			@Override
-			protected void onChat(String msg) {
-				System.out.println("CHAT MESSAGE EVENT: "+msg);
-			}
-			
-		};
+		factionColours = new HashMap<String,Integer>();
+		chunkFactionMap = new HashMap<ChunkData,String>();
+		createFactionListener();
 	}
 	
 	public void draw(int x, int y, double scale){
@@ -143,6 +142,38 @@ public class Map {
 	
 	private boolean pointWithinChunk(int x, int z, int cx, int cz){
 		return x > cx && x < cx+16 && z > cz && z < cz+16;
+	}
+	
+	private void createFactionListener(){
+		
+		listener = new EventListener(){
+			
+			@EventTarget
+			public void onPacketRecieve(EventRecievePacket e){
+				
+				if(e.packet instanceof S02PacketChat){
+					
+					String msg = ((S02PacketChat)e.packet).func_148915_c().getUnformattedText();
+					
+					if(msg.startsWith(" ~ ")){
+						
+						try{
+							
+							String faction = msg.split(" ~ ")[1].split(" ")[0];
+							
+							System.out.println("FACTION:"+faction);
+							
+							ChunkData chunk = new ChunkData();
+							
+							//factionColours.put(, value);
+							
+						}catch(Exception ex){
+							ex.printStackTrace();
+						}
+					}
+				}
+			}			
+		};
 	}
 	
 	public void bind(){

@@ -9,7 +9,7 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.Window;
-import net.yawk.client.gui.maps.Map;
+import net.yawk.client.gui.maps.LargeMap;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.mods.world.HideClient;
 import net.yawk.client.utils.Colours;
