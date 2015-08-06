@@ -112,14 +112,15 @@ public class GuiUtils {
 		GL11.glPushMatrix();
 		
 		GL11.glBegin(GL11.GL_TRIANGLES);
-		GL11.glVertex2d(0, 0 - 4);
-		GL11.glVertex2d(0 - 4, 0 + 2);
-		GL11.glVertex2d(0 + 4, 0 + 2);
+		GL11.glVertex2d(0, -4);
+		GL11.glVertex2d(-4, 2);
+		GL11.glVertex2d(4, 2);
 		GL11.glEnd();
 		
 		GL11.glPopMatrix();
 		
 		GL11.glRotated(-rotation, 0F, 0F, 1.0F);
+		GL11.glTranslated(-x, -y, 0);
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_BLEND);
@@ -145,14 +146,15 @@ public class GuiUtils {
 		GL11.glPushMatrix();
 		
 		GL11.glBegin(GL11.GL_TRIANGLES);
-		GL11.glVertex2d(0, 0 - 2);
-		GL11.glVertex2d(0 - 2, 0 + 3);
-		GL11.glVertex2d(0 + 2, 0 + 3);
+		GL11.glVertex2d(0, -2);
+		GL11.glVertex2d(-2, 4);
+		GL11.glVertex2d(2, 4);
 		GL11.glEnd();
 		
 		GL11.glPopMatrix();
 		
 		GL11.glRotated(-rotation, 0F, 0F, 1.0F);
+		GL11.glTranslated(-x, -y, 0);
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_BLEND);

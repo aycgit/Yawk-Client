@@ -1,4 +1,4 @@
-package net.yawk.client.gui.minimap;
+package net.yawk.client.gui.maps;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -21,23 +21,25 @@ import net.yawk.client.Client;
 import net.yawk.client.utils.GuiUtils;
 import net.yawk.client.utils.Scissor;
 
-public class Minimap {
+public class Map {
 	
 	private int vID = -1;
 	
-	private int width = 140, height = 140;
+	private int width = 170, height = 170;
 	
 	private double lastX, lastY, lastZ;
 	
 	private Minecraft mc;
 	
-	public Minimap(){
-		mc = Minecraft.getMinecraft();
+	public Map(){
+		mc = Client.getClient().getMinecraft();
 	}
 	
-	public void draw(){
+	public void draw(int x, int y){
 		
-		if(mc.thePlayer.getDistance(lastX, lastY, lastZ) > 5f){
+		//GuiUtils.drawRect(x-5, y-5, x+5, y+5, 0x5FFF0000);
+		
+		if(mc.thePlayer.getDistance(lastX, lastY, lastZ) > 5){
 			
 			if(vID != -1){
 				glDeleteTextures(vID);
@@ -51,41 +53,35 @@ public class Minimap {
 		}
 		
 		float rot = mc.thePlayer.rotationYaw+90;
-		double distX = mc.thePlayer.posX - lastX;
-		double distZ = mc.thePlayer.posZ - lastZ;
+		//double distX = mc.thePlayer.posX - lastX;
+		//double distZ = mc.thePlayer.posZ - lastZ;
 		
 		//Scissor.enableScissoring();
 		//Scissor.scissor(width/2 - 50, height/2 - 50, 100, 100);
 		
 		//System.out.println(mc.thePlayer.posX - lastX);
 		
-		double x = height/2;
-		double z = width/2;
-		
-		glTranslated(x+distX, z+distZ, 0);
-		glRotatef(-rot, 0, 0, 1);
+		glTranslated(x, y, 0);
+		//glRotatef(-rot, 0, 0, 1);
+		glScalef(2, 2, 2);
 		
 		bind();
 		
 		glColor4f(1, 1, 1, 1);
 		glClear(256);
 		
-		//glEnable(GL_STENCIL_TEST);
-		//glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
-		//glStencilFunc(GL_ALWAYS, 1, -1);
-		
 		GuiUtils.drawTextureRect(-width/2, -height/2, width/2, height/2);
 		
 		unbind();
 		
-		glRotatef(rot, 0, 0, 1);
-		glTranslated(-(x+distX), -(z+distZ), 0);
+		glScalef(0.5f, 0.5f, 0.5f);
+		
+		GuiUtils.drawSmallTriangle(0, 0, rot, 0xFFFF0000);
+		
+		//glRotatef(rot, 0, 0, 1);
+		glTranslated(-x, -y, 0);
 		
 		//Scissor.disableScissoring();
-		
-		GuiUtils.drawSmallTriangle(width/2, height/2, 0, 0xFFFF0000);
-		
-		//glDisable(GL_STENCIL_TEST);
 	}
 	
 	private int getTexture(){
@@ -97,10 +93,26 @@ public class Minimap {
 		
 		for(int x = 0; x < width; x++){
 			for(int z = 0; z < height; z++){
+
+				int pixel = 0;
+
+				int xPos = playerX+x;
+				int zPos = playerZ+z;
 				
-				IBlockState top = getTopBlock(playerX+x, playerZ+z);
+				BlockPos pos = getTopBlock(playerX+x, playerZ+z);
 				
-				int pixel = top != null? top.getBlock().getMaterial().getMaterialMapColor().colorValue:0xFF000000;
+				if(pos != null){
+					
+					IBlockState top = mc.theWorld.getBlockState(pos);
+					pixel = top.getBlock().getMaterial().getMaterialMapColor().colorValue;
+					
+					if(xPos % 16 == 0 || zPos % 16 == 0){
+						pixel -= 0x00101010;
+					}
+					
+				}else{
+					pixel = 0xFFB0B0B0;
+				}
 				
 				buffer.put((byte) (pixel >> 16 & 0xFF)); //r
 				buffer.put((byte) (pixel >> 8 & 0xFF)); //g
@@ -108,7 +120,7 @@ public class Minimap {
 			}
 		}
 		
-		buffer.flip(); //Buffer limit set to the current position, uses less memory
+		buffer.flip();
 		
 		int id = glGenTextures();
 		
@@ -117,7 +129,7 @@ public class Minimap {
 		
 		return id;
 	}
-	
+		
 	public void bind(){
 		
 		glEnable(GL_TEXTURE_2D);
@@ -135,18 +147,19 @@ public class Minimap {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	
-	private IBlockState getTopBlock(int x, int z){
+	private BlockPos getTopBlock(int x, int z){
 		
 		int playerY = (int)mc.thePlayer.posY;
 		
-		IBlockState state = null;
+		BlockPos pos = null;
 		
 		for(int y = 80; y > 0; y--){
 			
-			state = mc.theWorld.getBlockState(new BlockPos(x, playerY+y-40, z));
+			pos = new BlockPos(x, playerY+y-40, z);
+			IBlockState state = mc.theWorld.getBlockState(pos);
 			
 			if(state.getBlock() != Blocks.air){
-				return state;
+				return pos;
 			}
 		}
 		

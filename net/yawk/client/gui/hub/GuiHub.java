@@ -19,11 +19,11 @@ import static org.lwjgl.opengl.GL12.*;
 
 public class GuiHub extends GuiScreen {
 
-	private int buttonPaddingX = 30;
-	private int buttonWidth = 16;
-	private int buttonSlateSpace = 30;
-	private int cellSize = 100;
-	private int cellPadding = 5;
+	public int buttonPaddingX = 30;
+	public int buttonWidth = 16;
+	public int buttonSlateSpace = 30;
+	public int cellSize = 100;
+	public int cellPadding = 5;
 
 	private int transition, slateIndex, rotation;
 	private Slate lastSlate;
@@ -36,7 +36,7 @@ public class GuiHub extends GuiScreen {
 	public ArrayList<Slate> slates = new ArrayList<Slate>();
 
 	public GuiHub(){
-
+		
 	}
 
 	@Override
@@ -81,9 +81,9 @@ public class GuiHub extends GuiScreen {
 			}
 
 		}else{
-
+			
 			if(needsLeft()){
-				if(mouseOverLeft(x,y)){
+				if(mouseOverLeft(x, y)){
 					GuiUtils.drawBorderedRect(buttonPaddingX, this.height/2 - 20, buttonPaddingX+buttonWidth, this.height/2 + 20, 1, 0xFFFFFFFF, 0x5F000000);
 					GuiUtils.drawTriangle(buttonPaddingX + buttonWidth/2, this.height/2, 270, 0xFFFFFFFF);
 				}else{
@@ -91,9 +91,9 @@ public class GuiHub extends GuiScreen {
 					GuiUtils.drawTriangle(buttonPaddingX + buttonWidth/2, this.height/2, 270, 0xFF9F9F9F);
 				}
 			}
-
+			
 			if(needsRight()){
-				if(mouseOverRight(x,y)){
+				if(mouseOverRight(x, y)){
 					GuiUtils.drawBorderedRect(this.width - buttonPaddingX - buttonWidth, this.height/2 - 20, this.width - buttonPaddingX, this.height/2 + 20, 1, 0xFFFFFFFF, 0x5F000000);
 					GuiUtils.drawTriangle(this.width - buttonPaddingX - buttonWidth/2, this.height/2, 90, 0xFFFFFFFF);
 				}else{
@@ -101,7 +101,7 @@ public class GuiHub extends GuiScreen {
 					GuiUtils.drawTriangle(this.width - buttonPaddingX - buttonWidth/2, this.height/2, 90, 0xFF9F9F9F);
 				}
 			}
-
+			
 			renderSlate(x, y, slates.get(slateIndex), 0);
 		}
 	}
@@ -151,11 +151,14 @@ public class GuiHub extends GuiScreen {
 
 	@Override
 	public void initGui() {
-
+		
 		if(this.state == State.IDLE && slates.size() == 0){
+			
 			this.state = State.LOADING;
 			Thread thread = new Thread(new HubLoadingThread(this));
 			thread.start();
+			
+			slates.add(new MapSlate(this));
 		}
 	}
 
@@ -202,48 +205,7 @@ public class GuiHub extends GuiScreen {
 	}
 
 	private void renderSlate(int x, int y, Slate slate, int xOffset){
-
-		int alignXMiddle = width/2 - (5*cellSize)/2;
-
-		int lineNum = slates.size() / 5;
-		int alignYMiddle = height/2 - ((lineNum+2)*cellSize)/2;
-
-		int num = 0;
-
-		int w = cellSize - cellPadding;
-		int h = cellSize - cellPadding;
-
-		for(SquareCell s : slate.getCells()){
-
-			int column = num % 5;
-			int row = num / 5;
-
-			int xPos = xOffset + column*cellSize + alignXMiddle + cellPadding;
-			int yPos = alignYMiddle + row*cellSize + cellPadding;
-
-			renderCell(s, x, y, xPos, yPos, w, h);
-
-			num++;
-		}
-	}
-
-	private void renderCell(SquareCell cell, int x, int y, int xPos, int yPos, int w, int h){
-
-		if(mouseOverButton(x, y, xPos, yPos, xPos+w, yPos+h)){
-			GuiUtils.drawRect(xPos, yPos, xPos+w, yPos+h, cell.getColour() + 0x00303030);
-		}else{
-			GuiUtils.drawRect(xPos, yPos, xPos+w, yPos+h, cell.getColour());
-		}
-
-		//GuiUtils.drawRect(xPos, yPos, xPos+w, yPos+11, 0x7F2B2B2B);
-
-		Client.getClient().getFontRenderer().drawStringWithShadow(cell.getTitle(), xPos + w/2 - Client.getClient().getFontRenderer().getStringWidth(cell.getTitle())/2, yPos + 2, 0xFFFFFFFF, true);
-
-		Client.getClient().getFontRenderer().drawSplitString(cell.getContents(), xPos + 3, yPos + 14, w-3, 0xFFFFFFFF);
-	}
-
-	public boolean mouseOverButton(int x, int y, int bx, int by, int bx1, int by1){
-		return x >= bx && x <= bx1 && y >= by && y <= by1;
+		slate.renderSlate(x, y, xOffset);
 	}
 
 	public boolean mouseOverLeft(int x, int y){

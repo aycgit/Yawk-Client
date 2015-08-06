@@ -16,9 +16,10 @@ public class Sprint extends Mod{
 	
 	@EventTarget
 	public void onTick(EventTick e){
-		Client.getClient().getPlayer().setSprinting(Client.getClient().getPlayer().moveForward > 0);
+		Client.getClient().getPlayer().setSprinting(Client.getClient().getPlayer().moveForward > 0
+				&& Client.getClient().getPlayer().getFoodStats().getFoodLevel() > 4);
 	}
-		
+	
 	public void onEnable(){
 		
 	}

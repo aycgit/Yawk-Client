@@ -24,11 +24,9 @@ public class HubLoadingThread implements Runnable {
 	
 	@Override
 	public void run() {
-				
-		hub.slates.clear();
 		
 		try {
-						
+			
 			Document doc = Jsoup.connect("http://yawk.net/news.php").userAgent(ClientUtils.USER_AGENT).get();
 			JsonArray array = (JsonArray) new JsonParser().parse(doc.text());
 			
@@ -45,7 +43,7 @@ public class HubLoadingThread implements Runnable {
 					
 				}
 				
-				hub.slates.add(new Slate(slate.get("header").getAsString(), cells.toArray(new SquareCell[cells.size()])));
+				hub.slates.add(new Slate(slate.get("header").getAsString(), cells.toArray(new SquareCell[cells.size()]), hub));
 			}
 			
 			hub.setState(State.CONNECTED);

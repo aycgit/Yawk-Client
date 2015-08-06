@@ -9,7 +9,7 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.Window;
-import net.yawk.client.gui.minimap.Minimap;
+import net.yawk.client.gui.maps.Map;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.mods.world.HideClient;
 import net.yawk.client.utils.Colours;
@@ -27,7 +27,7 @@ public class GuiIngameHook extends GuiIngame{
 	
 	private EventGuiRender eventGuiRender = new EventGuiRender();
 	
-	private Minimap map = new Minimap();
+	//private Minimap map = new Minimap();
 	
 	@Override
     public void func_175180_a(float p_175180_1_){
@@ -48,6 +48,6 @@ public class GuiIngameHook extends GuiIngame{
 		
 		EventManager.call(eventGuiRender);
 		
-		map.draw();
+		//map.draw();
 	}
 }
