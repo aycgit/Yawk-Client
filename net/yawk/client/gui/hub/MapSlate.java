@@ -1,17 +1,40 @@
 package net.yawk.client.gui.hub;
 
+import net.yawk.client.gui.Canvas;
+import net.yawk.client.gui.components.Slider;
 import net.yawk.client.gui.maps.Map;
+import net.yawk.client.modmanager.values.SliderValue;
 
 public class MapSlate extends Slate{
-
+	
+	private Map map;
+	private Canvas options;
+	private SliderValue scale;
+	
 	public MapSlate(GuiHub hub) {
 		super("Map", null, hub);
+		
+		map = new Map(hub.colourModifier);
+		options = new Canvas(hub.width/2 - 50, 3, 100, 50);
+		scale = new SliderValue("Scale", 1, 5, 2, false);
+		options.components.add(new Slider(options, scale));
 	}
 	
-	private Map map = new Map(hub.colourModifier);
+	@Override
+	public void renderSlate(int x, int y) {
+		
+		map.draw(hub.width/2, hub.height/2, scale.getValue());
+		
+		options.draw(x, y);
+	}
 	
 	@Override
-	public void renderSlate(int x, int y, int xOffset) {
-		map.draw(hub.width/2 + xOffset, hub.height/2);
+	public void mouseClicked(int x, int y) {
+		options.mouseClicked(x, y);
+	}
+	
+	@Override
+	public void mouseReleased(int x, int y, int state) {
+		options.mouseReleased(x, y, state);
 	}
 }

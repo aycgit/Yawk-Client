@@ -16,7 +16,7 @@ public class Slate {
 		this.hub = hub;
 	}
 	
-	public void renderSlate(int x, int y, int xOffset){
+	public void renderSlate(int x, int y){
 
 		int alignXMiddle = hub.width/2 - (5*hub.cellSize)/2;
 
@@ -33,13 +33,17 @@ public class Slate {
 			int column = num % 5;
 			int row = num / 5;
 			
-			int xPos = xOffset + column*hub.cellSize + alignXMiddle + hub.cellPadding;
+			int xPos = column*hub.cellSize + alignXMiddle + hub.cellPadding;
 			int yPos = alignYMiddle + row*hub.cellSize + hub.cellPadding;
 			
 			s.renderCell(s, hub.colourModifier, x, y, xPos, yPos, w, h);
 			
 			num++;
 		}
+	}
+	
+	public void mouseClicked(int x, int y){
+		
 	}
 	
 	public SquareCell[] getCells() {
@@ -56,5 +60,9 @@ public class Slate {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void mouseReleased(int x, int y, int state) {
+		
 	}
 }

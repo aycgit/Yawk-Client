@@ -34,7 +34,7 @@ public class Map {
 		this.colourModifier = colourModifier;
 	}
 	
-	public void draw(int x, int y){
+	public void draw(int x, int y, double scale){
 		
 		//GuiUtils.drawRect(x-5, y-5, x+5, y+5, 0x5FFF0000);
 		
@@ -62,18 +62,18 @@ public class Map {
 		
 		glTranslated(x, y, 0);
 		//glRotatef(-rot, 0, 0, 1);
-		glScalef(2, 2, 2);
+		glScaled(scale, scale, scale);
 		
 		bind();
 		
 		glColor4f(1, 1, 1, 1);
 		glClear(256);
 		
-		GuiUtils.drawTextureRect(-width/2, -height/2, width/2, height/2);
+		GuiUtils.drawTextureRect(-50, -50, 50, 50);
 		
 		unbind();
 		
-		glScalef(0.5f, 0.5f, 0.5f);
+		glScaled(1/scale, 1/scale, 1/scale);
 		
 		GuiUtils.drawSmallTriangle(0, 0, rot, 0xFFFF0000);
 		

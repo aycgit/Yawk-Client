@@ -68,13 +68,24 @@ public class GuiHub extends GuiScreen {
 		if(lastSlate != null){
 
 			if(direction){
+				
 				transition+=20;
-				renderSlate(x, y, lastSlate, transition);
-				renderSlate(x, y, slates.get(slateIndex), transition - width);
+				
+				glTranslatef(transition, 0, 0);
+				lastSlate.renderSlate(x, y);
+				glTranslatef(-width, 0, 0);
+				slates.get(slateIndex).renderSlate(x, y);
+				glTranslatef(transition+width, 0, 0);
+				
 			}else{
+				
 				transition-=20;
-				renderSlate(x, y, lastSlate, transition);
-				renderSlate(x, y, slates.get(slateIndex), transition + width);
+				
+				glTranslatef(transition, 0, 0);
+				lastSlate.renderSlate(x, y);
+				glTranslatef(width, 0, 0);
+				slates.get(slateIndex).renderSlate(x, y);
+				glTranslatef(transition-width, 0, 0);
 			}
 
 			if(Math.abs(transition) >= width-20){
@@ -105,7 +116,7 @@ public class GuiHub extends GuiScreen {
 				}
 			}
 			
-			renderSlate(x, y, slates.get(slateIndex), 0);
+			slates.get(slateIndex).renderSlate(x, y);
 		}
 	}
 
@@ -169,6 +180,7 @@ public class GuiHub extends GuiScreen {
 
 	@Override
 	protected void mouseClicked(int x, int y, int b) throws IOException {
+		
 		if(needsLeft() && mouseOverLeft(x,y)){
 
 			lastSlate = slates.get(slateIndex);
@@ -196,23 +208,21 @@ public class GuiHub extends GuiScreen {
 
 			direction = false;
 			transition = 0;
+		}else{
+			slates.get(slateIndex).mouseClicked(x, y);
 		}
 	}
 
 	@Override
 	protected void mouseReleased(int x, int y, int state) {
-
+		slates.get(slateIndex).mouseReleased(x, y, state);
 	}
 
 	@Override
 	public boolean doesGuiPauseGame() {
 		return false;
 	}
-
-	private void renderSlate(int x, int y, Slate slate, int xOffset){
-		slate.renderSlate(x, y, xOffset);
-	}
-
+	
 	public boolean mouseOverLeft(int x, int y){
 		return x >= buttonPaddingX && x <= buttonPaddingX+buttonWidth && y >= this.height/2 - 20 && y <= this.height/2 + 20;
 	}
