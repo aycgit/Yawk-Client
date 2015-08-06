@@ -8,6 +8,38 @@ public class ColourModifier {
 	
 	private HashMap<Integer, Integer> darkColours = new HashMap<Integer, Integer>();
 	
+	public int getMergedColour(int paramColour, int extraColour){
+				
+		//float a = (float)(paramColor >> 24 & 0xFF) / 255F;
+		int r = paramColour >> 16 & 0xFF;
+		int g = paramColour >> 8 & 0xFF;
+		int b = paramColour & 0xFF;
+		
+		int r1 = extraColour >> 16 & 0xFF;
+		int g1 = extraColour >> 8 & 0xFF;
+		int b1 = extraColour & 0xFF;
+		
+		r += r1 * 0.3;
+		g += g1 * 0.3;
+		b += b1 * 0.3;
+		
+		r = MathHelper.clamp_int(r, 0, 255);
+		g = MathHelper.clamp_int(g, 0, 255);
+		b = MathHelper.clamp_int(b, 0, 255);
+		
+		String rHex = Integer.toString(r, 16);
+		String gHex = Integer.toString(g, 16);
+		String bHex = Integer.toString(b, 16);
+		
+		String hexValue = (rHex.length() == 2 ? "" + rHex : "0" + rHex)
+				+ (gHex.length() == 2 ? "" + gHex : "0" + gHex)
+				+ (bHex.length() == 2 ? "" + bHex : "0" + bHex);
+		
+		int intValue = Integer.parseInt(hexValue, 16); 
+		
+		return intValue;
+	}
+	
 	public int getDarkColour(int paramColour){
 		
 		if(darkColours.containsKey(paramColour)){

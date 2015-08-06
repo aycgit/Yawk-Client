@@ -129,7 +129,7 @@ public class LargeMap {
 						String faction = getChunkOwner(xPos, zPos);
 						
 						if(faction != null){
-							pixel = factionColours.get(faction);
+							pixel = colourModifier.getMergedColour(pixel, factionColours.get(faction));
 						}
 					}
 					
@@ -203,7 +203,7 @@ public class LargeMap {
 	}
 	
 	private int getNewFactionColour(){
-		return Colours.options[factionColours.size()];
+		return Colours.brightColours[factionColours.size() % 10];
 	}
 	
 	private String getChunkOwner(int x, int z){

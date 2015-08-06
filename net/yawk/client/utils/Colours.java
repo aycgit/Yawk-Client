@@ -20,4 +20,17 @@ public class Colours {
 		0xFF0C478A,
 		0xFF595959,
 	};
+	
+	public static int[] brightColours = new int[]{
+		0xFFFF0000,
+		0xFF00FF00,
+		0xFF0000FF,
+		0xFFFFFF00,
+		0xFFFF00FF,
+		0xFF00FFFF,
+		BRIGHT_TEXT,
+		0xFFFF5050,
+		0xFF5050FF,
+		ALTERNATIVE_TEXT
+	};
 }
