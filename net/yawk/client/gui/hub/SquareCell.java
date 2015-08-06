@@ -27,11 +27,11 @@ public class SquareCell {
 		this.colour = colours[colour];
 		this.contents = contents;
 	}
-		
-	public void renderCell(SquareCell cell, int x, int y, int xPos, int yPos, int w, int h){
+	
+	public void renderCell(SquareCell cell, ColourModifier colourModifier, int x, int y, int xPos, int yPos, int w, int h){
 		
 		if(mouseOverButton(x, y, xPos, yPos, xPos+w, yPos+h)){
-			GuiUtils.drawRect(xPos, yPos, xPos+w, yPos+h, cell.getColour() + 0x00303030);
+			GuiUtils.drawRect(xPos, yPos, xPos+w, yPos+h, colourModifier.getDarkColourWithAlpha(cell.getColour()));
 		}else{
 			GuiUtils.drawRect(xPos, yPos, xPos+w, yPos+h, cell.getColour());
 		}

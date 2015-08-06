@@ -33,6 +33,8 @@ public class GuiHub extends GuiScreen {
 	private String trail = "";
 	private MillisecondTimer timer = new MillisecondTimer(5);
 
+	public ColourModifier colourModifier;
+	
 	public ArrayList<Slate> slates = new ArrayList<Slate>();
 
 	public GuiHub(){
@@ -78,6 +80,7 @@ public class GuiHub extends GuiScreen {
 			if(Math.abs(transition) >= width-20){
 				transition = 0;
 				lastSlate = null;
+				colourModifier.clear();
 			}
 
 		}else{
@@ -153,6 +156,8 @@ public class GuiHub extends GuiScreen {
 	public void initGui() {
 		
 		if(this.state == State.IDLE && slates.size() == 0){
+			
+			colourModifier = new ColourModifier();
 			
 			this.state = State.LOADING;
 			Thread thread = new Thread(new HubLoadingThread(this));

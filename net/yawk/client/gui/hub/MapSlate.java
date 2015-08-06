@@ -8,7 +8,7 @@ public class MapSlate extends Slate{
 		super("Map", null, hub);
 	}
 	
-	private Map map = new Map();
+	private Map map = new Map(hub.colourModifier);
 	
 	@Override
 	public void renderSlate(int x, int y, int xOffset) {

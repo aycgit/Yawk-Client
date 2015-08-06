@@ -36,7 +36,7 @@ public class Slate {
 			int xPos = xOffset + column*hub.cellSize + alignXMiddle + hub.cellPadding;
 			int yPos = alignYMiddle + row*hub.cellSize + hub.cellPadding;
 			
-			s.renderCell(s, x, y, xPos, yPos, w, h);
+			s.renderCell(s, hub.colourModifier, x, y, xPos, yPos, w, h);
 			
 			num++;
 		}

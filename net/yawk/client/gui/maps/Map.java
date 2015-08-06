@@ -18,21 +18,20 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.yawk.client.Client;
+import net.yawk.client.gui.hub.ColourModifier;
 import net.yawk.client.utils.GuiUtils;
 import net.yawk.client.utils.Scissor;
 
 public class Map {
 	
-	private int vID = -1;
-	
-	private int width = 170, height = 170;
-	
+	private int vID = -1, width = 170, height = 170;
 	private double lastX, lastY, lastZ;
-	
 	private Minecraft mc;
+	private ColourModifier colourModifier;
 	
-	public Map(){
-		mc = Client.getClient().getMinecraft();
+	public Map(ColourModifier colourModifier){
+		this.mc = Client.getClient().getMinecraft();
+		this.colourModifier = colourModifier;
 	}
 	
 	public void draw(int x, int y){
@@ -107,7 +106,7 @@ public class Map {
 					pixel = top.getBlock().getMaterial().getMaterialMapColor().colorValue;
 					
 					if(xPos % 16 == 0 || zPos % 16 == 0){
-						pixel -= 0x00101010;
+						pixel = colourModifier.getDarkColour(pixel);
 					}
 					
 				}else{
