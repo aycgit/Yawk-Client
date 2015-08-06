@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
 import com.darkmagician6.eventapi.EventTarget;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
@@ -23,6 +26,8 @@ import net.yawk.client.Client;
 import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.gui.hub.ColourModifier;
 import net.yawk.client.modmanager.EventListener;
+import net.yawk.client.utils.ClientUtils;
+import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.GuiUtils;
 import net.yawk.client.utils.Scissor;
 
@@ -34,14 +39,14 @@ public class LargeMap {
 	private ColourModifier colourModifier;
 	private EventListener listener;
 	private HashMap<String,Integer> factionColours;
-	private HashMap<ChunkData,String> chunkFactionMap;
+	private BiMap<String,List<ChunkData>> factionChunkMap;
 	
 	public LargeMap(ColourModifier colourModifier){
 		
 		this.mc = Client.getClient().getMinecraft();
 		this.colourModifier = colourModifier;
 		factionColours = new HashMap<String,Integer>();
-		chunkFactionMap = new HashMap<ChunkData,String>();
+		factionChunkMap = HashBiMap.create();
 		createFactionListener();
 	}
 	
@@ -118,6 +123,13 @@ public class LargeMap {
 					
 					if(xPos % 16 == 0 || zPos % 16 == 0){
 						pixel = colourModifier.getDarkColour(pixel);
+					}else{
+						
+						String faction = getChunkOwner(xPos, zPos);
+						
+						if(faction != null){
+							pixel = factionColours.get(faction);
+						}
 					}
 					
 				}else{
@@ -139,11 +151,7 @@ public class LargeMap {
 		
 		return id;
 	}
-	
-	private boolean pointWithinChunk(int x, int z, int cx, int cz){
-		return x > cx && x < cx+16 && z > cz && z < cz+16;
-	}
-	
+		
 	private void createFactionListener(){
 		
 		listener = new EventListener(){
@@ -163,9 +171,20 @@ public class LargeMap {
 							
 							System.out.println("FACTION:"+faction);
 							
-							ChunkData chunk = new ChunkData();
+							int chunkX = ClientUtils.roundTo16((int)Client.getClient().getPlayer().posX);
+							int chunkZ = ClientUtils.roundTo16((int)Client.getClient().getPlayer().posZ);
 							
-							//factionColours.put(, value);
+							ChunkData chunk = new ChunkData(chunkX, chunkZ);
+							
+							if(!factionColours.containsKey(faction)){
+								factionColours.put(faction, getNewFactionColour());
+							}
+							
+							List<ChunkData> chunks = factionChunkMap.get(faction);
+							
+							if(!chunks.contains(chunk)){
+								chunks.add(chunk);
+							}
 							
 						}catch(Exception ex){
 							ex.printStackTrace();
@@ -174,6 +193,15 @@ public class LargeMap {
 				}
 			}			
 		};
+	}
+	
+	private int getNewFactionColour(){
+		return Colours.options[factionColours.size()];
+	}
+	
+	private String getChunkOwner(int x, int z){
+		ChunkData chunk = new ChunkData(x, z);
+		return this.factionChunkMap.inverse().get(chunk);
 	}
 	
 	public void bind(){

@@ -77,4 +77,8 @@ public class ClientUtils {
             return str.substring(0, pos);
         }
     }
+    
+    public static int roundTo16(int i){
+        return i - (i % 16);
+    }
 }
