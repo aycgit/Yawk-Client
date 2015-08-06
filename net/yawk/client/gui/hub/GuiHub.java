@@ -90,6 +90,8 @@ public class GuiHub extends GuiScreen {
 
 			if(Math.abs(transition) >= width-20){
 				transition = 0;
+				lastSlate.close();
+				slates.get(slateIndex).init();
 				lastSlate = null;
 				colourModifier.clear();
 			}

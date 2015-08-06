@@ -46,6 +46,14 @@ public class Slate {
 		
 	}
 	
+	public void init(){
+		
+	}
+	
+	public void close(){
+		
+	}
+	
 	public SquareCell[] getCells() {
 		return cells;
 	}

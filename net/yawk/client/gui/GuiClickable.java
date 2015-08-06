@@ -33,7 +33,7 @@ public class GuiClickable extends GuiScreen {
 		
 		for(Mod.Type type : Mod.Type.values()){
 			
-			if(type != Mod.Type.PLUGIN){
+			if(type != Mod.Type.PLUGIN && type != Mod.Type.NONE){
 				
 				Window win;
 				windows.add(win = new Window(type.getName(), modManager, 85, 12));

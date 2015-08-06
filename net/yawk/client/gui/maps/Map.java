@@ -19,6 +19,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.yawk.client.Client;
 import net.yawk.client.gui.hub.ColourModifier;
+import net.yawk.client.modmanager.ChatListener;
 import net.yawk.client.utils.GuiUtils;
 import net.yawk.client.utils.Scissor;
 
@@ -28,10 +29,21 @@ public class Map {
 	private double lastX, lastY, lastZ;
 	private Minecraft mc;
 	private ColourModifier colourModifier;
+	private ChatListener listener;
 	
 	public Map(ColourModifier colourModifier){
+		
 		this.mc = Client.getClient().getMinecraft();
 		this.colourModifier = colourModifier;
+		
+		listener = new ChatListener(){
+			
+			@Override
+			protected void onChat(String msg) {
+				System.out.println(msg);
+			}
+			
+		};
 	}
 	
 	public void draw(int x, int y, double scale){
@@ -128,7 +140,11 @@ public class Map {
 		
 		return id;
 	}
-		
+	
+	private boolean pointWithinChunk(int x, int z, int cx, int cz){
+		return x > cx && x <= cx+16 && z > cz && z <= cz+16;
+	}
+	
 	public void bind(){
 		
 		glEnable(GL_TEXTURE_2D);
@@ -163,5 +179,13 @@ public class Map {
 		}
 		
 		return null;
+	}
+	
+	public void registerFactionsListener(){
+		
+	}
+	
+	public void unregisterFactionsListener(){
+		
 	}
 }

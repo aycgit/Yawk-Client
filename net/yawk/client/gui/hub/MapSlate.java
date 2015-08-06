@@ -16,7 +16,7 @@ public class MapSlate extends Slate{
 		
 		map = new Map(hub.colourModifier);
 		options = new Canvas(hub.width/2 - 50, 3, 100, 50);
-		scale = new SliderValue("Scale", 1, 5, 2, false);
+		scale = new SliderValue("Scale", 1, 7, 2, false);
 		options.components.add(new Slider(options, scale));
 	}
 	
@@ -28,6 +28,16 @@ public class MapSlate extends Slate{
 		options.draw(x, y);
 	}
 	
+	@Override
+	public void init() {
+		map.registerFactionsListener();
+	}
+
+	@Override
+	public void close() {
+		map.unregisterFactionsListener();
+	}
+
 	@Override
 	public void mouseClicked(int x, int y) {
 		options.mouseClicked(x, y);

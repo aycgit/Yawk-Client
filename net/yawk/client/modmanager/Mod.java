@@ -60,7 +60,7 @@ public class Mod {
 	
 	public enum Type {
 		
-		COMBAT("Combat"), MOVEMENT("Movement"), WORLD("World"), BUILDING("Building"), PLUGIN("Plugin");
+		COMBAT("Combat"), MOVEMENT("Movement"), WORLD("World"), BUILDING("Building"), PLUGIN("Plugin"), NONE("None");
 		
 	    private final String name;
 	    
