@@ -30,11 +30,13 @@ public class MapSlate extends Slate{
 	
 	@Override
 	public void init() {
+		System.out.println("MAP INIT");
 		map.registerFactionsListener();
 	}
 
 	@Override
 	public void close() {
+		System.out.println("MAP CLOSE");
 		map.unregisterFactionsListener();
 	}
 

@@ -11,8 +11,10 @@ public abstract class ChatListener extends EventListener{
 	@EventTarget
 	public void onPacketRecieve(EventRecievePacket e){
 		
+		System.out.println("CHAT LISTENER EVENT");
+		
 		if(e.packet instanceof S02PacketChat){
-			System.out.println(((S02PacketChat)e.packet).func_148915_c().getUnformattedText());
+			onChat(((S02PacketChat)e.packet).func_148915_c().getUnformattedText());
 		}
 	}
 	

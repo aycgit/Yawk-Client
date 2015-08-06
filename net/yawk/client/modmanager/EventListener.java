@@ -5,7 +5,7 @@ import com.darkmagician6.eventapi.EventManager;
 public class EventListener {
 	
 	public EventListener(){
-		register();
+		
 	}
 	
 	public void register(){

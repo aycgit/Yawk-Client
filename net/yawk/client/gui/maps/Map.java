@@ -40,7 +40,7 @@ public class Map {
 			
 			@Override
 			protected void onChat(String msg) {
-				System.out.println(msg);
+				System.out.println("CHAT MESSAGE EVENT: "+msg);
 			}
 			
 		};
@@ -182,10 +182,10 @@ public class Map {
 	}
 	
 	public void registerFactionsListener(){
-		
+		listener.register();
 	}
 	
 	public void unregisterFactionsListener(){
-		
+		listener.unregister();
 	}
 }
