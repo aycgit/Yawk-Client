@@ -56,9 +56,7 @@ public class LargeMap {
 	}
 	
 	public void draw(int x, int y, double scale){
-		
-		//GuiUtils.drawRect(x-5, y-5, x+5, y+5, 0x5FFF0000);
-		
+				
 		if(changed || mc.thePlayer.getDistance(lastX, mc.thePlayer.posY, lastZ) > 1){
 			
 			if(vID != -1){
@@ -74,16 +72,8 @@ public class LargeMap {
 		}
 		
 		float rot = mc.thePlayer.rotationYaw+90;
-		//double distX = mc.thePlayer.posX - lastX;
-		//double distZ = mc.thePlayer.posZ - lastZ;
-		
-		//Scissor.enableScissoring();
-		//Scissor.scissor(width/2 - 50, height/2 - 50, 100, 100);
-		
-		//System.out.println(mc.thePlayer.posX - lastX);
 		
 		glTranslated(x, y, 0);
-		//glRotatef(-rot, 0, 0, 1);
 		glScaled(scale, scale, scale);
 		
 		bind();
@@ -96,13 +86,10 @@ public class LargeMap {
 		unbind();
 		
 		glScaled(1/scale, 1/scale, 1/scale);
-				
+		
 		GuiUtils.drawSmallTriangle(0, 0, rot, 0xFFFF0000);
 		
-		//glRotatef(rot, 0, 0, 1);
 		glTranslated(-x, -y, 0);
-		
-		//Scissor.disableScissoring();
 		
 		glBindTexture(GL_TEXTURE_2D, fontRendererID);
 	}
