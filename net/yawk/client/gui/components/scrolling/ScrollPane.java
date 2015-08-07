@@ -1,6 +1,7 @@
 package net.yawk.client.gui.components.scrolling;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.yawk.client.gui.Component;
 import net.yawk.client.gui.IPanel;
@@ -12,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 public class ScrollPane extends Component implements IPanel{
 	
-	public ArrayList<Component> components = new ArrayList<Component>();
+	public List<Component> components = new ArrayList<Component>();
 	private int height, dragged, mouseYOffset, BAR_HEIGHT = 12, BAR_WIDTH = 4;
 	private boolean dragging;
 	protected Window win;

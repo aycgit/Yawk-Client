@@ -41,7 +41,7 @@ public enum ColourType {
 	}
 	
 	public int getOverlayColour() {
-		return colour - 0x5F000000;
+		return colour - 0x2F000000;
 	}
 	
 	public void setColour(int colour) {

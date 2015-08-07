@@ -1,20 +1,24 @@
 package net.yawk.client.gui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Canvas implements IPanel{
 	
-	private int posX, posY, width, height;
-	public ArrayList<Component> components = new ArrayList<Component>();
+	private ScalerPosition pos;
+	private int width, height;
+	public List<Component> components = new ArrayList<Component>();
 	
-	public Canvas(int posX, int posY, int width, int height) {
-		this.posX = posX;
-		this.posY = posY;
+	public Canvas(ScalerPosition pos, int width, int height) {
+		this.pos = pos;
 		this.width = width;
 		this.height = height;
 	}
 	
 	public void draw(int x, int y){
+		
+		int posX = pos.getX();
+		int posY = pos.getY();
 		
 		int h = 0;
 		
@@ -25,6 +29,9 @@ public class Canvas implements IPanel{
 	}
 	
 	public void mouseClicked(int x, int y) {
+		
+		int posX = pos.getX();
+		int posY = pos.getY();
 		
 		int h = 0;
 		
