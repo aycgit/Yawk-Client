@@ -39,6 +39,7 @@ import net.yawk.client.gui.hub.GuiHub;
 import net.yawk.client.hooks.EntityPlayerSPHook;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModManager;
+import net.yawk.client.modmanager.values.ValuesRegistry;
 import net.yawk.client.mods.world.HideClient;
 import net.yawk.client.saving.FileManager;
 import net.yawk.client.utils.ClientSession;
@@ -56,6 +57,7 @@ public class Client {
 	private ModManager modManager;
 	private PluginManager pluginManager;
 	private FileManager fileManager;
+	private ValuesRegistry valuesRegistry;
 	private Logger logger;
 	
 	public Client(final Minecraft mc){
@@ -66,21 +68,22 @@ public class Client {
 		
 		logger = Logger.getGlobal();
 		
+		this.valuesRegistry = new ValuesRegistry();
+		this.fileManager = new FileManager(this);
+		fileManager.loadClientSettings();
+		
 		this.mc = mc;
 		this.fontRenderer = mc.fontRendererObj;
 		this.modManager = new ModManager();
-		this.hub = new GuiHub();
-		
+		this.hub = new GuiHub(this);
 		this.gui = new GuiClickable(modManager);
-		
 		this.pluginManager = new PluginManager();
-		this.fileManager = new FileManager();
 		
 		(new Thread(){
 			
 			public void run(){
 				
-				fileManager.load();
+				fileManager.loadSecondarySettings();
 				
 				try {
 					pluginManager.load();
@@ -157,7 +160,7 @@ public class Client {
 	public FileManager getFileManager() {
 		return fileManager;
 	}
-	
+		
 	public void keyPressed(int key){
 		
 		if(key == Keyboard.KEY_Y){
@@ -196,5 +199,9 @@ public class Client {
 		}
 		
 		return null;
+	}
+	
+	public ValuesRegistry getValuesRegistry() {
+		return valuesRegistry;
 	}
 }

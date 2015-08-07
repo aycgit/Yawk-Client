@@ -4,9 +4,17 @@ public class Value<T> {
 	
 	protected T value;
 	private String name;
+	private ValuesRegistry registry;
 	
-	public Value(String name, T value){
-		this.value = value;
+	public Value(String name, ValuesRegistry registry, T defaultValue){
+		
+		if(registry.hasValue(name)){
+			this.value = (T) registry.get(name);
+		}else{
+			this.value = defaultValue;
+		}
+		
+		this.registry = registry;
 		this.name = name;
 	}
 	
@@ -24,5 +32,6 @@ public class Value<T> {
 	
 	public void setValue(T value) {
 		this.value = value;
+		registry.set(name, value);
 	}
 }

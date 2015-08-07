@@ -20,7 +20,7 @@ public class PluginDataTask implements DataTask{
 	}
 
 	@Override
-	public void read(JsonObject obj) {
+	public void read(Client client, JsonObject obj) {
 		
 		//The list of the data saved on the previous shutdown. This tells us if we need an update or which plugins were previously enabled.
 		ArrayList<PluginData> lastInstalledData = new ArrayList<PluginData>();
@@ -71,7 +71,7 @@ public class PluginDataTask implements DataTask{
 	}
 
 	@Override
-	public void write(JsonObject obj) {
+	public void write(Client client, JsonObject obj) {
 		
 		JsonArray arr = new JsonArray();
 		

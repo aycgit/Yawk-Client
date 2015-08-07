@@ -16,7 +16,7 @@ public class ColourDataTask implements DataTask{
 	}
 
 	@Override
-	public void read(JsonObject obj) {
+	public void read(Client client, JsonObject obj) {
 		
 		JsonArray arr = obj.get("colours").getAsJsonArray();
 		
@@ -33,7 +33,7 @@ public class ColourDataTask implements DataTask{
 	}
 
 	@Override
-	public void write(JsonObject obj) {
+	public void write(Client client, JsonObject obj) {
 		
 		JsonArray arr = new JsonArray();
 		

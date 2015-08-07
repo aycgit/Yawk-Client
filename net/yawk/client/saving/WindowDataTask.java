@@ -16,7 +16,7 @@ public class WindowDataTask implements DataTask{
 	}
 
 	@Override
-	public void read(JsonObject obj) {
+	public void read(Client client, JsonObject obj) {
 		JsonArray arr = obj.get("windows").getAsJsonArray();
 		
 		for(JsonElement el : arr){
@@ -34,7 +34,7 @@ public class WindowDataTask implements DataTask{
 	}
 
 	@Override
-	public void write(JsonObject obj) {
+	public void write(Client client, JsonObject obj) {
 		JsonArray arr = new JsonArray();
 		
 		for(Window w : Client.getClient().getGui().windows){

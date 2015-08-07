@@ -1,5 +1,6 @@
 package net.yawk.client.gui.hub;
 
+import net.yawk.client.Client;
 import net.yawk.client.gui.Canvas;
 import net.yawk.client.gui.ScalerPosition;
 import net.yawk.client.gui.components.Slider;
@@ -7,6 +8,7 @@ import net.yawk.client.gui.components.buttons.BooleanButton;
 import net.yawk.client.gui.maps.LargeMap;
 import net.yawk.client.modmanager.values.BooleanValue;
 import net.yawk.client.modmanager.values.SliderValue;
+import net.yawk.client.modmanager.values.ValuesRegistry;
 
 public class MapSlate extends Slate{
 	
@@ -15,40 +17,42 @@ public class MapSlate extends Slate{
 	private SliderValue scale;
 	private BooleanValue chunks, cavefinder;
 	
-	public MapSlate(final GuiHub hub) {
+	public MapSlate(final GuiHub hub, Client client) {
 		super("Map", null, hub);
-		
+
 		ScalerPosition pos = new ScalerPosition(){
-			
+
 			@Override
 			public int getX() {
 				return hub.width/2 - 50;
 			}
-			
+
 			@Override
 			public int getY() {
 				return 3;
 			}
-			
+
 		};
-		
+
 		options = new Canvas(pos, 100, 50);
-		
-		scale = new SliderValue("Scale", 1, 8, 2, false);
+
+		ValuesRegistry registry = client.getValuesRegistry();
+
+		scale = new SliderValue("Scale", registry, 2, 1, 8, false);
 		options.addComponent(new Slider(options, scale));
-		
-		chunks = new BooleanValue("Show Chunks", false);
+
+		chunks = new BooleanValue("Show Chunks", registry, false);
 		options.addComponent(new BooleanButton(options, chunks));
-		
-		cavefinder = new BooleanValue("Cavefinder Mode", false);
+
+		cavefinder = new BooleanValue("Cavefinder Mode", registry, false);
 		options.addComponent(new BooleanButton(options, cavefinder));
-		
+
 		map = new LargeMap(hub.colourModifier);
 	}
 	
 	@Override
 	public void renderSlate(int x, int y) {
-		
+				
 		map.setCavefinder(cavefinder.getValue());
 		
 		map.setShowChunks(chunks.getValue());

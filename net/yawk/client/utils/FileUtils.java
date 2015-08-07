@@ -67,6 +67,17 @@ public class FileUtils {
 		}
 	}
 	
+	public static void appendFile(File file, String text){
+		try {
+			FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(text);
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static String[] readFile(String s){
 		try {
 				String sCurrentLine;

@@ -6,8 +6,8 @@ public class SliderValue extends Value<Double>{
 	private double upperBound;
 	private boolean rounded;
 	
-	public SliderValue(String name, double lowerBound, double upperBound, double value, boolean rounded) {
-		super(name, value);
+	public SliderValue(String name, ValuesRegistry registry, double defaultValue, double lowerBound, double upperBound, boolean rounded) {
+		super(name, registry, defaultValue);
 		this.lowerBound = lowerBound;
 		this.upperBound = upperBound;
 		this.rounded = rounded;
@@ -43,6 +43,6 @@ public class SliderValue extends Value<Double>{
 			value = lowerBound;
 		}
 		
-		this.value = value;
+		super.setValue(value);
 	}
 }

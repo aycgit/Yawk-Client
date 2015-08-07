@@ -37,8 +37,10 @@ public class GuiHub extends GuiScreen {
 	
 	public List<Slate> slates = new ArrayList<Slate>();
 
-	public GuiHub(){
-		
+	private Client client;
+	
+	public GuiHub(Client client){
+		this.client = client;
 	}
 
 	@Override
@@ -178,7 +180,7 @@ public class GuiHub extends GuiScreen {
 			Thread thread = new Thread(new HubLoadingThread(this));
 			thread.start();
 			
-			slates.add(new MapSlate(this));
+			slates.add(new MapSlate(this, client));
 		}
 	}
 	
