@@ -46,8 +46,10 @@ public class HubLoadingThread implements Runnable {
 				hub.slates.add(new Slate(slate.get("header").getAsString(), cells.toArray(new SquareCell[cells.size()]), hub));
 			}
 			
-			hub.setState(State.CONNECTED);
-			hub.postConnection();
+			throw new NullPointerException();
+			
+			//hub.setState(State.CONNECTED);
+			//hub.postConnection();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

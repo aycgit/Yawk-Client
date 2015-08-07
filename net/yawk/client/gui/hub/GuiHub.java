@@ -9,7 +9,9 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.gui.GuiScreen;
 import net.yawk.client.Client;
 import net.yawk.client.gui.Canvas;
+import net.yawk.client.gui.ScalerPosition;
 import net.yawk.client.gui.components.Slider;
+import net.yawk.client.gui.components.buttons.TextButton;
 import net.yawk.client.modmanager.values.SliderValue;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.GuiUtils;
@@ -36,11 +38,30 @@ public class GuiHub extends GuiScreen {
 	public ColourModifier colourModifier;
 	
 	public List<Slate> slates = new ArrayList<Slate>();
+	private Canvas options;
 	
 	private Client client;
 	
 	public GuiHub(Client client){
+		
 		this.client = client;
+		this.colourModifier = new ColourModifier();
+		
+		ScalerPosition pos = new ScalerPosition(){
+
+			@Override
+			public int getX() {
+				return width/2 - 50;
+			}
+
+			@Override
+			public int getY() {
+				return 3;
+			}
+			
+		};
+		
+		options = new Canvas(pos, 100, 50);
 	}
 
 	@Override
@@ -53,6 +74,8 @@ public class GuiHub extends GuiScreen {
 		}else if(this.state == State.CONNECTED){
 			renderSlates(x, y);
 		}
+		
+		options.draw(x, y);
 	}
 
 	private void updateTrail() {
@@ -168,24 +191,25 @@ public class GuiHub extends GuiScreen {
 		String failed = "Failed";
 		Client.getClient().getFontRenderer().drawString(failed, posX - Client.getClient().getFontRenderer().getStringWidth(failed)/2, posY + 30, 0xFFFFFFFF);
 	}
-
+	
+	
 	@Override
 	public void initGui() {
 		
-		if((this.state == State.IDLE || this.state == State.FAILED) && slates.size() == 0){
-			
-			colourModifier = new ColourModifier();
-			
-			this.state = State.LOADING;
-			Thread thread = new Thread(new HubLoadingThread(this));
-			thread.start();
-			
-			slates.add(new MapSlate(this, client));
+		if(this.state == State.IDLE && slates.size() == 0){
+			connect();
 		}
+	}
+	
+	private void connect(){
+		this.state = State.LOADING;
+		Thread thread = new Thread(new HubLoadingThread(this));
+		thread.start();
 	}
 	
 	public void postConnection() {
 		slates.get(slateIndex).init();
+		slates.add(new MapSlate(this, client));
 	}
 	
 	@Override
@@ -221,11 +245,14 @@ public class GuiHub extends GuiScreen {
 		}else{
 			slates.get(slateIndex).mouseClicked(x, y);
 		}
+		
+		options.mouseClicked(x, y);
 	}
 
 	@Override
 	protected void mouseReleased(int x, int y, int state) {
 		slates.get(slateIndex).mouseReleased(x, y, state);
+		options.mouseReleased(x, y, state);
 	}
 
 	@Override
@@ -254,7 +281,28 @@ public class GuiHub extends GuiScreen {
 	}
 
 	public void setState(State state) {
+		
 		this.state = state;
+		
+		if(state == State.FAILED){
+			
+			options.addComponent(new TextButton(options, "Retry", true){
+				
+				@Override
+				public void toggle() {
+					clearOptions();
+					connect();
+				}
+				
+			});
+			
+		}else if(state == State.CONNECTED){
+			
+		}
+	}
+	
+	public void clearOptions(){
+		options.clearComponents();
 	}
 }
 

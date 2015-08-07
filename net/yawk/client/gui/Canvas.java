@@ -1,6 +1,7 @@
 package net.yawk.client.gui;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Canvas implements IPanel{
@@ -35,7 +36,10 @@ public class Canvas implements IPanel{
 		
 		int h = 0;
 		
-		for(Component comp : components){
+		Iterator<Component> it = components.iterator();
+		
+		while(it.hasNext()){
+			Component comp = it.next();
 			comp.mouseClicked(x, y, posX, posY+h);
 			h += comp.getHeight();
 		}
@@ -73,5 +77,9 @@ public class Canvas implements IPanel{
 	
 	public void addComponent(Component c){
 		this.components.add(c);
+	}
+	
+	public void clearComponents(){
+		this.components.clear();
 	}
 }
