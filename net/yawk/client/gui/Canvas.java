@@ -7,7 +7,7 @@ public class Canvas implements IPanel{
 	
 	private ScalerPosition pos;
 	private int width, height;
-	public List<Component> components = new ArrayList<Component>();
+	protected List<Component> components = new ArrayList<Component>();
 	
 	public Canvas(ScalerPosition pos, int width, int height) {
 		this.pos = pos;
@@ -69,5 +69,9 @@ public class Canvas implements IPanel{
 	@Override
 	public int getHeight() {
 		return height;
+	}
+	
+	public void addComponent(Component c){
+		this.components.add(c);
 	}
 }

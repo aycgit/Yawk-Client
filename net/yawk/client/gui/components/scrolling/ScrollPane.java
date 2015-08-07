@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 public class ScrollPane extends Component implements IPanel{
 	
-	public List<Component> components = new ArrayList<Component>();
+	protected List<Component> components = new ArrayList<Component>();
 	private int height, dragged, mouseYOffset, BAR_HEIGHT = 12, BAR_WIDTH = 4;
 	private boolean dragging;
 	protected Window win;
@@ -141,5 +141,9 @@ public class ScrollPane extends Component implements IPanel{
 	@Override
 	public int getWidth() {
 		return win.getWidth() - BAR_WIDTH - 1;
+	}
+	
+	public void addComponent(Component c){
+		this.components.add(c);
 	}
 }

@@ -235,7 +235,7 @@ public class PluginManager {
 				}
 				
 				Client.getClient().getModManager().addPluginMod(m, plugin);
-				w.components.add(new ModButton(w, m));
+				w.addComponent(new ModButton(w, m));
 			}
 			
 		}else{

@@ -17,7 +17,7 @@ public class Window implements IPanel{
 	public String title;
 	public int posX, posY, mouseXOffset, mouseYOffset, colour = 0x99000000, borderColour = 0x20FFFFFF;
 	public boolean dragging, extended, pinned;
-	public List<Component> components = new ArrayList<Component>();
+	protected List<Component> components = new ArrayList<Component>();
 	private ModManager modManager;
 	
 	public static int TITLE_COMPONENT_SPACE = 2;
@@ -184,5 +184,9 @@ public class Window implements IPanel{
 
 	public void setModManager(ModManager modManager) {
 		this.modManager = modManager;
+	}
+	
+	public void addComponent(Component c){
+		this.components.add(c);
 	}
 }

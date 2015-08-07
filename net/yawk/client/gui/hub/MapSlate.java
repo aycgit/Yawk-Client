@@ -15,8 +15,6 @@ public class MapSlate extends Slate{
 	public MapSlate(final GuiHub hub) {
 		super("Map", null, hub);
 		
-		map = new LargeMap(hub.colourModifier);
-		
 		ScalerPosition pos = new ScalerPosition(){
 			
 			@Override
@@ -34,7 +32,9 @@ public class MapSlate extends Slate{
 		options = new Canvas(pos, 100, 50);
 		
 		scale = new SliderValue("Scale", 1, 8, 2, false);
-		options.components.add(new Slider(options, scale));
+		options.addComponent(new Slider(options, scale));
+		
+		map = new LargeMap(hub.colourModifier);
 	}
 	
 	@Override

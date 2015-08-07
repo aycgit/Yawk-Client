@@ -19,7 +19,7 @@ public class Colours {
 		0xFFFF2929,
 		0xFF0C478A,
 		0xFF595959,
-		0xFF000000
+		0xFF000000,
 	};
 	
 	public static int[] brightColours = new int[]{

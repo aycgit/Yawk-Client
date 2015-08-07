@@ -41,7 +41,7 @@ public class GuiClickable extends GuiScreen {
 				
 				for(Mod m : modManager.mods){
 					if(m.getType() == type){
-						win.components.add(new ModButton(win, m));
+						win.addComponent(new ModButton(win, m));
 					}
 				}
 			}
@@ -51,16 +51,16 @@ public class GuiClickable extends GuiScreen {
 		windows.add(keybindWindow);
 		
 		ScrollPane pane;
-		keybindWindow.components.add(pane = new ScrollPane(keybindWindow, 72));
+		keybindWindow.addComponent(pane = new ScrollPane(keybindWindow, 72));
 		SelectorSystem<KeybindButton> system = new SelectorSystem<KeybindButton>();
 		
 		for(Mod m : modManager.mods){
-			pane.components.add(system.add(new KeybindButton(pane, m, system)));
+			pane.addComponent(system.add(new KeybindButton(pane, m, system)));
 		}
 		
 		Window enabledMods = new Window("Enabled", modManager, 85, 12);
 		windows.add(enabledMods);
-		enabledMods.components.add(new EnabledModsDisplay(enabledMods));
+		enabledMods.addComponent(new EnabledModsDisplay(enabledMods));
 		
 		//PLUGIN DOWNLOAD WINDOW
 		
@@ -68,15 +68,15 @@ public class GuiClickable extends GuiScreen {
 		windows.add(plugins);
 		
 		SelectorSystem<SelectorButton> pluginSystem = new SelectorSystem<SelectorButton>();
-		plugins.components.add(new PluginScrollPane(plugins, 72, pluginSystem));
-		plugins.components.add(new PluginDownloadButton(plugins, pluginSystem));
+		plugins.addComponent(new PluginScrollPane(plugins, 72, pluginSystem));
+		plugins.addComponent(new PluginDownloadButton(plugins, pluginSystem));
 		
 		//COLOUR PICKER WINDOW
 		
 		Window colours = new Window("Colours", modManager, 85, 12);
 		
 		for(ColourType colourType : ColourType.values()){
-			colours.components.add(new ColourPicker(colours, colourType, this));
+			colours.addComponent(new ColourPicker(colours, colourType, this));
 		}
 		
 		windows.add(colours);
@@ -86,8 +86,8 @@ public class GuiClickable extends GuiScreen {
 		FriendScrollPane friendsPane;
 		Window friends = new Window("Friends", modManager, 85, 12);
 		
-		friends.components.add(friendsPane = new FriendScrollPane(friends, 72, friendsSystem));
-		friends.components.add(new FriendsExecuteButton(friends, friendsSystem));
+		friends.addComponent(friendsPane = new FriendScrollPane(friends, 72, friendsSystem));
+		friends.addComponent(new FriendsExecuteButton(friends, friendsSystem));
 		
 		windows.add(friends);
 		
@@ -166,7 +166,7 @@ public class GuiClickable extends GuiScreen {
 					sr.getScaledWidth(),
 					sr.getScaledHeight());
 			
-			popup.components.add(new LinkButton(popup, "Yawk Forums", "http://yawk.net/forums"));
+			popup.addComponent(new LinkButton(popup, "Yawk Forums", "http://yawk.net/forums"));
 			
 			windows.add(popup);
 			
