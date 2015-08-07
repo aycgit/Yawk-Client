@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import net.yawk.client.modmanager.Mod;
+import net.yawk.client.modmanager.Toggleable;
 
 import com.darkmagician6.eventapi.events.Event;
 import com.darkmagician6.eventapi.events.EventStoppable;
@@ -32,52 +33,52 @@ public final class EventManager {
 	 */
 	private EventManager() {
 	}
-		
+	
     /**
-     * Registers all the methods marked with the EventTarget annotation in the class of the given Object.
+     * Registers all the methods marked with the EventTarget annotation in the class of the given Toggleable.
      *
-     * @param object
-     *         Object that you want to register.
+     * @param toggleable
+     *         Toggleable that you want to register.
      */
-    public static void register(Object object) {
-        for (final Method method : object.getClass().getDeclaredMethods()) {
+    public static void register(Toggleable toggleable) {
+        for (final Method method : toggleable.getClass().getDeclaredMethods()) {
             if (isMethodBad(method)) {
                 continue;
             }
 
-            register(method, object);
+            register(method, toggleable);
         }
     }
 
     /**
      * Registers the methods marked with the EventTarget annotation and that require
-     * the specified Event as the parameter in the class of the given Object.
+     * the specified Event as the parameter in the class of the given Toggleable.
      *
-     * @param object
-     *         Object that contains the Method you want to register.
+     * @param toggleable
+     *         Toggleable that contains the Method you want to register.
      * @param Parameter
      *         class for the marked method we are looking for.
      */
-    public static void register(Object object, Class<? extends Event> eventClass) {
-        for (final Method method : object.getClass().getDeclaredMethods()) {
+    public static void register(Toggleable toggleable, Class<? extends Event> eventClass) {
+        for (final Method method : toggleable.getClass().getDeclaredMethods()) {
             if (isMethodBad(method, eventClass)) {
                 continue;
             }
 
-            register(method, object);
+            register(method, toggleable);
         }
     }
 
     /**
-     * Unregisters all the methods inside the Object that are marked with the EventTarget annotation.
+     * Unregisters all the methods inside the Toggleable that are marked with the EventTarget annotation.
      *
-     * @param object
-     *         Object of which you want to unregister all Methods.
+     * @param toggleable
+     *         Toggleable of which you want to unregister all Methods.
      */
-    public static void unregister(Object object) {
+    public static void unregister(Toggleable toggleable) {
         for (final List<MethodData> dataList : REGISTRY_MAP.values()) {
             for (final MethodData data : dataList) {
-                if (data.getSource().equals(object)) {
+                if (data.getSource().equals(toggleable)) {
                     dataList.remove(data);
                 }
             }
@@ -87,17 +88,17 @@ public final class EventManager {
     }
 
     /**
-     * Unregisters all the methods in the given Object that have the specified class as a parameter.
+     * Unregisters all the methods in the given Toggleable that have the specified class as a parameter.
      *
-     * @param object
-     *         Object that implements the Listener interface.
+     * @param toggleable
+     *         Toggleable that implements the Listener interface.
      * @param Parameter
      *         class for the method to remove.
      */
-    public static void unregister(Object object, Class<? extends Event> eventClass) {
+    public static void unregister(Toggleable toggleable, Class<? extends Event> eventClass) {
         if (REGISTRY_MAP.containsKey(eventClass)) {
             for (final MethodData data : REGISTRY_MAP.get(eventClass)) {
-                if (data.getSource().equals(object)) {
+                if (data.getSource().equals(toggleable)) {
                 	REGISTRY_MAP.get(eventClass).remove(data);
                 }
             }
@@ -115,13 +116,13 @@ public final class EventManager {
      *
      * @param method
      *         Method to register to the HashMap.
-     * @param object
+     * @param toggleable
      *         Source object of the method.
      */
-    private static void register(Method method, Object object) {
+    private static void register(Method method, Toggleable toggleable) {
     	Class<? extends Event> indexClass = (Class<? extends Event>) method.getParameterTypes()[0];
     	//New MethodData from the Method we are registering.
-    	final MethodData data = new MethodData(object, method, method.getAnnotation(EventTarget.class).value());
+    	final MethodData data = new MethodData(toggleable, method, method.getAnnotation(EventTarget.class).value());
     	
     	//Set's the method to accessible so that we can also invoke it if it's protected or private.
     	if (!data.getTarget().isAccessible()) {
@@ -254,7 +255,7 @@ public final class EventManager {
 
                 for (final MethodData data : dataList) {
                 	//Addition by 10askinsw
-                	if(isModuleEnabled(data.getSource())){
+                	if(data.getSource().isEnabled()){
 
                 		invoke(data, event);
 
@@ -266,7 +267,7 @@ public final class EventManager {
             } else {
                 for (final MethodData data : dataList) {
                 	//Addition by 10askinsw
-                	if(isModuleEnabled(data.getSource())){
+                	if(data.getSource().isEnabled()){
                 		invoke(data, event);
                 	}
                 }
@@ -275,20 +276,7 @@ public final class EventManager {
 
         return event;
     }
-    
-    /**
-     * Casts the object to a mod to check for the enabled boolean
-     * @author 10askinsw
-     * @return Whether the mod is enabled or not
-     */
-    private static boolean isModuleEnabled(Object obj){
-    	if(obj instanceof Mod){
-    		return ((Mod) obj).isEnabled();
-    	}else{
-    		return true;
-    	}
-    }
-    
+        
     /**
      * Invokes a MethodData when an Event call is made.
      *
@@ -315,7 +303,7 @@ public final class EventManager {
 	 */
 	private static final class MethodData {
 
-	    private final Object source;
+	    private final Toggleable source;
 
 	    private final Method target;
 
@@ -325,7 +313,7 @@ public final class EventManager {
 	     * Sets the values of the data.
 	     *
 	     * @param source
-	     *         The source Object of the data. Used by the VM to
+	     *         The source Toggleable of the data. Used by the VM to
 	     *         determine to which object it should send the call to.
 	     * @param target
 	     *         The targeted Method to which the Event should be send to.
@@ -333,18 +321,18 @@ public final class EventManager {
 	     *         The priority of this Method. Used by the registry to sort
 	     *         the data on.
 	     */
-	    public MethodData(Object source, Method target, byte priority) {
+	    public MethodData(Toggleable source, Method target, byte priority) {
 	        this.source = source;
 	        this.target = target;
 	        this.priority = priority;
 	    }
 
 	    /**
-	     * Gets the source Object of the data.
+	     * Gets the source Toggleable of the data.
 	     *
-	     * @return Source Object of the targeted Method.
+	     * @return Source Toggleable of the targeted Method.
 	     */
-	    public Object getSource() {
+	    public Toggleable getSource() {
 	        return source;
 	    }
 

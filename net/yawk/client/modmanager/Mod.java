@@ -2,7 +2,7 @@ package net.yawk.client.modmanager;
 
 import org.lwjgl.input.Keyboard;
 
-public class Mod {
+public class Mod implements Toggleable{
 	
 	protected int keybind;
 	protected boolean enabled;

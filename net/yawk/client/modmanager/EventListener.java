@@ -2,7 +2,7 @@ package net.yawk.client.modmanager;
 
 import com.darkmagician6.eventapi.EventManager;
 
-public class EventListener {
+public class EventListener implements Toggleable{
 	
 	public EventListener(){
 		
@@ -14,5 +14,10 @@ public class EventListener {
 	
 	public void unregister(){
 		EventManager.unregister(this);
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 }
