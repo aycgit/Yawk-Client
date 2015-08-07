@@ -18,6 +18,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.jar.JarEntry;
@@ -48,9 +50,9 @@ public class PluginManager {
 	
 	private File plugins = new File(Client.getFullDir(), "plugins");
 	
-	public ArrayList<PluginData> pluginData = new ArrayList<PluginData>();
-	private ConcurrentLinkedQueue<PluginData> downloadQueue = new ConcurrentLinkedQueue<PluginData>();
-	public HashMap<PluginData,Window> pluginWindows = new HashMap<PluginData,Window>();
+	public List<PluginData> pluginData = new ArrayList<PluginData>();
+	private Queue<PluginData> downloadQueue = new ConcurrentLinkedQueue<PluginData>();
+	public Map<PluginData,Window> pluginWindows = new HashMap<PluginData,Window>();
 	
 	private Thread downloadThread;
 	

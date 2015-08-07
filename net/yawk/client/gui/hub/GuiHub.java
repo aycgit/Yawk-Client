@@ -35,7 +35,7 @@ public class GuiHub extends GuiScreen {
 
 	public ColourModifier colourModifier;
 	
-	public ArrayList<Slate> slates = new ArrayList<Slate>();
+	public List<Slate> slates = new ArrayList<Slate>();
 
 	public GuiHub(){
 		
@@ -156,9 +156,11 @@ public class GuiHub extends GuiScreen {
 		int size = 10;
 
 		glTranslatef(posX, posY, 0);
-
+		glRotatef(90, 0, 0, 1);
+		
 		GuiUtils.drawRect(-size, -size, size, size, 0xFFFF0000);
-
+		
+		glRotatef(-90, 0, 0, 1);
 		glTranslatef(-posX, -posY, 0);
 
 		String failed = "Failed";

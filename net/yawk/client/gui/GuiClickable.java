@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -26,7 +27,7 @@ import net.yawk.client.modmanager.*;
 
 public class GuiClickable extends GuiScreen {
 	
-	public CopyOnWriteArrayList<Window> windows = new CopyOnWriteArrayList<Window>();
+	public List<Window> windows = new CopyOnWriteArrayList<Window>();
 	public boolean opened;
 	
 	public GuiClickable(ModManager modManager){

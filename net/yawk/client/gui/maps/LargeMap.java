@@ -39,7 +39,7 @@ public class LargeMap {
 	private Minecraft mc;
 	private ColourModifier colourModifier;
 	private EventListener listener;
-	private HashMap<String,Integer> factionColours;
+	private Map<String,Integer> factionColours;
 	private BiMap<String,List<ChunkData>> factionChunkMap;
 	private int vID = -1, fontRendererID;
 	
