@@ -3,7 +3,9 @@ package net.yawk.client.gui.hub;
 import net.yawk.client.gui.Canvas;
 import net.yawk.client.gui.ScalerPosition;
 import net.yawk.client.gui.components.Slider;
+import net.yawk.client.gui.components.buttons.BooleanButton;
 import net.yawk.client.gui.maps.LargeMap;
+import net.yawk.client.modmanager.values.BooleanValue;
 import net.yawk.client.modmanager.values.SliderValue;
 
 public class MapSlate extends Slate{
@@ -11,6 +13,7 @@ public class MapSlate extends Slate{
 	private LargeMap map;
 	private Canvas options;
 	private SliderValue scale;
+	private BooleanValue chunks, cavefinder;
 	
 	public MapSlate(final GuiHub hub) {
 		super("Map", null, hub);
@@ -34,11 +37,21 @@ public class MapSlate extends Slate{
 		scale = new SliderValue("Scale", 1, 8, 2, false);
 		options.addComponent(new Slider(options, scale));
 		
+		chunks = new BooleanValue("Show Chunks", false);
+		options.addComponent(new BooleanButton(options, chunks));
+		
+		cavefinder = new BooleanValue("Cavefinder Mode", false);
+		options.addComponent(new BooleanButton(options, cavefinder));
+		
 		map = new LargeMap(hub.colourModifier);
 	}
 	
 	@Override
 	public void renderSlate(int x, int y) {
+		
+		map.setCavefinder(cavefinder.getValue());
+		
+		map.setShowChunks(chunks.getValue());
 		
 		map.draw(hub.width/2, hub.height/2, scale.getValue());
 		

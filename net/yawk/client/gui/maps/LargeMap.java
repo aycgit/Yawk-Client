@@ -35,13 +35,14 @@ import net.yawk.client.utils.Scissor;
 public class LargeMap {
 	
 	private int width = 170, height = 170;
-	private double lastX, lastY, lastZ;
+	private double lastX, lastZ;
 	private Minecraft mc;
 	private ColourModifier colourModifier;
 	private EventListener listener;
 	private Map<String,Integer> factionColours;
 	private BiMap<String,List<ChunkData>> factionChunkMap;
 	private int vID = -1, fontRendererID;
+	private boolean showChunks, cavefinder, changed;
 	
 	public LargeMap(ColourModifier colourModifier){
 		
@@ -58,7 +59,7 @@ public class LargeMap {
 		
 		//GuiUtils.drawRect(x-5, y-5, x+5, y+5, 0x5FFF0000);
 		
-		if(mc.thePlayer.getDistance(lastX, lastY, lastZ) > 5){
+		if(changed || mc.thePlayer.getDistance(lastX, mc.thePlayer.posY, lastZ) > 1){
 			
 			if(vID != -1){
 				glDeleteTextures(vID);
@@ -67,8 +68,9 @@ public class LargeMap {
 			vID = getTexture();
 			
 			lastX = mc.thePlayer.posX;
-			lastY = mc.thePlayer.posY;
 			lastZ = mc.thePlayer.posZ;
+			
+			changed = false;
 		}
 		
 		float rot = mc.thePlayer.rotationYaw+90;
@@ -102,7 +104,6 @@ public class LargeMap {
 		
 		//Scissor.disableScissoring();
 		
-		//TODO: fix rendering text after drawing the texture
 		glBindTexture(GL_TEXTURE_2D, fontRendererID);
 	}
 	
@@ -128,7 +129,7 @@ public class LargeMap {
 					IBlockState top = mc.theWorld.getBlockState(pos);
 					pixel = top.getBlock().getMaterial().getMaterialMapColor().colorValue;
 					
-					if(xPos % 16 == 0 || zPos % 16 == 0){
+					if(showChunks && (xPos % 16 == 0 || zPos % 16 == 0)){
 						pixel = colourModifier.getDarkColour(pixel);
 					}else{
 						
@@ -244,6 +245,14 @@ public class LargeMap {
 	}
 	
 	private BlockPos getTopBlock(int x, int z){
+		if(cavefinder){
+			return getCaveFinderTopBlock(x, z);
+		}else{
+			return getNormalTopBlock(x, z);
+		}
+	}
+
+	private BlockPos getNormalTopBlock(int x, int z){
 		
 		int playerY = (int)mc.thePlayer.posY;
 		
@@ -262,11 +271,60 @@ public class LargeMap {
 		return null;
 	}
 	
+	private BlockPos getCaveFinderTopBlock(int x, int z){
+		
+		int playerY = (int)mc.thePlayer.posY;
+		BlockPos pos = null;
+		boolean wasBlock = false;
+		
+		for(int y = -30; y < 30; y++){
+			
+			pos = new BlockPos(x, playerY+y, z);
+			IBlockState state = mc.theWorld.getBlockState(pos);
+			
+			if(state.getBlock() != Blocks.air){
+				wasBlock = true;
+			}else if(wasBlock){
+				return pos.offsetDown(1);
+			}else{
+				wasBlock = false;
+			}
+		}
+		
+		return null;
+	}
+	
 	public void registerFactionsListener(){
 		listener.register();
 	}
 	
 	public void unregisterFactionsListener(){
 		listener.unregister();
+	}
+	
+	public boolean isShowChunks() {
+		return showChunks;
+	}
+
+	public void setShowChunks(boolean showChunks) {
+		
+		if(showChunks != this.showChunks){
+			this.changed = true;
+			this.showChunks = showChunks;
+		}
+		
+	}
+	
+	public boolean isCavefinder() {
+		return cavefinder;
+	}
+
+	public void setCavefinder(boolean cavefinder) {
+		
+		if(cavefinder != this.cavefinder){
+			this.changed = true;
+			this.cavefinder = cavefinder;
+		}
+		
 	}
 }

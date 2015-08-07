@@ -14,7 +14,7 @@ public class BooleanButton extends Button{
 
 	@Override
 	public boolean isCentered() {
-		return false;
+		return true;
 	}
 
 	@Override
