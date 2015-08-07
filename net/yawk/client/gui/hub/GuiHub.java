@@ -36,7 +36,7 @@ public class GuiHub extends GuiScreen {
 	public ColourModifier colourModifier;
 	
 	public List<Slate> slates = new ArrayList<Slate>();
-
+	
 	private Client client;
 	
 	public GuiHub(Client client){
@@ -158,11 +158,11 @@ public class GuiHub extends GuiScreen {
 		int size = 10;
 
 		glTranslatef(posX, posY, 0);
-		glRotatef(90, 0, 0, 1);
+		glRotatef(45, 0, 0, 1);
 		
 		GuiUtils.drawRect(-size, -size, size, size, 0xFFFF0000);
 		
-		glRotatef(-90, 0, 0, 1);
+		glRotatef(-45, 0, 0, 1);
 		glTranslatef(-posX, -posY, 0);
 
 		String failed = "Failed";
@@ -172,7 +172,7 @@ public class GuiHub extends GuiScreen {
 	@Override
 	public void initGui() {
 		
-		if(this.state == State.IDLE && slates.size() == 0){
+		if((this.state == State.IDLE || this.state == State.FAILED) && slates.size() == 0){
 			
 			colourModifier = new ColourModifier();
 			
