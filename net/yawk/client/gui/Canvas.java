@@ -3,12 +3,13 @@ package net.yawk.client.gui;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Canvas implements IPanel{
 	
 	private ScalerPosition pos;
 	private int width, height;
-	protected List<Component> components = new ArrayList<Component>();
+	protected List<Component> components = new CopyOnWriteArrayList<Component>();
 	
 	public Canvas(ScalerPosition pos, int width, int height) {
 		this.pos = pos;
@@ -36,10 +37,7 @@ public class Canvas implements IPanel{
 		
 		int h = 0;
 		
-		Iterator<Component> it = components.iterator();
-		
-		while(it.hasNext()){
-			Component comp = it.next();
+		for (Component comp : components){
 			comp.mouseClicked(x, y, posX, posY+h);
 			h += comp.getHeight();
 		}
