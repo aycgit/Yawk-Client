@@ -15,14 +15,14 @@ public class HighJump extends Mod{
 	public HighJump(){
 		
 	}
-		
+	
 	@EventTarget
 	public void onJump(EventJump e){
 		if(e.type == EventType.POST){
 			Client.getClient().getPlayer().motionY = 1.2f;
 		}
 	}
-		
+	
 	@Override
 	public void onEnable() {
 		
