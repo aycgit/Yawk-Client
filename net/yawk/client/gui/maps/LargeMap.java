@@ -42,7 +42,7 @@ public class LargeMap {
 	private Map<String,Integer> factionColours;
 	private BiMap<String,List<ChunkData>> factionChunkMap;
 	private int vID = -1, fontRendererID;
-	private boolean showChunks, cavefinder, changed;
+	private boolean showChunks, cavefinder, factions, changed;
 	
 	public LargeMap(ColourModifier colourModifier){
 		
@@ -131,7 +131,7 @@ public class LargeMap {
 					
 					if(showChunks && (xPos % 16 == 0 || zPos % 16 == 0)){
 						pixel = colourModifier.getDarkColour(pixel);
-					}else{
+					}else if (factions){
 						
 						String faction = getChunkOwner(xPos, zPos);
 						
@@ -300,6 +300,20 @@ public class LargeMap {
 	
 	public void unregisterFactionsListener(){
 		listener.unregister();
+	}
+	
+	public void setShowFactions(boolean factions){
+		
+		if(factions != this.factions){
+			this.changed = true;
+			this.factions = factions;
+			
+			if(factions){
+				registerFactionsListener();
+			}else{
+				unregisterFactionsListener();
+			}
+		}
 	}
 	
 	public boolean isShowChunks() {

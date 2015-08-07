@@ -23,7 +23,6 @@ public class Colours {
 	};
 	
 	public static int[] brightColours = new int[]{
-		0xFFFF0000,
 		0xFF00FF00,
 		0xFF0000FF,
 		0xFFFFFF00,

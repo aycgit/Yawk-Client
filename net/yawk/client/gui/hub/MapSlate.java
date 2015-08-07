@@ -15,11 +15,11 @@ public class MapSlate extends Slate{
 	private LargeMap map;
 	private Canvas options;
 	private SliderValue scale;
-	private BooleanValue chunks, cavefinder;
-	
+	private BooleanValue chunks, cavefinder, factions;
+
 	public MapSlate(final GuiHub hub, Client client) {
 		super("Map", null, hub);
-
+		
 		ScalerPosition pos = new ScalerPosition(){
 
 			@Override
@@ -46,15 +46,18 @@ public class MapSlate extends Slate{
 
 		cavefinder = new BooleanValue("Cavefinder Mode", registry, false);
 		options.addComponent(new BooleanButton(options, cavefinder));
-
+		
+		factions = new BooleanValue("Record Factions", registry, false);
+		options.addComponent(new BooleanButton(options, factions));
+		
 		map = new LargeMap(hub.colourModifier);
 	}
 	
 	@Override
 	public void renderSlate(int x, int y) {
-				
-		map.setCavefinder(cavefinder.getValue());
 		
+		map.setShowFactions(factions.getValue());
+		map.setCavefinder(cavefinder.getValue());
 		map.setShowChunks(chunks.getValue());
 		
 		map.draw(hub.width/2, hub.height/2, scale.getValue());
