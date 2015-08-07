@@ -12,6 +12,6 @@ public @interface RegisterMod {
 	String name();
 	String desc();
 	int defaultKey() default -1;
-	Mod.Type type();
+	Mod.Type type() default Mod.Type.PLUGIN;
 	
 }

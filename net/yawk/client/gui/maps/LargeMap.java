@@ -103,9 +103,9 @@ public class LargeMap {
 		
 		for(int x = 0; x < width; x++){
 			for(int z = 0; z < height; z++){
-
+				
 				int pixel = 0;
-
+				
 				int xPos = playerX+x;
 				int zPos = playerZ+z;
 				
