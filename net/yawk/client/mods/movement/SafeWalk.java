@@ -19,11 +19,13 @@ public class SafeWalk extends Mod{
 	
 	@EventTarget
 	public void onMove(EventMoveEntity e){
-		if(e.type == EventType.PRE){
-			wasSneaking = Client.getClient().getPlayer().movementInput.sneak;
-			Client.getClient().getPlayer().movementInput.sneak = true;
-		}else if(e.type == EventType.POST){
-			Client.getClient().getPlayer().movementInput.sneak = wasSneaking;
+		if(Client.getClient().getPlayer().onGround){
+			if(e.type == EventType.PRE){
+				wasSneaking = Client.getClient().getPlayer().movementInput.sneak;
+				Client.getClient().getPlayer().movementInput.sneak = true;
+			}else if(e.type == EventType.POST){
+				Client.getClient().getPlayer().movementInput.sneak = wasSneaking;
+			}
 		}
 	}
 	
