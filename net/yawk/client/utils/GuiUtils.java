@@ -93,6 +93,45 @@ public class GuiUtils {
 		GuiUtils.drawRect(x, y, x1, y1, insideC);
 	}
 	
+	public static void drawBorderedRoundedRect(float x, float y, float x1, float y1, int borderC, int insideC) {
+    	x *= 2; y *= 2; x1 *= 2; y1 *= 2;
+    	GL11.glScalef(0.5F, 0.5F, 0.5F);
+        drawRect(x + 1, y + 1, x1 - 1, y1 - 1, insideC);
+        drawVLine(x, y + 1, y1 -2, borderC);
+        drawVLine(x1 - 1, y + 1, y1 - 2, borderC);
+        drawHLine(x + 2, x1 - 3, y, borderC);
+        drawHLine(x + 2, x1 - 3, y1 -1, borderC);
+        drawHLine(x + 1, x + 1, y + 1, borderC);
+        drawHLine(x1 - 2, x1 - 2, y + 1, borderC);
+        drawHLine(x1 - 2, x1 - 2, y1 - 2, borderC);
+        drawHLine(x + 1, x + 1, y1 - 2, borderC);
+        GL11.glScalef(2.0F, 2.0F, 2.0F);
+	}
+	
+	public static void drawHLine(double par1, double par2, double par3, int par4)
+	{
+		if (par2 < par1)
+		{
+			double var5 = par1;
+			par1 = par2;
+			par2 = var5;
+		}
+
+		drawRect(par1, par3, par2 + 1, par3 + 1, par4);
+	}
+
+	public static void drawVLine(double x, double y, double y1, int colour)
+	{
+		if (y1 < y)
+		{
+			double var5 = y;
+			y = y1;
+			y1 = var5;
+		}
+
+		drawRect(x, y + 1, x + 1, y1, colour);
+	}
+	
 	public static void drawTriangle(double x, double y, double rotation, int paramColor) {
 		
 		float alpha = (float)(paramColor >> 24 & 0xFF) / 255F;

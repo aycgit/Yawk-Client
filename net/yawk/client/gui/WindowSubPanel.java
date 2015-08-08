@@ -24,7 +24,7 @@ public class WindowSubPanel implements IPanel{
 			h += c.getHeight();
 		}
 		
-		GuiUtils.drawRect(posX+2, posY, posX+win.getWidth()-2, posY+h, 0x1FFFFFFF);
+		GuiUtils.drawRect(posX+2, posY, posX+win.getWidth()-2, posY+h, 0x3FFFFFFF);
 		
 		h = 0;
 		

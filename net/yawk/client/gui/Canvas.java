@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import net.yawk.client.utils.GuiUtils;
+
 public class Canvas implements IPanel{
 	
 	private ScalerPosition pos;
@@ -23,6 +25,14 @@ public class Canvas implements IPanel{
 		int posY = pos.getY();
 		
 		int h = 0;
+		
+		for(Component comp : components){
+			h += comp.getHeight();
+		}
+		
+		GuiUtils.drawRect(posX, posY, posX+width, posY+h, 0x3FFFFFFF);
+		
+		h = 0;
 		
 		for(Component comp : components){
 			comp.draw(x, y, posX, posY+h);

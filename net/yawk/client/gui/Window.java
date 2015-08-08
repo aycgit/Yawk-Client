@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 public class Window implements IPanel{
 	
 	public String title;
-	public int posX, posY, mouseXOffset, mouseYOffset, colour = 0x99000000, borderColour = 0x20FFFFFF;
+	public int posX, posY, mouseXOffset, mouseYOffset;
 	public boolean dragging, extended, pinned;
 	protected List<Component> components = new ArrayList<Component>();
 	private ModManager modManager;
@@ -83,11 +83,11 @@ public class Window implements IPanel{
 	}
 	
 	protected void drawHeader(int x, int y, int x1, int y1){
-		GuiUtils.drawRect(x, y, x1, y1, ColourType.TITLE.getOverlayColour());
+		GuiUtils.drawTopNodusRect(posX, posY, posX+width, posY+height);
 	}
 	
 	protected void drawBodyRect(int x, int y, int x1, int y1){
-		GuiUtils.drawRect(x, y, x1, y1, ColourType.BODY.getOverlayColour());
+		GuiUtils.drawBottomNodusRect(x, y, x1, y1);
 	}
 	
 	public void mouseClicked(int x, int y) {

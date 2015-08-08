@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -85,8 +86,17 @@ public class FileManager {
 		File file = getFile(task);
 		
 		if(file.exists()){
+			
 			System.out.println("LOADING TASK: "+task.getFileName());
-			task.read(client, (JsonObject) new JsonParser().parse(FileUtils.readFileFull(file)));
+			
+			JsonElement el = new JsonParser().parse(FileUtils.readFileFull(file));
+			
+			if(el.isJsonObject()){
+				task.read(client, (JsonObject) new JsonParser().parse(FileUtils.readFileFull(file)));
+			}else{
+				System.out.println("REJECTED TASK FILE: "+task.getFileName());
+			}
+			
 		}else{
 			try {
 				file.createNewFile();
