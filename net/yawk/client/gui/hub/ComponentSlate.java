@@ -7,7 +7,7 @@ import net.yawk.client.gui.ScalerPosition;
 public abstract class ComponentSlate extends Slate{
 
 	private Client client;
-	private Canvas options;
+	protected Canvas options;
 	private GuiHub hub;
 	
 	public ComponentSlate(String name, final GuiHub hub, Client client) {
@@ -36,6 +36,16 @@ public abstract class ComponentSlate extends Slate{
 	public void renderSlate(int x, int y) {
 		
 		options.draw(x, y);
+	}
+	
+	@Override
+	public void mouseClicked(int x, int y) {
+		options.mouseClicked(x, y);
+	}
+	
+	@Override
+	public void mouseReleased(int x, int y, int state) {
+		options.mouseReleased(x, y, state);
 	}
 	
 	public abstract void init();

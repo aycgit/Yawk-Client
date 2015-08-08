@@ -211,6 +211,7 @@ public class GuiHub extends GuiScreen {
 	public void postConnection() {
 		slates.get(slateIndex).init();
 		slates.add(new MapSlate(this, client));
+		slates.add(new PluginSlate(this, client));
 	}
 	
 	@Override
