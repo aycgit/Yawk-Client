@@ -1,5 +1,10 @@
 package net.yawk.client.modmanager.values;
 
+import net.yawk.client.gui.Component;
+import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.components.Slider;
+import net.yawk.client.gui.components.buttons.BooleanButton;
+
 public class SliderValue extends Value<Double>{
 	
 	private double lowerBound;
@@ -29,6 +34,14 @@ public class SliderValue extends Value<Double>{
 		this.upperBound = upperBound;
 	}
 	
+	public boolean isRounded() {
+		return rounded;
+	}
+
+	public void setRounded(boolean rounded) {
+		this.rounded = rounded;
+	}
+	
 	public void setValue(double value){
 		
 		if(rounded){
@@ -44,5 +57,10 @@ public class SliderValue extends Value<Double>{
 		}
 		
 		super.setValue(value);
+	}
+	
+	@Override
+	public Component getComponent(IPanel panel) {
+		return new Slider(panel, this);
 	}
 }

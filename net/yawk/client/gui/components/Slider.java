@@ -45,7 +45,7 @@ public class Slider extends Component{
 		GuiUtils.drawRect(cx, cy, cx+panel.getWidth(), cy+getHeight(), 0x2FDFDFDF);
 		GuiUtils.drawRect(slide, cy, slide+15, cy+getHeight(), 0x7F9F9F9F);
 		
-		String displayString = val.getName()+": "+ClientUtils.decimalFormat.format(val.getValue());
+		String displayString = val.getName()+": "+(val.isRounded()? val.getValue().intValue():ClientUtils.decimalFormat.format(val.getValue()));
 		
 		Client.getClient().getFontRenderer().drawString(displayString, cx + panel.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(displayString)/2, cy + 2, 0xFFFFFFFF);
 	}

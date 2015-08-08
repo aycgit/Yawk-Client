@@ -1,43 +1,94 @@
 package net.yawk.client.gui.components.buttons;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.yawk.client.Client;
+import net.yawk.client.gui.Canvas;
+import net.yawk.client.gui.ColourType;
+import net.yawk.client.gui.Component;
 import net.yawk.client.gui.Window;
+import net.yawk.client.gui.WindowSubPanel;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.values.Value;
+import net.yawk.client.utils.GuiUtils;
 
 public class OptionsModButton extends ModButton{
 	
 	private boolean extended;
+	private WindowSubPanel panel;
 	
 	public OptionsModButton(Window win, Mod mod) {
 		super(win, mod);
+		
+		panel = new WindowSubPanel(win);
+		
+		for(Value option : mod.getOptions()){
+			panel.addComponent(option.getComponent(panel));
+		}
 	}
 	
 	@Override
 	public void draw(int x, int y, int cx, int cy) {
 		
-		super.draw(x, y, cx, cy);
+		if(mod.isEnabled()){
+			Client.getClient().getFontRenderer().drawStringWithShadow(getText(),
+					cx+3,
+					cy+2,
+					mouseOverButton(x, y, cx, cy)? ColourType.HIGHLIGHT.getModifiedColour():ColourType.HIGHLIGHT.getColour(),
+					true);
+		}else{
+			Client.getClient().getFontRenderer().drawStringWithShadow(getText(),
+					cx+3,
+					cy+2,
+					mouseOverButton(x, y, cx, cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
+					true);
+		}
 		
-		int line = 1;
+		GuiUtils.drawRect(cx+win.getWidth()-10, cy+2, cx+win.getWidth()-2, cy+10, extended? 0x3FFFFFFF:0x1FFFFFFF);
 		
-		System.out.println(mod.getName());
-		
-		for(Value val : mod.getOptions()){
-			Client.getClient().getFontRenderer().drawStringWithShadow(val.getName(), cx, cy + line++*12, 0xFFFFFFFF, true);
+		if(extended){
+			panel.draw(x, y, cx, cy+12);
 		}
 	}
 
 	@Override
 	public void mouseClicked(int x, int y, int cx, int cy) {
-		// TODO Auto-generated method stub
-		super.mouseClicked(x, y, cx, cy);
+		
+		if(mouseOverExtendButton(x, y, cx, cy)){
+			extended = !extended;
+			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
+		}else{
+			super.mouseClicked(x, y, cx, cy);
+		}
+		
+		if(extended){
+			panel.mouseClicked(x, y, cx, cy+12);
+		}
+	}
+	
+	@Override
+	public void mouseReleased(int mouseX, int mouseY, int state) {
+		if(extended){
+			panel.mouseReleased(mouseX, mouseY, state);
+		}
 	}
 
+	private boolean mouseOverExtendButton(int x, int y, int cx, int cy){
+		return x > cx+win.getWidth()-10 && x < cx+win.getWidth()-2 && y > cy+2 && y < cy+10;
+	}
+	
+	@Override
+	public boolean mouseOverButton(int x, int y, int cx, int cy){
+		return x > cx && x < cx+win.getWidth() && y > cy && y < cy+12;
+	}
+	
 	@Override
 	public int getHeight() {
 		
-		if(extended){
-			return super.getHeight() + mod.getOptions().length * 12;
+		if(extended){			
+			return super.getHeight() + panel.getHeight();
+			
 		}else{
 			return super.getHeight();
 		}

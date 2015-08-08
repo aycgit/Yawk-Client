@@ -1,6 +1,9 @@
 package net.yawk.client.modmanager.values;
 
-public class Value<T> {
+import net.yawk.client.gui.Component;
+import net.yawk.client.gui.IPanel;
+
+public abstract class Value<T> {
 	
 	protected T value;
 	private String name;
@@ -34,4 +37,6 @@ public class Value<T> {
 		this.value = value;
 		registry.set(name, value);
 	}
+	
+	public abstract Component getComponent(IPanel panel);
 }

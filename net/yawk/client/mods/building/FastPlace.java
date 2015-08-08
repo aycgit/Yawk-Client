@@ -1,7 +1,6 @@
 package net.yawk.client.mods.building;
 
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
-
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import net.minecraft.network.play.client.C09PacketHeldItemChange;
 import net.minecraft.util.BlockPos;
@@ -11,6 +10,9 @@ import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
+import net.yawk.client.modmanager.values.BooleanValue;
+import net.yawk.client.modmanager.values.SliderValue;
+import net.yawk.client.modmanager.values.Value;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
@@ -20,8 +22,11 @@ public class FastPlace extends Mod{
 	
 	public FastPlace(){
 		
+		super(new Value[]{
+				new SliderValue("Place delay", Client.getClient().getValuesRegistry(), 2, 0, 5, true),
+		});
 	}
-		
+	
 	@EventTarget
 	public void onSendPacket(EventSendPacket e){
 		if(e.packet instanceof C08PacketPlayerBlockPlacement){
