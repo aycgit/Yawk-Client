@@ -45,7 +45,7 @@ public class OptionsModButton extends ModButton{
 					true);
 		}
 		
-		GuiUtils.drawRect(cx+win.getWidth()-10, cy+2, cx+win.getWidth()-2, cy+10, extended? 0x3FFFFFFF:0x1FFFFFFF);
+		GuiUtils.drawRect(cx+win.getWidth()-10, cy+2, cx+win.getWidth()-2, cy+10, extended? 0x4FFFFFFF:0x2FFFFFFF);
 		
 		if(extended){
 			panel.draw(x, y, cx, cy+12);

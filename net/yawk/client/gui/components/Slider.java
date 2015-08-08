@@ -10,6 +10,8 @@ import net.yawk.client.utils.GuiUtils;
 
 public class Slider extends Component{
 	
+	private static int BAR_WIDTH = 10;
+	
 	private IPanel panel;
 	private SliderValue val;
 	private int slide, mouseXOffset;
@@ -27,15 +29,15 @@ public class Slider extends Component{
 			
 			slide = x + mouseXOffset;
 			
-			double factor = (slide - cx)/(double)panel.getWidth();
+			double factor = (slide - cx)/(double)(panel.getWidth()-BAR_WIDTH);
 			double range = val.getUpperBound() - val.getLowerBound();
 			double addition = range*factor;
 			
 			val.setValue(addition+val.getLowerBound());
 		}
 		
-		if(slide > cx+panel.getWidth()-15){
-			slide = cx+panel.getWidth()-15;
+		if(slide > cx+panel.getWidth()-BAR_WIDTH){
+			slide = cx+panel.getWidth()-BAR_WIDTH;
 		}
 		
 		if(slide < cx){
@@ -43,7 +45,7 @@ public class Slider extends Component{
 		}
 		
 		//GuiUtils.drawRect(cx, cy, cx+panel.getWidth(), cy+getHeight(), 0x2FDFDFDF);
-		GuiUtils.drawRect(slide, cy, slide+15, cy+getHeight(), 0x7F9F9F9F);
+		GuiUtils.drawRect(slide, cy, slide+BAR_WIDTH, cy+getHeight(), 0x7F9F9F9F);
 		
 		String displayString = val.getName()+": "+(val.isRounded()? val.getValue().intValue():ClientUtils.decimalFormat.format(val.getValue()));
 		
@@ -64,7 +66,7 @@ public class Slider extends Component{
 	}
 	
 	protected boolean mouseOverSlider(int x, int y, int cx, int cy){
-		return x > slide && x < slide+15 && y > cy && y < cy+getHeight();
+		return x > slide && x < slide+BAR_WIDTH && y > cy && y < cy+getHeight();
 	}
 	
 	@Override
