@@ -64,7 +64,7 @@ public class Slider extends Component{
 	}
 	
 	protected boolean mouseOverSlider(int x, int y, int cx, int cy){
-		return x > slide && x < slide+15 && y > cy && y < cy+panel.getHeight();
+		return x > slide && x < slide+15 && y > cy && y < cy+getHeight();
 	}
 	
 	@Override
