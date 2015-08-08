@@ -16,6 +16,7 @@ import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
+import net.yawk.client.modmanager.values.ArrayValue;
 import net.yawk.client.modmanager.values.BooleanValue;
 import net.yawk.client.modmanager.values.Value;
 import net.yawk.client.utils.ClientUtils;
@@ -25,17 +26,54 @@ import com.darkmagician6.eventapi.EventTarget;
 @RegisterMod(name = "Build", desc = "Automatically build structures", type = Mod.Type.BUILDING)
 public class Build extends Mod{
 	
+	private static ArrayValue modeValue;
+	
 	public Build(){
 		
 		super(new Value[]{
-				new BooleanValue("Delay", "build.delay", Client.getClient().getValuesRegistry(), false),
+				modeValue = new ArrayValue("Mode", "build.mode", Client.getClient().getValuesRegistry(), 0, new String[]{
+					"Floor",
+					"Pole",
+					"Swastika",
+				}),
 		});
 	}
 	
 	@EventTarget
 	public void onSend(EventPlaceBlock e){
-		//place(e.getPos().getX(), e.getPos().getY()+1, e.getPos().getZ());
-		//place(e.getPos().getX(), e.getPos().getY()+2, e.getPos().getZ());
+		
+		switch(modeValue.getValue()){
+		case 0: floor(e);
+		break;
+		case 1: pole(e);
+		break;
+		case 2: swastika(e);
+		break;
+		};
+	}
+	
+	private void floor(EventPlaceBlock e){
+		
+		place(e.getPos().getX()-1, e.getPos().getY(), e.getPos().getZ(), e.getFacing());
+		place(e.getPos().getX()-1, e.getPos().getY(), e.getPos().getZ()-1, e.getFacing());
+		place(e.getPos().getX()-1, e.getPos().getY(), e.getPos().getZ()+1, e.getFacing());
+		
+		place(e.getPos().getX(), e.getPos().getY(), e.getPos().getZ()-1, e.getFacing());
+		place(e.getPos().getX(), e.getPos().getY(), e.getPos().getZ()+1, e.getFacing());
+		
+		place(e.getPos().getX()+1, e.getPos().getY(), e.getPos().getZ(), e.getFacing());
+		place(e.getPos().getX()+1, e.getPos().getY(), e.getPos().getZ()-1, e.getFacing());
+		place(e.getPos().getX()+1, e.getPos().getY(), e.getPos().getZ()+1, e.getFacing());
+	}
+	
+	private void pole(EventPlaceBlock e){
+		
+		place(e.getPos().getX(), e.getPos().getY()+1, e.getPos().getZ(), e.getFacing());
+		place(e.getPos().getX(), e.getPos().getY()+2, e.getPos().getZ(), e.getFacing());
+		place(e.getPos().getX(), e.getPos().getY()+3, e.getPos().getZ(), e.getFacing());
+	}
+	
+	private void swastika(EventPlaceBlock e){
 		
 		place(e.getPos().getX(), e.getPos().getY()+1, e.getPos().getZ(), e.getFacing());
 		place(e.getPos().getX(), e.getPos().getY()+2, e.getPos().getZ(), e.getFacing());

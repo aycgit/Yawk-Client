@@ -4,19 +4,17 @@ import net.yawk.client.Client;
 import net.yawk.client.gui.ColourType;
 import net.yawk.client.gui.Component;
 import net.yawk.client.gui.IPanel;
-import net.yawk.client.gui.Window;
+import net.yawk.client.modmanager.values.ArrayValue;
 
-//TODO: Maybe merge this with the NumberSelector
-public class ArrayBox<T> extends Component{
+public class ArrayValueBox extends Component{
 	
-	private T[] options;
-	private int index;
 	private IPanel win;
+	private ArrayValue val;
 	
-	public ArrayBox(IPanel win, T[] options) {
+	public ArrayValueBox(IPanel win, ArrayValue val) {
 		super();
 		this.win = win;
-		this.options = options;
+		this.val = val;
 	}
 	
 	@Override
@@ -34,7 +32,7 @@ public class ArrayBox<T> extends Component{
 				mouseOverRight(x,y,cx,cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
 				true);
 		
-		String whole = options[index].toString();
+		String whole = val.getSelectedMode();
 		
 		Client.getClient().getFontRenderer().drawStringWithShadow(whole,
 				cx + win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(whole)/2,
@@ -50,21 +48,13 @@ public class ArrayBox<T> extends Component{
 			
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
 			
-			index--;
-			
-			if(index < 0){
-				index = options.length-1;
-			}
+			val.increment();
 			
 		}else if(mouseOverRight(x, y, cx, cy)){
 			
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
 			
-			index++;
-			
-			if(index >= options.length){
-				index = 0;
-			}
+			val.decrement();
 		}
 	}
 	
@@ -75,17 +65,9 @@ public class ArrayBox<T> extends Component{
 	private boolean mouseOverRight(int x, int y, int cx, int cy){
 		return x > cx+win.getWidth()/2 && x < cx+win.getWidth() && y > cy && y < cy+getHeight();
 	}
-	
-	public T[] getOptions() {
-		return options;
-	}
-	
-	public void setOptions(T[] options) {
-		this.options = options;
-	}
-	
-	public T getSelectedOption(){
-		return options[index];
+		
+	public String getSelectedOption(){
+		return val.getSelectedMode();
 	}
 	
 	@Override

@@ -19,7 +19,7 @@ public class Flight extends Mod{
 	public Flight(){
 		
 		super(new Value[]{
-				speed = new SliderValue("Fly Speed", "flight.speed", Client.getClient().getValuesRegistry(), 1, 0, 5, false),
+				speed = new SliderValue("Fly Speed", "flight.speed", Client.getClient().getValuesRegistry(), 1, 0, 3, false),
 		});
 	}
 	
