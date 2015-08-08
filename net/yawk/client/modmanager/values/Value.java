@@ -8,17 +8,21 @@ public abstract class Value<T> {
 	protected T value;
 	private String name;
 	private ValuesRegistry registry;
+	private String saveName;
 	
-	public Value(String name, ValuesRegistry registry, T defaultValue){
+	public Value(String name, String saveName, ValuesRegistry registry, T defaultValue){
 		
-		if(registry.hasValue(name)){
-			this.value = (T) registry.get(name);
+		if(registry.hasValue(saveName)){
+			this.value = (T) registry.get(saveName);
 		}else{
 			this.value = defaultValue;
 		}
 		
 		this.registry = registry;
 		this.name = name;
+		this.saveName = saveName;
+		
+		System.out.println(saveName);
 	}
 	
 	public String getName() {
@@ -27,6 +31,14 @@ public abstract class Value<T> {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getSaveName() {
+		return saveName;
+	}
+
+	public void setSaveName(String saveName) {
+		this.saveName = saveName;
 	}
 	
 	public T getValue() {

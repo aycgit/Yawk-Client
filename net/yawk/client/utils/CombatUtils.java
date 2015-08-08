@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.MathHelper;
 import net.yawk.client.Client;
 
@@ -73,7 +74,7 @@ public class CombatUtils {
 	 * @param move
 	 * @return whether you're now looking near to the entity
 	 */
-	public static boolean faceEntitySmooth(Entity e, boolean move)
+	public static boolean faceEntitySmooth(Entity e, boolean move, boolean silent)
 	{
 		double x = e.posX - Client.getClient().getMinecraft().thePlayer.posX;
 		double y = e.posY - Client.getClient().getMinecraft().thePlayer.posY;
@@ -103,12 +104,15 @@ public class CombatUtils {
 		}
 		
 		if(move){
-			Client.getClient().getPlayer().setPositionAndRotation(Client.getClient().getMinecraft().thePlayer.posX, Client.getClient().getMinecraft().thePlayer.posY, Client.getClient().getMinecraft().thePlayer.posZ, Client.getClient().getPlayer().rotationYaw+f, Client.getClient().getPlayer().rotationPitch+f1);
+			
+			if(silent){
+				ClientUtils.sendPacket(new C03PacketPlayer.C05PacketPlayerLook(f, f1, Client.getClient().getPlayer().onGround));
+			}else{
+				Client.getClient().getPlayer().setPositionAndRotation(Client.getClient().getMinecraft().thePlayer.posX, Client.getClient().getMinecraft().thePlayer.posY, Client.getClient().getMinecraft().thePlayer.posZ, Client.getClient().getPlayer().rotationYaw+f, Client.getClient().getPlayer().rotationPitch+f1);
+			}
 		}
 		
 		return f < 10 && f1 < 10 && f > -10 && f1 > -10;
-		
-		//ClientUtils.sendPacket(new C03PacketPlayer.C05PacketPlayerLook(f, f1, Client.getClient().getPlayer().onGround));
 	}
 
 }

@@ -19,7 +19,7 @@ public class HighJump extends Mod{
 	public HighJump(){
 		
 		super(new Value[]{
-				height = new SliderValue("Jump Height", Client.getClient().getValuesRegistry(), 1.2, 0, 3, false),
+				height = new SliderValue("Height", "highjump.height", Client.getClient().getValuesRegistry(), 1.2, 0, 3, false),
 		});
 	}
 	

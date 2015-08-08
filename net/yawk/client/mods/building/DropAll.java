@@ -10,22 +10,34 @@ import net.yawk.client.events.EventMoveEntity;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
+import net.yawk.client.modmanager.values.SliderValue;
+import net.yawk.client.modmanager.values.Value;
 import net.yawk.client.utils.ClientUtils;
-import net.yawk.client.utils.MillisecondTimer;
+import net.yawk.client.utils.timing.MillisecondTimer;
+import net.yawk.client.utils.timing.ValueTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
 @RegisterMod(name = "DropAll", desc = "Drop all your items", type = Mod.Type.BUILDING)
 public class DropAll extends Mod{
-		
+	
+	private static SliderValue delay;
+	
 	public DropAll(){
+		
 		//TODO: Make this hack much better
+		
+		super(new Value[]{
+				delay = new SliderValue("Drop Delay", "dropall.delay", Client.getClient().getValuesRegistry(), 2, 0, 100, true),
+		});
+		
+		timer = new ValueTimer(delay);
 	}
 	
 	private int slotProgress;
 	private int inventoryLine;
 	private boolean hasTransfered;
-	private MillisecondTimer timer = new MillisecondTimer(2);
+	private MillisecondTimer timer;
 	
 	@EventTarget
 	public void onTick(EventTick e){

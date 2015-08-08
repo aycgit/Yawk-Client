@@ -25,7 +25,7 @@ public class FastPlace extends Mod{
 	public FastPlace(){
 		
 		super(new Value[]{
-				delay = new SliderValue("Place delay", Client.getClient().getValuesRegistry(), 2, 0, 5, true),
+				delay = new SliderValue("Place delay", "fastplace.delay", Client.getClient().getValuesRegistry(), 2, 0, 5, true),
 		});
 	}
 	

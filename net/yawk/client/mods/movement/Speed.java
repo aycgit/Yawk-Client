@@ -22,7 +22,7 @@ public class Speed extends Mod{
 	public Speed(){
 		
 		super(new Value[]{
-				speed = new SliderValue("Walk Speed", Client.getClient().getValuesRegistry(), 2, 0, 5, false),
+				speed = new SliderValue("Walk Speed", "speed.walkspeed", Client.getClient().getValuesRegistry(), 2, 0, 5, false),
 		});
 	}
 	

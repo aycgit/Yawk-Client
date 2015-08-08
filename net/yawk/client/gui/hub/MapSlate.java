@@ -38,16 +38,16 @@ public class MapSlate extends Slate{
 
 		ValuesRegistry registry = client.getValuesRegistry();
 
-		scale = new SliderValue("Scale", registry, 2, 1, 8, false);
+		scale = new SliderValue("Scale", "map.scale", registry, 2, 1, 8, false);
 		options.addComponent(new Slider(options, scale));
 
-		chunks = new BooleanValue("Show Chunks", registry, false);
+		chunks = new BooleanValue("Show Chunks", "map.chunks", registry, false);
 		options.addComponent(new BooleanButton(options, chunks));
 
-		cavefinder = new BooleanValue("Cavefinder Mode", registry, false);
+		cavefinder = new BooleanValue("Cavefinder Mode", "map.cavefinder", registry, false);
 		options.addComponent(new BooleanButton(options, cavefinder));
 		
-		factions = new BooleanValue("Record Factions", registry, false);
+		factions = new BooleanValue("Record Factions", "map.factions", registry, false);
 		options.addComponent(new BooleanButton(options, factions));
 		
 		map = new LargeMap(hub.colourModifier);

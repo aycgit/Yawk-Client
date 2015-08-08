@@ -6,8 +6,8 @@ import net.yawk.client.gui.components.buttons.BooleanButton;
 
 public class BooleanValue extends Value<Boolean>{
 
-	public BooleanValue(String name, ValuesRegistry registry, Boolean defaultValue) {
-		super(name, registry, defaultValue);
+	public BooleanValue(String name, String saveName, ValuesRegistry registry, Boolean defaultValue) {
+		super(name, saveName, registry, defaultValue);
 	}
 
 	@Override

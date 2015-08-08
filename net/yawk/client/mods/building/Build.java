@@ -28,7 +28,7 @@ public class Build extends Mod{
 	public Build(){
 		
 		super(new Value[]{
-				new BooleanValue("Delay", Client.getClient().getValuesRegistry(), false),
+				new BooleanValue("Delay", "build.delay", Client.getClient().getValuesRegistry(), false),
 		});
 	}
 	

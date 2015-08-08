@@ -8,7 +8,8 @@ import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.utils.ClientUtils;
-import net.yawk.client.utils.MillisecondTimer;
+import net.yawk.client.utils.timing.FlatTimer;
+import net.yawk.client.utils.timing.MillisecondTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 
@@ -20,8 +21,8 @@ public class Derp extends Mod{
 	}
 	
 	private int yaw;
-	private MillisecondTimer lookTimer = new MillisecondTimer(150);
-	private MillisecondTimer hitTimer = new MillisecondTimer(20);
+	private MillisecondTimer lookTimer = new FlatTimer(150);
+	private MillisecondTimer hitTimer = new FlatTimer(20);
 	
 	@EventTarget
 	public void onTick(EventTick e){

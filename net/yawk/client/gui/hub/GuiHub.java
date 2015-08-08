@@ -15,7 +15,8 @@ import net.yawk.client.gui.components.buttons.TextButton;
 import net.yawk.client.modmanager.values.SliderValue;
 import net.yawk.client.utils.ClientUtils;
 import net.yawk.client.utils.GuiUtils;
-import net.yawk.client.utils.MillisecondTimer;
+import net.yawk.client.utils.timing.FlatTimer;
+import net.yawk.client.utils.timing.MillisecondTimer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 
@@ -33,7 +34,7 @@ public class GuiHub extends GuiScreen {
 
 	private State state = State.IDLE;
 	private String trail = "";
-	private MillisecondTimer timer = new MillisecondTimer(5);
+	private MillisecondTimer timer = new FlatTimer(5);
 
 	public ColourModifier colourModifier;
 	

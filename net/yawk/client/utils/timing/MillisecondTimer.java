@@ -1,21 +1,15 @@
-package net.yawk.client.utils;
+package net.yawk.client.utils.timing;
 
-public class MillisecondTimer {
+public abstract class MillisecondTimer {
 	
-	private int delay;
 	private long lastTime;
 	
 	public MillisecondTimer(){
-		this.delay = 1000;
 		reset();
 	}
-	
-	public MillisecondTimer(int delay){
-		this.delay = delay;
-	}
-	
+		
 	public boolean finished(){
-		return elapsedTime() >= delay;
+		return elapsedTime() >= getDelay();
 	}
 	
 	public void reset(){		
@@ -24,7 +18,7 @@ public class MillisecondTimer {
 	
 	public boolean output(){
 		
-		boolean done = elapsedTime() >= delay;
+		boolean done = elapsedTime() >= getDelay();
 		
 		if(done){
 			lastTime = getCurrentTime();
@@ -37,14 +31,7 @@ public class MillisecondTimer {
 		return getCurrentTime() - lastTime;
 	}
 	
-	public int getDelay() {
-		return delay;
-	}
-	
-	public MillisecondTimer setDelay(int delay) {
-		this.delay = delay;
-		return this;
-	}
+	public abstract int getDelay();
 	
 	public long getCurrentTime(){
 		return System.currentTimeMillis();
