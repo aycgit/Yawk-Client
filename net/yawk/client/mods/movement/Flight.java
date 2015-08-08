@@ -4,6 +4,8 @@ import net.yawk.client.Client;
 import net.yawk.client.events.*;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
+import net.yawk.client.modmanager.values.SliderValue;
+import net.yawk.client.modmanager.values.Value;
 
 import org.lwjgl.input.Keyboard;
 
@@ -11,7 +13,16 @@ import com.darkmagician6.eventapi.EventTarget;
 
 @RegisterMod(name = "Flight", defaultKey = Keyboard.KEY_R, desc = "Fly in the air", type = Mod.Type.MOVEMENT)
 public class Flight extends Mod{
-			
+	
+	private static SliderValue speed;
+	
+	public Flight(){
+		
+		super(new Value[]{
+				speed = new SliderValue("Fly Speed", Client.getClient().getValuesRegistry(), 2, 0, 5, false),
+		});
+	}
+	
 	@EventTarget
 	public void onTick(EventTick e){
 		fly();
@@ -62,8 +73,8 @@ public class Flight extends Mod{
 			
 			if(keyW || keyA || keyS || keyD)
 			{
-				Client.getClient().getPlayer().motionX = Math.cos(Math.toRadians(yaw))*0.5f;
-				Client.getClient().getPlayer().motionZ = Math.sin(Math.toRadians(yaw))*0.5f;
+				Client.getClient().getPlayer().motionX = Math.cos(Math.toRadians(yaw))*speed.getValue();
+				Client.getClient().getPlayer().motionZ = Math.sin(Math.toRadians(yaw))*speed.getValue();
 			}else{
 				Client.getClient().getPlayer().motionX = 0;
 				Client.getClient().getPlayer().motionZ = 0;

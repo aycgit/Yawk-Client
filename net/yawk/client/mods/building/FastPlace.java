@@ -20,17 +20,19 @@ import com.darkmagician6.eventapi.EventTarget;
 @RegisterMod(name = "FastPlace", desc = "Place blocks faster", type = Mod.Type.BUILDING)
 public class FastPlace extends Mod{
 	
+	private static SliderValue delay;
+	
 	public FastPlace(){
 		
 		super(new Value[]{
-				new SliderValue("Place delay", Client.getClient().getValuesRegistry(), 2, 0, 5, true),
+				delay = new SliderValue("Place delay", Client.getClient().getValuesRegistry(), 2, 0, 5, true),
 		});
 	}
 	
 	@EventTarget
 	public void onSendPacket(EventSendPacket e){
 		if(e.packet instanceof C08PacketPlayerBlockPlacement){
-			Client.getClient().getMinecraft().rightClickDelayTimer = 2;
+			Client.getClient().getMinecraft().rightClickDelayTimer = delay.getValue().intValue();
 		}
 	}
 	

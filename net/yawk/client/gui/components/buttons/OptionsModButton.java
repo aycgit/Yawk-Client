@@ -88,7 +88,6 @@ public class OptionsModButton extends ModButton{
 		
 		if(extended){			
 			return super.getHeight() + panel.getHeight();
-			
 		}else{
 			return super.getHeight();
 		}
