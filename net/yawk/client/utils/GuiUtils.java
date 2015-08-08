@@ -84,6 +84,7 @@ public class GuiUtils {
 	}
 	
 	public static void drawBorderedRect(int x, int y, int x1, int y1, int lw, int borderC, int insideC){
+		
 		GuiUtils.drawRect(x, y - lw, x1, y, borderC);
 		GuiUtils.drawRect(x, y1, x1, y1 + lw, borderC);
 		
