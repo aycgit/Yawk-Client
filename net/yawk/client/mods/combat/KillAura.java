@@ -35,7 +35,7 @@ public class KillAura extends Mod{
 		
 		super(new Value[]{
 				delay = new SliderValue("Hit Delay", "killaura.hitdelay", Client.getClient().getValuesRegistry(), 120, 0, 2000, true),
-				rotDelay = new SliderValue("Rotation Delay", "killaura.rotdelay", Client.getClient().getValuesRegistry(), 20, 0, 100, true),
+				rotDelay = new SliderValue("Rot Delay", "killaura.rotdelay", Client.getClient().getValuesRegistry(), 20, 0, 100, true),
 				silent = new BooleanValue("Silent", "killaura.silent", Client.getClient().getValuesRegistry(), false),
 		});
 		

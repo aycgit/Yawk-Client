@@ -26,7 +26,7 @@ public class Triggerbot extends Mod{
 	public Triggerbot(){
 		
 		super(new Value[]{
-				delay = new SliderValue("Hit Delay", "triggerbot.hitdelay", Client.getClient().getValuesRegistry(), 120, 0, 2000, true),
+				delay = new SliderValue("Hit Delay", "triggerbot.hitdelay", Client.getClient().getValuesRegistry(), 120, 0, 1000, true),
 		});
 		
 		timer = new ValueTimer(delay);
