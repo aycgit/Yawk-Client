@@ -6,7 +6,7 @@ import net.yawk.client.modmanager.Mod;
 
 public class ModButton extends Button{
 	
-	private Mod mod;
+	protected Mod mod;
 	
 	public ModButton(Window win, Mod mod) {
 		super(win);

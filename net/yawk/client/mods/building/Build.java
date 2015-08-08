@@ -16,12 +16,21 @@ import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
+import net.yawk.client.modmanager.values.BooleanValue;
+import net.yawk.client.modmanager.values.Value;
 import net.yawk.client.utils.ClientUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
 @RegisterMod(name = "Build", desc = "Automatically build structures", type = Mod.Type.BUILDING)
 public class Build extends Mod{
+	
+	public Build(){
+		
+		super(new Value[]{
+				new BooleanValue("Delay", Client.getClient().getValuesRegistry(), false),
+		});
+	}
 	
 	@EventTarget
 	public void onSend(EventPlaceBlock e){

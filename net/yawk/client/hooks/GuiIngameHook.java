@@ -18,7 +18,9 @@ public class GuiIngameHook extends GuiIngame{
 	
 	public GuiIngameHook(Minecraft mc) {
 		super(mc);
-		Client.init(mc);
+		
+		Client.setClient(new Client(mc));
+		Client.getClient().init();
 		
 		hideClientMod = Client.getClient().getHideClientMod();
 	}

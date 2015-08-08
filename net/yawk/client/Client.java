@@ -60,7 +60,11 @@ public class Client {
 	private ValuesRegistry valuesRegistry;
 	private Logger logger;
 	
-	public Client(final Minecraft mc){
+	public Client(Minecraft mc){
+		this.mc = mc;
+	}
+	
+	public void init(){
 		
 		//TODO: READ USERNAME AND PASSWORD FROM FILE
 		//TODO: CLIENT AUTHENTICATION
@@ -72,7 +76,6 @@ public class Client {
 		this.fileManager = new FileManager(this);
 		fileManager.loadClientSettings();
 		
-		this.mc = mc;
 		this.fontRenderer = mc.fontRendererObj;
 		this.modManager = new ModManager();
 		this.hub = new GuiHub(this);
@@ -120,11 +123,7 @@ public class Client {
 	public Mod getHideClientMod(){
 		return Client.getClient().getModManager().getMod(HideClient.class);
 	}
-	
-	public static void init(Minecraft mc){
-		client = new Client(mc);
-	}
-	
+		
 	public PluginManager getPluginManager() {
 		return pluginManager;
 	}
@@ -135,6 +134,10 @@ public class Client {
 	
 	public static Client getClient() {
 		return client;
+	}
+	
+	public static void setClient(Client client) {
+		Client.client = client;
 	}
 	
 	public EntityPlayerSPHook getPlayer(){

@@ -1,5 +1,7 @@
 package net.yawk.client.modmanager;
 
+import net.yawk.client.modmanager.values.Value;
+
 import org.lwjgl.input.Keyboard;
 
 public class Mod implements Toggleable{
@@ -8,10 +10,29 @@ public class Mod implements Toggleable{
 	protected boolean enabled;
 	protected Type type;
 	protected String name;
+	private Value[] options;
 	
 	public Mod() {
 		super();
 		this.keybind = -1;
+	}
+	
+	public Mod(Value[] options) {
+		super();
+		this.options = options;
+		this.keybind = -1;
+	}
+	
+	public boolean hasOptions(){
+		return options != null;
+	}
+	
+	public Value[] getOptions() {
+		return options;
+	}
+
+	public void setOptions(Value[] options) {
+		this.options = options;
 	}
 	
 	public final String getKeyName(){

@@ -17,6 +17,7 @@ import net.yawk.client.gui.components.*;
 import net.yawk.client.gui.components.buttons.FriendsExecuteButton;
 import net.yawk.client.gui.components.buttons.LinkButton;
 import net.yawk.client.gui.components.buttons.ModButton;
+import net.yawk.client.gui.components.buttons.OptionsModButton;
 import net.yawk.client.gui.components.buttons.PluginDownloadButton;
 import net.yawk.client.gui.components.scrolling.PluginScrollPane;
 import net.yawk.client.gui.components.scrolling.ScrollPane;
@@ -41,7 +42,12 @@ public class GuiClickable extends GuiScreen {
 				
 				for(Mod m : modManager.mods){
 					if(m.getType() == type){
-						win.addComponent(new ModButton(win, m));
+						
+						if(m.hasOptions()){
+							win.addComponent(new OptionsModButton(win, m));
+						}else{
+							win.addComponent(new ModButton(win, m));
+						}
 					}
 				}
 			}
