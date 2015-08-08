@@ -47,7 +47,7 @@ public abstract class Value<T> {
 	
 	public void setValue(T value) {
 		this.value = value;
-		registry.set(name, value);
+		registry.set(saveName, value);
 	}
 	
 	public abstract Component getComponent(IPanel panel);
