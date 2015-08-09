@@ -39,9 +39,9 @@ public class ScrollPane extends Component implements IPanel{
 			}
 		}
 		
-		GuiUtils.drawRect(cx + win.getWidth() - BAR_WIDTH - 1, cy, cx + win.getWidth(), cy + height, 0x1FFFFFFF);
+		GuiUtils.drawRect(cx + win.getWidth() - BAR_WIDTH - 1, cy, cx + win.getWidth(), cy + height, 0x1FCFCFCF);
 		
-		GuiUtils.drawRect(cx + win.getWidth() - BAR_WIDTH - 1, cy + dragged, cx + win.getWidth(), cy + dragged + BAR_HEIGHT, 0x3FFFFFFF);
+		GuiUtils.drawRect(cx + win.getWidth() - BAR_WIDTH - 1, cy + dragged, cx + win.getWidth(), cy + dragged + BAR_HEIGHT, 0x4FFFFFFF);
 		
 		int drag = getScrollHeight();
 		

@@ -30,7 +30,7 @@ public class Canvas implements IPanel{
 		}
 		
 		this.height = h;
-		GuiUtils.drawRect(posX, posY, posX+width, posY+h, 0x3FFFFFFF);
+		GuiUtils.drawRect(posX, posY, posX+width, posY+h, 0x5F5F5F5F);
 		
 		h = 0;
 		
