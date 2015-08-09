@@ -11,19 +11,20 @@ import org.lwjgl.input.Keyboard;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.yawk.client.Client;
 import net.yawk.client.gui.Component;
+import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.GuiUtils;
 
 public class TextField extends Component{
 	
-	protected Window win;
+	protected IPanel win;
 	private boolean selected;
 	private String contents = "";
 	private String placeholder;
 	private int frames = 0;
 	
-	public TextField(Window win, String placeholder){
+	public TextField(IPanel win, String placeholder){
 		this.win = win;
 		this.placeholder = placeholder;
 	}

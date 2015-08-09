@@ -6,6 +6,7 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;
+import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.Window;
 import net.yawk.client.gui.components.selectors.PluginSelectorButton;
 import net.yawk.client.gui.components.selectors.SelectorButton;
@@ -15,7 +16,7 @@ public class PluginScrollPane extends ScrollPane{
 	
 	private SelectorSystem<SelectorButton> system;
 	
-	public PluginScrollPane(Window win, int height, SelectorSystem<SelectorButton> system) {
+	public PluginScrollPane(IPanel win, int height, SelectorSystem<SelectorButton> system) {
 		super(win, height);
 		this.system = system;
 	}

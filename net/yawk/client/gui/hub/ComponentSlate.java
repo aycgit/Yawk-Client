@@ -24,7 +24,7 @@ public abstract class ComponentSlate extends Slate{
 			
 			@Override
 			public int getY() {
-				return 12;
+				return hub.height/2 - options.getHeight()/2;
 			}
 			
 		};

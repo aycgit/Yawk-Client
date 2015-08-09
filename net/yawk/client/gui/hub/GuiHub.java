@@ -117,7 +117,6 @@ public class GuiHub extends GuiScreen {
 			if(Math.abs(transition) >= width-20){
 				transition = 0;
 				lastSlate.close();
-				slates.get(slateIndex).init();
 				lastSlate = null;
 				colourModifier.clear();
 			}
@@ -209,9 +208,13 @@ public class GuiHub extends GuiScreen {
 	}
 	
 	public void postConnection() {
-		slates.get(slateIndex).init();
+		
 		slates.add(new MapSlate(this, client));
 		slates.add(new PluginSlate(this, client));
+		
+		for(Slate slate : slates){
+			slate.init();
+		}
 	}
 	
 	@Override

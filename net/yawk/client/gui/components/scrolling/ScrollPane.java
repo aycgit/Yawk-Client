@@ -16,9 +16,9 @@ public class ScrollPane extends Component implements IPanel{
 	protected List<Component> components = new ArrayList<Component>();
 	private int height, dragged, mouseYOffset, BAR_HEIGHT = 12, BAR_WIDTH = 4;
 	private boolean dragging;
-	protected Window win;
+	protected IPanel win;
 	
-	public ScrollPane(Window win, int height){
+	public ScrollPane(IPanel win, int height){
 		this.win = win;
 		this.height = height;
 	}

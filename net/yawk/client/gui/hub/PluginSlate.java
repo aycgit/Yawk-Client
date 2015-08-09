@@ -1,6 +1,13 @@
 package net.yawk.client.gui.hub;
 
 import net.yawk.client.Client;
+import net.yawk.client.gui.components.TextField;
+import net.yawk.client.gui.components.buttons.PluginDownloadButton;
+import net.yawk.client.gui.components.buttons.TextButton;
+import net.yawk.client.gui.components.scrolling.PluginScrollPane;
+import net.yawk.client.gui.components.scrolling.ScrollPane;
+import net.yawk.client.gui.components.selectors.SelectorButton;
+import net.yawk.client.gui.components.selectors.SelectorSystem;
 
 public class PluginSlate extends ComponentSlate{
 
@@ -11,6 +18,13 @@ public class PluginSlate extends ComponentSlate{
 	@Override
 	public void init() {
 		
+		SelectorSystem<SelectorButton> system = new SelectorSystem<SelectorButton>();
+		ScrollPane pluginsPane;
+		options.addComponent(pluginsPane = new PluginScrollPane(options, 200, system));
+		
+		options.addComponent(new TextField(options, "Search"));
+		options.addComponent(new PluginDownloadButton(options, system));
+				
 	}
 
 }
