@@ -1,31 +1,69 @@
 package net.yawk.client.gui.components.selectors;
 
 import net.yawk.client.Client;
+import net.yawk.client.api.PluginData;
+import net.yawk.client.gui.ColourType;
 import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.Window;
 import net.yawk.client.modmanager.Mod;
-
-import org.lwjgl.input.Keyboard;
+import net.yawk.client.modmanager.PluginMod;
+import net.yawk.client.utils.GuiUtils;
 
 public class KeybindButton extends SelectorButton{
 	
-	private Mod mod;
+	private Mod data;
+	private String provider;
 	
-	public KeybindButton(IPanel win, Mod mod, SelectorSystem system) {
-		super(win, mod.getName(), system);
-		this.mod = mod;
+	public KeybindButton(IPanel win, Mod data, SelectorSystem system) {
+		super(win, data.getName(), system);
+		this.data = data;
+		this.provider = getProvider(data);
+	}
+	
+	@Override
+	public void draw(int x, int y, int cx, int cy) {
+		
+		boolean mouseover = mouseOverButton(x, y, cx, cy);
+		
+		if(mouseover){
+			GuiUtils.drawRect(cx, cy, cx+win.getWidth(), cy+getHeight(), 0x2FFFFFFF);
+		}
+		
+		if(isEnabled()){
+			Client.getClient().getFontRenderer().drawStringWithShadow(getText(), cx+3, cy+2, mouseover? ColourType.HIGHLIGHT.getModifiedColour():ColourType.HIGHLIGHT.getColour(), true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(data.getDescription(), cx+3, cy+14, 0xFFCFCFCF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(provider, cx+3, cy+26, 0xFFCFCFCF, true);
+		}else{
+			Client.getClient().getFontRenderer().drawStringWithShadow(getText(), cx+3, cy+2, mouseover? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(), true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(data.getDescription(), cx+3, cy+14, 0xFFCFCFCF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(provider, cx+3, cy+26, 0xFFCFCFCF, true);
+			
+		}
+		
+	}
+	
+	private String getProvider(Mod m) {
+		
+		if(m instanceof PluginMod){
+			PluginData plugin = ((PluginMod)m).getPluginData();
+			return "Plugin: " + plugin.getName() + " Version " + plugin.getVersion();
+		}else{
+			return "Default";
+		}
 	}
 	
 	@Override
 	public String getText() {
-		return mod.getName()+": "+(isSelected? "...":mod.getKeyName());
-	}
-	
-	@Override
-	public void keyPress(int key, char c) {
-		if(isSelected){
-			mod.setKeybind(key);
-			isSelected = false;
+		
+		if(data.isEnabled()){
+			return super.getText() + " (On)";
+		}else{
+			return super.getText();
 		}
+	}
+
+	@Override
+	public int getHeight() {
+		return 38;
 	}
 }

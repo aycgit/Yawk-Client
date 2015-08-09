@@ -61,6 +61,7 @@ public class ModManager {
 			RegisterMod details = m.getClass().getAnnotation(RegisterMod.class);
 			m.setKeybind(details.defaultKey());
 			m.setName(details.name());
+			m.setDescription(details.desc());
 			m.setType(details.type());
 		}else{
 			Client.getClient().log("Error - RegisterMod class not found: "+m.getClass().getName());

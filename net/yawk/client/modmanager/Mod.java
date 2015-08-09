@@ -10,6 +10,7 @@ public class Mod implements Toggleable{
 	protected boolean enabled;
 	protected Type type;
 	protected String name;
+	protected String description;
 	private Value[] options;
 	
 	public Mod() {
@@ -77,6 +78,14 @@ public class Mod implements Toggleable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public enum Type {

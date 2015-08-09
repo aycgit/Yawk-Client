@@ -211,6 +211,7 @@ public class GuiHub extends GuiScreen {
 		
 		slates.add(new MapSlate(this, client));
 		slates.add(new PluginSlate(this, client));
+		slates.add(new KeybindSlate(this, client));
 		
 		for(Slate slate : slates){
 			slate.init();
