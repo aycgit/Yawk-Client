@@ -1,8 +1,5 @@
 package net.yawk.client.mods.building;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import net.minecraft.network.play.client.C09PacketHeldItemChange;
 import net.minecraft.network.play.client.C0APacketAnimation;
@@ -20,12 +17,8 @@ import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.modmanager.values.ArrayValue;
-import net.yawk.client.modmanager.values.BooleanValue;
-import net.yawk.client.modmanager.values.SliderValue;
 import net.yawk.client.modmanager.values.Value;
 import net.yawk.client.utils.ClientUtils;
-import net.yawk.client.utils.timing.MillisecondTimer;
-import net.yawk.client.utils.timing.ValueTimer;
 
 import com.darkmagician6.eventapi.EventTarget;
 

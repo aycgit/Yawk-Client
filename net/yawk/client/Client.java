@@ -140,7 +140,7 @@ public class Client {
 		Client.client = client;
 	}
 	
-	public EntityPlayerSPHook getPlayer(){
+	public EntityPlayerSP getPlayer(){
 		return mc.thePlayer;
 	}
 	
