@@ -19,6 +19,7 @@ import net.yawk.client.gui.components.buttons.LinkButton;
 import net.yawk.client.gui.components.buttons.ModButton;
 import net.yawk.client.gui.components.buttons.OptionsModButton;
 import net.yawk.client.gui.components.buttons.PluginDownloadButton;
+import net.yawk.client.gui.components.scrolling.FriendScrollPane;
 import net.yawk.client.gui.components.scrolling.PluginScrollPane;
 import net.yawk.client.gui.components.scrolling.ScrollPane;
 import net.yawk.client.gui.components.selectors.KeybindButton;

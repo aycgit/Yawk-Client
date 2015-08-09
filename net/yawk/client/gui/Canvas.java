@@ -54,12 +54,9 @@ public class Canvas implements IPanel{
 	}
 	
 	public void keyPress(char c, int key) {
-		
-		int h = 0;
-		
+				
 		for(Component comp : components){
 			comp.keyPress(key, c);
-			h += comp.getHeight();
 		}
 	}
 	

@@ -113,14 +113,14 @@ public class GuiHub extends GuiScreen {
 				slates.get(slateIndex).renderSlate(x, y);
 				glTranslatef(transition-width, 0, 0);
 			}
-
+			
 			if(Math.abs(transition) >= width-20){
 				transition = 0;
 				lastSlate.close();
 				lastSlate = null;
 				colourModifier.clear();
 			}
-
+			
 		}else{
 			
 			if(needsLeft()){
@@ -257,9 +257,21 @@ public class GuiHub extends GuiScreen {
 	}
 
 	@Override
-	protected void mouseReleased(int x, int y, int state) {
-		slates.get(slateIndex).mouseReleased(x, y, state);
-		options.mouseReleased(x, y, state);
+	protected void mouseReleased(int x, int y, int keyState) {
+		if(state == State.CONNECTED){
+			slates.get(slateIndex).mouseReleased(x, y, keyState);
+			options.mouseReleased(x, y, keyState);
+		}
+	}
+	
+	@Override
+	protected void keyTyped(char typedChar, int keyCode) throws IOException {
+		
+		if(state == State.CONNECTED){
+			slates.get(slateIndex).keyTyped(typedChar, keyCode);
+		}
+		
+		super.keyTyped(typedChar, keyCode);
 	}
 
 	@Override

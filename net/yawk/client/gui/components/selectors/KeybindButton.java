@@ -1,5 +1,6 @@
 package net.yawk.client.gui.components.selectors;
 
+import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;
 import net.yawk.client.gui.ColourType;
@@ -11,12 +12,12 @@ import net.yawk.client.utils.GuiUtils;
 
 public class KeybindButton extends SelectorButton{
 	
-	private Mod data;
+	private Mod mod;
 	private String provider;
 	
 	public KeybindButton(IPanel win, Mod data, SelectorSystem system) {
 		super(win, data.getName(), system);
-		this.data = data;
+		this.mod = data;
 		this.provider = getProvider(data);
 	}
 	
@@ -31,13 +32,12 @@ public class KeybindButton extends SelectorButton{
 		
 		if(isEnabled()){
 			Client.getClient().getFontRenderer().drawStringWithShadow(getText(), cx+3, cy+2, mouseover? ColourType.HIGHLIGHT.getModifiedColour():ColourType.HIGHLIGHT.getColour(), true);
-			Client.getClient().getFontRenderer().drawStringWithShadow(data.getDescription(), cx+3, cy+14, 0xFFCFCFCF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(mod.getDescription(), cx+3, cy+14, 0xFFCFCFCF, true);
 			Client.getClient().getFontRenderer().drawStringWithShadow(provider, cx+3, cy+26, 0xFFCFCFCF, true);
 		}else{
 			Client.getClient().getFontRenderer().drawStringWithShadow(getText(), cx+3, cy+2, mouseover? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(), true);
-			Client.getClient().getFontRenderer().drawStringWithShadow(data.getDescription(), cx+3, cy+14, 0xFFCFCFCF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(mod.getDescription(), cx+3, cy+14, 0xFFCFCFCF, true);
 			Client.getClient().getFontRenderer().drawStringWithShadow(provider, cx+3, cy+26, 0xFFCFCFCF, true);
-			
 		}
 		
 	}
@@ -55,8 +55,8 @@ public class KeybindButton extends SelectorButton{
 	@Override
 	public String getText() {
 		
-		if(data.isEnabled()){
-			return super.getText() + " (On)";
+		if(mod.getKeybind() != -1){
+			return super.getText() + EnumChatFormatting.GREEN + " (" + mod.getKeyName() + ")";
 		}else{
 			return super.getText();
 		}
@@ -65,5 +65,9 @@ public class KeybindButton extends SelectorButton{
 	@Override
 	public int getHeight() {
 		return 38;
+	}
+	
+	public Mod getMod() {
+		return mod;
 	}
 }

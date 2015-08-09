@@ -1,5 +1,7 @@
 package net.yawk.client.gui.hub;
 
+import java.io.IOException;
+
 import net.yawk.client.Client;
 import net.yawk.client.utils.GuiUtils;
 
@@ -43,6 +45,10 @@ public class Slate {
 	}
 	
 	public void mouseClicked(int x, int y){
+		
+	}
+	
+	public void keyTyped(char c, int key) throws IOException {
 		
 	}
 	

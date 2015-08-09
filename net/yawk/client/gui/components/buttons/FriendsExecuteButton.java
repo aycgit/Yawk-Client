@@ -1,7 +1,7 @@
 package net.yawk.client.gui.components.buttons;
 
 import net.yawk.client.gui.Window;
-import net.yawk.client.gui.components.FriendScrollPane;
+import net.yawk.client.gui.components.scrolling.FriendScrollPane;
 import net.yawk.client.gui.components.selectors.SelectorButton;
 import net.yawk.client.gui.components.selectors.SelectorSystem;
 

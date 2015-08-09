@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.yawk.client.gui.hub.GuiHub;
 
 public class Scissor {
 
@@ -30,7 +31,7 @@ public class Scissor {
 		GL11.glScissor( ( int ) ( x * factor ), ( int ) ( ( sr.getScaledHeight() - y2 ) * factor ),
 				( int ) ( ( x2 - x ) * factor ), ( int ) ( ( y2 - y ) * factor ) );
 	}
-
+	
 	public static void disableScissoring() {
 		GL11.glDisable( GL11.GL_SCISSOR_TEST );
 	}
