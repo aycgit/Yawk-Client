@@ -37,7 +37,7 @@ public class KeybindButton extends SelectorButton{
 		}else{
 			Client.getClient().getFontRenderer().drawStringWithShadow(getText(), cx+3, cy+2, mouseover? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(), true);
 			Client.getClient().getFontRenderer().drawStringWithShadow(mod.getDescription(), cx+3, cy+14, 0xFFCFCFCF, true);
-			Client.getClient().getFontRenderer().drawStringWithShadow(provider, cx+3, cy+26, 0xFFCFCFCF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(provider, cx+3, cy+26, 0xFF8F8F8F, true);
 		}
 		
 	}
@@ -64,7 +64,7 @@ public class KeybindButton extends SelectorButton{
 
 	@Override
 	public int getHeight() {
-		return 38;
+		return 36;
 	}
 	
 	public Mod getMod() {
