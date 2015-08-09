@@ -37,10 +37,10 @@ public class KillAura extends Mod{
 		
 		super(new Value[]{
 				delay = new SliderValue("Hit Delay", "killaura.hitdelay", Client.getClient().getValuesRegistry(), 120, 0, 2000, true),
-				rotDelay = new SliderValue("Rot Delay", "killaura.rotdelay", Client.getClient().getValuesRegistry(), 20, 0, 100, true),
 				range = new SliderValue("Range", "killaura.range", Client.getClient().getValuesRegistry(), 3.95, 0, 6, true),
 				silent = new BooleanValue("Silent", "killaura.silent", Client.getClient().getValuesRegistry(), false),
 				smooth = new BooleanValue("Smooth", "killaura.smooth", Client.getClient().getValuesRegistry(), false),
+				rotDelay = new SliderValue("Rot Delay", "killaura.rotdelay", Client.getClient().getValuesRegistry(), 20, 0, 100, true),
 		});
 		
 		timer = new ValueTimer(delay);

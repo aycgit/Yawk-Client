@@ -28,7 +28,7 @@ public class ScrollPane extends Component implements IPanel{
 		
 		if(dragging){
 			
-			dragged = y - cy + mouseYOffset + 2;
+			dragged = y - cy + mouseYOffset;
 			
 			if(dragged > height-BAR_HEIGHT){
 				dragged = height-BAR_HEIGHT;
