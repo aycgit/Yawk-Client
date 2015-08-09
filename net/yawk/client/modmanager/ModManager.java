@@ -3,6 +3,8 @@ package net.yawk.client.modmanager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;
@@ -22,8 +24,7 @@ import com.google.common.collect.HashBiMap;
 
 public class ModManager {
 	
-	public ArrayList<Mod> mods = new ArrayList<Mod>();
-	public BiMap<String, Mod> nameMap = HashBiMap.create();
+	public List<Mod> mods = new CopyOnWriteArrayList<Mod>();
 	
 	public ModManager(){
 		
@@ -58,7 +59,6 @@ public class ModManager {
 	private void initMod(Mod m){
 		if(m.getClass().isAnnotationPresent(RegisterMod.class)){
 			RegisterMod details = m.getClass().getAnnotation(RegisterMod.class);
-			nameMap.put(details.name(), m);
 			m.setKeybind(details.defaultKey());
 			m.setName(details.name());
 			m.setType(details.type());
@@ -77,7 +77,6 @@ public class ModManager {
 			
 			if(m instanceof PluginMod && ((PluginMod) m).getPluginData() == data){
 				Client.getClient().getModManager().mods.remove(m);
-				Client.getClient().getModManager().nameMap.remove(m.getName());
 				EventManager.unregister(m);
 			}
 		}
@@ -107,6 +106,13 @@ public class ModManager {
 	}
 	
 	public Mod getModByName(String name){
-		return this.nameMap.get(name);
+		
+		for(Mod m : mods){
+			if(m.getName().equalsIgnoreCase(name)){
+				return m;
+			}
+		}
+		
+		return null;
 	}
 }

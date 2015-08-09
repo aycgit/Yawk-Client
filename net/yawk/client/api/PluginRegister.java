@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 
+
 import net.yawk.client.Client;
 import net.yawk.client.gui.Window;
 import net.yawk.client.modmanager.Mod;
@@ -34,10 +35,13 @@ public abstract class PluginRegister {
 	public abstract String getName();
 	
 	/**
-	 * The description of the plugin. Currently unused.
+	 * The description of the plugin. Replaced by a server-side description
 	 * @return
 	 */
-	public abstract String getDescription();
+	@Deprecated
+	public String getDescription(){
+		return "";
+	}
 	
 	/**
 	 * Returns the width which the plugin window should have, defaulting to 85
