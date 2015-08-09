@@ -62,7 +62,7 @@ public class GuiHub extends GuiScreen {
 			
 		};
 		
-		options = new Canvas(pos, 100, 50);
+		options = new Canvas(pos, 100);
 	}
 
 	@Override

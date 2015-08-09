@@ -34,7 +34,7 @@ public class MapSlate extends Slate{
 
 		};
 
-		options = new Canvas(pos, 100, 50);
+		options = new Canvas(pos, 100);
 
 		ValuesRegistry registry = client.getValuesRegistry();
 

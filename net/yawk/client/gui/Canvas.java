@@ -13,10 +13,9 @@ public class Canvas implements IPanel{
 	private int width, height;
 	protected List<Component> components = new CopyOnWriteArrayList<Component>();
 	
-	public Canvas(ScalerPosition pos, int width, int height) {
+	public Canvas(ScalerPosition pos, int width) {
 		this.pos = pos;
 		this.width = width;
-		this.height = height;
 	}
 	
 	public void draw(int x, int y){
@@ -30,6 +29,7 @@ public class Canvas implements IPanel{
 			h += comp.getHeight();
 		}
 		
+		this.height = h;
 		GuiUtils.drawRect(posX, posY, posX+width, posY+h, 0x3FFFFFFF);
 		
 		h = 0;

@@ -19,7 +19,7 @@ public abstract class ComponentSlate extends Slate{
 			
 			@Override
 			public int getX() {
-				return hub.width/2 - 100;
+				return hub.width/2 - 150;
 			}
 			
 			@Override
@@ -29,7 +29,7 @@ public abstract class ComponentSlate extends Slate{
 			
 		};
 		
-		options = new Canvas(pos, 200, 300);
+		options = new Canvas(pos, 300);
 	}
 
 	@Override
