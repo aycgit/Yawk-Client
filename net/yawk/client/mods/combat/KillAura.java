@@ -29,6 +29,7 @@ public class KillAura extends Mod{
 	
 	private static SliderValue delay;
 	private static SliderValue rotDelay;
+	private static SliderValue range;
 	private static BooleanValue silent;
 	private static BooleanValue smooth;
 	
@@ -37,6 +38,7 @@ public class KillAura extends Mod{
 		super(new Value[]{
 				delay = new SliderValue("Hit Delay", "killaura.hitdelay", Client.getClient().getValuesRegistry(), 120, 0, 2000, true),
 				rotDelay = new SliderValue("Rot Delay", "killaura.rotdelay", Client.getClient().getValuesRegistry(), 20, 0, 100, true),
+				range = new SliderValue("Range", "killaura.range", Client.getClient().getValuesRegistry(), 3.95, 0, 6, true),
 				silent = new BooleanValue("Silent", "killaura.silent", Client.getClient().getValuesRegistry(), false),
 				smooth = new BooleanValue("Smooth", "killaura.smooth", Client.getClient().getValuesRegistry(), false),
 		});
@@ -48,7 +50,7 @@ public class KillAura extends Mod{
 	@EventTarget
 	public void onTick(EventGuiRender e){
 		
-		EntityPlayer player = CombatUtils.getClosestPlayer(3.95f);
+		EntityPlayer player = CombatUtils.getClosestPlayer(range.getValue());
 		
 		if (player != null) {
 			
