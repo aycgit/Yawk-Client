@@ -30,6 +30,7 @@ public class KillAura extends Mod{
 	private static SliderValue delay;
 	private static SliderValue rotDelay;
 	private static BooleanValue silent;
+	private static BooleanValue smooth;
 	
 	public KillAura(){
 		
@@ -37,6 +38,7 @@ public class KillAura extends Mod{
 				delay = new SliderValue("Hit Delay", "killaura.hitdelay", Client.getClient().getValuesRegistry(), 120, 0, 2000, true),
 				rotDelay = new SliderValue("Rot Delay", "killaura.rotdelay", Client.getClient().getValuesRegistry(), 20, 0, 100, true),
 				silent = new BooleanValue("Silent", "killaura.silent", Client.getClient().getValuesRegistry(), false),
+				smooth = new BooleanValue("Smooth", "killaura.smooth", Client.getClient().getValuesRegistry(), false),
 		});
 		
 		timer = new ValueTimer(delay);
@@ -47,16 +49,23 @@ public class KillAura extends Mod{
 	public void onTick(EventGuiRender e){
 		
 		EntityPlayer player = CombatUtils.getClosestPlayer(3.95f);
-
-		if (player != null && timer.output()) {
-
-			if(CombatUtils.faceEntitySmooth(player, false, silent.getValue())){
-				CombatUtils.hit(player);
+		
+		if (player != null) {
+			
+			if(timer.output()){
+				if(smooth.getValue()){
+					if(CombatUtils.faceEntitySmooth(player, false, silent.getValue())){
+						CombatUtils.hit(player);
+					}
+				}else{
+					CombatUtils.faceEntity(player, silent.getValue());
+					CombatUtils.hit(player);
+				}
 			}
-		}
-
-		if (player != null && rotTimer.output()) {
-			CombatUtils.faceEntitySmooth(player, true, silent.getValue());
+			
+			if (smooth.getValue() && rotTimer.output()) {
+				CombatUtils.faceEntitySmooth(player, true, silent.getValue());
+			}
 		}
 	}
 	
