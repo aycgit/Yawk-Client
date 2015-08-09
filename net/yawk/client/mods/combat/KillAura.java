@@ -9,6 +9,7 @@ import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.MathHelper;
 import net.yawk.client.Client;
 import net.yawk.client.events.EventGuiRender;
+import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
 import net.yawk.client.modmanager.values.BooleanValue;
@@ -48,7 +49,7 @@ public class KillAura extends Mod{
 	}
 	
 	@EventTarget
-	public void onTick(EventGuiRender e){
+	public void onTick(EventTick e){
 		
 		EntityPlayer player = CombatUtils.getClosestPlayer(range.getValue());
 		

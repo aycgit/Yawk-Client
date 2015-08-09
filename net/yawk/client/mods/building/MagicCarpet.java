@@ -1,5 +1,6 @@
 package net.yawk.client.mods.building;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
@@ -39,8 +40,9 @@ public class MagicCarpet extends Mod{
 					
 					BlockPos pos = new BlockPos(playerX+x, playerY, playerZ+z);
 					
-					if(Client.getClient().getMinecraft().theWorld.getBlockState(pos).getBlock() == Blocks.air
-							|| Client.getClient().getMinecraft().theWorld.getBlockState(pos).getBlock() == Blocks.tallgrass){
+					Block block = Client.getClient().getMinecraft().theWorld.getBlockState(pos).getBlock();
+					
+					if(block == Blocks.air || block == Blocks.tallgrass){
 						place(pos);
 					}
 				}
