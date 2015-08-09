@@ -80,7 +80,7 @@ public class PluginManager {
 			for(JsonElement el : arr){
 				
 				JsonObject json = el.getAsJsonObject();
-				pluginData.add(new PluginData(json.get("name").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), false));
+				pluginData.add(new PluginData(json.get("name").getAsString(), json.get("description").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), false));
 			}
 			
 		} catch (IOException e) {

@@ -20,7 +20,7 @@ public class PluginSlate extends ComponentSlate{
 		
 		SelectorSystem<SelectorButton> system = new SelectorSystem<SelectorButton>();
 		ScrollPane pluginsPane;
-		options.addComponent(pluginsPane = new PluginScrollPane(options, 200, system));
+		options.addComponent(pluginsPane = new PluginScrollPane(options, 200, system, true));
 		
 		options.addComponent(new TextField(options, "Search"));
 		options.addComponent(new PluginDownloadButton(options, system));

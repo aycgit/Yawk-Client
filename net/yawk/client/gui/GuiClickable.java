@@ -74,7 +74,7 @@ public class GuiClickable extends GuiScreen {
 		windows.add(plugins);
 		
 		SelectorSystem<SelectorButton> pluginSystem = new SelectorSystem<SelectorButton>();
-		plugins.addComponent(new PluginScrollPane(plugins, 72, pluginSystem));
+		plugins.addComponent(new PluginScrollPane(plugins, 72, pluginSystem, false));
 		plugins.addComponent(new PluginDownloadButton(plugins, pluginSystem));
 		
 		//COLOUR PICKER WINDOW

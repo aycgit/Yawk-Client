@@ -247,7 +247,8 @@ public class GuiHub extends GuiScreen {
 
 			direction = false;
 			transition = 0;
-		}else{
+			
+		}else if(slates.size() > 0){
 			slates.get(slateIndex).mouseClicked(x, y);
 		}
 		

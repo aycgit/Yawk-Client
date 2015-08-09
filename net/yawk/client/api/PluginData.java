@@ -3,13 +3,15 @@ package net.yawk.client.api;
 public class PluginData {
 	
 	private String name;
+	private String description;
 	private String filePath;
 	private String fileName;
 	private int version;
 	private boolean wasEnabled;
 	
-	public PluginData(String name, String filePath, String fileName, int version, boolean wasEnabled) {
+	public PluginData(String name, String description, String filePath, String fileName, int version, boolean wasEnabled) {
 		this.name = name;
+		this.description = description;
 		this.filePath = filePath;
 		this.fileName = fileName;
 		this.version = version;
@@ -18,6 +20,10 @@ public class PluginData {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public String getDescription() {
+		return description;
 	}
 	
 	public String getFilePath() {
