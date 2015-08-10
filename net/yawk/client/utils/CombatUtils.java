@@ -94,7 +94,7 @@ public class CombatUtils {
 
 		f = MathHelper.wrapAngleTo180_float(f);
 		f1 = MathHelper.wrapAngleTo180_float(f1);
-				
+		
 		f = f-MathHelper.wrapAngleTo180_float(Client.getClient().getPlayer().rotationYaw);
 		f1 = f1-MathHelper.wrapAngleTo180_float(Client.getClient().getPlayer().rotationPitch);
 		

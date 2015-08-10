@@ -1,13 +1,21 @@
 package net.yawk.client.utils;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.yawk.client.gui.ColourType;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 public class GuiUtils {
 	
+    public static ScaleManager scaleManager = new ScaleManager();
+	private static Minecraft mc = Minecraft.getMinecraft();
+    
 	public static void drawRect(double paramXStart, double paramYStart, double paramXEnd, double paramYEnd, int paramColor)
 	{
 		float alpha = (float)(paramColor >> 24 & 0xFF) / 255F;
@@ -212,5 +220,44 @@ public class GuiUtils {
         wr.addVertexWithUV(x1, y, 0, 1, 0);
         wr.addVertexWithUV(x, y, 0, 0, 0);
         tes.draw();
+    }
+
+    /**
+     * Renders the specified item of the inventory slot at the specified location. Args: itemstack, x, y, partialTick
+     * Taken from GuiIngame
+     */
+    public static void renderItemStack(ItemStack var6, int p_175184_2_, int p_175184_3_, float p_175184_4_, EntityPlayer p_175184_5_)
+    {
+    	
+        if (var6 != null)
+        {
+        	            
+            float var7 = (float)var6.animationsToGo - p_175184_4_;
+
+            if (var7 > 0.0F)
+            {
+                GlStateManager.pushMatrix();
+                float var8 = 1.0F + var7 / 5.0F;
+                GlStateManager.translate((float)(p_175184_2_ + 8), (float)(p_175184_3_ + 12), 0.0F);
+                GlStateManager.scale(1.0F / var8, (var8 + 1.0F) / 2.0F, 1.0F);
+                GlStateManager.translate((float)(-(p_175184_2_ + 8)), (float)(-(p_175184_3_ + 12)), 0.0F);
+            }
+
+            mc.getRenderItem().func_180450_b(var6, p_175184_2_, p_175184_3_);
+
+            if (var7 > 0.0F)
+            {
+                GlStateManager.popMatrix();
+            }
+
+            mc.getRenderItem().func_175030_a(mc.fontRendererObj, var6, p_175184_2_, p_175184_3_);
+        }
+        
+        //Needed because of something in renderItemOverlayIntoGUI
+        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+        GL11.glColor4f(1, 1, 1, 1);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_CULL_FACE);
     }
 }
