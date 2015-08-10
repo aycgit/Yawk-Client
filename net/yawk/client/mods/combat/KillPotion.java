@@ -23,7 +23,7 @@ public class KillPotion extends Mod{
 	
 	@Override
 	public void onEnable() {
-		
+
 		if(mc.thePlayer.inventory.getStackInSlot(0) != null){
 			mc.thePlayer.addChatComponentMessage(new ChatComponentTranslation("[KillPotion] Remove item out of slot 1!"));
 			Client.getClient().getModManager().toggle(this);
@@ -33,7 +33,7 @@ public class KillPotion extends Mod{
 			Client.getClient().getModManager().toggle(this);
 			return;
 		}
-		
+
 		ItemStack stack = new ItemStack(Items.potionitem);
 		stack.setItemDamage(16384);
 		NBTTagList effects = new NBTTagList();
@@ -45,7 +45,7 @@ public class KillPotion extends Mod{
 		stack.setTagInfo("CustomPotionEffects", effects);
 		stack.setStackDisplayName(EnumChatFormatting.GREEN+"Free Advertising - Contact Yawk Griefing on Youtube!");
 		mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, stack));
-		
+
 		Client.getClient().getModManager().toggle(this);
 	}
 }

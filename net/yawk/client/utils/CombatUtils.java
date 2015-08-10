@@ -60,23 +60,22 @@ public class CombatUtils {
 
 	public static void faceEntity(Entity e, boolean silent){
 		
-		double x = e.posX - Client.getClient().getMinecraft().thePlayer.posX;
-		double y = e.posY - Client.getClient().getMinecraft().thePlayer.posY;
-		double z = e.posZ - Client.getClient().getMinecraft().thePlayer.posZ;
-		double d1 = (Client.getClient().getMinecraft().thePlayer.posY + (double)Client.getClient().getMinecraft().thePlayer.getEyeHeight())-(e.posY+(double)e.getEyeHeight());
+		double x = e.posX - Client.getClient().getPlayer().posX;
+		double y = e.posY - Client.getClient().getPlayer().posY;
+		double z = e.posZ - Client.getClient().getPlayer().posZ;
+		double d1 = (Client.getClient().getPlayer().posY + (double)Client.getClient().getPlayer().getEyeHeight())-(e.posY+(double)e.getEyeHeight());
 		double d3 = MathHelper.sqrt_double(x*x+z*z);
 		float f = (float)((Math.atan2(z, x)*180D)/Math.PI)-90F;
-		float f1 = (float) ((Math.atan2(d1, d3)*180D)/Math.PI);
+		float f1= (float)(-((Math.atan2(d1, d3)*180D)/Math.PI));
 		
 		if(silent){
 			ClientUtils.sendPacket(new C03PacketPlayer.C05PacketPlayerLook(f, f1, Client.getClient().getPlayer().onGround));
 		}else{
-			Client.getClient().getPlayer().rotationPitch = f;
-			Client.getClient().getPlayer().rotationYaw = f1;
+			Client.getClient().getPlayer().rotationYaw = f;
+			Client.getClient().getPlayer().rotationPitch = f1;
 		}
-		
 	}
-
+	
 	/**
 	 * Begins to look towards an entity
 	 * @param e
@@ -113,7 +112,7 @@ public class CombatUtils {
 		}
 
 		if(move){
-
+			
 			if(silent){
 				ClientUtils.sendPacket(new C03PacketPlayer.C05PacketPlayerLook(f, f1, Client.getClient().getPlayer().onGround));
 			}else{
@@ -121,7 +120,7 @@ public class CombatUtils {
 			}
 		}
 
-		return f < 30 && f1 < 30 && f > -30 && f1 > -30;
+		return f < 20 && f1 < 20 && f > -20 && f1 > -20;
 	}
 
 }
