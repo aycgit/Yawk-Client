@@ -94,21 +94,22 @@ public class CombatUtils {
 
 		f = MathHelper.wrapAngleTo180_float(f);
 		f1 = MathHelper.wrapAngleTo180_float(f1);
-
+				
 		f = f-MathHelper.wrapAngleTo180_float(Client.getClient().getPlayer().rotationYaw);
-
+		f1 = f1-MathHelper.wrapAngleTo180_float(Client.getClient().getPlayer().rotationPitch);
+		
+		boolean facing = f < 20 && f1 < 20 && f > -20 && f1 > -20;
+		
 		if(f > 0){
-			f = MathHelper.clamp_float(f, 0, 10);
+			f = MathHelper.clamp_float(f, 0, 20);
 		}else if(f < 0){
-			f = MathHelper.clamp_float(f, -10, 0);
+			f = MathHelper.clamp_float(f, -20, 0);
 		}
 
-		f1 = f1-MathHelper.wrapAngleTo180_float(Client.getClient().getPlayer().rotationPitch);
-
 		if(f1 > 0){
-			f1 = MathHelper.clamp_float(f1, 0, 10);
+			f1 = MathHelper.clamp_float(f1, 0, 20);
 		}else if(f1 < 0){
-			f1 = MathHelper.clamp_float(f1, -10, 0);
+			f1 = MathHelper.clamp_float(f1, -20, 0);
 		}
 
 		if(move){
@@ -119,8 +120,8 @@ public class CombatUtils {
 				Client.getClient().getPlayer().setPositionAndRotation(Client.getClient().getMinecraft().thePlayer.posX, Client.getClient().getMinecraft().thePlayer.posY, Client.getClient().getMinecraft().thePlayer.posZ, Client.getClient().getPlayer().rotationYaw+f, Client.getClient().getPlayer().rotationPitch+f1);
 			}
 		}
-
-		return f < 20 && f1 < 20 && f > -20 && f1 > -20;
+		
+		return facing;
 	}
 
 }
