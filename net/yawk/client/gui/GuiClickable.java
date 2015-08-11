@@ -54,17 +54,6 @@ public class GuiClickable extends GuiScreen {
 			}
 		}
 		
-		Window keybindWindow = new Window("Keybinds", modManager, 100, 12);
-		windows.add(keybindWindow);
-		
-		ScrollPane pane;
-		keybindWindow.addComponent(pane = new ScrollPane(keybindWindow, 72));
-		SelectorSystem<KeybindButton> system = new SelectorSystem<KeybindButton>();
-		
-		for(Mod m : modManager.mods){
-			pane.addComponent(system.add(new KeybindButton(pane, m, system)));
-		}
-		
 		Window enabledMods = new Window("Enabled", modManager, 85, 12);
 		windows.add(enabledMods);
 		enabledMods.addComponent(new EnabledModsDisplay(enabledMods));
