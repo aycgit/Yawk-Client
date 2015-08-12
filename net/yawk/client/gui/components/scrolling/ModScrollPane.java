@@ -7,7 +7,7 @@ import net.yawk.client.gui.components.selectors.SelectorSystem;
 import net.yawk.client.gui.hub.KeybindSetButton;
 import net.yawk.client.modmanager.Mod;
 
-public class ModScrollPane extends ScrollPane{
+public class ModScrollPane extends FilterableScrollPane{
 
 	private KeybindSetButton keybindButton;
 	
@@ -15,7 +15,7 @@ public class ModScrollPane extends ScrollPane{
 		super(win, height);
 		
 		for(Mod m : Client.getClient().getModManager().mods){
-			addComponent(system.add(new KeybindButton(this, m, system)));
+			addFilterableComponent(system.add(new KeybindButton(this, m, system)));
 		}
 	}
 }

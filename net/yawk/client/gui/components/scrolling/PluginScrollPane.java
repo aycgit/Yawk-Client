@@ -13,7 +13,7 @@ import net.yawk.client.gui.components.selectors.PluginSelectorButton;
 import net.yawk.client.gui.components.selectors.SelectorButton;
 import net.yawk.client.gui.components.selectors.SelectorSystem;
 
-public class PluginScrollPane extends ScrollPane{
+public class PluginScrollPane extends FilterableScrollPane{
 	
 	private SelectorSystem<SelectorButton> system;
 	private boolean description;
@@ -34,9 +34,9 @@ public class PluginScrollPane extends ScrollPane{
 				for(PluginData plugin : Client.getClient().getPluginManager().pluginData){
 					
 					if(description){
-						components.add(system.add(new LargePluginSelectorButton(this, plugin, system)));
+						addFilterableComponent(system.add(new LargePluginSelectorButton(this, plugin, system)));
 					}else{
-						components.add(system.add(new PluginSelectorButton(this, plugin.getName(), system, plugin)));
+						addFilterableComponent(system.add(new PluginSelectorButton(this, plugin.getName(), system, plugin)));
 					}
 					
 					hasFoundPlugins = true;
