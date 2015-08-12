@@ -20,7 +20,7 @@ public class TextField extends Component{
 	
 	protected IPanel win;
 	private boolean selected;
-	private String contents = "";
+	protected String contents = "";
 	private String placeholder;
 	private int frames = 0;
 	
@@ -47,12 +47,11 @@ public class TextField extends Component{
 	public void keyPress(int key, char c) {
 		if(selected){
 			if(key == Keyboard.KEY_BACK && contents.length() > 0){
-				contents = contents.substring(0, contents.length() - 1);
+				removeLastCharacter();
 			}else if(key == Keyboard.KEY_V && (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL))){
 				
 				try {
-					String copied = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-					contents += copied;
+					addText((String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor));
 				} catch (HeadlessException e) {
 					e.printStackTrace();
 				} catch (UnsupportedFlavorException e) {
@@ -62,9 +61,21 @@ public class TextField extends Component{
 				}
 				
 			}else if(ChatAllowedCharacters.isAllowedCharacter(c)){
-				contents += c;
+				addCharacter(c);
 			}
 		}
+	}
+	
+	protected void removeLastCharacter(){
+		contents = contents.substring(0, contents.length() - 1);
+	}
+	
+	protected void addCharacter(char c){
+		contents += c;
+	}
+	
+	protected void addText(String text){
+		contents += text;
 	}
 	
 	@Override
