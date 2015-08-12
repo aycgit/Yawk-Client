@@ -3,6 +3,7 @@ package net.yawk.client.gui.hub;
 import java.io.IOException;
 
 import net.yawk.client.Client;
+import net.yawk.client.gui.components.SearchableTextField;
 import net.yawk.client.gui.components.TextField;
 import net.yawk.client.gui.components.buttons.PluginDownloadButton;
 import net.yawk.client.gui.components.buttons.TextButton;
@@ -30,7 +31,7 @@ public class KeybindSlate extends ComponentSlate{
 		ModScrollPane pane;
 		options.addComponent(pane = new ModScrollPane(options, 200, system));
 		
-		options.addComponent(new TextField(options, "Search"));
+		options.addComponent(new SearchableTextField(options, "Search", pane));
 		options.addComponent(setButton);
 	}
 
