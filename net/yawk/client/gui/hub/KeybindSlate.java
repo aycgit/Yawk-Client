@@ -35,9 +35,4 @@ public class KeybindSlate extends ComponentSlate{
 		options.addComponent(setButton);
 	}
 
-	@Override
-	public void keyTyped(char c, int key) throws IOException {
-		options.keyPress(c, key);
-	}
-
 }

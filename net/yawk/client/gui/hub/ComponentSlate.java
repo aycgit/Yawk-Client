@@ -49,6 +49,11 @@ public abstract class ComponentSlate extends Slate{
 	public void mouseReleased(int x, int y, int state) {
 		options.mouseReleased(x, y, state);
 	}
-		
+	
+	@Override
+	public void keyTyped(char c, int key) throws IOException {
+		options.keyPress(c, key);
+	}
+	
 	public abstract void init();
 }

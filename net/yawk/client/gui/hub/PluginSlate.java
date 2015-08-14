@@ -29,10 +29,5 @@ public class PluginSlate extends ComponentSlate{
 		options.addComponent(new PluginDownloadButton(options, system));
 		
 	}
-	
-	@Override
-	public void keyTyped(char c, int key) throws IOException {
-		options.keyPress(c, key);
-	}
 
 }

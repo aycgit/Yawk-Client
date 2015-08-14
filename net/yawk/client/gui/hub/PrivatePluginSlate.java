@@ -38,9 +38,4 @@ public class PrivatePluginSlate extends ComponentSlate{
 		options.addComponent(new PrivatePluginDownloadButton(options, pluginDisplay, nameField, passwordField));
 	}
 
-	@Override
-	public void keyTyped(char c, int key) throws IOException {
-		options.keyPress(c, key);
-	}
-
 }
