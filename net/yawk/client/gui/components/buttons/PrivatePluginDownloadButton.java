@@ -29,7 +29,7 @@ public class PrivatePluginDownloadButton extends Button{
 
 	@Override
 	public String getText() {
-		return null;
+		return "Get plugin";
 	}
 
 }

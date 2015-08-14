@@ -1,5 +1,6 @@
 package net.yawk.client.gui.components;
 
+import net.minecraft.client.gui.FontRenderer;
 import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;
 import net.yawk.client.gui.Component;
@@ -7,6 +8,7 @@ import net.yawk.client.gui.Component;
 public class PluginDisplay extends Component{
 
 	private PluginData plugin;
+	private FontRenderer fontRenderer;
 	
 	public PluginDisplay(){
 		this(null);
@@ -15,6 +17,7 @@ public class PluginDisplay extends Component{
 	public PluginDisplay(PluginData plugin) {
 		super();
 		this.plugin = plugin;
+		this.fontRenderer = Client.getClient().getFontRenderer();
 	}
 
 	@Override
@@ -25,9 +28,13 @@ public class PluginDisplay extends Component{
 	@Override
 	public void draw(int x, int y, int cx, int cy) {
 		
-		Client.getClient().getFontRenderer().drawStringWithShadow("Name: " + plugin.getName(), cx + 3, cy + 2, 0xFFFFFFFF, true);
-		Client.getClient().getFontRenderer().drawStringWithShadow("Description: " + plugin.getDescription(), cx + 3, cy + 14, 0xFFFFFFFF, true);
-		Client.getClient().getFontRenderer().drawStringWithShadow("Download link: " + plugin.getFilePath(), cx + 3, cy + 26, 0xFFFFFFFF, true);
+		if(plugin == null){
+			fontRenderer.drawStringWithShadow("No Plugin selected", cx + 3, cy + 2, 0xFFFFFFFF, true);
+		}else{
+			fontRenderer.drawStringWithShadow("Name: " + plugin.getName(), cx + 3, cy + 2, 0xFFFFFFFF, true);
+			fontRenderer.drawStringWithShadow("Description: " + plugin.getDescription(), cx + 3, cy + 14, 0xFFFFFFFF, true);
+			fontRenderer.drawStringWithShadow("Download link: " + plugin.getFilePath(), cx + 3, cy + 26, 0xFFFFFFFF, true);
+		}
 		
 	}
 	
