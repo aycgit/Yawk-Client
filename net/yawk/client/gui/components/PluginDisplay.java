@@ -8,6 +8,7 @@ import net.yawk.client.gui.Component;
 public class PluginDisplay extends Component{
 
 	private PluginData plugin;
+	private String message;
 	private FontRenderer fontRenderer;
 	
 	public PluginDisplay(){
@@ -29,7 +30,13 @@ public class PluginDisplay extends Component{
 	public void draw(int x, int y, int cx, int cy) {
 		
 		if(plugin == null){
-			fontRenderer.drawStringWithShadow("No Plugin selected", cx + 3, cy + 2, 0xFFFFFFFF, true);
+			
+			if(message == null){
+				fontRenderer.drawStringWithShadow("No Plugin selected", cx + 3, cy + 2, 0xFFFFFFFF, true);
+			}else{
+				fontRenderer.drawStringWithShadow(message, cx + 3, cy + 2, 0xFFFFFFFF, true);
+			}
+			
 		}else{
 			fontRenderer.drawStringWithShadow("Name: " + plugin.getName(), cx + 3, cy + 2, 0xFFFFFFFF, true);
 			fontRenderer.drawStringWithShadow("Description: " + plugin.getDescription(), cx + 3, cy + 14, 0xFFFFFFFF, true);
@@ -44,5 +51,13 @@ public class PluginDisplay extends Component{
 
 	public void setPlugin(PluginData plugin) {
 		this.plugin = plugin;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

@@ -45,7 +45,7 @@ public class PrivatePluginDownloadButton extends Button implements DownloadCallb
 	public void toggle() {
 		
 		if(downloadThread == null || (downloadThread != null && !downloadThread.isRunning())){
-			new Thread(downloadThread = new PrivatePluginDownloadThread(nameField.getText(), passwordField.getText())).start();
+			new Thread(downloadThread = new PrivatePluginDownloadThread(nameField.getText(), passwordField.getText(), this)).start();
 		}
 		
 	}
@@ -60,6 +60,9 @@ public class PrivatePluginDownloadButton extends Button implements DownloadCallb
 		
 		if(downloadThread.isSuccessful()){
 			pluginDisplay.setPlugin(downloadThread.getPlugin());
+		}else{
+			pluginDisplay.setMessage("Invalid plugin name/password!");
+			pluginDisplay.setPlugin(null);
 		}
 	}
 

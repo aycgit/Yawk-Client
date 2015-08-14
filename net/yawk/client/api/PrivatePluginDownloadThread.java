@@ -3,6 +3,7 @@ package net.yawk.client.api;
 import java.io.IOException;
 
 import net.yawk.client.utils.ClientUtils;
+import net.yawk.client.utils.downloading.DownloadCallback;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,11 +19,13 @@ public class PrivatePluginDownloadThread implements Runnable{
 	private JsonObject response;
 	private boolean successful, running;
 	private String name, password;
+	private DownloadCallback callback;
 	
-	public PrivatePluginDownloadThread(String name, String password) {
+	public PrivatePluginDownloadThread(String name, String password, DownloadCallback callback) {
 		super();
 		this.name = name;
 		this.password = password;
+		this.callback = callback;
 	}
 
 	@Override
@@ -47,6 +50,7 @@ public class PrivatePluginDownloadThread implements Runnable{
 		}
 		
 		running = false;
+		callback.finished(this);
 	}
 
 	public PluginData getPlugin() {
