@@ -22,12 +22,14 @@ public class FilterableScrollPane extends ScrollPane{
 
 	public void applyFilter(String filter){
 		
+		filter = filter.toLowerCase();
+		
 		components.clear();
 		
 		if(filter.length() > 0){
 			
 			for(SelectorButton selectorButton : componentsPool){
-				if(selectorButton.getStaticText().contains(filter)){
+				if(selectorButton.getStaticText().toLowerCase().contains(filter)){
 					components.add(selectorButton);
 				}
 			}
