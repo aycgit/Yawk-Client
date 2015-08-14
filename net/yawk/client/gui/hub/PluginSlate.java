@@ -1,5 +1,7 @@
 package net.yawk.client.gui.hub;
 
+import java.io.IOException;
+
 import net.yawk.client.Client;
 import net.yawk.client.gui.components.SearchableTextField;
 import net.yawk.client.gui.components.TextField;
@@ -26,6 +28,11 @@ public class PluginSlate extends ComponentSlate{
 		options.addComponent(new SearchableTextField(options, "Search", pluginsPane));
 		options.addComponent(new PluginDownloadButton(options, system));
 		
+	}
+	
+	@Override
+	public void keyTyped(char c, int key) throws IOException {
+		options.keyPress(c, key);
 	}
 
 }
