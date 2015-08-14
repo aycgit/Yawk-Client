@@ -3,9 +3,11 @@ package net.yawk.client.gui.hub;
 import java.io.IOException;
 
 import net.yawk.client.Client;
+import net.yawk.client.gui.components.PluginDisplay;
 import net.yawk.client.gui.components.SearchableTextField;
 import net.yawk.client.gui.components.TextField;
 import net.yawk.client.gui.components.buttons.PluginDownloadButton;
+import net.yawk.client.gui.components.buttons.PrivatePluginDownloadButton;
 import net.yawk.client.gui.components.buttons.TextButton;
 import net.yawk.client.gui.components.scrolling.ModScrollPane;
 import net.yawk.client.gui.components.scrolling.PluginScrollPane;
@@ -27,14 +29,10 @@ public class PrivatePluginSlate extends ComponentSlate{
 		options.addComponent(new TextField(options, "Plugin Name"));
 		options.addComponent(new TextField(options, "Plugin Password"));
 		
-		options.addComponent(new TextButton(options, "Get Plugin", true){
-
-			@Override
-			public void toggle() {
-				
-			}
-			
-		});
+		PluginDisplay pluginDisplay;
+		options.addComponent(pluginDisplay = new PluginDisplay());
+		
+		options.addComponent(new PrivatePluginDownloadButton(options, pluginDisplay));
 	}
 
 	@Override
