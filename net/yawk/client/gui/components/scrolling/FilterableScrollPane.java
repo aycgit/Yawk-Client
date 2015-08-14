@@ -37,6 +37,5 @@ public class FilterableScrollPane extends ScrollPane{
 		}else{
 			components.addAll(componentsPool);
 		}
-		
 	}
 }

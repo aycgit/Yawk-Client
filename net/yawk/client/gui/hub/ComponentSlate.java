@@ -1,5 +1,7 @@
 package net.yawk.client.gui.hub;
 
+import java.io.IOException;
+
 import net.yawk.client.Client;
 import net.yawk.client.gui.Canvas;
 import net.yawk.client.gui.ScalerPosition;
@@ -47,6 +49,6 @@ public abstract class ComponentSlate extends Slate{
 	public void mouseReleased(int x, int y, int state) {
 		options.mouseReleased(x, y, state);
 	}
-	
+		
 	public abstract void init();
 }
