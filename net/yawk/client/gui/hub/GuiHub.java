@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.GuiScreen;
@@ -196,6 +197,8 @@ public class GuiHub extends GuiScreen {
 	@Override
 	public void initGui() {
 		
+		Keyboard.enableRepeatEvents(true);
+		
 		if(this.state == State.IDLE && slates.size() == 0){
 			connect();
 		}
@@ -218,6 +221,11 @@ public class GuiHub extends GuiScreen {
 		}
 	}
 	
+	@Override
+	public void onGuiClosed() {
+		Keyboard.enableRepeatEvents(false);
+	}
+
 	@Override
 	protected void mouseClicked(int x, int y, int b) throws IOException {
 		
