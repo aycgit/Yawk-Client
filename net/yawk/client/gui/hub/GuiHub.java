@@ -310,6 +310,7 @@ public class GuiHub extends GuiScreen {
 				@Override
 				public void toggle() {
 					setState(State.CONNECTED);
+					postConnection();
 				}
 				
 			});
