@@ -9,7 +9,7 @@ public class FlatTimer extends MillisecondTimer{
 	}
 	
 	public FlatTimer(int delay){
-		this.delay = 1000;
+		this.delay = delay;
 	}
 	
 	public MillisecondTimer setDelay(int delay) {
