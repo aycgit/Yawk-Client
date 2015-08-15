@@ -2,6 +2,7 @@ package net.yawk.client;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.util.logging.Logger;
 
@@ -37,6 +38,7 @@ import net.yawk.client.events.EventKeyPress;
 import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.hub.GuiHub;
 import net.yawk.client.hooks.EntityPlayerSPHook;
+import net.yawk.client.hooks.RenderGlobalHook;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModManager;
 import net.yawk.client.modmanager.values.ValuesRegistry;
@@ -66,8 +68,10 @@ public class Client {
 	
 	public void init(){
 		
+		initHooks(this.mc);
+		
 		//TODO: READ USERNAME AND PASSWORD FROM FILE
-		//TODO: CLIENT AUTHENTICATION
+		//TODO: AUTHENTICATION
 		session = new ClientSession("Name", "348443568", false);
 		
 		logger = Logger.getGlobal();
@@ -110,6 +114,12 @@ public class Client {
 				fileManager.save();
 			}
 		});
+	}
+	
+	private void initHooks(Minecraft mc){
+		
+		mc.renderGlobal = new RenderGlobalHook(mc);
+		
 	}
 	
 	public void log(String print){
