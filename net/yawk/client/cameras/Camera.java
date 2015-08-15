@@ -1,21 +1,15 @@
 package net.yawk.client.cameras;
 
+import static org.lwjgl.opengl.GL11.*;
+
 import java.nio.IntBuffer;
 
-import org.lwjgl.opengl.ARBFramebufferObject;
-
-import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.EntityRenderer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.util.MovingObjectPosition;
-import net.yawk.client.Client;
 import net.yawk.client.utils.GuiUtils;
+
+import org.lwjgl.opengl.ARBFramebufferObject;
 
 public class Camera {
 	
