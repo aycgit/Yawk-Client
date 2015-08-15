@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import net.yawk.client.api.PluginData;
-import net.yawk.client.api.PrivatePluginDownloadThread;
+import net.yawk.client.api.PrivatePluginInformationThread;
 import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.components.PluginDisplay;
 import net.yawk.client.gui.components.TextField;
@@ -21,7 +21,7 @@ import net.yawk.client.utils.downloading.DownloadCallback;
 public class PrivatePluginDownloadButton extends Button implements DownloadCallback{
 
 	private PluginDisplay pluginDisplay;
-	private PrivatePluginDownloadThread downloadThread;
+	private PrivatePluginInformationThread downloadThread;
 	private TextField nameField, passwordField;
 	
 	public PrivatePluginDownloadButton(IPanel win, PluginDisplay pluginDisplay, TextField nameField, TextField passwordField) {
@@ -45,7 +45,7 @@ public class PrivatePluginDownloadButton extends Button implements DownloadCallb
 	public void toggle() {
 		
 		if(downloadThread == null || (downloadThread != null && !downloadThread.isRunning())){
-			new Thread(downloadThread = new PrivatePluginDownloadThread(nameField.getText(), passwordField.getText(), this)).start();
+			new Thread(downloadThread = new PrivatePluginInformationThread(nameField.getText(), passwordField.getText(), this)).start();
 		}
 		
 	}

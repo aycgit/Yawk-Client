@@ -13,7 +13,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class PrivatePluginDownloadThread implements Runnable{
+public class PrivatePluginInformationThread implements Runnable{
 
 	private PluginData plugin;
 	private JsonObject response;
@@ -21,7 +21,7 @@ public class PrivatePluginDownloadThread implements Runnable{
 	private String name, password;
 	private DownloadCallback callback;
 	
-	public PrivatePluginDownloadThread(String name, String password, DownloadCallback callback) {
+	public PrivatePluginInformationThread(String name, String password, DownloadCallback callback) {
 		super();
 		this.name = name;
 		this.password = password;
@@ -42,11 +42,17 @@ public class PrivatePluginDownloadThread implements Runnable{
 			successful = response.has("status") && response.get("status").getAsBoolean();
 			
 			if(successful){
-				plugin = new PluginData(response.get("name").getAsString(), response.get("description").getAsString(), response.get("file").getAsString(), response.get("filename").getAsString(), response.get("version").getAsInt(), false);
+				plugin = new PluginData(response.get("name").getAsString(),
+						response.get("description").getAsString(),
+						response.get("file").getAsString(),
+						response.get("filename").getAsString(),
+						response.get("version").getAsInt(),
+						false);
 			}
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			successful = false;
 		}
 		
 		running = false;
