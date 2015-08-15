@@ -60,7 +60,7 @@ public class GuiIngameHook extends GuiIngame{
 		camera.cameraRotationYaw = Client.getClient().getPlayer().rotationYaw;
 		camera.cameraRotationPitch = Client.getClient().getPlayer().rotationPitch;
 
-		camera.draw(0, 0, 200, 100);
+		camera.draw(0, 0, 180, 100);
 
 		camera.updateFramebuffer();
 		//map.draw();

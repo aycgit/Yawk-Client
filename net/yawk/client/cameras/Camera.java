@@ -82,7 +82,7 @@ public class Camera {
     public void updateFramebuffer(){
     	
     	//So we don't make a loop of rendering the cameras
-    	if(capturing){
+    	if(capturing || !mc.inGameHasFocus){
     		return;
     	}
     	
@@ -174,45 +174,12 @@ public class Camera {
     
     public void draw(double x, double y, double x1, double y1){
         
-    	//Notes to self when updating this to a new minecraft version
-    	//This code is taken from Minecraft.java in the method func_180510_a on line 889
-    	
-        GlStateManager.matrixMode(5889);
-        GlStateManager.loadIdentity();
-        GlStateManager.ortho(0.0D, mc.displayWidth, mc.displayHeight, 0.0D, 1000.0D, 3000.0D);
-        GlStateManager.matrixMode(5888);
-        GlStateManager.loadIdentity();
-        GlStateManager.translate(0.0F, 0.0F, -2000.0F);
-        GlStateManager.disableLighting();
-        GlStateManager.disableFog();
-        GlStateManager.disableDepth();
-        GlStateManager.func_179098_w();
-        
         glColor4f(1f, 1f, 1f, 1f);
         glBindTexture(GL_TEXTURE_2D, framebufferTexture);
         
-    	GuiUtils.drawFlippedTexturedModalRect(x*GuiUtils.scaleManager.getScaleFactor(), y*GuiUtils.scaleManager.getScaleFactor(), x1*GuiUtils.scaleManager.getScaleFactor(), y1*GuiUtils.scaleManager.getScaleFactor());
+    	GuiUtils.drawFlippedTexturedModalRect(x, y, x1, y1);
     	
     	//TODO: rebind font texture
-    	
-    	//Notes to self when updating this to a new minecraft version
-    	//This code is taken from Minecraft.java in the method func_180510_a on line 922
-    	//Unneeded or unwanted code has been commented out
-    	
-    	Tessellator var6 = Tessellator.getInstance();
-        WorldRenderer var7 = var6.getWorldRenderer();
-        
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        var7.func_178991_c(16777215);
-        //short var8 = 256;
-        //short var9 = 256;
-        //this.scaledTessellator((mc.displayWidth - var8) / 2, (mc.displayHeight - var9) / 2, 0, 0, var8, var9);
-        GlStateManager.disableLighting();
-        GlStateManager.disableFog();
-        //var4.unbindFramebuffer();
-        //var4.framebufferRender(var2.getScaledWidth() * var3, var2.getScaledHeight() * var3);
-        GlStateManager.enableAlpha();
-        GlStateManager.alphaFunc(516, 0.1F);
     }
     
     public static boolean isCapturing(){
