@@ -34,9 +34,9 @@ public class GuiIngameHook extends GuiIngame{
 	
 	@Override
 	public void func_175180_a(float p_175180_1_){
-		
-		super.func_175180_a(p_175180_1_);
 
+		super.func_175180_a(p_175180_1_);
+		
 		if(!hideClientMod.isEnabled()){
 			Client.getClient().getFontRenderer().drawStringWithShadow("Yawk" + EnumChatFormatting.GREEN + " v2.5" + EnumChatFormatting.LIGHT_PURPLE + " ("+(Client.getClient().getSession().isPremium()? "Premium":"Beta")+")", 3, 2, 0xFFFFFFFF, true);
 		}

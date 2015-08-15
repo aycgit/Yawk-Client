@@ -87,6 +87,7 @@ public class Camera {
     public void updateFramebuffer(){
     	
     	//So we don't make a loop of rendering the cameras
+    	//TODO: make this work when the game isn't in focus
     	if(capturing || !mc.inGameHasFocus){
     		return;
     	}
