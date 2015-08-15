@@ -30,8 +30,6 @@ public class GuiIngameHook extends GuiIngame{
 	
 	private EventGuiRender eventGuiRender = new EventGuiRender();
 	
-	//private Minimap map = new Minimap();
-	
 	private Camera camera = new Camera();
 	
 	@Override
@@ -63,6 +61,5 @@ public class GuiIngameHook extends GuiIngame{
 		camera.draw(0, 0, 180, 100);
 
 		camera.updateFramebuffer();
-		//map.draw();
 	}
 }

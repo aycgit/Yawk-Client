@@ -20,6 +20,7 @@ import net.yawk.client.utils.GuiUtils;
 public class Camera {
 	
 	private static boolean capturing;
+	private static int fontRendererID;
 	
 	//Taken from Framebuffer.java
 	//These won't need updating
@@ -33,6 +34,10 @@ public class Camera {
     public Camera(){
     	mc = Minecraft.getMinecraft();
     	createFrameBuffer();
+    	
+    	if(fontRendererID == 0){
+    		fontRendererID =  mc.getTextureManager().getTexture(mc.fontRendererObj.locationFontTexture).getGlTextureId();
+    	}
     }
     
     private void createFrameBuffer(){
@@ -179,7 +184,8 @@ public class Camera {
         
     	GuiUtils.drawFlippedTexturedModalRect(x, y, x1, y1);
     	
-    	//TODO: rebind font texture
+    	//Done so that the text rendered after the cameras will have the right texture
+		glBindTexture(GL_TEXTURE_2D, fontRendererID);
     }
     
     public static boolean isCapturing(){
