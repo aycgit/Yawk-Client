@@ -2,20 +2,18 @@ package net.yawk.client.api;
 
 public class PluginData {
 	
-	private String name;
-	private String description;
-	private String filePath;
-	private String fileName;
+	private String name, description, filePath, fileName;
 	private int version;
-	private boolean wasEnabled;
+	private boolean wasEnabled, privatePlugin;
 	
-	public PluginData(String name, String description, String filePath, String fileName, int version, boolean wasEnabled) {
+	public PluginData(String name, String description, String filePath, String fileName, int version, boolean wasEnabled, boolean privatePlugin) {
 		this.name = name;
 		this.description = description;
 		this.filePath = filePath;
 		this.fileName = fileName;
 		this.version = version;
 		this.wasEnabled = wasEnabled;
+		this.privatePlugin = privatePlugin;
 	}
 	
 	public String getName() {
@@ -40,6 +38,10 @@ public class PluginData {
 	
 	public boolean getWasEnabled() {
 		return wasEnabled;
+	}
+	
+	public boolean isPrivatePlugin() {
+		return privatePlugin;
 	}
 	
 	public String getPluginIdentifier(){

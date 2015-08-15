@@ -80,7 +80,7 @@ public class PluginManager {
 			for(JsonElement el : arr){
 
 				JsonObject json = el.getAsJsonObject();
-				pluginData.add(new PluginData(json.get("name").getAsString(), json.get("description").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), false));
+				pluginData.add(new PluginData(json.get("name").getAsString(), json.get("description").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), false, false));
 			}
 
 		} catch (IOException e) {
@@ -284,6 +284,20 @@ public class PluginManager {
 
 						} catch (IOException e) {
 							e.printStackTrace();
+						}
+						
+						if(data.isPrivatePlugin()){
+							try {
+								addPlugin(data);
+							} catch (MalformedURLException e) {
+								e.printStackTrace();
+							} catch (ClassNotFoundException e) {
+								e.printStackTrace();
+							} catch (InstantiationException e) {
+								e.printStackTrace();
+							} catch (IllegalAccessException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				}

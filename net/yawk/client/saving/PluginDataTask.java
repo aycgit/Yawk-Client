@@ -29,7 +29,7 @@ public class PluginDataTask implements DataTask{
 		
 		for(JsonElement el : arr){
 			JsonObject json = el.getAsJsonObject();
-			lastInstalledData.add(new PluginData(json.get("name").getAsString(), json.get("description").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), json.get("enabled").getAsBoolean()));
+			lastInstalledData.add(new PluginData(json.get("name").getAsString(), json.get("description").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), json.get("enabled").getAsBoolean(), json.get("privatePlugin").getAsBoolean()));
 		}
 		
 		//Check if a new update is available
@@ -85,6 +85,7 @@ public class PluginDataTask implements DataTask{
 			json.addProperty("filename", data.getFileName());
 			json.addProperty("version", data.getVersion());
 			json.addProperty("enabled", Client.getClient().getPluginManager().pluginWindows.containsKey(data));
+			json.addProperty("privatePlugin", data.isPrivatePlugin());
 			
 			arr.add(json);
 		}

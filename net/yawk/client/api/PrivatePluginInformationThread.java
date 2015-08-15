@@ -47,7 +47,8 @@ public class PrivatePluginInformationThread implements Runnable{
 						response.get("file").getAsString(),
 						response.get("filename").getAsString(),
 						response.get("version").getAsInt(),
-						false);
+						false,
+						true);
 			}
 			
 		} catch (Exception e) {
