@@ -1,34 +1,15 @@
 package net.yawk.client.gui.components.buttons;
 
-import java.io.IOException;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import net.yawk.client.api.PluginData;
-import net.yawk.client.api.PrivatePluginInformationThread;
+import net.yawk.client.Client;
 import net.yawk.client.gui.IPanel;
-import net.yawk.client.gui.components.PluginDisplay;
-import net.yawk.client.gui.components.TextField;
-import net.yawk.client.utils.ClientUtils;
-import net.yawk.client.utils.downloading.DownloadCallback;
 
-public class PrivatePluginDownloadButton extends Button implements DownloadCallback{
+public class PrivatePluginDownloadButton extends Button{
 
-	private PluginDisplay pluginDisplay;
-	private PrivatePluginInformationThread downloadThread;
-	private TextField nameField, passwordField;
+	private PrivatePluginInformationButton information;
 	
-	public PrivatePluginDownloadButton(IPanel win, PluginDisplay pluginDisplay, TextField nameField, TextField passwordField) {
+	public PrivatePluginDownloadButton(IPanel win, PrivatePluginInformationButton information) {
 		super(win);
-		this.pluginDisplay = pluginDisplay;
-		this.nameField = nameField;
-		this.passwordField = passwordField;
+		this.information = information;
 	}
 
 	@Override
@@ -44,26 +25,19 @@ public class PrivatePluginDownloadButton extends Button implements DownloadCallb
 	@Override
 	public void toggle() {
 		
-		if(downloadThread == null || (downloadThread != null && !downloadThread.isRunning())){
-			new Thread(downloadThread = new PrivatePluginInformationThread(nameField.getText(), passwordField.getText(), this)).start();
+		if(isPluginSelected()){
+			Client.getClient().getPluginManager().downloadPlugin(information.getDownloadThread().getPlugin());
 		}
 		
 	}
 
 	@Override
 	public String getText() {
-		return "Get plugin";
+		return isPluginSelected()? "Download plugin":"";
 	}
-
-	@Override
-	public void finished(Object download) {
-		
-		if(downloadThread.isSuccessful()){
-			pluginDisplay.setPlugin(downloadThread.getPlugin());
-		}else{
-			pluginDisplay.setMessage("Invalid plugin name/password!");
-			pluginDisplay.setPlugin(null);
-		}
+	
+	private boolean isPluginSelected(){
+		return information.getDownloadThread() != null && !information.getDownloadThread().isRunning() && information.getDownloadThread().getPlugin() != null;
 	}
 
 }

@@ -7,7 +7,7 @@ import net.yawk.client.gui.components.PluginDisplay;
 import net.yawk.client.gui.components.SearchableTextField;
 import net.yawk.client.gui.components.TextField;
 import net.yawk.client.gui.components.buttons.PluginDownloadButton;
-import net.yawk.client.gui.components.buttons.PrivatePluginDownloadButton;
+import net.yawk.client.gui.components.buttons.PrivatePluginInformationButton;
 import net.yawk.client.gui.components.buttons.TextButton;
 import net.yawk.client.gui.components.scrolling.ModScrollPane;
 import net.yawk.client.gui.components.scrolling.PluginScrollPane;
@@ -35,7 +35,7 @@ public class PrivatePluginSlate extends ComponentSlate{
 		
 		options.addComponent(pluginDisplay = new PluginDisplay());
 		
-		options.addComponent(new PrivatePluginDownloadButton(options, pluginDisplay, nameField, passwordField));
+		options.addComponent(new PrivatePluginInformationButton(options, pluginDisplay, nameField, passwordField));
 	}
 
 }
