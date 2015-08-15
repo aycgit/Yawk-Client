@@ -260,4 +260,17 @@ public class GuiUtils {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_CULL_FACE);
     }
+
+    public static void drawFlippedTexturedModalRect(double x, double y, double x1, double y1)
+    {
+        Tessellator tes = Tessellator.getInstance();
+        WorldRenderer wr = tes.getWorldRenderer();
+        
+        wr.startDrawing(GL11.GL_QUADS);
+        wr.addVertexWithUV(x, y1, 0, 0, 0);
+        wr.addVertexWithUV(x1, y1, 0, 1, 0);
+        wr.addVertexWithUV(x1, y, 0, 1, 1);
+        wr.addVertexWithUV(x, y, 0, 0, 1);
+        tes.draw();
+    }
 }
