@@ -1,5 +1,6 @@
 package net.yawk.client.gui.components;
 
+import net.yawk.client.Client;
 import net.yawk.client.cameras.Camera;
 import net.yawk.client.gui.Component;
 import net.yawk.client.gui.IPanel;
@@ -9,7 +10,7 @@ public class CameraDisplay extends Component{
 	
 	private IPanel panel;
 	private Camera camera;
-	private boolean draggingHeight, changed;
+	private boolean draggingHeight;
 	
 	public CameraDisplay(IPanel panel, Camera camera) {
 		super();
@@ -28,16 +29,24 @@ public class CameraDisplay extends Component{
 				camera.setHeight(200);
 			}
 			
-			if(camera.getHeight() < 0){
-				camera.setHeight(0);
+			if(camera.getHeight() < 30){
+				camera.setHeight(30);
 			}
 		}
 		
 		if(camera.isFrameBufferUpdated()){
 			camera.draw(cx, cy, cx+camera.getWidth()/2, cy+camera.getHeight()/2);
+		}else{
+			
+			String closeMessage = "Close GUI to update";
+			
+			Client.getClient().getFontRenderer().drawString(closeMessage,
+					cx+camera.getWidth()/4 - Client.getClient().getFontRenderer().getStringWidth(closeMessage)/2,
+					cy+camera.getHeight()/4 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
+					0xFFFFFFFF);
 		}
 		
-		GuiUtils.drawRect(cx+camera.getWidth()/4 - 15, cy+camera.getHeight()/2, cx+camera.getWidth()/4 + 15, cy+camera.getHeight()/2 + 8, 0x5F000000);
+		GuiUtils.drawRect(cx+camera.getWidth()/4 - 15, cy+camera.getHeight()/2, cx+camera.getWidth()/4 + 15, cy+camera.getHeight()/2 + 4, 0x5F000000);
 		
 	}
 	
@@ -60,7 +69,7 @@ public class CameraDisplay extends Component{
 	}
 	
 	private boolean mouseOverHeightSlider(int mouseX, int mouseY, int cx, int cy){
-		return mouseX > cx+camera.getWidth()/4-15 && mouseX < cx+camera.getWidth()/4+15 && mouseY > cy+camera.getHeight()/2 && mouseY < cy+camera.getHeight()/2+8;
+		return mouseX > cx+camera.getWidth()/4-15 && mouseX < cx+camera.getWidth()/4+15 && mouseY > cy+camera.getHeight()/2 && mouseY < cy+camera.getHeight()/2+4;
 	}
 
 	@Override
