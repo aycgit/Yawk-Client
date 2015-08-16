@@ -184,7 +184,6 @@ public class Camera {
     
     public void makeNewFrameBuffer(){
     	frameBuffer.createFramebuffer(width, height);
-    	frameBufferUpdated = false;
     }
     
 	public int getWidth() {
@@ -193,6 +192,7 @@ public class Camera {
 
 	public void setWidth(int width) {
 		this.width = width;
+    	frameBufferUpdated = false;
 	}
 
 	public int getHeight() {
@@ -201,6 +201,7 @@ public class Camera {
 
 	public void setHeight(int height) {
 		this.height = height;
+    	frameBufferUpdated = false;
 	}
 	
 	public boolean isFrameBufferUpdated() {
