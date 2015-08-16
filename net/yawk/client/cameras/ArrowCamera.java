@@ -32,12 +32,7 @@ public class ArrowCamera extends Camera{
 				}
 			}
 			
-			cameraPosX = mc.thePlayer.posX;
-			cameraPosY = mc.thePlayer.posY;
-			cameraPosZ = mc.thePlayer.posZ;
-			
-			cameraRotationYaw = mc.thePlayer.rotationYaw;
-			cameraRotationPitch = mc.thePlayer.rotationPitch;
+			setToEntityPositionAndRotation(mc.thePlayer);
 		}
 		
 		super.updateFramebuffer();
