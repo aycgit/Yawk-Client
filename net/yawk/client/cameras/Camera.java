@@ -22,19 +22,20 @@ public class Camera {
 	private static boolean capturing;
 	private static int fontRendererID;
 	
-	public static int WIDTH = 360, HEIGHT = 200;
+	private int width = 360, height = 200;
 	private Framebuffer frameBuffer;
 	
 	public float cameraRotationYaw, cameraRotationPitch;
     public double cameraPosX, cameraPosY, cameraPosZ;
+    private boolean frameBufferUpdated;
     
 	private Minecraft mc;
 	
     public Camera(){
     	mc = Minecraft.getMinecraft();
     	
-    	frameBuffer = new Framebuffer(WIDTH, HEIGHT, true);
-    	frameBuffer.createFramebuffer(WIDTH, HEIGHT);
+    	frameBuffer = new Framebuffer(width, height, true);
+    	frameBuffer.createFramebuffer(width, height);
     	
     	Client.getClient().registerCamera(this);
     	
@@ -106,8 +107,8 @@ public class Camera {
     	mc.renderViewEntity.prevPosZ = cameraPosZ;
     	mc.renderViewEntity.lastTickPosZ = cameraPosZ;
     	
-    	mc.displayWidth = WIDTH;
-    	mc.displayHeight = HEIGHT;
+    	mc.displayWidth = width;
+    	mc.displayHeight = height;
     	mc.renderViewEntity.rotationYaw = cameraRotationYaw;
     	mc.renderViewEntity.prevRotationYaw = cameraRotationYaw;
     	mc.renderViewEntity.rotationPitch = cameraRotationPitch;
@@ -146,6 +147,8 @@ public class Camera {
     	mc.renderViewEntity.posZ = posZ;
     	mc.renderViewEntity.prevPosZ = prevPosZ;
     	mc.renderViewEntity.lastTickPosZ = lastTickPosZ;
+    	
+    	frameBufferUpdated = true;
     }
     
     public void draw(double x, double y, double x1, double y1){
@@ -179,6 +182,31 @@ public class Camera {
 		cameraRotationPitch = e.rotationPitch;
     }
     
+    public void makeNewFrameBuffer(){
+    	frameBuffer.createFramebuffer(width, height);
+    	frameBufferUpdated = false;
+    }
+    
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	
+	public boolean isFrameBufferUpdated() {
+		return frameBufferUpdated;
+	}
+	
     public static boolean isCapturing(){
 		return capturing;
 	}

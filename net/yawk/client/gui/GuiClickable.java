@@ -81,11 +81,11 @@ public class GuiClickable extends GuiScreen {
 		windows.add(friends);
 		
 		Window rearview = new Window("Rearview", modManager, 85, 12);
-		rearview.addComponent(new CameraDisplay(new RearviewCamera()));
+		rearview.addComponent(new CameraDisplay(rearview, new RearviewCamera()));
 		windows.add(rearview);
 		
 		Window arrowview = new Window("ArrowView", modManager, 85, 12);
-		arrowview.addComponent(new CameraDisplay(new ArrowCamera()));
+		arrowview.addComponent(new CameraDisplay(arrowview, new ArrowCamera()));
 		windows.add(arrowview);
 				
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
