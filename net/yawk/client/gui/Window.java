@@ -39,6 +39,19 @@ public class Window implements IPanel{
 			posY = y+mouseYOffset;
 		}
 		
+		width = 0;
+		
+		int h = 0;
+		
+		for(Component c : components){
+			
+			h += c.getHeight();
+			
+			if(c.getWidth() > this.width){
+				this.width = c.getWidth();
+			}
+		}
+		
 		drawHeader(posX, posY, posX+width, posY+height);
 		
 		Client.getClient().getFontRenderer().drawStringWithShadow(title,
@@ -46,13 +59,7 @@ public class Window implements IPanel{
 				posY + height/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
 				ColourType.TITLE_TEXT.getColour(),
 				true);
-		
-		int h = 0;
-		
-		for(Component c : components){
-			h += c.getHeight();
-		}
-		
+				
 		if(extended){
 			drawBodyRect(posX, posY+height+Window.TITLE_COMPONENT_SPACE, posX+width, posY+height+TITLE_COMPONENT_SPACE+h);
 		}
@@ -187,11 +194,7 @@ public class Window implements IPanel{
 	}
 	
 	public void addComponent(Component c){
-		
 		this.components.add(c);
-		
-		if(c.getWidth() > this.width){
-			this.width = c.getWidth();
-		}
 	}
+	
 }

@@ -4,17 +4,18 @@ import net.yawk.client.Client;
 import net.yawk.client.cameras.Camera;
 import net.yawk.client.gui.Component;
 import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.Window;
 import net.yawk.client.utils.GuiUtils;
 
 public class CameraDisplay extends Component{
 	
-	private IPanel panel;
+	private Window window;
 	private Camera camera;
 	private boolean draggingHeight, draggingWidth;
 	
-	public CameraDisplay(IPanel panel, Camera camera) {
+	public CameraDisplay(Window window, Camera camera) {
 		super();
-		this.panel = panel;
+		this.window = window;
 		this.camera = camera;
 	}
 	
@@ -25,12 +26,12 @@ public class CameraDisplay extends Component{
 			
 			camera.setWidth((x - cx) * 2);
 			
-			if(camera.getWidth() > 400){
-				camera.setWidth(400);
+			if(camera.getWidth() > 600){
+				camera.setWidth(600);
 			}
 			
-			if(camera.getWidth() < 100){
-				camera.setWidth(100);
+			if(camera.getWidth() < 250){
+				camera.setWidth(250);
 			}
 		}
 		
@@ -38,8 +39,8 @@ public class CameraDisplay extends Component{
 			
 			camera.setHeight((y - cy) * 2);
 			
-			if(camera.getHeight() > 250){
-				camera.setHeight(250);
+			if(camera.getHeight() > 400){
+				camera.setHeight(400);
 			}
 			
 			if(camera.getHeight() < 30){
@@ -67,13 +68,14 @@ public class CameraDisplay extends Component{
 	@Override
 	public void mouseClicked(int x, int y, int cx, int cy) {
 		
+		if(mouseOverWidthSlider(x, y, cx, cy)){
+			draggingWidth = true;
+		}
+		
 		if(mouseOverHeightSlider(x, y, cx, cy)){
 			draggingHeight = true;
 		}
 		
-		if(mouseOverWidthSlider(x, y, cx, cy)){
-			draggingWidth = true;
-		}
 	}
 
 	@Override
