@@ -14,17 +14,17 @@ public class CameraDisplay extends Component{
 	
 	@Override
 	public void draw(int x, int y, int cx, int cy) {
-		camera.draw(cx, cy, cx+180, cy+100);
+		camera.draw(cx, cy, cx+Camera.WIDTH/2, cy+Camera.HEIGHT/2);
 	}
 	
 	@Override
 	public int getWidth() {
-		return 180;
+		return Camera.WIDTH/2;
 	}
 	
 	@Override
 	public int getHeight() {
-		return 100;
+		return Camera.HEIGHT/2;
 	}
 
 }

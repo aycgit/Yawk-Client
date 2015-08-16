@@ -22,9 +22,7 @@ public class Camera {
 	private static boolean capturing;
 	private static int fontRendererID;
 	
-	//Taken from Framebuffer.java
-	//These won't need updating
-	protected int framebufferTextureWidth = 360, framebufferTextureHeight = 200;
+	public static int WIDTH = 360, HEIGHT = 200;
 	private Framebuffer frameBuffer;
 	
 	public float cameraRotationYaw, cameraRotationPitch;
@@ -35,8 +33,8 @@ public class Camera {
     public Camera(){
     	mc = Minecraft.getMinecraft();
     	
-    	frameBuffer = new Framebuffer(framebufferTextureWidth, framebufferTextureHeight, true);
-    	frameBuffer.createFramebuffer(framebufferTextureWidth, framebufferTextureHeight);
+    	frameBuffer = new Framebuffer(WIDTH, HEIGHT, true);
+    	frameBuffer.createFramebuffer(WIDTH, HEIGHT);
     	
     	Client.getClient().registerCamera(this);
     	
@@ -108,8 +106,8 @@ public class Camera {
     	mc.renderViewEntity.prevPosZ = cameraPosZ;
     	mc.renderViewEntity.lastTickPosZ = cameraPosZ;
     	
-    	mc.displayWidth = framebufferTextureWidth;
-    	mc.displayHeight = framebufferTextureHeight;
+    	mc.displayWidth = WIDTH;
+    	mc.displayHeight = HEIGHT;
     	mc.renderViewEntity.rotationYaw = cameraRotationYaw;
     	mc.renderViewEntity.prevRotationYaw = cameraRotationYaw;
     	mc.renderViewEntity.rotationPitch = cameraRotationPitch;
