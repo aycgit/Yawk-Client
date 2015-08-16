@@ -187,6 +187,11 @@ public class Window implements IPanel{
 	}
 	
 	public void addComponent(Component c){
+		
 		this.components.add(c);
+		
+		if(c.getWidth() > this.width){
+			this.width = c.getWidth();
+		}
 	}
 }

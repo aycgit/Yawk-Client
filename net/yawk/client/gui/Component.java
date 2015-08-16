@@ -18,6 +18,10 @@ public abstract class Component {
 		
 	}
 	
+	public int getWidth(){
+		return 85;
+	}
+	
 	public abstract int getHeight();
 	
 }
