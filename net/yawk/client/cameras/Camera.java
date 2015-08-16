@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.client.shader.Framebuffer;
 import net.yawk.client.Client;
 import net.yawk.client.utils.GuiUtils;
 
@@ -22,7 +23,8 @@ public class Camera {
 	
 	//Taken from Framebuffer.java
 	//These won't need updating
-	protected int framebufferTextureWidth = 360, framebufferTextureHeight = 200, framebufferObject, framebufferTexture, depthBuffer;
+	protected int framebufferTextureWidth = 360, framebufferTextureHeight = 200;
+	private Framebuffer frameBuffer;
 	
 	public float cameraRotationYaw, cameraRotationPitch;
     public double cameraPosX, cameraPosY, cameraPosZ;
@@ -31,7 +33,9 @@ public class Camera {
 	
     public Camera(){
     	mc = Minecraft.getMinecraft();
-    	createFrameBuffer();
+    	
+    	frameBuffer = new Framebuffer(framebufferTextureWidth, framebufferTextureHeight, true);
+    	frameBuffer.createFramebuffer(framebufferTextureWidth, framebufferTextureHeight);
     	
     	Client.getClient().registerCamera(this);
     	
@@ -40,45 +44,12 @@ public class Camera {
     	}
     }
     
-    private void createFrameBuffer(){
-    	
-    	//Notes to self when updating this to a new minecraft version
-    	//This code is taken from Framebuffer.java in method createFramebuffer on line 101
-        this.framebufferObject = OpenGlHelper.func_153165_e();
-        this.framebufferTexture = TextureUtil.glGenTextures();
-        this.depthBuffer = OpenGlHelper.func_153185_f();
-        
-        //TODO: Use the mc code for the Framebuffer
-        glBindTexture(GL_TEXTURE_2D, framebufferTexture);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, framebufferTextureWidth, framebufferTextureHeight, 0, GL_RGBA, GL_INT,
-                (IntBuffer) null);
-        
-        glBindTexture(GL_TEXTURE_2D, depthBuffer);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, framebufferTextureWidth, framebufferTextureHeight, 0, GL_DEPTH_COMPONENT,
-                GL_INT, (IntBuffer) null);
-        
-        glBindTexture(GL_TEXTURE_2D, 0);
-    }
-    
     protected void setCapture(boolean capture){
     	
     	if(capture){
-    		
-            ARBFramebufferObject.glBindFramebuffer(ARBFramebufferObject.GL_DRAW_FRAMEBUFFER, framebufferObject);
-            
-            ARBFramebufferObject.glFramebufferTexture2D(ARBFramebufferObject.GL_DRAW_FRAMEBUFFER,
-                    ARBFramebufferObject.GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
-                    framebufferTexture, 0);
-            
-            ARBFramebufferObject.glFramebufferTexture2D(ARBFramebufferObject.GL_DRAW_FRAMEBUFFER,
-                    ARBFramebufferObject.GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
-                    depthBuffer, 0);
+    		frameBuffer.bindFramebuffer(true);
     	}else{
-            ARBFramebufferObject.glBindFramebuffer(ARBFramebufferObject.GL_DRAW_FRAMEBUFFER, 0);
+    		frameBuffer.unbindFramebuffer();
     	}
     	
     	capturing = capture;
@@ -180,13 +151,21 @@ public class Camera {
     
     public void draw(double x, double y, double x1, double y1){
     	
+    	//Note to self for updating
+    	//Taken from Framebuffer.java in method func_178038_a on line 234
+        GlStateManager.func_179098_w();
+        GlStateManager.disableLighting();
+        GlStateManager.disableAlpha();
+        
+        GlStateManager.disableBlend();
+        GlStateManager.enableColorMaterial();
+        
         glColor4f(1f, 1f, 1f, 1f);
-        glBindTexture(GL_TEXTURE_2D, framebufferTexture);
+        frameBuffer.bindFramebufferTexture();
         
     	GuiUtils.drawFlippedTexturedModalRect(x, y, x1, y1);
     	
-    	//Done so that the text rendered after the cameras will have the right texture
-		glBindTexture(GL_TEXTURE_2D, fontRendererID);
+    	frameBuffer.unbindFramebufferTexture();
     }
     
     public static boolean isCapturing(){

@@ -87,7 +87,7 @@ public class GuiClickable extends GuiScreen {
 		Window arrowview = new Window("ArrowView", modManager, 85, 12);
 		arrowview.addComponent(new CameraDisplay(new ArrowCamera()));
 		windows.add(arrowview);
-		
+				
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();
 	}
