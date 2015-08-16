@@ -14,6 +14,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.yawk.client.Client;
 import net.yawk.client.cameras.Camera;
+import net.yawk.client.cameras.RearviewCamera;
 import net.yawk.client.gui.components.*;
 import net.yawk.client.gui.components.buttons.FriendsExecuteButton;
 import net.yawk.client.gui.components.buttons.LinkButton;
@@ -90,7 +91,9 @@ public class GuiClickable extends GuiScreen {
 		
 		Window rearview = new Window("Rearview", modManager, 85, 12);
 		
-		rearview.addComponent(new CameraDisplay(new Camera()));
+		rearview.addComponent(new CameraDisplay(new RearviewCamera()));
+		
+		windows.add(rearview);
 		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();
