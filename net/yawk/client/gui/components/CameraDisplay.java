@@ -3,6 +3,7 @@ package net.yawk.client.gui.components;
 import net.yawk.client.Client;
 import net.yawk.client.cameras.Camera;
 import net.yawk.client.gui.Component;
+import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.IPanel;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.GuiUtils;
@@ -60,9 +61,10 @@ public class CameraDisplay extends Component{
 					0xFFFFFFFF);
 		}
 		
-		GuiUtils.drawRect(cx+camera.getWidth()/4 - 15, cy+camera.getHeight()/2, cx+camera.getWidth()/4 + 15, cy+camera.getHeight()/2 + 4, 0x5F000000);
-		
-		GuiUtils.drawRect(cx+camera.getWidth()/2, cy+camera.getHeight()/4-15, cx+camera.getWidth()/2+4, cy+camera.getHeight()/4+15, 0x5F000000);
+		if(Client.getClient().getMinecraft().currentScreen instanceof GuiClickable){
+			GuiUtils.drawRect(cx+camera.getWidth()/4 - 15, cy+camera.getHeight()/2, cx+camera.getWidth()/4 + 15, cy+camera.getHeight()/2 + 4, 0x5F000000);
+			GuiUtils.drawRect(cx+camera.getWidth()/2, cy+camera.getHeight()/4-15, cx+camera.getWidth()/2+4, cy+camera.getHeight()/4+15, 0x5F000000);
+		}
 	}
 	
 	@Override
