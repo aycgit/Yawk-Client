@@ -1,5 +1,7 @@
 package net.yawk.client.hooks;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.resources.IResourceManager;
@@ -10,7 +12,7 @@ public class EntityRendererHook extends EntityRenderer{
 	public EntityRendererHook(Minecraft mcIn, IResourceManager p_i45076_2_) {
 		super(mcIn, p_i45076_2_);
 	}
-
+	
 	@Override
 	public float getFOVModifier(float partialTicks, boolean p_78481_2_) {
 		

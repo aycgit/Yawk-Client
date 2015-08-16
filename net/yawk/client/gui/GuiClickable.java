@@ -13,20 +13,11 @@ import org.lwjgl.input.Keyboard;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.yawk.client.Client;
-import net.yawk.client.cameras.Camera;
-import net.yawk.client.cameras.RearviewCamera;
+import net.yawk.client.cameras.*;
 import net.yawk.client.gui.components.*;
-import net.yawk.client.gui.components.buttons.FriendsExecuteButton;
-import net.yawk.client.gui.components.buttons.LinkButton;
-import net.yawk.client.gui.components.buttons.ModButton;
-import net.yawk.client.gui.components.buttons.OptionsModButton;
-import net.yawk.client.gui.components.buttons.PluginDownloadButton;
-import net.yawk.client.gui.components.scrolling.FriendScrollPane;
-import net.yawk.client.gui.components.scrolling.PluginScrollPane;
-import net.yawk.client.gui.components.scrolling.ScrollPane;
-import net.yawk.client.gui.components.selectors.KeybindButton;
-import net.yawk.client.gui.components.selectors.SelectorButton;
-import net.yawk.client.gui.components.selectors.SelectorSystem;
+import net.yawk.client.gui.components.buttons.*;
+import net.yawk.client.gui.components.scrolling.*;
+import net.yawk.client.gui.components.selectors.*;
 import net.yawk.client.modmanager.*;
 
 public class GuiClickable extends GuiScreen {
@@ -90,10 +81,12 @@ public class GuiClickable extends GuiScreen {
 		windows.add(friends);
 		
 		Window rearview = new Window("Rearview", modManager, 85, 12);
-		
 		rearview.addComponent(new CameraDisplay(new RearviewCamera()));
-		
 		windows.add(rearview);
+		
+		Window arrowview = new Window("ArrowView", modManager, 85, 12);
+		arrowview.addComponent(new CameraDisplay(new ArrowCamera()));
+		windows.add(arrowview);
 		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();
