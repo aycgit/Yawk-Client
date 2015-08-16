@@ -27,11 +27,18 @@ public class Camera {
 	
 	public float cameraRotationYaw, cameraRotationPitch;
     public double cameraPosX, cameraPosY, cameraPosZ;
-    private boolean frameBufferUpdated;
+    private boolean frameBufferUpdated, reflected;
     
 	private Minecraft mc;
 	
-    public Camera(){
+	public Camera(){
+		this(false);
+	}
+	
+    public Camera(boolean reflected){
+    	
+    	this.reflected = reflected;
+    	
     	mc = Minecraft.getMinecraft();
     	
     	frameBuffer = new Framebuffer(width, height, true);
@@ -165,8 +172,12 @@ public class Camera {
         glColor4f(1f, 1f, 1f, 1f);
         frameBuffer.bindFramebufferTexture();
         
-    	GuiUtils.drawFlippedTexturedModalRect(x, y, x1, y1);
-    	
+        if(reflected){
+        	GuiUtils.drawReflectedTexturedRect(x, y, x1, y1);
+        }else{
+        	GuiUtils.drawFlippedTexturedModalRect(x, y, x1, y1);
+        }
+        
     	frameBuffer.unbindFramebufferTexture();
     }
     
@@ -208,6 +219,11 @@ public class Camera {
 		return frameBufferUpdated;
 	}
 	
+    public Camera setReflected(boolean reflected){
+    	this.reflected = reflected;
+    	return this;
+    }
+    
     public static boolean isCapturing(){
 		return capturing;
 	}

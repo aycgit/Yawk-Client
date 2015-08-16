@@ -8,7 +8,7 @@ public class RearviewCamera extends Camera{
 	private Minecraft mc;
 	
 	public RearviewCamera(){
-		super();
+		super(true);
 		mc = Minecraft.getMinecraft();
 	}
 
