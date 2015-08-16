@@ -69,7 +69,7 @@ public class CameraDisplay extends Component{
 	}
 	
 	private boolean mouseOverHeightSlider(int mouseX, int mouseY, int cx, int cy){
-		return mouseX > cx+camera.getWidth()/4-15 && mouseX < cx+camera.getWidth()/4+15 && mouseY > cy+camera.getHeight()/2 && mouseY < cy+camera.getHeight()/2+4;
+		return mouseX > cx+camera.getWidth()/4-15 && mouseX <= cx+camera.getWidth()/4+15 && mouseY > cy+camera.getHeight()/2 && mouseY <= cy+camera.getHeight()/2+4;
 	}
 
 	@Override
