@@ -44,7 +44,7 @@ public class ArrowCamera extends Camera{
 				&& !currentArrow.inGround
 				&& !currentArrow.isCollided
 				&& !currentArrow.isDead
-				&& currentArrow.getDistanceToEntity(mc.thePlayer) < 500
+				&& currentArrow.getDistanceToEntity(mc.thePlayer) < 1000
 				&& mc.theWorld.loadedEntityList.contains(currentArrow);
 	}
 }
