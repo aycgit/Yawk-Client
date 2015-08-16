@@ -26,8 +26,8 @@ public class CameraDisplay extends Component{
 			
 			camera.setWidth((x - cx) * 2);
 			
-			if(camera.getWidth() > 600){
-				camera.setWidth(600);
+			if(camera.getWidth() > 800){
+				camera.setWidth(800);
 			}
 			
 			if(camera.getWidth() < 250){
@@ -39,12 +39,12 @@ public class CameraDisplay extends Component{
 			
 			camera.setHeight((y - cy) * 2);
 			
-			if(camera.getHeight() > 400){
-				camera.setHeight(400);
+			if(camera.getHeight() > 600){
+				camera.setHeight(600);
 			}
 			
-			if(camera.getHeight() < 30){
-				camera.setHeight(30);
+			if(camera.getHeight() < 60){
+				camera.setHeight(60);
 			}
 		}
 		
