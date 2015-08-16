@@ -25,8 +25,8 @@ public class CameraDisplay extends Component{
 			
 			camera.setHeight((y - cy) * 2);
 			
-			if(camera.getHeight() > 200){
-				camera.setHeight(200);
+			if(camera.getHeight() > 250){
+				camera.setHeight(250);
 			}
 			
 			if(camera.getHeight() < 30){
@@ -69,7 +69,7 @@ public class CameraDisplay extends Component{
 	}
 	
 	private boolean mouseOverHeightSlider(int mouseX, int mouseY, int cx, int cy){
-		return mouseX > cx+camera.getWidth()/4-15 && mouseX <= cx+camera.getWidth()/4+15 && mouseY > cy+camera.getHeight()/2 && mouseY <= cy+camera.getHeight()/2+4;
+		return mouseX > cx+camera.getWidth()/4-15 && mouseX <= cx+camera.getWidth()/4+15 && mouseY > cy+camera.getHeight()/2 && mouseY <= cy+camera.getHeight()/2+5;
 	}
 
 	@Override
