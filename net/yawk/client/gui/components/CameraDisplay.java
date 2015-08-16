@@ -10,7 +10,7 @@ public class CameraDisplay extends Component{
 	
 	private IPanel panel;
 	private Camera camera;
-	private boolean draggingHeight;
+	private boolean draggingHeight, draggingWidth;
 	
 	public CameraDisplay(IPanel panel, Camera camera) {
 		super();
@@ -20,6 +20,19 @@ public class CameraDisplay extends Component{
 	
 	@Override
 	public void draw(int x, int y, int cx, int cy) {
+		
+		if(draggingWidth){
+			
+			camera.setWidth((x - cx) * 2);
+			
+			if(camera.getWidth() > 400){
+				camera.setWidth(400);
+			}
+			
+			if(camera.getWidth() < 100){
+				camera.setWidth(100);
+			}
+		}
 		
 		if(draggingHeight){
 			
@@ -48,6 +61,7 @@ public class CameraDisplay extends Component{
 		
 		GuiUtils.drawRect(cx+camera.getWidth()/4 - 15, cy+camera.getHeight()/2, cx+camera.getWidth()/4 + 15, cy+camera.getHeight()/2 + 4, 0x5F000000);
 		
+		GuiUtils.drawRect(cx+camera.getWidth()/2, cy+camera.getHeight()/4-15, cx+camera.getWidth()/2+4, cy+camera.getHeight()/4+15, 0x5F000000);
 	}
 	
 	@Override
@@ -56,22 +70,31 @@ public class CameraDisplay extends Component{
 		if(mouseOverHeightSlider(x, y, cx, cy)){
 			draggingHeight = true;
 		}
+		
+		if(mouseOverWidthSlider(x, y, cx, cy)){
+			draggingWidth = true;
+		}
 	}
 
 	@Override
 	public void mouseReleased(int mouseX, int mouseY, int state) {
 		
-		if(draggingHeight){
+		if(draggingWidth || draggingHeight){
 			camera.makeNewFrameBuffer();
 		}
 		
+		draggingWidth = false;
 		draggingHeight = false;
 	}
 	
 	private boolean mouseOverHeightSlider(int mouseX, int mouseY, int cx, int cy){
 		return mouseX > cx+camera.getWidth()/4-15 && mouseX <= cx+camera.getWidth()/4+15 && mouseY > cy+camera.getHeight()/2 && mouseY <= cy+camera.getHeight()/2+5;
 	}
-
+	
+	private boolean mouseOverWidthSlider(int mouseX, int mouseY, int cx, int cy){
+		return mouseX > cx+camera.getWidth()/2 && mouseX <= cx+camera.getWidth()/2+5 && mouseY > cy+camera.getHeight()/4-15 && mouseY <= cy+camera.getHeight()/4+15;
+	}
+	
 	@Override
 	public int getWidth() {
 		return camera.getWidth()/2;
