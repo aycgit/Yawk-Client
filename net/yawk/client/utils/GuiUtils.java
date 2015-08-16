@@ -69,16 +69,19 @@ public class GuiUtils {
 		GuiUtils.drawBorderedRect(x, y, x1, y1, 2, ColourType.BORDER.getModifiedColour(), ColourType.TITLE.getColour());
 	}
 	
-	public static void drawBottomNodusRect(float x, float y, float x1, float y1) {		
+	public static void drawBottomNodusRect(float x, float y, float x1, float y1, boolean titleVisible) {		
 		//GuiUtils.drawRect(par1 - 2.0F, par2 /*- 2.0F*/, par3 + 2.0F, par4 + 2.0F, 0x5FFFFFFF);
 		GuiUtils.drawRect(x, y, x1, y1, 0x9F000000);
-		
+
 		int lw = 2;
-		
-		//Cuts off the top border
-		//GuiUtils.drawRect(x, y - lw, x1, y, 0x5FFFFFFF);
+
+		if(!titleVisible){
+			//Cuts off the top border
+			GuiUtils.drawRect(x - lw, y - lw, x1 + lw, y, ColourType.BORDER.getModifiedColour());
+		}
+
 		GuiUtils.drawRect(x, y1, x1, y1 + lw, ColourType.BORDER.getModifiedColour());
-		
+
 		GuiUtils.drawRect(x - lw, y, x, y1 + lw, ColourType.BORDER.getModifiedColour());
 		GuiUtils.drawRect(x1, y, x1 + lw, y1 + lw, ColourType.BORDER.getModifiedColour());
 	}

@@ -49,7 +49,7 @@ public class Camera {
     	mc = Minecraft.getMinecraft();
     	
     	frameBuffer = new Framebuffer(width, height, true);
-    	frameBuffer.createFramebuffer(width, height);
+    	makeNewFrameBuffer();
     	
     	Client.getClient().registerCamera(this);
     	
@@ -205,7 +205,7 @@ public class Camera {
     public void makeNewFrameBuffer(){
     	frameBuffer.createFramebuffer(width, height);
     }
-    	
+    
 	public int getWidth() {
 		return width;
 	}

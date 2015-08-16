@@ -32,7 +32,7 @@ public class Window implements IPanel{
 		this.modManager = modManager;
 	}
 	
-	public void renderWindow(int x, int y) {
+	public void renderWindow(int x, int y, boolean titleVisible) {
 		
 		if(dragging){
 			posX = x+mouseXOffset;
@@ -52,26 +52,29 @@ public class Window implements IPanel{
 			}
 		}
 		
-		drawHeader(posX, posY, posX+width, posY+height);
+		if(titleVisible){
+			
+			drawHeader(posX, posY, posX+width, posY+height);
+			
+			Client.getClient().getFontRenderer().drawStringWithShadow(title,
+					posX + 3,
+					posY + height/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
+					ColourType.TITLE_TEXT.getColour(),
+					true);
+			
+			//Toggle extension
+			if(hasExtensionButton()){
+				drawButton(posX+width-10, posY+2, posX+width-2, posY+height-2, extended);
+			}
+			
+			//Toggle pinned
+			if(hasPinnedButton()){
+				drawButton(posX+width-22, posY+2, posX+width-14, posY+height-2, pinned);
+			}
+		}
 		
-		Client.getClient().getFontRenderer().drawStringWithShadow(title,
-				posX + 3,
-				posY + height/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
-				ColourType.TITLE_TEXT.getColour(),
-				true);
-				
 		if(extended){
-			drawBodyRect(posX, posY+height+Window.TITLE_COMPONENT_SPACE, posX+width, posY+height+TITLE_COMPONENT_SPACE+h);
-		}
-		
-		//Toggle extension
-		if(hasExtensionButton()){
-			drawButton(posX+width-10, posY+2, posX+width-2, posY+height-2, extended);
-		}
-		
-		//Toggle pinned
-		if(hasPinnedButton()){
-			drawButton(posX+width-22, posY+2, posX+width-14, posY+height-2, pinned);
+			drawBodyRect(posX, posY+height+Window.TITLE_COMPONENT_SPACE, posX+width, posY+height+TITLE_COMPONENT_SPACE+h, titleVisible);
 		}
 		
 		if(extended){
@@ -93,8 +96,8 @@ public class Window implements IPanel{
 		GuiUtils.drawTopNodusRect(posX, posY, posX+width, posY+height);
 	}
 	
-	protected void drawBodyRect(int x, int y, int x1, int y1){
-		GuiUtils.drawBottomNodusRect(x, y, x1, y1);
+	protected void drawBodyRect(int x, int y, int x1, int y1, boolean titleVisible){
+		GuiUtils.drawBottomNodusRect(x, y, x1, y1, titleVisible);
 	}
 	
 	public void mouseClicked(int x, int y) {
@@ -166,7 +169,7 @@ public class Window implements IPanel{
 	}
 	
 	public boolean mouseOverTitle(int x, int y){
-		return x >= posX && x <= posX+width && y >= posY && y <= posY+height;
+		return x >= posX && x <= posX+width && y >= posY && y <= posY+height+TITLE_COMPONENT_SPACE;
 	}
 	
 	public boolean mouseOverToggleExtension(int x, int y){

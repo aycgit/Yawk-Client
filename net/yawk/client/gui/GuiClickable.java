@@ -80,7 +80,7 @@ public class GuiClickable extends GuiScreen {
 		
 		windows.add(friends);
 		
-		Window rearview = new Window("Rearview Mirror", modManager, 85, 12);
+		Window rearview = new Window("Rearview", modManager, 85, 12);
 		rearview.addComponent(new CameraDisplay(rearview, new RearviewCamera(rearview)));
 		windows.add(rearview);
 		
@@ -106,7 +106,7 @@ public class GuiClickable extends GuiScreen {
 	public void drawScreen(int x, int y, float f){
 		
 		for(Window w : windows){
-			w.renderWindow(x, y);
+			w.renderWindow(x, y, true);
 		}
 		
 	}

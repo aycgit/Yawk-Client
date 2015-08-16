@@ -31,8 +31,8 @@ public class CameraDisplay extends Component{
 				camera.setWidth(800);
 			}
 			
-			if(camera.getWidth() < 250){
-				camera.setWidth(250);
+			if(camera.getWidth() < 120){
+				camera.setWidth(120);
 			}
 		}
 		
@@ -53,17 +53,23 @@ public class CameraDisplay extends Component{
 			camera.draw(cx, cy, cx+camera.getWidth()/2, cy+camera.getHeight()/2);
 		}else{
 			
-			String closeMessage = "Close GUI to update";
+			String closeMessage = "Close GUI";
+			String updateMessage = "to update";
 			
 			Client.getClient().getFontRenderer().drawString(closeMessage,
 					cx+camera.getWidth()/4 - Client.getClient().getFontRenderer().getStringWidth(closeMessage)/2,
-					cy+camera.getHeight()/4 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
+					cy+camera.getHeight()/4 - Client.getClient().getFontRenderer().FONT_HEIGHT/2 - 6,
+					0xFFFFFFFF);
+			
+			Client.getClient().getFontRenderer().drawString(updateMessage,
+					cx+camera.getWidth()/4 - Client.getClient().getFontRenderer().getStringWidth(updateMessage)/2,
+					cy+camera.getHeight()/4 - Client.getClient().getFontRenderer().FONT_HEIGHT/2 + 6,
 					0xFFFFFFFF);
 		}
 		
 		if(Client.getClient().getMinecraft().currentScreen instanceof GuiClickable){
-			GuiUtils.drawRect(cx+camera.getWidth()/4 - 15, cy+camera.getHeight()/2, cx+camera.getWidth()/4 + 15, cy+camera.getHeight()/2 + 4, 0x5F000000);
-			GuiUtils.drawRect(cx+camera.getWidth()/2, cy+camera.getHeight()/4-15, cx+camera.getWidth()/2+4, cy+camera.getHeight()/4+15, 0x5F000000);
+			GuiUtils.drawRect(cx+camera.getWidth()/4 - 15, cy+camera.getHeight()/2, cx+camera.getWidth()/4 + 15, cy+camera.getHeight()/2 + 4, 0x5FFFFFFF);
+			GuiUtils.drawRect(cx+camera.getWidth()/2, cy+camera.getHeight()/4-15, cx+camera.getWidth()/2+4, cy+camera.getHeight()/4+15, 0x5FFFFFFF);
 		}
 	}
 	
