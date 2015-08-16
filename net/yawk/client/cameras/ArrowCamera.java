@@ -17,9 +17,9 @@ public class ArrowCamera extends Camera{
 		
 		if(isArrowAlive()){
 			
-			cameraPosX = currentArrow.posX;
-			cameraPosY = currentArrow.posY;
-			cameraPosZ = currentArrow.posZ;
+			cameraPosX = currentArrow.posX + (currentArrow.posX-currentArrow.lastTickPosX)*mc.timer.elapsedPartialTicks;
+			cameraPosY = currentArrow.posY + (currentArrow.posY-currentArrow.lastTickPosY)*mc.timer.elapsedPartialTicks;
+			cameraPosZ = currentArrow.posZ + (currentArrow.posZ-currentArrow.lastTickPosZ)*mc.timer.elapsedPartialTicks;
 			cameraRotationYaw = currentArrow.rotationYaw+90;
 			cameraRotationPitch = currentArrow.rotationPitch+180;
 			
