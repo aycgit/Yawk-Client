@@ -1,9 +1,13 @@
 package net.yawk.client;
 
+import io.netty.buffer.Unpooled;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.apache.commons.codec.binary.Base64;
@@ -25,15 +29,18 @@ import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.client.C11PacketEnchantItem;
 import net.minecraft.network.play.client.C16PacketClientStatus;
+import net.minecraft.network.play.client.C17PacketCustomPayload;
 import net.minecraft.network.play.client.C18PacketSpectate;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHealth;
 import net.minecraft.util.ResourceLocation;
 import net.yawk.client.api.PluginManager;
+import net.yawk.client.cameras.Camera;
 import net.yawk.client.events.EventKeyPress;
 import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.hub.GuiHub;
@@ -62,9 +69,11 @@ public class Client {
 	private FileManager fileManager;
 	private ValuesRegistry valuesRegistry;
 	private Logger logger;
-	
+	private List<Camera> cameras;
+		
 	public Client(Minecraft mc){
 		this.mc = mc;
+		cameras = new ArrayList<Camera>();
 	}
 	
 	public void init(){
@@ -184,7 +193,7 @@ public class Client {
 		if(key == Keyboard.KEY_X){
 			mc.displayGuiScreen(hub);
 		}
-		
+				
 		if(mc.currentScreen == null){
 			for(Mod m : modManager.mods){
 				if(m.getKeybind() == key){
@@ -217,5 +226,13 @@ public class Client {
 	
 	public ValuesRegistry getValuesRegistry() {
 		return valuesRegistry;
+	}
+	
+	public List<Camera> getCameras() {
+		return cameras;
+	}
+	
+	public void registerCamera(Camera camera){
+		cameras.add(camera);
 	}
 }

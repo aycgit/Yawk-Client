@@ -13,6 +13,7 @@ import org.lwjgl.input.Keyboard;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.yawk.client.Client;
+import net.yawk.client.cameras.Camera;
 import net.yawk.client.gui.components.*;
 import net.yawk.client.gui.components.buttons.FriendsExecuteButton;
 import net.yawk.client.gui.components.buttons.LinkButton;
@@ -86,6 +87,10 @@ public class GuiClickable extends GuiScreen {
 		friends.addComponent(new FriendsExecuteButton(friends, friendsSystem));
 		
 		windows.add(friends);
+		
+		Window rearview = new Window("Rearview", modManager, 85, 12);
+		
+		rearview.addComponent(new CameraDisplay(new Camera()));
 		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();

@@ -1,12 +1,14 @@
 package net.yawk.client.cameras;
 
 import static org.lwjgl.opengl.GL11.*;
+import io.netty.buffer.Unpooled;
 
 import java.nio.IntBuffer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.TextureUtil;
+import net.yawk.client.Client;
 import net.yawk.client.utils.GuiUtils;
 
 import org.lwjgl.opengl.ARBFramebufferObject;
@@ -28,6 +30,8 @@ public class Camera {
     public Camera(){
     	mc = Minecraft.getMinecraft();
     	createFrameBuffer();
+    	
+    	Client.getClient().registerCamera(this);
     	
     	if(fontRendererID == 0){
     		fontRendererID =  mc.getTextureManager().getTexture(mc.fontRendererObj.locationFontTexture).getGlTextureId();

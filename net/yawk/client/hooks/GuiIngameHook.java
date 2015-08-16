@@ -1,5 +1,8 @@
 package net.yawk.client.hooks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.darkmagician6.eventapi.EventManager;
 
 import net.minecraft.client.Minecraft;
@@ -30,8 +33,6 @@ public class GuiIngameHook extends GuiIngame{
 	
 	private EventGuiRender eventGuiRender = new EventGuiRender();
 	
-	private Camera camera = new Camera();
-	
 	@Override
 	public void func_175180_a(float p_175180_1_){
 
@@ -50,16 +51,18 @@ public class GuiIngameHook extends GuiIngame{
 		}
 
 		EventManager.call(eventGuiRender);
-
+		
+		/*
 		camera.cameraPosX = Client.getClient().getPlayer().posX;
 		camera.cameraPosY = Client.getClient().getPlayer().posY;
 		camera.cameraPosZ = Client.getClient().getPlayer().posZ;
 
-		camera.cameraRotationYaw = Client.getClient().getPlayer().rotationYaw;
+		camera.cameraRotationYaw = Client.getClient().getPlayer().rotationYaw+180;
 		camera.cameraRotationPitch = Client.getClient().getPlayer().rotationPitch;
-
-		camera.draw(0, 0, 180, 100);
-
-		camera.updateFramebuffer();
+		*/
+		
+		for(Camera camera : Client.getClient().getCameras()){
+			camera.updateFramebuffer();
+		}
 	}
 }
