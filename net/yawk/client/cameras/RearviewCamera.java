@@ -15,9 +15,7 @@ public class RearviewCamera extends Camera{
 	@Override
 	public void updateFramebuffer() {
 		
-		cameraPosX = mc.thePlayer.posX;
-		cameraPosY = mc.thePlayer.posY;
-		cameraPosZ = mc.thePlayer.posZ;
+		setToEntityPosition(mc.thePlayer);
 		
 		cameraRotationYaw = mc.thePlayer.rotationYaw+180;
 		cameraRotationPitch = mc.thePlayer.rotationPitch;

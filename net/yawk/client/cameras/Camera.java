@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.shader.Framebuffer;
+import net.minecraft.entity.Entity;
 import net.yawk.client.Client;
 import net.yawk.client.utils.GuiUtils;
 
@@ -166,6 +167,18 @@ public class Camera {
     	GuiUtils.drawFlippedTexturedModalRect(x, y, x1, y1);
     	
     	frameBuffer.unbindFramebufferTexture();
+    }
+    
+    protected void setToEntityPosition(Entity e){
+		cameraPosX = e.posX + (e.posX-e.lastTickPosX)*mc.timer.elapsedPartialTicks;
+		cameraPosY = e.posY + (e.posY-e.lastTickPosY)*mc.timer.elapsedPartialTicks;
+		cameraPosZ = e.posZ + (e.posZ-e.lastTickPosZ)*mc.timer.elapsedPartialTicks;
+    }
+    
+    protected void setToEntityPositionAndRotation(Entity e){
+    	setToEntityPosition(e);
+		cameraRotationYaw = e.rotationYaw;
+		cameraRotationPitch = e.rotationPitch;
     }
     
     public static boolean isCapturing(){
