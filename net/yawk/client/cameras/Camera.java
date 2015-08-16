@@ -170,9 +170,9 @@ public class Camera {
     }
     
     protected void setToEntityPosition(Entity e){
-		cameraPosX = e.posX + (e.posX-e.lastTickPosX)*mc.timer.elapsedPartialTicks;
-		cameraPosY = e.posY + (e.posY-e.lastTickPosY)*mc.timer.elapsedPartialTicks;
-		cameraPosZ = e.posZ + (e.posZ-e.lastTickPosZ)*mc.timer.elapsedPartialTicks;
+		cameraPosX = e.lastTickPosX - (e.lastTickPosX-e.posX)*mc.timer.elapsedPartialTicks;
+		cameraPosY = e.lastTickPosY - (e.lastTickPosY-e.posY)*mc.timer.elapsedPartialTicks;
+		cameraPosZ = e.lastTickPosZ - (e.lastTickPosZ-e.posZ)*mc.timer.elapsedPartialTicks;
     }
     
     protected void setToEntityPositionAndRotation(Entity e){
