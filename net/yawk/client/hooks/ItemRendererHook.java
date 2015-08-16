@@ -12,9 +12,7 @@ public class ItemRendererHook extends ItemRenderer{
 	
 	@Override
     public void renderFireInFirstPerson(float f){
-		
-		System.out.println("hook render fire");
-		
+				
     	if(!Camera.isCapturing()){
     		super.renderFireInFirstPerson(f);
     	}
