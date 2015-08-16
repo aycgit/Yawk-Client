@@ -91,14 +91,7 @@ public class Camera {
     	if(capturing || !mc.inGameHasFocus){
     		return;
     	}
-    	
-    	System.out.println("===== CAMERA =====");
-    	System.out.println("posX: "+cameraPosX);
-    	System.out.println("posY: "+cameraPosY);
-    	System.out.println("posZ: "+cameraPosZ);
-    	System.out.println("yaw: "+cameraRotationYaw);
-    	System.out.println("pitch: "+cameraRotationPitch);
-    	
+    	    	
     	//Saves the player's current position and game settings
     	
     	double posX, posY, posZ, prevPosX, prevPosY, prevPosZ, lastTickPosX, lastTickPosY, lastTickPosZ;
