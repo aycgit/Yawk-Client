@@ -3,6 +3,7 @@ package net.yawk.client.gui.components;
 import net.yawk.client.cameras.Camera;
 import net.yawk.client.gui.Component;
 import net.yawk.client.gui.IPanel;
+import net.yawk.client.utils.GuiUtils;
 
 public class CameraDisplay extends Component{
 	
@@ -36,6 +37,8 @@ public class CameraDisplay extends Component{
 			camera.draw(cx, cy, cx+camera.getWidth()/2, cy+camera.getHeight()/2);
 		}
 		
+		GuiUtils.drawRect(cx+camera.getWidth()/4 - 15, cy+camera.getHeight()/2, cx+camera.getWidth()/4 + 15, cy+camera.getHeight()/2 + 8, 0x5F000000);
+		
 	}
 	
 	@Override
@@ -57,7 +60,7 @@ public class CameraDisplay extends Component{
 	}
 	
 	private boolean mouseOverHeightSlider(int mouseX, int mouseY, int cx, int cy){
-		return mouseX > cx && mouseX < cx+panel.getWidth() && mouseY > cy+camera.getHeight()/2 && mouseY < cy+camera.getHeight()/2+10;
+		return mouseX > cx+camera.getWidth()/4-15 && mouseX < cx+camera.getWidth()/4+15 && mouseY > cy+camera.getHeight()/2 && mouseY < cy+camera.getHeight()/2+8;
 	}
 
 	@Override
