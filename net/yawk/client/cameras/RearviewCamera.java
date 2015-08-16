@@ -1,15 +1,15 @@
 package net.yawk.client.cameras;
 
-import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.Minecraft;
 import net.yawk.client.Client;
 
 public class RearviewCamera extends Camera{
 	
-	public EntityPlayerSP player;
+	private Minecraft mc;
 	
 	public RearviewCamera(){
 		super();
-		player = Client.getClient().getPlayer();
+		mc = Minecraft.getMinecraft();
 	}
 	
 	@Override
@@ -17,12 +17,12 @@ public class RearviewCamera extends Camera{
 		
     	if(capture){
     		
-    		cameraPosX = player.posX;
-    		cameraPosY = player.posY;
-    		cameraPosZ = player.posZ;
+    		cameraPosX = mc.thePlayer.posX;
+    		cameraPosY = mc.thePlayer.posY;
+    		cameraPosZ = mc.thePlayer.posZ;
     		
-    		cameraRotationYaw = player.rotationYaw+180;
-    		cameraRotationPitch = player.rotationPitch;
+    		cameraRotationYaw = mc.thePlayer.rotationYaw+180;
+    		cameraRotationPitch = mc.thePlayer.rotationPitch;
     	}
     	
     	super.setCapture(capture);

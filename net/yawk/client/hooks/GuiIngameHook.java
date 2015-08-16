@@ -52,15 +52,6 @@ public class GuiIngameHook extends GuiIngame{
 
 		EventManager.call(eventGuiRender);
 		
-		/*
-		camera.cameraPosX = Client.getClient().getPlayer().posX;
-		camera.cameraPosY = Client.getClient().getPlayer().posY;
-		camera.cameraPosZ = Client.getClient().getPlayer().posZ;
-
-		camera.cameraRotationYaw = Client.getClient().getPlayer().rotationYaw+180;
-		camera.cameraRotationPitch = Client.getClient().getPlayer().rotationPitch;
-		*/
-		
 		for(Camera camera : Client.getClient().getCameras()){
 			camera.updateFramebuffer();
 		}
