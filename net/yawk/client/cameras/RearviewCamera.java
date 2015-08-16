@@ -11,21 +11,18 @@ public class RearviewCamera extends Camera{
 		super();
 		mc = Minecraft.getMinecraft();
 	}
-	
+
 	@Override
-    protected void setCapture(boolean capture){
+	public void updateFramebuffer() {
 		
-    	if(capture){
-    		
-    		cameraPosX = mc.thePlayer.posX;
-    		cameraPosY = mc.thePlayer.posY;
-    		cameraPosZ = mc.thePlayer.posZ;
-    		
-    		cameraRotationYaw = mc.thePlayer.rotationYaw+180;
-    		cameraRotationPitch = mc.thePlayer.rotationPitch;
-    	}
-    	
-    	super.setCapture(capture);
-    }
+		cameraPosX = mc.thePlayer.posX;
+		cameraPosY = mc.thePlayer.posY;
+		cameraPosZ = mc.thePlayer.posZ;
+		
+		cameraRotationYaw = mc.thePlayer.rotationYaw+180;
+		cameraRotationPitch = mc.thePlayer.rotationPitch;
+		
+		super.updateFramebuffer();
+	}
 	
 }

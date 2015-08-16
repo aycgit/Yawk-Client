@@ -6,12 +6,14 @@ import io.netty.buffer.Unpooled;
 import java.nio.IntBuffer;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.yawk.client.Client;
 import net.yawk.client.utils.GuiUtils;
 
 import org.lwjgl.opengl.ARBFramebufferObject;
+import org.lwjgl.opengl.GL11;
 
 public class Camera {
 	
@@ -89,6 +91,13 @@ public class Camera {
     	if(capturing || !mc.inGameHasFocus){
     		return;
     	}
+    	
+    	System.out.println("===== CAMERA =====");
+    	System.out.println("posX: "+cameraPosX);
+    	System.out.println("posY: "+cameraPosY);
+    	System.out.println("posZ: "+cameraPosZ);
+    	System.out.println("yaw: "+cameraRotationYaw);
+    	System.out.println("pitch: "+cameraRotationPitch);
     	
     	//Saves the player's current position and game settings
     	
@@ -177,7 +186,7 @@ public class Camera {
     }
     
     public void draw(double x, double y, double x1, double y1){
-        
+    	
         glColor4f(1f, 1f, 1f, 1f);
         glBindTexture(GL_TEXTURE_2D, framebufferTexture);
         

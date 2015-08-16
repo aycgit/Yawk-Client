@@ -70,7 +70,7 @@ public class Client {
 	private ValuesRegistry valuesRegistry;
 	private Logger logger;
 	private List<Camera> cameras;
-		
+	
 	public Client(Minecraft mc){
 		this.mc = mc;
 		cameras = new ArrayList<Camera>();
