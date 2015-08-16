@@ -1,14 +1,15 @@
 package net.yawk.client.cameras;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.yawk.client.gui.Window;
 
 public class ArrowCamera extends Camera{
 	
 	private EntityArrow currentArrow;
 	private Minecraft mc;
 	
-	public ArrowCamera() {
-		super();
+	public ArrowCamera(Window displayedWindow) {
+		super(displayedWindow);
 		mc = Minecraft.getMinecraft();
 	}
 

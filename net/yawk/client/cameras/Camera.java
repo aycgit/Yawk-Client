@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.entity.Entity;
 import net.yawk.client.Client;
+import net.yawk.client.gui.Window;
 import net.yawk.client.utils.GuiUtils;
 
 import org.lwjgl.opengl.ARBFramebufferObject;
@@ -24,6 +25,7 @@ public class Camera {
 	
 	private int width = 360, height = 200;
 	private Framebuffer frameBuffer;
+	private Window displayedWindow;
 	
 	public float cameraRotationYaw, cameraRotationPitch;
     public double cameraPosX, cameraPosY, cameraPosZ;
@@ -32,12 +34,17 @@ public class Camera {
 	private Minecraft mc;
 	
 	public Camera(){
-		this(false);
+		this(null, false);
 	}
 	
-    public Camera(boolean reflected){
+	public Camera(Window displayedWindow){
+		this(displayedWindow, false);
+	}
+	
+    public Camera(Window displayedWindow, boolean reflected){
     	
     	this.reflected = reflected;
+    	this.displayedWindow = displayedWindow;
     	
     	mc = Minecraft.getMinecraft();
     	
@@ -66,15 +73,15 @@ public class Camera {
     	
     	//So we don't make a loop of rendering the cameras
     	//TODO: make this work when the game isn't in focus
-    	if(capturing || !mc.inGameHasFocus){
+    	if(capturing || !mc.inGameHasFocus || !isCameraVisible()){
     		return;
     	}
-    	    	
+    	
     	//Saves the player's current position and game settings
     	
     	double posX, posY, posZ, prevPosX, prevPosY, prevPosZ, lastTickPosX, lastTickPosY, lastTickPosZ;
     	int displayWidth, displayHeight, thirdPersonView;
-    	float rotationYaw, rotationPitch, prevRotationYaw, prevRotationPitch, fovSetting;
+    	float rotationYaw, rotationPitch, prevRotationYaw, prevRotationPitch;
     	boolean hideGUI, viewBobbing;
     	
     	displayWidth = mc.displayWidth;
@@ -86,7 +93,6 @@ public class Camera {
     	hideGUI = mc.gameSettings.hideGUI;
     	thirdPersonView = mc.gameSettings.thirdPersonView;
     	viewBobbing = mc.gameSettings.viewBobbing;
-    	fovSetting = mc.gameSettings.fovSetting;
     	
     	posX = mc.renderViewEntity.posX;
     	prevPosX = mc.renderViewEntity.prevPosX;
@@ -123,7 +129,6 @@ public class Camera {
     	mc.gameSettings.thirdPersonView = 0;
     	mc.gameSettings.viewBobbing = false;
     	mc.gameSettings.hideGUI = true;
-    	mc.gameSettings.fovSetting = 90;
     	
     	setCapture(true);
     	
@@ -156,6 +161,10 @@ public class Camera {
     	mc.renderViewEntity.lastTickPosZ = lastTickPosZ;
     	
     	frameBufferUpdated = true;
+    }
+    
+    private boolean isCameraVisible(){
+    	return displayedWindow != null && displayedWindow.pinned && displayedWindow.extended;
     }
     
     public void draw(double x, double y, double x1, double y1){
@@ -196,7 +205,7 @@ public class Camera {
     public void makeNewFrameBuffer(){
     	frameBuffer.createFramebuffer(width, height);
     }
-    
+    	
 	public int getWidth() {
 		return width;
 	}

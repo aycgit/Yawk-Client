@@ -144,7 +144,7 @@ public class Window implements IPanel{
 	
 	public void onExtensionToggle(){
 		extended = !extended;
-		doClickSound();
+		doClickSound();		
 	}
 	
 	public void onPinnedToggle(){

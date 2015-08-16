@@ -17,7 +17,7 @@ public abstract class Component {
 	public void mouseReleased(int mouseX, int mouseY, int state) {
 		
 	}
-	
+		
 	public int getWidth(){
 		return 85;
 	}
