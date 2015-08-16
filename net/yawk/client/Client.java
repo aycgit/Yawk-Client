@@ -46,6 +46,7 @@ import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.hub.GuiHub;
 import net.yawk.client.hooks.EntityPlayerSPHook;
 import net.yawk.client.hooks.EntityRendererHook;
+import net.yawk.client.hooks.ItemRendererHook;
 import net.yawk.client.hooks.RenderGlobalHook;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModManager;
@@ -129,6 +130,10 @@ public class Client {
 	private void initHooks(Minecraft mc){
 		
 		mc.renderGlobal = new RenderGlobalHook(mc);
+		
+		//This NEEDS to go before entityRenderer because entityRenderer caches the value of Minecraft.getItemRenderer
+		mc.itemRenderer = new ItemRendererHook(mc);
+		
 		mc.entityRenderer = new EntityRendererHook(mc, mc.getResourceManager());
 	}
 	
