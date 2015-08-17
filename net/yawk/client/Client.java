@@ -188,7 +188,7 @@ public class Client {
 	public FileManager getFileManager() {
 		return fileManager;
 	}
-		
+	
 	public void keyPressed(int key){
 		
 		if(key == Keyboard.KEY_Y){
@@ -198,7 +198,7 @@ public class Client {
 		if(key == Keyboard.KEY_X){
 			mc.displayGuiScreen(hub);
 		}
-				
+		
 		if(mc.currentScreen == null){
 			for(Mod m : modManager.mods){
 				if(m.getKeybind() == key){

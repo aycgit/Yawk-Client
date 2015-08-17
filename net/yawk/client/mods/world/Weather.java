@@ -1,6 +1,7 @@
 package net.yawk.client.mods.world;
 
 import net.yawk.client.Client;
+import net.yawk.client.events.EventRecievePacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
@@ -16,16 +17,6 @@ public class Weather extends Mod{
 	
 	@EventTarget
 	public void onTick(EventTick e){
-		Client.getClient().getMinecraft().theWorld.setRainStrength(0);
-	}
-		
-	@Override
-	public void onEnable() {
-		
-	}
-	
-	@Override
-	public void onDisable() {
-		
+		Client.getClient().getMinecraft().theWorld.getWorldInfo().setRaining(false);
 	}
 }
