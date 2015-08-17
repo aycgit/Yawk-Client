@@ -26,6 +26,7 @@ public class Weather extends Mod{
 	
 	/**
 	 * Made using information from http://wiki.vg/Protocol#Change_Game_State
+	 * The state called "End raining" is 1
 	 * The state called "Begin raining" is 2
 	 * @param e the event for recieving a packet
 	 */
