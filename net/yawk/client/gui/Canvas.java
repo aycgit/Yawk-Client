@@ -9,11 +9,11 @@ import net.yawk.client.utils.GuiUtils;
 
 public class Canvas implements IPanel{
 	
-	private ScalerPosition pos;
+	private IScalerPosition pos;
 	private int width, height;
 	protected List<AbstractComponent> components = new CopyOnWriteArrayList<AbstractComponent>();
 	
-	public Canvas(ScalerPosition pos, int width) {
+	public Canvas(IScalerPosition pos, int width) {
 		this.pos = pos;
 		this.width = width;
 	}
