@@ -88,6 +88,10 @@ public class GuiClickable extends GuiScreen {
 		arrowview.addComponent(new CameraDisplay(arrowview, new ArrowCamera(arrowview)));
 		windows.add(arrowview);
 		
+		Window periscope = new Window("Periscope", modManager, 85, 12);
+		periscope.addComponent(new CameraDisplay(periscope, new PeriscopeCamera(periscope)));
+		windows.add(periscope);
+		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
 		moveWindows();
 	}
