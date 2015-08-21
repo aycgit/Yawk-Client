@@ -72,11 +72,11 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 	}
 	
 	public boolean mouseOverBarArea(int x, int y, int cx, int cy){
-		return x >= cx + rect.getWidth() - BAR_WIDTH - 1 && x <= cx + rect.getWidth() && y >= cy && y <= cy + height;
+		return x >= cx + rect.getWidth() - BAR_WIDTH - 1 && x <= cx + rect.getWidth() && y >= cy && y <= cy + viewportHeight;
 	}
 	
 	private boolean isWithinScrollPane(int x, int y, int cx, int cy){
-		return x > cx && x < cx+rect.getWidth() - BAR_WIDTH - 1 && y > cy && y < cy + height;
+		return x > cx && x < cx+rect.getWidth() - BAR_WIDTH - 1 && y > cy && y < cy + viewportHeight;
 	}
 	
 	@Override
@@ -118,7 +118,7 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 	
 	@Override
 	public int getHeight() {
-		return height;
+		return viewportHeight;
 	}
 	
 	@Override

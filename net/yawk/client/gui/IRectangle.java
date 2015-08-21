@@ -9,4 +9,6 @@ public interface IRectangle {
 	public int getRectX();
 	
 	public int getRectY();
+	
+	public void updateHeight();
 }

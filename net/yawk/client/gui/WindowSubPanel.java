@@ -10,18 +10,19 @@ public class WindowSubPanel implements IRectangle{
 
 	private List<AbstractComponent> components;
 	private IRectangle win;
-	private int posX, posY, height;
+	private int height, yOffset;
+	private AbstractComponent component;
 	
-	public WindowSubPanel(IRectangle win, int posX, int posY){
+	public WindowSubPanel(IRectangle win, AbstractComponent component, int yOffset){
 		this.win = win;
-		this.posX = posX;
-		this.posY = posY;
+		this.component = component;
+		this.yOffset = yOffset;
 		components = new ArrayList<AbstractComponent>();
 	}
 	
 	public void draw(int x, int y){
 		
-		GuiUtils.drawRect(posX+2, posY, posX+win.getWidth()-2, posY+height, 0x3FFFFFFF);
+		GuiUtils.drawRect(component.getX()+2, component.getY()+yOffset, component.getX()+2+getWidth(), component.getY()+yOffset+height, 0x3FFFFFFF);
 		
 		for(AbstractComponent c : components){
 			c.draw(x, y);
@@ -31,6 +32,7 @@ public class WindowSubPanel implements IRectangle{
 	public void addComponent(AbstractComponent c){
 		components.add(c);
 		c.setRectangle(this);
+		c.init();
 		updateHeight();
 	}
 	
@@ -45,7 +47,7 @@ public class WindowSubPanel implements IRectangle{
 	}
 	
 	public void mouseClicked(int x, int y) {
-				
+		
 		for(AbstractComponent c : components){
 			c.mouseClicked(x, y);
 		}
@@ -57,15 +59,8 @@ public class WindowSubPanel implements IRectangle{
 	}
 
 	@Override
-	public int getHeight() {
-		
-		int h = 0;
-		
-		for(AbstractComponent c : components){
-			h += c.getHeight();
-		}
-		
-		return h;
+	public int getHeight() {		
+		return height;
 	}
 
 	public void mouseReleased(int mouseX, int mouseY, int state) {
@@ -77,12 +72,12 @@ public class WindowSubPanel implements IRectangle{
 
 	@Override
 	public int getRectX() {
-		return win.getRectX()+posX;
+		return component.getX();
 	}
 
 	@Override
 	public int getRectY() {
-		return win.getRectY()+posY;
+		return component.getY();
 	}
 	
 }

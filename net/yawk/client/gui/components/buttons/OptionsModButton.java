@@ -25,7 +25,7 @@ public class OptionsModButton extends ModButton{
 	@Override
 	public void init() {
 		
-		panel = new WindowSubPanel(rect, getX(), getY());
+		panel = new WindowSubPanel(rect, this, 12);
 		
 		for(AbstractValue option : mod.getOptions()){
 			panel.addComponent(option.getComponent(panel));
@@ -62,6 +62,7 @@ public class OptionsModButton extends ModButton{
 		if(mouseOverExtendButton(x, y, getX(), getY())){
 			extended = !extended;
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
+			rect.updateHeight();
 		}else{
 			super.mouseClicked(x, y);
 		}
@@ -90,7 +91,7 @@ public class OptionsModButton extends ModButton{
 	@Override
 	public int getHeight() {
 		
-		if(extended){			
+		if(extended){
 			return super.getHeight() + panel.getHeight() + 1;
 		}else{
 			return super.getHeight();
