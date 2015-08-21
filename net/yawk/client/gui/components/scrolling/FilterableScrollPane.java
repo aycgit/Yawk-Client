@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.yawk.client.gui.AbstractComponent;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.components.selectors.SelectorButton;
 
 public class FilterableScrollPane extends ScrollPane{
 	
 	protected List<SelectorButton> componentsPool = new ArrayList<SelectorButton>();
 	
-	public FilterableScrollPane(IPanel win, int height) {
-		super(win, height);
+	public FilterableScrollPane(int height) {
+		super(height);
 	}
 
 	public void addFilterableComponent(SelectorButton c) {

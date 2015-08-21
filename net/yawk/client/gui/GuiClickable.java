@@ -32,40 +32,40 @@ public class GuiClickable extends GuiScreen {
 			if(type != Mod.Type.PLUGIN && type != Mod.Type.NONE){
 				
 				Window win;
-				windows.add(win = new Window(type.getName(), modManager, 85, 12));
+				windows.add(win = new Window(type.getName(), modManager, 85));
 				
 				for(Mod m : modManager.mods){
 					if(m.getType() == type){
 						
 						if(m.hasOptions()){
-							win.addComponent(new OptionsModButton(win, m));
+							win.addComponent(new OptionsModButton(m));
 						}else{
-							win.addComponent(new ModButton(win, m));
+							win.addComponent(new ModButton(m));
 						}
 					}
 				}
 			}
 		}
 		
-		Window enabledMods = new Window("Enabled", modManager, 85, 12);
+		Window enabledMods = new Window("Enabled", modManager, 85);
 		windows.add(enabledMods);
-		enabledMods.addComponent(new EnabledModsDisplay(enabledMods));
+		enabledMods.addComponent(new EnabledModsDisplay());
 		
 		//PLUGIN DOWNLOAD WINDOW
 		
-		Window plugins = new Window("Get Plugins", modManager, 120, 12);
+		Window plugins = new Window("Get Plugins", modManager, 120);
 		windows.add(plugins);
 		
 		SelectorSystem<SelectorButton> pluginSystem = new SelectorSystem<SelectorButton>();
-		plugins.addComponent(new PluginScrollPane(plugins, 72, pluginSystem, false));
-		plugins.addComponent(new PluginDownloadButton(plugins, pluginSystem));
+		plugins.addComponent(new PluginScrollPane(72, pluginSystem, false));
+		plugins.addComponent(new PluginDownloadButton(pluginSystem));
 		
 		//COLOUR PICKER WINDOW
 		
-		Window colours = new Window("Colours", modManager, 85, 12);
+		Window colours = new Window("Colours", modManager, 85);
 		
 		for(ColourType colourType : ColourType.values()){
-			colours.addComponent(new ColourPicker(colours, colourType, this));
+			colours.addComponent(new ColourPicker(colourType, this));
 		}
 		
 		windows.add(colours);
@@ -73,23 +73,23 @@ public class GuiClickable extends GuiScreen {
 		//FRIENDS WINDOW
 		SelectorSystem<SelectorButton> friendsSystem = new SelectorSystem<SelectorButton>();
 		FriendScrollPane friendsPane;
-		Window friends = new Window("Friends", modManager, 85, 12);
+		Window friends = new Window("Friends", modManager, 85);
 		
-		friends.addComponent(friendsPane = new FriendScrollPane(friends, 72, friendsSystem));
-		friends.addComponent(new FriendsExecuteButton(friends, friendsSystem));
+		friends.addComponent(friendsPane = new FriendScrollPane(72, friendsSystem));
+		friends.addComponent(new FriendsExecuteButton(friendsSystem));
 		
 		windows.add(friends);
 		
-		Window rearview = new Window("Rearview", modManager, 85, 12);
-		rearview.addComponent(new CameraDisplay(rearview, new RearviewCamera(rearview)));
+		Window rearview = new Window("Rearview", modManager, 85);
+		rearview.addComponent(new CameraDisplay(new RearviewCamera(rearview)));
 		windows.add(rearview);
 		
-		Window arrowview = new Window("ArrowView", modManager, 85, 12);
-		arrowview.addComponent(new CameraDisplay(arrowview, new ArrowCamera(arrowview)));
+		Window arrowview = new Window("ArrowView", modManager, 85);
+		arrowview.addComponent(new CameraDisplay(new ArrowCamera(arrowview)));
 		windows.add(arrowview);
 		
-		Window periscope = new Window("Periscope", modManager, 85, 12);
-		periscope.addComponent(new CameraDisplay(periscope, new PeriscopeCamera(periscope)));
+		Window periscope = new Window("Periscope", modManager, 85);
+		periscope.addComponent(new CameraDisplay(new PeriscopeCamera(periscope)));
 		windows.add(periscope);
 		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
@@ -167,7 +167,7 @@ public class GuiClickable extends GuiScreen {
 					sr.getScaledWidth(),
 					sr.getScaledHeight());
 			
-			popup.addComponent(new LinkButton(popup, "Yawk Forums", "http://yawk.net/forums"));
+			popup.addComponent(new LinkButton("Yawk Forums", "http://yawk.net/forums"));
 			
 			windows.add(popup);
 			

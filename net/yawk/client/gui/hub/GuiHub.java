@@ -314,7 +314,7 @@ public class GuiHub extends GuiScreen {
 		
 		if(state == State.FAILED){
 			
-			options.addComponent(new TextButton(options, "Offline mode", true){
+			options.addComponent(new TextButton("Offline mode", true){
 				
 				@Override
 				public void toggle() {
@@ -324,7 +324,7 @@ public class GuiHub extends GuiScreen {
 				
 			});
 			
-			options.addComponent(new TextButton(options, "Retry", true){
+			options.addComponent(new TextButton("Retry", true){
 				
 				@Override
 				public void toggle() {

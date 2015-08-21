@@ -12,16 +12,16 @@ public class ColourPicker extends Button{
 	private ColourType col;
 	private GuiClickable gui;
 	
-	public ColourPicker(Window win, ColourType col, GuiClickable gui) {
-		super(win);
+	public ColourPicker(ColourType col, GuiClickable gui) {
+		super();
 		this.col = col;
 		this.gui = gui;
 	}
 	
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
-		super.draw(x, y, cx, cy);
-		GuiUtils.drawRect(cx + win.getWidth() - 10, cy + 2, cx + win.getWidth() - 2, cy + 10, col.getColour());
+	public void draw(int x, int y) {
+		super.draw(x, y);
+		GuiUtils.drawRect(getX() + rect.getWidth() - 10, getY() + 2, getX() + rect.getWidth() - 2, getY() + 10, col.getColour());
 	}
 	
 	@Override

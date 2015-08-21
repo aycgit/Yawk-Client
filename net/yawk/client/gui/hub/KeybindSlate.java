@@ -26,12 +26,12 @@ public class KeybindSlate extends ComponentSlate{
 		
 		SelectorSystem<KeybindButton> system = new SelectorSystem<KeybindButton>();
 		
-		KeybindSetButton setButton = new KeybindSetButton(options, system);
+		KeybindSetButton setButton = new KeybindSetButton(system);
 		
 		ModScrollPane pane;
-		options.addComponent(pane = new ModScrollPane(options, 200, system));
+		options.addComponent(pane = new ModScrollPane(200, system));
 		
-		options.addComponent(new SearchableTextField(options, "Search", pane));
+		options.addComponent(new SearchableTextField("Search", pane));
 		options.addComponent(setButton);
 	}
 

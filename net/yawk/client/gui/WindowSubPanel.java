@@ -6,45 +6,48 @@ import java.util.List;
 import net.yawk.client.Client;
 import net.yawk.client.utils.GuiUtils;
 
-public class WindowSubPanel implements IPanel{
+public class WindowSubPanel implements IRectangle{
 
 	private List<AbstractComponent> components;
-	private Window win;
+	private IRectangle win;
+	private int posX, posY, height;
 	
-	public WindowSubPanel(Window win){
+	public WindowSubPanel(IRectangle win, int posX, int posY){
 		this.win = win;
+		this.posX = posX;
+		this.posY = posY;
 		components = new ArrayList<AbstractComponent>();
 	}
 	
-	public void draw(int x, int y, int posX, int posY){
+	public void draw(int x, int y){
 		
-		int h = 0;
-		
-		for(AbstractComponent c : components){
-			h += c.getHeight();
-		}
-		
-		GuiUtils.drawRect(posX+2, posY, posX+win.getWidth()-2, posY+h, 0x3FFFFFFF);
-		
-		h = 0;
+		GuiUtils.drawRect(posX+2, posY, posX+win.getWidth()-2, posY+height, 0x3FFFFFFF);
 		
 		for(AbstractComponent c : components){
-			c.draw(x, y, posX+2, posY+h);
-			h += c.getHeight();
+			c.draw(x, y);
 		}
 	}
 	
-	public void addComponent(AbstractComponent comp){
-		components.add(comp);
+	public void addComponent(AbstractComponent c){
+		components.add(c);
+		c.setRectangle(this);
+		updateHeight();
 	}
 	
-	public void mouseClicked(int x, int y, int posX, int posY) {
+	public void updateHeight(){
 		
-		int h = 0;
+		height = 0;
 		
+		for(AbstractComponent component : components){
+			height += component.getHeight();
+			component.setY(height);
+		}
+	}
+	
+	public void mouseClicked(int x, int y) {
+				
 		for(AbstractComponent c : components){
-			c.mouseClicked(x, y, posX+2, posY+h);
-			h += c.getHeight();
+			c.mouseClicked(x, y);
 		}
 	}
 	
@@ -70,6 +73,16 @@ public class WindowSubPanel implements IPanel{
 		for(AbstractComponent c : components){
 			c.mouseReleased(mouseX, mouseY, state);
 		}
+	}
+
+	@Override
+	public int getRectX() {
+		return win.getRectX()+posX;
+	}
+
+	@Override
+	public int getRectY() {
+		return win.getRectY()+posY;
 	}
 	
 }

@@ -6,12 +6,12 @@ import net.yawk.client.modmanager.ModManager;
 public class WindowClosable extends Window{
 
 	public WindowClosable(String title, ModManager modManager) {
-		super(title, modManager, 85, 12);
+		super(title, modManager, 85);
 		this.extended = true;
 	}
 	
 	public WindowClosable(String title, ModManager modManager, int width){
-		super(title, modManager, width, 12);
+		super(title, modManager, width);
 		this.extended = true;
 	}
 	

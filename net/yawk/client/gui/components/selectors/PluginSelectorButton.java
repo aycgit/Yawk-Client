@@ -2,15 +2,15 @@ package net.yawk.client.gui.components.selectors;
 
 import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.Window;
 
 public class PluginSelectorButton extends SelectorButton{
 	
 	private PluginData data;
 	
-	public PluginSelectorButton(IPanel win, String mod, SelectorSystem system, PluginData data) {
-		super(win, mod, system);
+	public PluginSelectorButton(String mod, SelectorSystem system, PluginData data) {
+		super(mod, system);
 		this.data = data;
 	}
 	

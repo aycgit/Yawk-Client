@@ -9,7 +9,6 @@ import net.yawk.client.utils.Colours;
 
 public class NumberSelector extends AbstractComponent{
 	
-	protected Window win;
 	private int number;
 	private int max;
 	private int min;
@@ -17,8 +16,7 @@ public class NumberSelector extends AbstractComponent{
 	private String name;
 	private String unit = "";
 	
-	public NumberSelector(Window win, String name, int min, int max, int start, int increment){
-		this.win = win;
+	public NumberSelector(String name, int min, int max, int start, int increment){
 		this.name = name;
 		this.min = min;
 		this.max = max;
@@ -26,8 +24,7 @@ public class NumberSelector extends AbstractComponent{
 		this.increment = increment;
 	}
 	
-	public NumberSelector(Window win, String name, int min, int max, int start, int increment, String unit){
-		this.win = win;
+	public NumberSelector(String name, int min, int max, int start, int increment, String unit){
 		this.name = name;
 		this.min = min;
 		this.max = max;
@@ -37,32 +34,32 @@ public class NumberSelector extends AbstractComponent{
 	}
 	
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
+	public void draw(int x, int y) {
 		
 		Client.getClient().getFontRenderer().drawStringWithShadow("<",
-				cx + 3,
-				cy + 2,
-				mouseOverLeft(x,y,cx,cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
+				getX() + 3,
+				getY() + 2,
+				mouseOverLeft(x,y,getX(),getY())? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
 				true);
 		
 		Client.getClient().getFontRenderer().drawStringWithShadow(">",
-				cx + win.getWidth() - 3 - Client.getClient().getFontRenderer().getStringWidth(">"),
-				cy + 2,
-				mouseOverRight(x,y,cx,cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
+				getX() + rect.getWidth() - 3 - Client.getClient().getFontRenderer().getStringWidth(">"),
+				getY() + 2,
+				mouseOverRight(x,y,getX(),getY())? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
 				true);
 		
 		String whole = name + ": " + number + unit;
 		
 		Client.getClient().getFontRenderer().drawStringWithShadow(whole,
-				cx + win.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(whole)/2,
-				cy + 2,
+				getX() + rect.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(whole)/2,
+				getY() + 2,
 				ColourType.TEXT.getColour(),
 				true);
 	}
 	
 	@Override
-	public void mouseClicked(int x, int y, int cx, int cy) {
-		if(mouseOverLeft(x, y, cx, cy)){
+	public void mouseClicked(int x, int y) {
+		if(mouseOverLeft(x, y, getX(), getY())){
 			
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
 			
@@ -72,7 +69,7 @@ public class NumberSelector extends AbstractComponent{
 				number = min;
 			}
 			
-		}else if(mouseOverRight(x, y, cx, cy)){
+		}else if(mouseOverRight(x, y, getX(), getY())){
 			
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
 			
@@ -85,11 +82,11 @@ public class NumberSelector extends AbstractComponent{
 	}
 	
 	private boolean mouseOverLeft(int x, int y, int cx, int cy){
-		return x > cx && x < cx+win.getWidth()/2 && y > cy && y < cy+getHeight();
+		return x > cx && x < cx+rect.getWidth()/2 && y > cy && y < cy+getHeight();
 	}
 	
 	private boolean mouseOverRight(int x, int y, int cx, int cy){
-		return x > cx+win.getWidth()/2 && x < cx+win.getWidth() && y > cy && y < cy+getHeight();
+		return x > cx+rect.getWidth()/2 && x < cx+rect.getWidth() && y > cy && y < cy+getHeight();
 	}
 	
 	@Override

@@ -1,7 +1,7 @@
 package net.yawk.client.modmanager.values;
 
 import net.yawk.client.gui.AbstractComponent;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.components.Slider;
 import net.yawk.client.gui.components.buttons.BooleanButton;
 
@@ -60,7 +60,7 @@ public class SliderValue extends AbstractValue<Double>{
 	}
 	
 	@Override
-	public AbstractComponent getComponent(IPanel panel) {
-		return new Slider(panel, this);
+	public AbstractComponent getComponent(IRectangle panel) {
+		return new Slider(this);
 	}
 }

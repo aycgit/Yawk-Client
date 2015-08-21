@@ -8,8 +8,8 @@ public class ModButton extends Button{
 	
 	protected Mod mod;
 	
-	public ModButton(Window win, Mod mod) {
-		super(win);
+	public ModButton(Mod mod) {
+		super();
 		this.mod = mod;
 	}
 	

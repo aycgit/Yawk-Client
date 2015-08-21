@@ -1,14 +1,14 @@
 package net.yawk.client.gui.components.buttons;
 
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 
 public abstract class TextButton extends Button{
 
 	private String text;
 	private boolean centered;
 	
-	public TextButton(IPanel win, String text, boolean centered) {
-		super(win);
+	public TextButton(String text, boolean centered) {
+		super();
 		this.text = text;
 		this.centered = centered;
 	}

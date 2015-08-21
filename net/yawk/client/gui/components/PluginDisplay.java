@@ -27,20 +27,20 @@ public class PluginDisplay extends AbstractComponent{
 	}
 
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
+	public void draw(int x, int y) {
 		
 		if(plugin == null){
 			
 			if(message == null){
-				fontRenderer.drawStringWithShadow("No Plugin selected", cx + 3, cy + 2, 0xFFFFFFFF, true);
+				fontRenderer.drawStringWithShadow("No Plugin selected", getX() + 3, getY() + 2, 0xFFFFFFFF, true);
 			}else{
-				fontRenderer.drawStringWithShadow(message, cx + 3, cy + 2, 0xFFFFFFFF, true);
+				fontRenderer.drawStringWithShadow(message, getX() + 3, getY() + 2, 0xFFFFFFFF, true);
 			}
 			
 		}else{
-			fontRenderer.drawStringWithShadow("Name: " + plugin.getName(), cx + 3, cy + 2, 0xFFFFFFFF, true);
-			fontRenderer.drawStringWithShadow("Description: " + plugin.getDescription(), cx + 3, cy + 14, 0xFFFFFFFF, true);
-			fontRenderer.drawStringWithShadow("Download link: " + plugin.getFilePath(), cx + 3, cy + 26, 0xFFFFFFFF, true);
+			fontRenderer.drawStringWithShadow("Name: " + plugin.getName(), getX() + 3, getY() + 2, 0xFFFFFFFF, true);
+			fontRenderer.drawStringWithShadow("Description: " + plugin.getDescription(), getX() + 3, getY() + 14, 0xFFFFFFFF, true);
+			fontRenderer.drawStringWithShadow("Download link: " + plugin.getFilePath(), getX() + 3, getY() + 26, 0xFFFFFFFF, true);
 		}
 		
 	}

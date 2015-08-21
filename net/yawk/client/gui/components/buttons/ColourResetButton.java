@@ -6,8 +6,8 @@ import net.yawk.client.utils.ClientUtils;
 
 public class ColourResetButton extends Button{
 	
-	public ColourResetButton(Window win) {
-		super(win);
+	public ColourResetButton() {
+		super();
 	}
 
 	@Override

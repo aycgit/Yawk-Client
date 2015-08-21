@@ -32,13 +32,13 @@ public class PrivatePluginSlate extends ComponentSlate{
 		TextField passwordField;
 		PrivatePluginInformationButton informationButton;
 		
-		options.addComponent(nameField = new TextField(options, "Plugin Name"));
-		options.addComponent(passwordField = new TextField(options, "Plugin Password"));
+		options.addComponent(nameField = new TextField("Plugin Name"));
+		options.addComponent(passwordField = new TextField("Plugin Password"));
 		
 		options.addComponent(pluginDisplay = new PluginDisplay());
 		
-		options.addComponent(informationButton = new PrivatePluginInformationButton(options, pluginDisplay, nameField, passwordField));
-		options.addComponent(new PrivatePluginDownloadButton(options, informationButton));
+		options.addComponent(informationButton = new PrivatePluginInformationButton(pluginDisplay, nameField, passwordField));
+		options.addComponent(new PrivatePluginDownloadButton(informationButton));
 	}
 
 }

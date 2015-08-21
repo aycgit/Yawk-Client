@@ -6,7 +6,7 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.Window;
 import net.yawk.client.gui.components.selectors.LargePluginSelectorButton;
 import net.yawk.client.gui.components.selectors.PluginSelectorButton;
@@ -18,8 +18,8 @@ public class PluginScrollPane extends FilterableScrollPane{
 	private SelectorSystem<SelectorButton> system;
 	private boolean description;
 	
-	public PluginScrollPane(IPanel win, int height, SelectorSystem<SelectorButton> system, boolean description) {
-		super(win, height);
+	public PluginScrollPane(int height, SelectorSystem<SelectorButton> system, boolean description) {
+		super(height);
 		this.system = system;
 		this.description = description;
 	}
@@ -27,16 +27,16 @@ public class PluginScrollPane extends FilterableScrollPane{
 	private boolean hasFoundPlugins;
 	
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
+	public void draw(int x, int y) {
 		
 		if(!hasFoundPlugins){
 			if(Client.getClient().getPluginManager().pluginData.size() > 0){
 				for(PluginData plugin : Client.getClient().getPluginManager().pluginData){
 					
 					if(description){
-						addFilterableComponent(system.add(new LargePluginSelectorButton(this, plugin, system)));
+						addFilterableComponent(system.add(new LargePluginSelectorButton(plugin, system)));
 					}else{
-						addFilterableComponent(system.add(new PluginSelectorButton(this, plugin.getName(), system, plugin)));
+						addFilterableComponent(system.add(new PluginSelectorButton(plugin.getName(), system, plugin)));
 					}
 					
 					hasFoundPlugins = true;
@@ -44,6 +44,6 @@ public class PluginScrollPane extends FilterableScrollPane{
 			}
 		}
 		
-		super.draw(x, y, cx, cy);
+		super.draw(x, y);
 	}
 }

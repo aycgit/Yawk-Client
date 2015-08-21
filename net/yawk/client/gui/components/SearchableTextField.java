@@ -1,14 +1,14 @@
 package net.yawk.client.gui.components;
 
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.components.scrolling.FilterableScrollPane;
 
 public class SearchableTextField extends TextField{
 
 	private FilterableScrollPane scrollPane;
 
-	public SearchableTextField(IPanel win, String placeholder, FilterableScrollPane scrollPane) {
-		super(win, placeholder);
+	public SearchableTextField(String placeholder, FilterableScrollPane scrollPane) {
+		super(placeholder);
 		this.scrollPane = scrollPane;
 	}
 

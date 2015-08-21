@@ -4,34 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.yawk.client.gui.AbstractComponent;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.GuiUtils;
 import net.yawk.client.utils.Scissor;
 
 import org.lwjgl.opengl.GL11;
 
-public class ScrollPane extends AbstractComponent implements IPanel{
+public class ScrollPane extends AbstractComponent implements IRectangle{
 	
 	protected List<AbstractComponent> components = new ArrayList<AbstractComponent>();
-	protected int height, dragged, mouseYOffset, BAR_HEIGHT = 12, BAR_WIDTH = 4;
+	protected int height, viewportHeight, dragged, mouseYOffset, BAR_HEIGHT = 12, BAR_WIDTH = 4;
 	private boolean dragging;
-	protected IPanel win;
 	
-	public ScrollPane(IPanel win, int height){
-		this.win = win;
-		this.height = height;
+	public ScrollPane(int viewportHeight){
+		this.viewportHeight = viewportHeight;
 	}
 	
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
+	public void draw(int x, int y) {
 		
 		if(dragging){
 			
-			dragged = y - cy + mouseYOffset;
+			dragged = y - getY() + mouseYOffset;
 			
-			if(dragged > height-BAR_HEIGHT){
-				dragged = height-BAR_HEIGHT;
+			if(dragged > viewportHeight-BAR_HEIGHT){
+				dragged = viewportHeight-BAR_HEIGHT;
 			}
 			
 			if(dragged < 0){
@@ -39,28 +37,24 @@ public class ScrollPane extends AbstractComponent implements IPanel{
 			}
 		}
 		
-		GuiUtils.drawRect(cx + win.getWidth() - BAR_WIDTH - 1, cy, cx + win.getWidth(), cy + height, 0x1FCFCFCF);
+		GuiUtils.drawRect(getX() + rect.getWidth() - BAR_WIDTH - 1, getY(), getX() + rect.getWidth(), getY() + viewportHeight, 0x1FCFCFCF);
 		
-		GuiUtils.drawRect(cx + win.getWidth() - BAR_WIDTH - 1, cy + dragged, cx + win.getWidth(), cy + dragged + BAR_HEIGHT, 0x4FFFFFFF);
+		GuiUtils.drawRect(getX() + rect.getWidth() - BAR_WIDTH - 1, getY() + dragged, getX() + rect.getWidth(), getY() + dragged + BAR_HEIGHT, 0x4FFFFFFF);
 		
 		int drag = getScrollHeight();
 		
 		Scissor.enableScissoring();
-		Scissor.scissor(cx, cy, win.getWidth(), height);
+		Scissor.scissor(getX(), getY(), rect.getWidth(), viewportHeight);
 		
 		GL11.glTranslatef(0, -drag, 0);
-		
-		int h = 0;
-		
-		if(isWithinScrollPane(x, y, cx, cy)){
+				
+		if(isWithinScrollPane(x, y, getX(), getY())){
 			for(AbstractComponent c : components){
-				c.draw(x, y + drag, cx, cy+h);
-				h += c.getHeight();
+				c.draw(x, y + drag);
 			}
 		}else{
 			for(AbstractComponent c : components){
-				c.draw(-999, -999, cx, cy+h);
-				h += c.getHeight();
+				c.draw(-999, -999);
 			}
 		}
 		
@@ -70,51 +64,40 @@ public class ScrollPane extends AbstractComponent implements IPanel{
 	}
 	
 	public int getScrollHeight(){
-		return (int) ((float)(dragged/(float)(height-BAR_HEIGHT)) * (getComponentsHeight()-height));
-	}
-	
-	public int getComponentsHeight(){
-		
-		int h = 0;
-		
-		for(AbstractComponent c : components){
-			h += c.getHeight();
-		}
-		
-		return h;
+		return (int) ((float)(dragged/(float)(height-BAR_HEIGHT)) * (height-viewportHeight));
 	}
 	
 	public boolean mouseOverBar(int x, int y, int cx, int cy){
-		return x >= cx + win.getWidth() - BAR_WIDTH - 1 && x < cx + win.getWidth() && y > cy + dragged && y <= cy + dragged + BAR_HEIGHT;
+		return x >= cx + rect.getWidth() - BAR_WIDTH - 1 && x < cx + rect.getWidth() && y > cy + dragged && y <= cy + dragged + BAR_HEIGHT;
 	}
 	
 	public boolean mouseOverBarArea(int x, int y, int cx, int cy){
-		return x >= cx + win.getWidth() - BAR_WIDTH - 1 && x <= cx + win.getWidth() && y >= cy && y <= cy + height;
+		return x >= cx + rect.getWidth() - BAR_WIDTH - 1 && x <= cx + rect.getWidth() && y >= cy && y <= cy + height;
 	}
 	
 	private boolean isWithinScrollPane(int x, int y, int cx, int cy){
-		return x > cx && x < cx+win.getWidth() - BAR_WIDTH - 1 && y > cy && y < cy + height;
+		return x > cx && x < cx+rect.getWidth() - BAR_WIDTH - 1 && y > cy && y < cy + height;
 	}
 	
 	@Override
-	public void mouseClicked(int x, int y, int cx, int cy) {
-		if(mouseOverBar(x, y, cx, cy)){
+	public void mouseClicked(int x, int y) {
+		if(mouseOverBar(x, y, getX(), getY())){
 			dragging = true;
 			
-			mouseYOffset = (cy + dragged) - y;
+			mouseYOffset = (getY() + dragged) - y;
 		}else{
 			
 			int h = 0;
 			int drag = getScrollHeight();
 			
-			if(isWithinScrollPane(x, y, cx, cy)){
+			if(isWithinScrollPane(x, y, getX(), getY())){
 				for(AbstractComponent c : components){
-					c.mouseClicked(x, y + drag, cx, cy+h);
+					c.mouseClicked(x, y + drag);
 					h += c.getHeight();
 				}
 			}else{
 				for(AbstractComponent c : components){
-					c.mouseClicked(-999, -999, cx, cy+h);
+					c.mouseClicked(-999, -999);
 					h += c.getHeight();
 				}
 			}
@@ -140,10 +123,33 @@ public class ScrollPane extends AbstractComponent implements IPanel{
 	
 	@Override
 	public int getWidth() {
-		return win.getWidth() - BAR_WIDTH - 1;
+		return rect.getWidth() - BAR_WIDTH - 1;
 	}
 	
 	public void addComponent(AbstractComponent c){
 		this.components.add(c);
+		c.setRectangle(this);
+		c.init();
+		updateHeight();
+	}
+	
+	public void updateHeight(){
+		
+		height = 0;
+		
+		for(AbstractComponent component : components){
+			height += component.getHeight();
+			component.setY(height);
+		}
+	}
+
+	@Override
+	public int getRectX() {
+		return getX();
+	}
+
+	@Override
+	public int getRectY() {
+		return getY();
 	}
 }

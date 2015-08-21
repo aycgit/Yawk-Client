@@ -11,35 +11,33 @@ import org.lwjgl.input.Keyboard;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.yawk.client.Client;
 import net.yawk.client.gui.AbstractComponent;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.Window;
 import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.GuiUtils;
 
 public class TextField extends AbstractComponent{
 	
-	protected IPanel win;
 	private boolean selected;
 	protected String contents = "";
 	private String placeholder;
 	private int frames = 0;
 	
-	public TextField(IPanel win, String placeholder){
-		this.win = win;
+	public TextField(String placeholder){
 		this.placeholder = placeholder;
 	}
 	
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
+	public void draw(int x, int y) {
 		
 		//GuiUtils.drawRect(cx, cy, cx+win.getWidth(), cy+getHeight(), 0x2F000000);
 		
 		if(!selected && contents.length() == 0){
-			Client.getClient().getFontRenderer().drawStringWithShadow(placeholder, cx + 3, cy + 2, 0xFFBFBFBF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(placeholder, getX() + 3, getY() + 2, 0xFFBFBFBF, true);
 		}else if(selected){
-			Client.getClient().getFontRenderer().drawStringWithShadow(contents + (frames++ % 2 == 0? "_" : ""), cx + 3, cy + 2, 0xFFFFFFFF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(contents + (frames++ % 2 == 0? "_" : ""), getX() + 3, getY() + 2, 0xFFFFFFFF, true);
 		}else{
-			Client.getClient().getFontRenderer().drawStringWithShadow(contents, cx + 3, cy + 2, 0xFFFFFFFF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(contents, getX() + 3, getY() + 2, 0xFFFFFFFF, true);
 		}
 	}
 	
@@ -79,8 +77,8 @@ public class TextField extends AbstractComponent{
 	}
 	
 	@Override
-	public void mouseClicked(int x, int y, int cx, int cy) {
-		if(mouseOverButton(x, y, cx, cy)){
+	public void mouseClicked(int x, int y) {
+		if(mouseOverButton(x, y, getX(), getY())){
 			selected = true;
 		}else{
 			selected = false;
@@ -88,7 +86,7 @@ public class TextField extends AbstractComponent{
 	}
 	
 	private boolean mouseOverButton(int x, int y, int cx, int cy){
-		return x > cx && x < cx+win.getWidth() && y > cy && y < cy+getHeight();
+		return x > cx && x < cx+rect.getWidth() && y > cy && y < cy+getHeight();
 	}
 	
 	@Override

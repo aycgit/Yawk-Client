@@ -14,13 +14,13 @@ public class FriendScrollPane extends ScrollPane{
 	private ArrayList<String> friends = new ArrayList<String>();
 	private SelectorSystem system;
 	
-	public FriendScrollPane(Window win, int height, SelectorSystem system) {
-		super(win, height);
+	public FriendScrollPane(int height, SelectorSystem system) {
+		super(height);
 		this.system = system;
 	}
 	
 	public void addFriend(String name){
-		SelectorButton button = new SelectorButton(this, name, system);
+		SelectorButton button = new SelectorButton(name, system);
 		components.add(button);
 		friends.add(name);
 		system.add(button);

@@ -12,7 +12,7 @@ import com.google.gson.JsonParser;
 
 import net.yawk.client.api.PluginData;
 import net.yawk.client.api.PrivatePluginInformationThread;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.components.PluginDisplay;
 import net.yawk.client.gui.components.TextField;
 import net.yawk.client.utils.ClientUtils;
@@ -24,8 +24,8 @@ public class PrivatePluginInformationButton extends Button implements DownloadCa
 	private PrivatePluginInformationThread downloadThread;
 	private TextField nameField, passwordField;
 	
-	public PrivatePluginInformationButton(IPanel win, PluginDisplay pluginDisplay, TextField nameField, TextField passwordField) {
-		super(win);
+	public PrivatePluginInformationButton(PluginDisplay pluginDisplay, TextField nameField, TextField passwordField) {
+		super();
 		this.pluginDisplay = pluginDisplay;
 		this.nameField = nameField;
 		this.passwordField = passwordField;

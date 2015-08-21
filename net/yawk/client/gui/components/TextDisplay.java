@@ -18,8 +18,8 @@ public class TextDisplay extends AbstractComponent{
 	}
 
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
-		Client.getClient().getFontRenderer().drawStringWithShadow(text, cx + 3, cy + 2, 0xFFFFFFFF, true);
+	public void draw(int x, int y) {
+		Client.getClient().getFontRenderer().drawStringWithShadow(text, getX() + 3, getY() + 2, 0xFFFFFFFF, true);
 	}
 	
 	public String getText() {

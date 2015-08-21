@@ -1,7 +1,7 @@
 package net.yawk.client.modmanager.values;
 
 import net.yawk.client.gui.AbstractComponent;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.components.ArrayBox;
 import net.yawk.client.gui.components.ArrayValueBox;
 
@@ -15,8 +15,8 @@ public class ArrayValue extends AbstractValue<Integer>{
 	}
 
 	@Override
-	public AbstractComponent getComponent(IPanel panel) {
-		return new ArrayValueBox(panel, this);
+	public AbstractComponent getComponent(IRectangle panel) {
+		return new ArrayValueBox(this);
 	}
 
 	public String getSelectedMode(){

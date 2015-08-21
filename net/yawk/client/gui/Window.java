@@ -12,7 +12,7 @@ import net.yawk.client.utils.GuiUtils;
 
 import org.lwjgl.opengl.GL11;
 
-public class Window implements IPanel{
+public class Window implements IRectangle{
 	
 	public String title;
 	public int posX, posY, mouseXOffset, mouseYOffset;
@@ -21,14 +21,14 @@ public class Window implements IPanel{
 	private ModManager modManager;
 	
 	public static int TITLE_COMPONENT_SPACE = 2;
+	public static int TITLE_SIZE = 12;
 	
 	public int width;
 	public int height;
 	
-	public Window(String title, ModManager modManager, int width, int height){
+	public Window(String title, ModManager modManager, int width){
 		this.title = title;
 		this.width = width;
-		this.height = height;
 		this.modManager = modManager;
 	}
 	
@@ -39,51 +39,35 @@ public class Window implements IPanel{
 			posY = y+mouseYOffset;
 		}
 		
-		width = 0;
-		
-		int h = 0;
-		
-		for(AbstractComponent c : components){
-			
-			h += c.getHeight();
-			
-			if(c.getWidth() > this.width){
-				this.width = c.getWidth();
-			}
-		}
-		
 		if(titleVisible){
 			
-			drawHeader(posX, posY, posX+width, posY+height);
+			drawHeader(posX, posY, posX+width, posY+TITLE_SIZE);
 			
 			Client.getClient().getFontRenderer().drawStringWithShadow(title,
 					posX + 3,
-					posY + height/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
+					posY + TITLE_SIZE/2 - Client.getClient().getFontRenderer().FONT_HEIGHT/2,
 					ColourType.TITLE_TEXT.getColour(),
 					true);
 			
 			//Toggle extension
 			if(hasExtensionButton()){
-				drawButton(posX+width-10, posY+2, posX+width-2, posY+height-2, extended);
+				drawButton(posX+width-10, posY+2, posX+width-2, posY+TITLE_SIZE-2, extended);
 			}
 			
 			//Toggle pinned
 			if(hasPinnedButton()){
-				drawButton(posX+width-22, posY+2, posX+width-14, posY+height-2, pinned);
+				drawButton(posX+width-22, posY+2, posX+width-14, posY+TITLE_SIZE-2, pinned);
 			}
 		}
 		
 		if(extended){
-			drawBodyRect(posX, posY+height+Window.TITLE_COMPONENT_SPACE, posX+width, posY+height+TITLE_COMPONENT_SPACE+h, titleVisible);
+			drawBodyRect(posX, posY+TITLE_SIZE+TITLE_COMPONENT_SPACE, posX+width, posY+TITLE_SIZE+TITLE_COMPONENT_SPACE+height, titleVisible);
 		}
 		
 		if(extended){
-			
-			h = 0;
-			
+						
 			for(AbstractComponent c : components){
-				c.draw(x, y, posX, posY+height+TITLE_COMPONENT_SPACE+h);
-				h += c.getHeight();
+				c.draw(x, y);
 			}
 		}
 	}
@@ -93,7 +77,7 @@ public class Window implements IPanel{
 	}
 	
 	protected void drawHeader(int x, int y, int x1, int y1){
-		GuiUtils.drawTopNodusRect(posX, posY, posX+width, posY+height);
+		GuiUtils.drawTopNodusRect(posX, posY, posX+width, posY+TITLE_SIZE);
 	}
 	
 	protected void drawBodyRect(int x, int y, int x1, int y1, boolean titleVisible){
@@ -117,12 +101,9 @@ public class Window implements IPanel{
 		}
 		
 		if(extended){
-			
-			int h = 0;
-			
+						
 			for(AbstractComponent c : components){
-				c.mouseClicked(x, y, posX, posY+height+h);
-				h += c.getHeight();
+				c.mouseClicked(x, y);
 			}
 		}
 	}
@@ -169,15 +150,15 @@ public class Window implements IPanel{
 	}
 	
 	public boolean mouseOverTitle(int x, int y){
-		return x >= posX && x <= posX+width && y >= posY && y <= posY+height+TITLE_COMPONENT_SPACE;
+		return x >= posX && x <= posX+width && y >= posY && y <= posY+TITLE_SIZE+TITLE_COMPONENT_SPACE;
 	}
 	
 	public boolean mouseOverToggleExtension(int x, int y){
-		return x >= posX+width-10 && x <= posX+width-2 && y >= posY+2 && y <= posY+height-2;
+		return x >= posX+width-10 && x <= posX+width-2 && y >= posY+2 && y <= posY+TITLE_SIZE-2;
 	}
 	
 	public boolean mouseOverTogglePinned(int x, int y){
-		return x >= posX+width-22 && x <= posX+width-14 && y >= posY+2 && y <= posY+height-2;
+		return x >= posX+width-22 && x <= posX+width-14 && y >= posY+2 && y <= posY+TITLE_SIZE-2;
 	}
 	
 	public int getWidth() {
@@ -198,6 +179,33 @@ public class Window implements IPanel{
 	
 	public void addComponent(AbstractComponent c){
 		this.components.add(c);
+		c.setRectangle(this);
+		c.init();
+		updateHeight();
+		
+		if(c.getWidth() > this.width){
+			this.width = c.getWidth();
+		}
+	}
+	
+	public void updateHeight(){
+		
+		height = 0;
+		
+		for(AbstractComponent component : components){
+			height += component.getHeight();
+			component.setY(height);
+		}
+	}
+	
+	@Override
+	public int getRectX() {
+		return posX;
+	}
+
+	@Override
+	public int getRectY() {
+		return posY+TITLE_COMPONENT_SPACE;
 	}
 	
 }

@@ -4,7 +4,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
 import net.yawk.client.api.PluginData;
 import net.yawk.client.gui.ColourType;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.Window;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.PluginMod;
@@ -15,29 +15,29 @@ public class KeybindButton extends SelectorButton{
 	private Mod mod;
 	private String provider;
 	
-	public KeybindButton(IPanel win, Mod data, SelectorSystem system) {
-		super(win, data.getName(), system);
+	public KeybindButton(Mod data, SelectorSystem system) {
+		super(data.getName(), system);
 		this.mod = data;
 		this.provider = getProvider(data);
 	}
 	
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
+	public void draw(int x, int y) {
 		
-		boolean mouseover = mouseOverButton(x, y, cx, cy);
+		boolean mouseover = mouseOverButton(x, y, getX(), getY());
 		
 		if(mouseover){
-			GuiUtils.drawRect(cx, cy, cx+win.getWidth(), cy+getHeight(), 0x2FFFFFFF);
+			GuiUtils.drawRect(getX(), getY(), getX()+rect.getWidth(), getY()+getHeight(), 0x2FFFFFFF);
 		}
 		
 		if(isEnabled()){
-			Client.getClient().getFontRenderer().drawStringWithShadow(getText(), cx+3, cy+2, mouseover? ColourType.HIGHLIGHT.getModifiedColour():ColourType.HIGHLIGHT.getColour(), true);
-			Client.getClient().getFontRenderer().drawStringWithShadow(mod.getDescription(), cx+3, cy+14, 0xFFCFCFCF, true);
-			Client.getClient().getFontRenderer().drawStringWithShadow(provider, cx+3, cy+26, 0xFFCFCFCF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(getText(), getX()+3, getY()+2, mouseover? ColourType.HIGHLIGHT.getModifiedColour():ColourType.HIGHLIGHT.getColour(), true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(mod.getDescription(), getX()+3, getY()+14, 0xFFCFCFCF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(provider, getX()+3, getY()+26, 0xFFCFCFCF, true);
 		}else{
-			Client.getClient().getFontRenderer().drawStringWithShadow(getText(), cx+3, cy+2, mouseover? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(), true);
-			Client.getClient().getFontRenderer().drawStringWithShadow(mod.getDescription(), cx+3, cy+14, 0xFFCFCFCF, true);
-			Client.getClient().getFontRenderer().drawStringWithShadow(provider, cx+3, cy+26, 0xFF8F8F8F, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(getText(), getX()+3, getY()+2, mouseover? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(), true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(mod.getDescription(), getX()+3, getY()+14, 0xFFCFCFCF, true);
+			Client.getClient().getFontRenderer().drawStringWithShadow(provider, getX()+3, getY()+26, 0xFF8F8F8F, true);
 		}
 		
 	}

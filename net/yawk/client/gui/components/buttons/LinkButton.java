@@ -8,8 +8,8 @@ public class LinkButton extends Button{
 	private String text;
 	private String link;
 	
-	public LinkButton(Window win, String text, String link) {
-		super(win);
+	public LinkButton(String text, String link) {
+		super();
 		this.text = text;
 		this.link = link;
 	}

@@ -9,8 +9,8 @@ public class FriendsExecuteButton extends Button{
 	
 	private SelectorSystem<SelectorButton> system;
 	
-	public FriendsExecuteButton(Window win, SelectorSystem<SelectorButton> system) {
-		super(win);
+	public FriendsExecuteButton(SelectorSystem<SelectorButton> system) {
+		super();
 		this.system = system;
 	}
 

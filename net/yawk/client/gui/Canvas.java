@@ -7,7 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import net.yawk.client.utils.GuiUtils;
 
-public class Canvas implements IPanel{
+public class Canvas implements IRectangle{
 	
 	private IScalerPosition pos;
 	private int width, height;
@@ -23,33 +23,17 @@ public class Canvas implements IPanel{
 		int posX = pos.getX();
 		int posY = pos.getY();
 		
-		int h = 0;
+		GuiUtils.drawRect(posX, posY, posX+width, posY+height, 0x5F5F5F5F);
 		
 		for(AbstractComponent comp : components){
-			h += comp.getHeight();
-		}
-		
-		this.height = h;
-		GuiUtils.drawRect(posX, posY, posX+width, posY+h, 0x5F5F5F5F);
-		
-		h = 0;
-		
-		for(AbstractComponent comp : components){
-			comp.draw(x, y, posX, posY+h);
-			h += comp.getHeight();
+			comp.draw(x, y);
 		}
 	}
 	
 	public void mouseClicked(int x, int y) {
-		
-		int posX = pos.getX();
-		int posY = pos.getY();
-		
-		int h = 0;
-		
+						
 		for (AbstractComponent comp : components){
-			comp.mouseClicked(x, y, posX, posY+h);
-			h += comp.getHeight();
+			comp.mouseClicked(x, y);
 		}
 	}
 	
@@ -61,12 +45,9 @@ public class Canvas implements IPanel{
 	}
 	
 	public void mouseReleased(int x, int y, int state) {
-		
-		int h = 0;
-		
+				
 		for(AbstractComponent comp : components){
 			comp.mouseReleased(x, y, state);
-			h += comp.getHeight();
 		}
 	}
 	
@@ -82,9 +63,33 @@ public class Canvas implements IPanel{
 	
 	public void addComponent(AbstractComponent c){
 		this.components.add(c);
+		c.setRectangle(this);
+		c.init();
+		updateHeight();
 	}
 	
 	public void clearComponents(){
 		this.components.clear();
+		height = 0;
+	}
+	
+	public void updateHeight(){
+		
+		height = 0;
+		
+		for(AbstractComponent component : components){
+			height += component.getHeight();
+			component.setY(height);
+		}
+	}
+	
+	@Override
+	public int getRectX() {
+		return pos.getX();
+	}
+
+	@Override
+	public int getRectY() {
+		return pos.getY();
 	}
 }

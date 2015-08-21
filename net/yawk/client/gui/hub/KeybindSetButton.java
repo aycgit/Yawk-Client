@@ -1,7 +1,7 @@
 package net.yawk.client.gui.hub;
 
 import net.yawk.client.Client;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.components.buttons.Button;
 import net.yawk.client.gui.components.selectors.KeybindButton;
 import net.yawk.client.gui.components.selectors.SelectorSystem;
@@ -12,8 +12,8 @@ public class KeybindSetButton extends Button{
 	private boolean focus;
 	private SelectorSystem<KeybindButton> system;
 	
-	public KeybindSetButton(IPanel win, SelectorSystem<KeybindButton> system) {
-		super(win);
+	public KeybindSetButton(SelectorSystem<KeybindButton> system) {
+		super();
 		this.system = system;
 	}
 
@@ -43,9 +43,9 @@ public class KeybindSetButton extends Button{
 	}
 
 	@Override
-	public void mouseClicked(int x, int y, int cx, int cy) {
+	public void mouseClicked(int x, int y) {
 		
-		if(mouseOverButton(x, y, cx, cy)){
+		if(mouseOverButton(x, y, getX(), getY())){
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
 			toggle();
 		}else{

@@ -11,8 +11,8 @@ public class FileChooserButton extends Button{
 	private File file;
 	private String text;
 	
-	public FileChooserButton(Window win, String text) {
-		super(win);
+	public FileChooserButton(String text) {
+		super();
 		this.text = text;
 	}
 

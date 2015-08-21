@@ -9,10 +9,9 @@ import net.yawk.client.modmanager.Mod;
 public class EnabledModsDisplay extends AbstractComponent {
 	
 	private int height;
-	protected Window win;
 	
-	public EnabledModsDisplay(Window win){
-		this.win = win;
+	public EnabledModsDisplay(){
+		
 	}
 	
 	@Override
@@ -21,13 +20,13 @@ public class EnabledModsDisplay extends AbstractComponent {
 	}
 	
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
+	public void draw(int x, int y) {
 		
 		height = 0;
 		
 		for(Mod m : Client.getClient().getModManager().mods){
 			if(m.isEnabled()){
-				Client.getClient().getFontRenderer().drawStringWithShadow(m.getName(), cx + 3, cy + height*12 + 2, ColourType.TEXT.getColour(), true);
+				Client.getClient().getFontRenderer().drawStringWithShadow(m.getName(), getX() + 3, getY() + height*12 + 2, ColourType.TEXT.getColour(), true);
 				height++;
 			}
 		}

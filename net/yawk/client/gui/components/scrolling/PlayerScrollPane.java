@@ -15,13 +15,13 @@ public class PlayerScrollPane extends ScrollPane{
 	
 	private SelectorSystem<SelectorButton> system;
 	
-	public PlayerScrollPane(Window win, int height, SelectorSystem<SelectorButton> system) {
-		super(win, height);
+	public PlayerScrollPane(int height, SelectorSystem<SelectorButton> system) {
+		super(height);
 		this.system = system;
 	}
 	
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
+	public void draw(int x, int y) {
 		
 		ArrayList<String> players = getPlayers();
 		ArrayList<SelectorButton> offline = new ArrayList<SelectorButton>();
@@ -45,10 +45,10 @@ public class PlayerScrollPane extends ScrollPane{
 		}
 		
 		for(String newPlayer : newPlayers){
-			components.add(system.add(new SelectorButton(win, newPlayer, system)));
+			components.add(system.add(new SelectorButton(newPlayer, system)));
 		}
 		
-		super.draw(x, y, cx, cy);
+		super.draw(x, y);
 	}
 	
 	private boolean playerNotFound(String p){

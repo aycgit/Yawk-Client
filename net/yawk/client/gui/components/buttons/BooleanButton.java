@@ -1,14 +1,14 @@
 package net.yawk.client.gui.components.buttons;
 
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.modmanager.values.BooleanValue;
 
 public class BooleanButton extends Button{
 
 	private BooleanValue val;
 	
-	public BooleanButton(IPanel win, BooleanValue val) {
-		super(win);
+	public BooleanButton(BooleanValue val) {
+		super();
 		this.val = val;
 	}
 

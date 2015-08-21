@@ -18,10 +18,14 @@ public class OptionsModButton extends ModButton{
 	private boolean extended;
 	private WindowSubPanel panel;
 	
-	public OptionsModButton(Window win, Mod mod) {
-		super(win, mod);
+	public OptionsModButton(Mod mod) {
+		super(mod);
+	}
+	
+	@Override
+	public void init() {
 		
-		panel = new WindowSubPanel(win);
+		panel = new WindowSubPanel(rect, getX(), getY());
 		
 		for(AbstractValue option : mod.getOptions()){
 			panel.addComponent(option.getComponent(panel));
@@ -29,41 +33,41 @@ public class OptionsModButton extends ModButton{
 	}
 	
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
+	public void draw(int x, int y) {
 		
 		if(mod.isEnabled()){
 			Client.getClient().getFontRenderer().drawStringWithShadow(getText(),
-					cx+3,
-					cy+2,
-					mouseOverButton(x, y, cx, cy)? ColourType.HIGHLIGHT.getModifiedColour():ColourType.HIGHLIGHT.getColour(),
+					getX()+3,
+					getY()+2,
+					mouseOverButton(x, y, getX(), getY())? ColourType.HIGHLIGHT.getModifiedColour():ColourType.HIGHLIGHT.getColour(),
 					true);
 		}else{
 			Client.getClient().getFontRenderer().drawStringWithShadow(getText(),
-					cx+3,
-					cy+2,
-					mouseOverButton(x, y, cx, cy)? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
+					getX()+3,
+					getY()+2,
+					mouseOverButton(x, y, getX(), getY())? ColourType.TEXT.getModifiedColour():ColourType.TEXT.getColour(),
 					true);
 		}
 		
-		GuiUtils.drawRect(cx+win.getWidth()-10, cy+2, cx+win.getWidth()-2, cy+10, extended? 0x4FFFFFFF:0x2FFFFFFF);
+		GuiUtils.drawRect(getX()+rect.getWidth()-10, getY()+2, getX()+rect.getWidth()-2, getY()+10, extended? 0x4FFFFFFF:0x2FFFFFFF);
 		
 		if(extended){
-			panel.draw(x, y, cx, cy+12);
+			panel.draw(x, y);
 		}
 	}
 
 	@Override
-	public void mouseClicked(int x, int y, int cx, int cy) {
+	public void mouseClicked(int x, int y) {
 		
-		if(mouseOverExtendButton(x, y, cx, cy)){
+		if(mouseOverExtendButton(x, y, getX(), getY())){
 			extended = !extended;
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
 		}else{
-			super.mouseClicked(x, y, cx, cy);
+			super.mouseClicked(x, y);
 		}
 		
 		if(extended){
-			panel.mouseClicked(x, y, cx, cy+12);
+			panel.mouseClicked(x, y);
 		}
 	}
 	
@@ -75,12 +79,12 @@ public class OptionsModButton extends ModButton{
 	}
 	
 	public boolean mouseOverExtendButton(int x, int y, int cx, int cy){
-		return x >= cx+win.getWidth()-10 && x <= cx+win.getWidth()-2 && y >= cy+2 && y <= cy+10;
+		return x >= cx+rect.getWidth()-10 && x <= cx+rect.getWidth()-2 && y >= cy+2 && y <= cy+10;
 	}
 	
 	@Override
 	public boolean mouseOverButton(int x, int y, int cx, int cy){
-		return x > cx && x < cx+win.getWidth() && y > cy && y < cy+12;
+		return x > cx && x < cx+rect.getWidth() && y > cy && y < cy+12;
 	}
 	
 	@Override

@@ -1,14 +1,14 @@
 package net.yawk.client.gui.components.buttons;
 
 import net.yawk.client.Client;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 
 public class PrivatePluginDownloadButton extends Button{
 
 	private PrivatePluginInformationButton information;
 	
-	public PrivatePluginDownloadButton(IPanel win, PrivatePluginInformationButton information) {
-		super(win);
+	public PrivatePluginDownloadButton(PrivatePluginInformationButton information) {
+		super();
 		this.information = information;
 	}
 

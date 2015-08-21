@@ -2,7 +2,7 @@ package net.yawk.client.gui.components;
 
 import net.yawk.client.Client;
 import net.yawk.client.gui.AbstractComponent;
-import net.yawk.client.gui.IPanel;
+import net.yawk.client.gui.IRectangle;
 import net.yawk.client.modmanager.values.SliderValue;
 import net.yawk.client.modmanager.values.AbstractValue;
 import net.yawk.client.utils.ClientUtils;
@@ -12,49 +12,47 @@ public class Slider extends AbstractComponent{
 	
 	private static int BAR_WIDTH = 10;
 	
-	private IPanel panel;
 	private SliderValue val;
 	private int slide, mouseXOffset;
 	private boolean dragging;
 	
-	public Slider(IPanel panel, SliderValue val) {
-		this.panel = panel;
+	public Slider(SliderValue val) {
 		this.val = val;
 	}
 	
 	@Override
-	public void draw(int x, int y, int cx, int cy) {
+	public void draw(int x, int y) {
 		
 		if(dragging){
 			
 			slide = x + mouseXOffset;
 			
-			double factor = (slide - cx)/(double)(panel.getWidth()-BAR_WIDTH);
+			double factor = (slide - getX())/(double)(rect.getWidth()-BAR_WIDTH);
 			double range = val.getUpperBound() - val.getLowerBound();
 			double addition = range*factor;
 			
 			val.setValue(addition+val.getLowerBound());
 		}
 		
-		if(slide > cx+panel.getWidth()-BAR_WIDTH){
-			slide = cx+panel.getWidth()-BAR_WIDTH;
+		if(slide > getX()+rect.getWidth()-BAR_WIDTH){
+			slide = getX()+rect.getWidth()-BAR_WIDTH;
 		}
 		
-		if(slide < cx){
-			slide = cx;
+		if(slide < getX()){
+			slide = getX();
 		}
 		
 		//GuiUtils.drawRect(cx, cy, cx+panel.getWidth(), cy+getHeight(), 0x2FDFDFDF);
-		GuiUtils.drawRect(slide, cy, slide+BAR_WIDTH, cy+getHeight(), 0x7F9F9F9F);
+		GuiUtils.drawRect(slide, getY(), slide+BAR_WIDTH, getY()+getHeight(), 0x7F9F9F9F);
 		
 		String displayString = val.getName()+": "+(val.isRounded()? val.getValue().intValue():ClientUtils.decimalFormat.format(val.getValue()));
 		
-		Client.getClient().getFontRenderer().drawString(displayString, cx + panel.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(displayString)/2, cy + 2, 0xFFFFFFFF);
+		Client.getClient().getFontRenderer().drawString(displayString, getX() + rect.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(displayString)/2, getY() + 2, 0xFFFFFFFF);
 	}
 	
 	@Override
-	public void mouseClicked(int x, int y, int cx, int cy) {
-		if(mouseOverSlider(x, y, cx, cy)){
+	public void mouseClicked(int x, int y) {
+		if(mouseOverSlider(x, y, getX(), getY())){
 			dragging = true;
 			mouseXOffset = slide - x;
 		}
