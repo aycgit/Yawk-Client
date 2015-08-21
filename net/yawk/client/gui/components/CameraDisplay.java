@@ -45,6 +45,8 @@ public class CameraDisplay extends AbstractComponent{
 			if(camera.getHeight() < 60){
 				camera.setHeight(60);
 			}
+			
+			rect.updateHeight();
 		}
 		
 		if(camera.isFrameBufferUpdated()){

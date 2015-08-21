@@ -64,7 +64,7 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 	}
 	
 	public int getScrollHeight(){
-		return (int) ((float)(dragged/(float)(height-BAR_HEIGHT)) * (height-viewportHeight));
+		return (int) ((float)(dragged/(float)(viewportHeight-BAR_HEIGHT)) * (height-viewportHeight));
 	}
 	
 	public boolean mouseOverBar(int x, int y, int cx, int cy){
