@@ -188,13 +188,14 @@ public class Window implements IRectangle{
 		}
 	}
 	
+	@Override
 	public void updateHeight(){
 		
 		height = 0;
 		
 		for(AbstractComponent component : components){
+			component.setY(height+TITLE_SIZE);
 			height += component.getHeight();
-			component.setY(height);
 		}
 	}
 	

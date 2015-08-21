@@ -20,7 +20,7 @@ public class CameraDisplay extends AbstractComponent{
 	
 	@Override
 	public void draw(int x, int y) {
-		
+				
 		if(draggingWidth){
 			
 			camera.setWidth((x - getX()) * 2);
@@ -89,6 +89,7 @@ public class CameraDisplay extends AbstractComponent{
 		
 		if(draggingWidth || draggingHeight){
 			camera.makeNewFrameBuffer();
+			rect.updateHeight();
 		}
 		
 		draggingWidth = false;

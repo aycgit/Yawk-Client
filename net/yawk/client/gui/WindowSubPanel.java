@@ -36,13 +36,14 @@ public class WindowSubPanel implements IRectangle{
 		updateHeight();
 	}
 	
+	@Override
 	public void updateHeight(){
 		
 		height = 0;
 		
 		for(AbstractComponent component : components){
+			component.setY(height+yOffset);
 			height += component.getHeight();
-			component.setY(height);
 		}
 	}
 	

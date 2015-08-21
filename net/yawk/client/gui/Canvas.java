@@ -73,13 +73,14 @@ public class Canvas implements IRectangle{
 		height = 0;
 	}
 	
+	@Override
 	public void updateHeight(){
 		
 		height = 0;
 		
 		for(AbstractComponent component : components){
-			height += component.getHeight();
 			component.setY(height);
+			height += component.getHeight();
 		}
 	}
 	
