@@ -2,7 +2,10 @@ package net.yawk.client.gui.components.buttons;
 
 import java.net.MalformedURLException;
 
+import net.minecraft.util.ChatComponentTranslation;
 import net.yawk.client.Client;
+import net.yawk.client.api.DependancyNotFoundException;
+import net.yawk.client.api.DependancyNotInstalledException;
 import net.yawk.client.api.PluginData;
 import net.yawk.client.gui.IRectangle;
 import net.yawk.client.gui.Window;
@@ -52,6 +55,10 @@ public class PluginDownloadButton extends Button{
 						e.printStackTrace();
 					} catch (IllegalAccessException e) {
 						e.printStackTrace();
+					} catch (DependancyNotInstalledException e) {
+						Client.getClient().addChat("Error - Plugin dependancy not installed: "+e.getPlugin().getName());
+					} catch (DependancyNotFoundException e) {
+						Client.getClient().addChat("Error - Plugin dependancy not found or installed: "+e.getDependancy().name());
 					}
 				}
 			}

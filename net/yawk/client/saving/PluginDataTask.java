@@ -5,6 +5,8 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import net.yawk.client.Client;
+import net.yawk.client.api.DependancyNotFoundException;
+import net.yawk.client.api.DependancyNotInstalledException;
 import net.yawk.client.api.PluginData;
 import net.yawk.client.utils.FileUtils;
 
@@ -63,6 +65,10 @@ public class PluginDataTask implements DataTask{
 					} catch (InstantiationException e) {
 						e.printStackTrace();
 					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+					} catch (DependancyNotInstalledException e) {
+						e.printStackTrace();
+					} catch (DependancyNotFoundException e) {
 						e.printStackTrace();
 					}
 				}

@@ -149,8 +149,10 @@ public class PluginManager {
 	 * @throws ClassNotFoundException
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
+	 * @throws DependancyNotInstalledException 
+	 * @throws DependancyNotFoundException 
 	 */
-	public void addPlugin(PluginData plugin) throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+	public void addPlugin(PluginData plugin) throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException, DependancyNotInstalledException, DependancyNotFoundException{
 
 		File jar = new File(plugins, plugin.getFileName());
 
@@ -208,7 +210,28 @@ public class PluginManager {
 
 			ClassLoader cl = new URLClassLoader(urls);
 			Class register = Class.forName(mainClass, true, cl);
-
+			
+			if(register.isAnnotationPresent(PluginDependancy.class)){
+				PluginDependancy dependancy = (PluginDependancy) register.getAnnotation(PluginDependancy.class);
+				Client.getClient().log("Plugin dependancy requested: "+dependancy.name()+" version "+dependancy.version());
+				
+				for(PluginData pl : pluginData){
+					
+					if(pl.getName().equals(dependancy.name()) && (pl.getVersion() == dependancy.version() || dependancy.version() == -1)){
+						if(pluginEnabled(pl)){
+							Client.getClient().log("Dependancy found and installed");
+							break;
+						}else{
+							Client.getClient().log("Dependancy not installed");
+							throw new DependancyNotInstalledException(pl, dependancy);
+						}
+					}
+				}
+				
+				Client.getClient().log("Dependancy not found");
+				throw new DependancyNotFoundException(dependancy);
+			}
+			
 			PluginRegister reg = (PluginRegister) register.newInstance();
 			cl.clearAssertionStatus();
 
@@ -296,6 +319,10 @@ public class PluginManager {
 							} catch (InstantiationException e) {
 								e.printStackTrace();
 							} catch (IllegalAccessException e) {
+								e.printStackTrace();
+							} catch (DependancyNotInstalledException e) {
+								e.printStackTrace();
+							} catch (DependancyNotFoundException e) {
 								e.printStackTrace();
 							}
 						}

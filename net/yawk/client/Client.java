@@ -38,6 +38,7 @@ import net.minecraft.network.play.client.C18PacketSpectate;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHealth;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ResourceLocation;
 import net.yawk.client.api.PluginManager;
 import net.yawk.client.cameras.Camera;
@@ -86,7 +87,7 @@ public class Client {
 		session = new ClientSession("Name", "348443568", false);
 		
 		logger = Logger.getGlobal();
-		
+				
 		this.valuesRegistry = new ValuesRegistry();
 		this.fileManager = new FileManager(this);
 		fileManager.loadClientSettings();
@@ -187,6 +188,10 @@ public class Client {
 	
 	public FileManager getFileManager() {
 		return fileManager;
+	}
+	
+	public void addChat(String text){
+		Client.getClient().getPlayer().addChatComponentMessage(new ChatComponentTranslation(text));
 	}
 	
 	public void keyPressed(int key){
