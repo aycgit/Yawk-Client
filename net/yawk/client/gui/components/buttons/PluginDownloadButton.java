@@ -47,18 +47,12 @@ public class PluginDownloadButton extends Button{
 				}else{
 					try {
 						Client.getClient().getPluginManager().addPlugin(selected);
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					} catch (InstantiationException e) {
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						e.printStackTrace();
 					} catch (DependancyNotInstalledException e) {
 						Client.getClient().addChat("Error - Plugin dependancy not installed: "+e.getPlugin().getName());
 					} catch (DependancyNotFoundException e) {
 						Client.getClient().addChat("Error - Plugin dependancy not found or installed: "+e.getDependancy().name());
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
 				}
 			}

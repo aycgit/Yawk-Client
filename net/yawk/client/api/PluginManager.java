@@ -312,17 +312,7 @@ public class PluginManager {
 						if(data.isPrivatePlugin()){
 							try {
 								addPlugin(data);
-							} catch (MalformedURLException e) {
-								e.printStackTrace();
-							} catch (ClassNotFoundException e) {
-								e.printStackTrace();
-							} catch (InstantiationException e) {
-								e.printStackTrace();
-							} catch (IllegalAccessException e) {
-								e.printStackTrace();
-							} catch (DependancyNotInstalledException e) {
-								e.printStackTrace();
-							} catch (DependancyNotFoundException e) {
+							} catch (Exception e) {
 								e.printStackTrace();
 							}
 						}
