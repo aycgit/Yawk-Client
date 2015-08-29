@@ -3,7 +3,7 @@ package net.yawk.client.modmanager.values;
 import net.yawk.client.gui.AbstractComponent;
 import net.yawk.client.gui.IRectangle;
 
-public abstract class AbstractValue<T> {
+public abstract class AbstractValue<T>{
 	
 	protected T value;
 	private String name;

@@ -11,11 +11,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
+import net.yawk.client.Client;
 import net.yawk.client.events.EventClickBlock;
 import net.yawk.client.events.EventDamageBlock;
 import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventPlaceBlock;
 import net.yawk.client.events.EventUpdateController;
+import net.yawk.client.modmanager.Mod;
+import net.yawk.client.mods.building.Reach;
 
 public class PlayerControllerMPHook extends PlayerControllerMP{
 
@@ -71,4 +74,18 @@ public class PlayerControllerMPHook extends PlayerControllerMP{
 			return false;
 		}
 	}
+
+	private Mod reach = Client.getClient().getModManager().getMod(Reach.class);
+	
+	@Override
+	public float getBlockReachDistance() {
+		
+		if(reach.isEnabled()){
+			return 20;
+		}else{
+			return super.getBlockReachDistance();
+		}
+		
+	}
+	
 }
