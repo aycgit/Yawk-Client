@@ -3,6 +3,7 @@ package net.yawk.client.mods.building;
 import com.darkmagician6.eventapi.EventTarget;
 import com.darkmagician6.eventapi.types.EventType;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C0APacketAnimation;
@@ -48,10 +49,12 @@ public class Reach extends Mod {
         MovingObjectPosition trace = mc.objectMouseOver;
 
         if(trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK){
-        	        	
-            mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(Math.floor(trace.hitVec.xCoord) + 0.5,
-            		trace.hitVec.yCoord,
-            		Math.floor(trace.hitVec.zCoord) + 0.5,
+        	
+        	Vec3 look = mc.thePlayer.getLookVec();
+        	
+            mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(trace.hitVec.xCoord - look.xCoord,
+            		trace.hitVec.yCoord - look.yCoord,
+            		trace.hitVec.zCoord - look.zCoord,
             		mc.thePlayer.onGround));
         }
     }

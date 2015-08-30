@@ -1,5 +1,6 @@
 package net.yawk.client.mods.movement;
 
+import net.minecraft.client.Minecraft;
 import net.yawk.client.Client;
 import net.yawk.client.events.*;
 import net.yawk.client.modmanager.Mod;
@@ -13,42 +14,44 @@ import com.darkmagician6.eventapi.EventTarget;
 
 @RegisterMod(name = "Flight", defaultKey = Keyboard.KEY_R, desc = "Fly in the air", type = Mod.Type.MOVEMENT)
 public class Flight extends Mod{
-	
+
 	private static SliderValue speed;
-	
+	private Minecraft mc;
+
 	public Flight(){
-		
+
 		super(new AbstractValue[]{
 				speed = new SliderValue("Fly Speed", "flight.speed", Client.getClient().getValuesRegistry(), 0.5, 0, 3, false),
 		});
+
+		mc = Minecraft.getMinecraft();
 	}
-	
+
 	@EventTarget
 	public void onTick(EventTick e){
 		fly();
 	}
-	
-	public static void fly(){
-		
-		Client.getClient().getPlayer().onGround = true;
-		
+
+	public void fly(){
+
+		mc.thePlayer.onGround = true;
+
 		if(Client.getClient().getMinecraft().inGameHasFocus){
-			
+
+			float yaw = mc.thePlayer.rotationYaw + 90;
+			float pitch = mc.thePlayer.rotationPitch;
+
 			if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
-				Client.getClient().getPlayer().motionY = 0.5d;
+				pitch += 45;
 			}else if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
-				Client.getClient().getPlayer().motionY = -0.5d;
-			}else{
-				Client.getClient().getPlayer().motionY = 0;
+				pitch -= 45;
 			}
-			
-			float yaw = Client.getClient().getPlayer().rotationYaw + 90;
-			
+
 			boolean keyW = Keyboard.isKeyDown(Keyboard.KEY_W), 
 					keyS = Keyboard.isKeyDown(Keyboard.KEY_S), 
 					keyA = Keyboard.isKeyDown(Keyboard.KEY_A), 
 					keyD = Keyboard.isKeyDown(Keyboard.KEY_D);
-			
+
 			if(keyW)
 			{
 				if(keyA)
@@ -70,28 +73,31 @@ public class Flight extends Mod{
 			}else if(keyD){
 				yaw += 90;
 			}
-			
+
 			if(keyW || keyA || keyS || keyD)
 			{
-				Client.getClient().getPlayer().motionX = Math.cos(Math.toRadians(yaw))*speed.getValue();
-				Client.getClient().getPlayer().motionZ = Math.sin(Math.toRadians(yaw))*speed.getValue();
+				mc.thePlayer.motionX = Math.cos(Math.toRadians(yaw))*speed.getValue();
+				mc.thePlayer.motionZ = Math.sin(Math.toRadians(yaw))*speed.getValue();
+				
+				mc.thePlayer.motionY = Math.sin(Math.toRadians(pitch))*speed.getValue();
+				
 			}else{
-				Client.getClient().getPlayer().motionX = 0;
-				Client.getClient().getPlayer().motionZ = 0;
+				mc.thePlayer.motionX = 0;
+				mc.thePlayer.motionZ = 0;
 			}
 		}else{
-			Client.getClient().getPlayer().motionY = 0;
+			mc.thePlayer.motionY = 0;
 		}
 
 	}
 
 	@Override
 	public void onEnable() {
-		
+
 	}
 
 	@Override
 	public void onDisable() {
-		
+
 	}
 }
