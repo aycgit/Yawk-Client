@@ -1,5 +1,7 @@
 package net.yawk.client.command;
 
+import java.util.List;
+
 import net.yawk.client.Client;
 
 public abstract class Command {
@@ -30,6 +32,6 @@ public abstract class Command {
 		Client.getClient().addChat(msg);
 	}
 	
-	public abstract void runCommand(String[] args);
+	public abstract void runCommand(List<Object> values);
 	public abstract Argument[] getArguments(CommandManager cm);
 }

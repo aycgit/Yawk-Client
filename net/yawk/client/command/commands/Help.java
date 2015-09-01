@@ -1,5 +1,7 @@
 package net.yawk.client.command.commands;
 
+import java.util.List;
+
 import net.yawk.client.Client;
 import net.yawk.client.command.Argument;
 import net.yawk.client.command.Command;
@@ -14,7 +16,7 @@ public class Help extends Command {
 	}
 	
 	@Override
-	public void runCommand(String[] args) {
+	public void runCommand(List<Object> values) {
 		for(Command c : Client.getClient().getCommandManager().getCommands()) {
 			if(c instanceof Help) {
 				continue;

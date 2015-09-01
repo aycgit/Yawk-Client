@@ -34,6 +34,7 @@ public class CommandManager {
 	public String run(String[] parts){
 
 		Argument[] args = null;
+		List<Object> values = new ArrayList<Object>();
 
 		Command command = getCommandByName(parts[0]);
 
@@ -58,12 +59,12 @@ public class CommandManager {
 				if(!arg.getType().isValid(input)){
 					return "Invalid argument type " + Chars.QUOTE + arg.getName() + Chars.QUOTE + " needs to be in " + arg.getType().getName() +" form";
 				}else{
-					//TODO: Parse argument
+					values.add(arg.getType().getValue(input));
 				}
 			}
 		}
-
-		command.runCommand(parts);
+		
+		command.runCommand(values);
 
 		return null;
 	}
