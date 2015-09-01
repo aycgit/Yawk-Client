@@ -61,7 +61,7 @@ public class SpoilerButton extends Button{
 	@Override
 	public void toggle() {
 		extended = !extended;
-		rect.updateHeight();
+		rect.updateSize();
 	}
 	
 	@Override

@@ -62,7 +62,7 @@ public class OptionsModButton extends ModButton{
 		if(mouseOverExtendButton(x, y, getX(), getY())){
 			extended = !extended;
 			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
-			rect.updateHeight();
+			rect.updateSize();
 		}else{
 			super.mouseClicked(x, y);
 		}

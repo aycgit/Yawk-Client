@@ -130,11 +130,11 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 		this.components.add(c);
 		c.setRectangle(this);
 		c.init();
-		updateHeight();
+		updateSize();
 	}
 	
 	@Override
-	public void updateHeight(){
+	public void updateSize(){
 		
 		height = 0;
 		

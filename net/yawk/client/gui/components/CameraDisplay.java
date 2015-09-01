@@ -46,7 +46,7 @@ public class CameraDisplay extends AbstractComponent{
 				camera.setHeight(60);
 			}
 			
-			rect.updateHeight();
+			rect.updateSize();
 		}
 		
 		if(camera.isFrameBufferUpdated()){
@@ -91,7 +91,7 @@ public class CameraDisplay extends AbstractComponent{
 		
 		if(draggingWidth || draggingHeight){
 			camera.makeNewFrameBuffer();
-			rect.updateHeight();
+			rect.updateSize();
 		}
 		
 		draggingWidth = false;

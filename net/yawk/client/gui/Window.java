@@ -65,7 +65,7 @@ public class Window implements IRectangle{
 		}
 		
 		if(extended){
-						
+			
 			for(AbstractComponent c : components){
 				c.draw(x, y);
 			}
@@ -181,21 +181,23 @@ public class Window implements IRectangle{
 		this.components.add(c);
 		c.setRectangle(this);
 		c.init();
-		updateHeight();
-		
-		if(c.getWidth() > this.width){
-			this.width = c.getWidth();
-		}
+		updateSize();
 	}
 	
 	@Override
-	public void updateHeight(){
+	public void updateSize(){
 		
-		height = 0;
+		this.height = 0;
+		this.width = 85;
 		
 		for(AbstractComponent component : components){
+			
 			component.setY(height+TITLE_SIZE);
 			height += component.getHeight();
+			
+			if(component.getWidth() > this.width){
+				this.width = component.getWidth();
+			}
 		}
 	}
 	

@@ -10,5 +10,6 @@ public interface IRectangle {
 	
 	public int getRectY();
 	
-	public void updateHeight();
+	public void updateSize();
+	
 }
