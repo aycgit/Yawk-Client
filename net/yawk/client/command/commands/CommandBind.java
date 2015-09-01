@@ -25,7 +25,7 @@ public class CommandBind extends Command {
 		
 		if(m != null){
 			
-			m.setKeybind(Keyboard.getKeyIndex(args.get("key")));
+			m.setKeybind(Keyboard.getKeyIndex(args.get("key").toUpperCase()));
 			chat("Mod "+m.getName()+" binded to "+ m.getKeyName());
 		}else{
 			chat("Mod not found!");
