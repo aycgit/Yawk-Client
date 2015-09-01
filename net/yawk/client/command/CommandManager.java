@@ -36,7 +36,7 @@ public class CommandManager {
 	public String run(String[] parts){
 
 		Argument[] args = null;
-		Map<Argument,String> values = new HashMap<Argument,String>();
+		Map<String,String> values = new HashMap<String,String>();
 
 		Command command = getCommandByName(parts[0]);
 
@@ -52,16 +52,18 @@ public class CommandManager {
 				return "Not enough arguments specified!";
 			}
 			
-			for(int i = 1; i < args.length; i++){
+			for(int i = 0; i < args.length; i++){
 
 				Argument arg = args[i];
 
-				String input = parts[i];
-
+				String input = parts[i+1];
+				
+				System.out.println(arg.getName() +" : "+input);
+				
 				if(!arg.getType().isValid(input)){
 					return "Invalid argument type " + Chars.QUOTE + arg.getName() + Chars.QUOTE + " needs to be in " + arg.getType().getName() +" form";
 				}else{
-					values.put(arg, input);
+					values.put(arg.getName(), input);
 				}
 			}
 		}

@@ -6,14 +6,14 @@ import java.util.Map;
 public class Arguments {
 	
 	private CommandManager cm;
-	private Map<Argument,String> values;
+	private Map<String,String> values;
 	
-	public Arguments(CommandManager cm, Map<Argument,String> values) {
+	public Arguments(CommandManager cm, Map<String,String> values) {
 		this.cm = cm;
 		this.values = values;
 	}
 	
-	public Map<Argument,String> getValues() {
+	public Map<String,String> getValues() {
 		return values;
 	}
 	
