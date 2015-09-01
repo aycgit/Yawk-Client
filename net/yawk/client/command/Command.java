@@ -1,5 +1,7 @@
 package net.yawk.client.command;
 
+import net.yawk.client.Client;
+
 public abstract class Command {
 	
 	private String name;
@@ -24,6 +26,10 @@ public abstract class Command {
 		return desc;
 	}
 	
-	public abstract void runCommand(String message);
+	protected void chat(String msg){
+		Client.getClient().addChat(msg);
+	}
+	
+	public abstract void runCommand(String[] args);
 	public abstract Argument[] getArguments(CommandManager cm);
 }

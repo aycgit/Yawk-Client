@@ -14,7 +14,7 @@ public class VClip extends Command {
 	}
 	
 	@Override
-	public void runCommand(String message) {
+	public void runCommand(String[] args) {
 		
 	}
 
