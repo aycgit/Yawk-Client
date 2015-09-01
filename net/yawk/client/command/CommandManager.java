@@ -42,13 +42,13 @@ public class CommandManager {
 		}else{
 			args = command.getArguments(this);
 		}
-
-		if(parts.length-1 < getRequiredArguments(args).size()){
-			return "Not enough arguments specified!";
-		}
 		
 		if(args != null){
-
+			
+			if(parts.length-1 < getRequiredArguments(args).size()){
+				return "Not enough arguments specified!";
+			}
+			
 			for(int i = 1; i < args.length; i++){
 
 				Argument arg = args[i];
