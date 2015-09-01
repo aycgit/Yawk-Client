@@ -17,5 +17,10 @@ public class BooleanDataType extends DataType<Boolean>{
 	public Boolean getValue(String text) {
 		return Boolean.parseBoolean(text);
 	}
+
+	@Override
+	public Boolean getDefault() {
+		return false;
+	}
 	
 }

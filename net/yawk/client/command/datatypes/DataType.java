@@ -14,4 +14,5 @@ public abstract class DataType<T> {
 	
 	public abstract boolean isValid(String text);
 	public abstract T getValue(String text);
+	public abstract T getDefault();
 }

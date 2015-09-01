@@ -17,5 +17,10 @@ public class IntegerDataType extends DataType<Integer>{
 	public Integer getValue(String text) {
 		return Integer.parseInt(text);
 	}
+
+	@Override
+	public Integer getDefault() {
+		return 0;
+	}
 	
 }
