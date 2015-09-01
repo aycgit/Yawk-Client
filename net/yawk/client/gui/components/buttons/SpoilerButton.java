@@ -61,6 +61,7 @@ public class SpoilerButton extends Button{
 	@Override
 	public void toggle() {
 		extended = !extended;
+		rect.updateHeight();
 	}
 	
 	@Override
@@ -68,4 +69,14 @@ public class SpoilerButton extends Button{
 		return text;
 	}
 	
+	@Override
+	public int getHeight() {
+		
+		if(extended){
+			return super.getHeight() + panel.getHeight() + 1;
+		}else{
+			return super.getHeight();
+		}
+	}
+
 }
