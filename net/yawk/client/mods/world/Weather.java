@@ -19,11 +19,6 @@ public class Weather extends Mod{
 		
 	}
 	
-	@EventTarget
-	public void onTick(EventTick e){
-		Client.getClient().getMinecraft().theWorld.getWorldInfo().setRaining(false);
-	}
-	
 	/**
 	 * Made using information from http://wiki.vg/Protocol#Change_Game_State
 	 * The state called "End raining" is 1
@@ -48,11 +43,12 @@ public class Weather extends Mod{
 
 	@Override
 	public void onEnable() {
-		raining = Client.getClient().getMinecraft().theWorld.getWorldInfo().isRaining();
+		raining = Client.getClient().getMinecraft().theWorld.getRainStrength(1) > 0;
+		Client.getClient().getMinecraft().theWorld.setRainStrength(0);
 	}
 
 	@Override
 	public void onDisable() {
-		Client.getClient().getMinecraft().theWorld.getWorldInfo().setRaining(raining);
+		Client.getClient().getMinecraft().theWorld.setRainStrength(raining ? 1:0);
 	}
 }
