@@ -7,7 +7,6 @@ public class Argument {
 	private String name;
 	private boolean optional;
 	private DataType type;
-	private int index;
 	
 	public Argument(String name, boolean optional, DataType type) {
 		this.name = name;
