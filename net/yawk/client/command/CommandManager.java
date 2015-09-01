@@ -17,8 +17,8 @@ public class CommandManager {
 	public BooleanDataType BOOLEAN = new BooleanDataType();
 	public IntegerDataType INTEGER = new IntegerDataType();
 	public StringDataType STRING = new StringDataType();
-	public StringDataType INFINITE_STRING = new StringDataType();
-	
+	public StringDataType MULTISPACE_STRING = new StringDataType();
+
 	public CommandManager() {
 		commandsList = new ArrayList<Command>();
 		this.addClassesFromPackage("net.yawk.client.command.commands");
@@ -59,15 +59,15 @@ public class CommandManager {
 				Argument arg = args[i];
 
 				if(i < parts.length-1){
-					
+
 					String input = null;
-					
-					if(arg.getType() == INFINITE_STRING){
+
+					if(arg.getType() == MULTISPACE_STRING){
 						input = getStringAfterIndex(parts, i+1);
 					}else{
 						input = parts[i+1];
 					}
-					
+
 					if(arg.getType().isValid(input)){
 						values.put(arg.getName(), arg.getType().getValue(input));
 					}else{
@@ -75,11 +75,11 @@ public class CommandManager {
 								" was provided as " +Chars.QUOTE + input + Chars.QUOTE + 
 								" but needs to be in " + arg.getType().getName() +" form";
 					}
-										
+
 				}else{
-					
+
 					values.put(arg.getName(), arg.getType().getDefault());
-					
+
 				}
 			}
 		}
@@ -90,16 +90,17 @@ public class CommandManager {
 	}
 
 	private String getStringAfterIndex(String[] array, int index){
-		
+
 		StringBuilder builder = new StringBuilder();
-		
+
 		for(int i = index; i < array.length; i++){
-			builder.append(array[index]);
+			builder.append(array[i]);
+			builder.append(" ");
 		}
-		
-		return builder.toString();
+
+		return builder.toString().trim();
 	}
-	
+
 	private List<Argument> getRequiredArguments(Argument[] args){
 
 		List<Argument> required = new ArrayList<Argument>();
