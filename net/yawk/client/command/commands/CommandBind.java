@@ -1,5 +1,7 @@
 package net.yawk.client.command.commands;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.Minecraft;
 import net.yawk.client.Client;
 import net.yawk.client.command.Argument;
@@ -10,10 +12,10 @@ import net.yawk.client.modmanager.Mod;
 import net.yawk.client.utils.ChatColor;
 import net.yawk.client.utils.Colours;
 
-public class CommandToggle extends Command {
+public class CommandBind extends Command {
 	
-	public CommandToggle() {
-		super("Toggle", "toggle", "Change the enabled state of a mod");
+	public CommandBind() {
+		super("Bind", "bind", "Change the keybind of a mod");
 	}
 	
 	@Override
@@ -22,8 +24,9 @@ public class CommandToggle extends Command {
 		Mod m = Client.getClient().getModManager().getModByName(args.get("name"));
 		
 		if(m != null){
-			Client.getClient().getModManager().toggle(m);
-			chat("Mod "+m.getName()+" set to "+ (m.isEnabled()? "enabled":"disabled"));
+			
+			m.setKeybind(Keyboard.getKeyIndex(args.get("key")));
+			chat("Mod "+m.getName()+" binded to "+ m.getKeyName());
 		}else{
 			chat("Mod not found!");
 		}
@@ -33,6 +36,7 @@ public class CommandToggle extends Command {
 	public Argument[] getArguments(CommandManager cm) {
 		return new Argument[]{
 				new Argument("name", false, cm.STRING),
+				new Argument("key", false, cm.STRING),
 		};
 	}
 }
