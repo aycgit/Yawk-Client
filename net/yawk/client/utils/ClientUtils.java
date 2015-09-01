@@ -8,27 +8,27 @@ import net.minecraft.util.ChatAllowedCharacters;
 import net.yawk.client.Client;
 
 public class ClientUtils {
-	
+
 	public static Random random = new Random();
 	public static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
 	public static DecimalFormat decimalFormat = new DecimalFormat("#0.00");
-	
+
 	public static void sendPacket(Packet p)
 	{
 		Client.getClient().getPlayer().sendQueue.addToSendQueue(p);
 	}
-	
+
 	private static String allowedCharacters;
-	
+
 	static
 	{
 		allowedCharacters = ChatAllowedCharacters.allowedCharactersArray.toString()+" ";
 	}
-	
+
 	public static String allowedCharacters(){
 		return allowedCharacters;
 	}
-	
+
 	public static void openBrowserWindow(String url)
 	{
 		String os = System.getProperty("os.name").toLowerCase();
@@ -68,19 +68,54 @@ public class ClientUtils {
 		return;		
 
 	}
-	
-    public static String stripExtension(String str) {
-    	
-        int pos = str.lastIndexOf(".");
-        
-        if (pos == -1){
-        	return str;
-        }else{
-            return str.substring(0, pos);
-        }
-    }
-    
-    public static int roundTo16(int i){
-        return i - (i % 16);
-    }
+
+	public static String stripExtension(String str) {
+
+		int pos = str.lastIndexOf(".");
+
+		if (pos == -1){
+			return str;
+		}else{
+			return str.substring(0, pos);
+		}
+	}
+
+	public static int roundTo16(int i){
+		return i - (i % 16);
+	}
+
+	public static boolean isInteger(String text) {
+		
+		if (text == null) {
+			return false;
+		}
+		
+		int length = text.length();
+		
+		if (length == 0) {
+			return false;
+		}
+		
+		int i = 0;
+		
+		if (text.charAt(0) == '-') {
+			
+			if (length == 1) {
+				return false;
+			}
+			
+			i = 1;
+		}
+		
+		for (; i < length; i++) {
+			
+			char c = text.charAt(i);
+			
+			if (c <= '/' || c >= ':') {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }

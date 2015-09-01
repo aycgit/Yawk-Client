@@ -25,4 +25,5 @@ public abstract class Command {
 	}
 	
 	public abstract void runCommand(String message);
+	public abstract 
 }

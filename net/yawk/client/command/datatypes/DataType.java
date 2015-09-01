@@ -1,4 +1,4 @@
-package net.yawk.client.command;
+package net.yawk.client.command.datatypes;
 
 public abstract class DataType<T> {
 	
@@ -12,6 +12,6 @@ public abstract class DataType<T> {
 		return name;
 	}
 	
-	public abstract boolean isValid(Object object);
-	public abstract T getValue(Object object);
+	public abstract boolean isValid(String text);
+	public abstract T getValue(String text);
 }
