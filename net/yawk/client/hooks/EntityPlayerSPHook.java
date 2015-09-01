@@ -10,6 +10,9 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.stats.StatFileWriter;
 import net.minecraft.world.World;
+import net.yawk.client.Client;
+import net.yawk.client.command.Command;
+import net.yawk.client.command.CommandManager;
 import net.yawk.client.events.*;
 
 public class EntityPlayerSPHook extends EntityPlayerSP{
@@ -122,5 +125,33 @@ public class EntityPlayerSPHook extends EntityPlayerSP{
 		
 		EventJump e1 = new EventJump(EventType.POST);
 		EventManager.call(e1);
+	}
+	
+	@Override
+	public void sendChatMessage(String p_71165_1_) {
+		String message = p_71165_1_;
+		if(message.startsWith(CommandManager.preifx)) {
+			boolean isCmdReal = false;
+			for(Command c : Client.getClient().getCommandManager().getCommands()) {
+				if(message.toLowerCase().startsWith(CommandManager.preifx + c.getCallName().toLowerCase())) {
+					try {
+						if(!message.contains(" ")) {
+							if(message.toLowerCase().substring(1).equalsIgnoreCase(c.getCallName().toLowerCase())) {
+								c.runCommand("");
+								isCmdReal = true;
+							} else if(message.substring(1).split(" ")[0].equals(c.getCallName())) {
+								c.runCommand(message.substring(c.getCallName().length() + 2));
+								isCmdReal = true;
+							}
+						}
+					} catch(Exception e) {}
+				}
+			}
+			if(!isCmdReal) {
+				Client.getClient().addChat("Command couldn't be found...");
+			}
+			return;
+		}
+		super.sendChatMessage(p_71165_1_);
 	}
 }

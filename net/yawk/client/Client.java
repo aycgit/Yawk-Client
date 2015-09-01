@@ -1,51 +1,22 @@
 package net.yawk.client;
 
-import io.netty.buffer.Unpooled;
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.apache.commons.codec.binary.Base64;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.lwjgl.input.Keyboard;
-
-import com.darkmagician6.eventapi.EventManager;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPotion;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.nbt.NBTException;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.client.C03PacketPlayer;
-import net.minecraft.network.play.client.C11PacketEnchantItem;
-import net.minecraft.network.play.client.C16PacketClientStatus;
-import net.minecraft.network.play.client.C17PacketCustomPayload;
-import net.minecraft.network.play.client.C18PacketSpectate;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHealth;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ResourceLocation;
 import net.yawk.client.api.PluginManager;
 import net.yawk.client.cameras.Camera;
+import net.yawk.client.command.CommandManager;
 import net.yawk.client.events.EventKeyPress;
 import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.hub.GuiHub;
-import net.yawk.client.hooks.EntityPlayerSPHook;
 import net.yawk.client.hooks.EntityRendererHook;
 import net.yawk.client.hooks.ItemRendererHook;
 import net.yawk.client.hooks.RenderGlobalHook;
@@ -55,7 +26,10 @@ import net.yawk.client.modmanager.values.ValuesRegistry;
 import net.yawk.client.mods.world.HideClient;
 import net.yawk.client.saving.FileManager;
 import net.yawk.client.utils.ClientSession;
-import net.yawk.client.utils.ClientUtils;
+
+import org.lwjgl.input.Keyboard;
+
+import com.darkmagician6.eventapi.EventManager;
 
 public class Client {
 	
@@ -72,6 +46,7 @@ public class Client {
 	private ValuesRegistry valuesRegistry;
 	private Logger logger;
 	private List<Camera> cameras;
+	private CommandManager commandManager;
 	
 	public Client(Minecraft mc){
 		this.mc = mc;
@@ -97,6 +72,7 @@ public class Client {
 		this.hub = new GuiHub(this);
 		this.gui = new GuiClickable(modManager);
 		this.pluginManager = new PluginManager();
+		this.commandManager = new CommandManager();
 		
 		(new Thread(){
 			
@@ -191,7 +167,7 @@ public class Client {
 	}
 	
 	public void addChat(String text){
-		Client.getClient().getPlayer().addChatComponentMessage(new ChatComponentTranslation(text));
+		Client.getClient().getPlayer().addChatComponentMessage(new ChatComponentTranslation("[Yawk] " + text));
 	}
 	
 	public void keyPressed(int key){
@@ -240,6 +216,10 @@ public class Client {
 	
 	public List<Camera> getCameras() {
 		return cameras;
+	}
+	
+	public CommandManager getCommandManager() {
+		return commandManager;
 	}
 	
 	public void registerCamera(Camera camera){
