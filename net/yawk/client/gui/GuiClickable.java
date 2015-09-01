@@ -27,6 +27,23 @@ public class GuiClickable extends GuiScreen {
 	
 	public GuiClickable(ModManager modManager){
 		
+		initModWindows(modManager);
+		
+		initEnabledModsWindow(modManager);
+				
+		initPluginsWindow(modManager);
+		
+		initColoursWindow(modManager);
+		
+		initFriendsWindow(modManager);
+		
+		initCameraWindows(modManager);
+		
+		moveWindows();
+	}
+	
+	private void initModWindows(ModManager modManager){
+		
 		for(Mod.Type type : Mod.Type.values()){
 			
 			if(type != Mod.Type.PLUGIN && type != Mod.Type.NONE){
@@ -46,39 +63,9 @@ public class GuiClickable extends GuiScreen {
 				}
 			}
 		}
-		
-		Window enabledMods = new Window("Enabled", modManager, 85);
-		windows.add(enabledMods);
-		enabledMods.addComponent(new EnabledModsDisplay());
-		
-		//PLUGIN DOWNLOAD WINDOW
-		
-		Window plugins = new Window("Get Plugins", modManager, 120);
-		windows.add(plugins);
-		
-		SelectorSystem<SelectorButton> pluginSystem = new SelectorSystem<SelectorButton>();
-		plugins.addComponent(new PluginScrollPane(72, pluginSystem, false));
-		plugins.addComponent(new PluginDownloadButton(pluginSystem));
-		
-		//COLOUR PICKER WINDOW
-		
-		Window colours = new Window("Colours", modManager, 85);
-		
-		for(ColourType colourType : ColourType.values()){
-			colours.addComponent(new ColourPicker(colourType, this));
-		}
-		
-		windows.add(colours);
-		
-		//FRIENDS WINDOW
-		SelectorSystem<SelectorButton> friendsSystem = new SelectorSystem<SelectorButton>();
-		FriendScrollPane friendsPane;
-		Window friends = new Window("Friends", modManager, 85);
-		
-		friends.addComponent(friendsPane = new FriendScrollPane(72, friendsSystem));
-		friends.addComponent(new FriendsExecuteButton(friendsSystem));
-		
-		windows.add(friends);
+	}
+	
+	private void initCameraWindows(ModManager modManager){
 		
 		Window rearview = new Window("Rearview", modManager, 85);
 		rearview.addComponent(new CameraDisplay(new RearviewCamera(rearview)));
@@ -102,9 +89,46 @@ public class GuiClickable extends GuiScreen {
 		spoiler.addComponent(new PlayerEntityScrollPane(50, playersSystem));
 		
 		windows.add(players);
+	}
+	
+	private void initPluginsWindow(ModManager modManager){
 		
-		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
-		moveWindows();
+		Window plugins = new Window("Get Plugins", modManager, 120);
+		windows.add(plugins);
+		
+		SelectorSystem<SelectorButton> pluginSystem = new SelectorSystem<SelectorButton>();
+		plugins.addComponent(new PluginScrollPane(72, pluginSystem, false));
+		plugins.addComponent(new PluginDownloadButton(pluginSystem));
+	}
+	
+	private void initColoursWindow(ModManager modManager){
+		
+		Window colours = new Window("Colours", modManager, 85);
+		
+		for(ColourType colourType : ColourType.values()){
+			colours.addComponent(new ColourPicker(colourType, this));
+		}
+		
+		windows.add(colours);
+	}
+	
+	private void initFriendsWindow(ModManager modManager){
+		
+		SelectorSystem<SelectorButton> friendsSystem = new SelectorSystem<SelectorButton>();
+		FriendScrollPane friendsPane;
+		Window friends = new Window("Friends", modManager, 85);
+		
+		friends.addComponent(friendsPane = new FriendScrollPane(72, friendsSystem));
+		friends.addComponent(new FriendsExecuteButton(friendsSystem));
+		
+		windows.add(friends);
+	}
+	
+	private void initEnabledModsWindow(ModManager modManager){
+		
+		Window enabledMods = new Window("Enabled", modManager, 85);
+		windows.add(enabledMods);
+		enabledMods.addComponent(new EnabledModsDisplay());
 	}
 	
 	private void moveWindows(){
