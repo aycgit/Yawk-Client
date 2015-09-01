@@ -11,14 +11,15 @@ import net.yawk.client.utils.ReflectionUtils;
 
 public class CommandManager {
 
-	public static ArrayList<Command> commandsList = new ArrayList<Command>();
-	public static String prefix = ".";
+	public ArrayList<Command> commandsList;
+	public static String PREFIX = ".";
 
 	public BooleanDataType BOOLEAN = new BooleanDataType();
 	public IntegerDataType INTEGER = new IntegerDataType();
 	public StringDataType STRING = new StringDataType();
 
 	public CommandManager() {
+		commandsList = new ArrayList<Command>();
 		this.addClassesFromPackage("net.yawk.client.command.commands");
 	}
 
@@ -41,7 +42,7 @@ public class CommandManager {
 		Command command = getCommandByName(parts[0]);
 
 		if(command == null){
-			return "Command not found. Type " + Chars.QUOTE + prefix + "help" + Chars.QUOTE + " for a list of all commands";
+			return "Command not found. Type " + Chars.QUOTE + PREFIX + "help" + Chars.QUOTE + " for a list of all commands";
 		}else{
 			args = command.getArguments(this);
 		}
@@ -78,7 +79,7 @@ public class CommandManager {
 			}
 		}
 
-		command.runCommand(new Arguments(this, values));
+		command.runCommand(null, new Arguments(this, values));
 
 		return null;
 	}
@@ -108,9 +109,5 @@ public class CommandManager {
 		}
 
 		return null;
-	}
-
-	public static ArrayList<Command> getCommands() {
-		return commandsList;
 	}
 }

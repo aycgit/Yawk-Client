@@ -15,8 +15,8 @@ public class Help extends Command {
 	}
 	
 	@Override
-	public void runCommand(Arguments args) {
-		for(Command c : Client.getClient().getCommandManager().getCommands()) {
+	public void runCommand(CommandManager cm, Arguments args) {
+		for(Command c : cm.commandsList) {
 			if(c instanceof Help) {
 				continue;
 			}

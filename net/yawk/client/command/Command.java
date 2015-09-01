@@ -30,6 +30,6 @@ public abstract class Command {
 		Client.getClient().addChat(msg);
 	}
 	
-	public abstract void runCommand(Arguments args);
+	public abstract void runCommand(CommandManager cm, Arguments args);
 	public abstract Argument[] getArguments(CommandManager cm);
 }

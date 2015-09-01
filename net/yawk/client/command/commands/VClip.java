@@ -19,7 +19,7 @@ public class VClip extends Command {
 	}
 	
 	@Override
-	public void runCommand(Arguments args) {
+	public void runCommand(CommandManager cm, Arguments args) {
 		
 		if(args.getBoolean("pitch")){
 			mc.thePlayer.rotationPitch = -90;

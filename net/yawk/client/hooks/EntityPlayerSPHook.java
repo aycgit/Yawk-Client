@@ -130,9 +130,9 @@ public class EntityPlayerSPHook extends EntityPlayerSP{
 	@Override
 	public void sendChatMessage(String message) {
 
-		if(message.startsWith(CommandManager.prefix)) {
+		if(message.startsWith(CommandManager.PREFIX)) {
 
-			String commandWithArgs = message.toLowerCase().replaceFirst(CommandManager.prefix, "");
+			String commandWithArgs = message.toLowerCase().replaceFirst(CommandManager.PREFIX, "");
 
 			String[] parts = commandWithArgs.split(" ");
 
