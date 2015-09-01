@@ -78,5 +78,10 @@ public class SpoilerButton extends Button{
 			return super.getHeight();
 		}
 	}
+	
+	@Override
+	public boolean mouseOverButton(int x, int y, int cx, int cy){
+		return x > cx && x < cx+rect.getWidth() && y > cy && y < cy+12;
+	}
 
 }
