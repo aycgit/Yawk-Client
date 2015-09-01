@@ -1,6 +1,7 @@
 package net.yawk.client.gui.components.scrolling;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -24,28 +25,19 @@ public class PlayerScrollPane extends ScrollPane{
 	public void draw(int x, int y) {
 		
 		ArrayList<String> players = getPlayers();
-		ArrayList<SelectorButton> offline = new ArrayList<SelectorButton>();
-		ArrayList<String> newPlayers = new ArrayList<String>();
 		
-		for(SelectorButton b : system.buttons){
-			if(!players.contains(b.getStaticText())){
-				offline.add(b);
+		Iterator<SelectorButton> it = system.buttons.iterator();
+		
+		while(it.hasNext()){
+			if(!players.contains(it.next().getStaticText())){
+				it.remove();
 			}
 		}
 		
 		for(String p : players){
 			if(playerNotFound(p)){
-				newPlayers.add(p);
+				addComponent(system.add(new SelectorButton(p, system)));
 			}
-		}
-		
-		for(SelectorButton b : offline){
-			components.remove(b);
-			system.buttons.remove(b);
-		}
-		
-		for(String newPlayer : newPlayers){
-			components.add(system.add(new SelectorButton(newPlayer, system)));
 		}
 		
 		super.draw(x, y);
