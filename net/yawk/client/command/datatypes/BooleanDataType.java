@@ -2,7 +2,7 @@ package net.yawk.client.command.datatypes;
 
 import net.yawk.client.utils.ClientUtils;
 
-public class BooleanDataType extends DataType{
+public class BooleanDataType extends DataType<Boolean>{
 
 	public BooleanDataType() {
 		super("Boolean");
@@ -14,7 +14,7 @@ public class BooleanDataType extends DataType{
 	}
 
 	@Override
-	public Object getValue(String text) {
+	public Boolean getValue(String text) {
 		return Boolean.parseBoolean(text);
 	}
 	

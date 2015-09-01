@@ -2,7 +2,7 @@ package net.yawk.client.command.datatypes;
 
 import net.yawk.client.utils.ClientUtils;
 
-public class IntegerDataType extends DataType{
+public class IntegerDataType extends DataType<Integer>{
 
 	public IntegerDataType() {
 		super("Integer");
@@ -14,7 +14,7 @@ public class IntegerDataType extends DataType{
 	}
 
 	@Override
-	public Object getValue(String text) {
+	public Integer getValue(String text) {
 		return Integer.parseInt(text);
 	}
 	

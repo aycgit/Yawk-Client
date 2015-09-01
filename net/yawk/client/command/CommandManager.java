@@ -1,7 +1,9 @@
 package net.yawk.client.command;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.yawk.client.command.datatypes.*;
 import net.yawk.client.utils.Chars;
@@ -34,7 +36,7 @@ public class CommandManager {
 	public String run(String[] parts){
 
 		Argument[] args = null;
-		List<Object> values = new ArrayList<Object>();
+		Map<Argument,String> values = new HashMap<Argument,String>();
 
 		Command command = getCommandByName(parts[0]);
 
@@ -59,12 +61,12 @@ public class CommandManager {
 				if(!arg.getType().isValid(input)){
 					return "Invalid argument type " + Chars.QUOTE + arg.getName() + Chars.QUOTE + " needs to be in " + arg.getType().getName() +" form";
 				}else{
-					values.add(arg.getType().getValue(input));
+					values.put(arg, input);
 				}
 			}
 		}
 		
-		command.runCommand(values);
+		command.runCommand(new Arguments(this, values));
 
 		return null;
 	}

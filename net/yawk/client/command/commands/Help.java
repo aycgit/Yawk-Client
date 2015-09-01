@@ -1,9 +1,8 @@
 package net.yawk.client.command.commands;
 
-import java.util.List;
-
 import net.yawk.client.Client;
 import net.yawk.client.command.Argument;
+import net.yawk.client.command.Arguments;
 import net.yawk.client.command.Command;
 import net.yawk.client.command.CommandManager;
 import net.yawk.client.utils.ChatColor;
@@ -16,7 +15,7 @@ public class Help extends Command {
 	}
 	
 	@Override
-	public void runCommand(List<Object> values) {
+	public void runCommand(Arguments args) {
 		for(Command c : Client.getClient().getCommandManager().getCommands()) {
 			if(c instanceof Help) {
 				continue;
