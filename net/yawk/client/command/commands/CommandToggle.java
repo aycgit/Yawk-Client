@@ -6,33 +6,33 @@ import net.yawk.client.command.Argument;
 import net.yawk.client.command.Arguments;
 import net.yawk.client.command.Command;
 import net.yawk.client.command.CommandManager;
+import net.yawk.client.modmanager.Mod;
 import net.yawk.client.utils.ChatColor;
 import net.yawk.client.utils.Colours;
 
-public class VClip extends Command {
-	
-	private Minecraft mc;
-	
-	public VClip() {
-		super("VClip", "vclip", "Move upwards");
-		mc = Minecraft.getMinecraft();
+public class CommandToggle extends Command {
+		
+	public CommandToggle() {
+		super("Toggle", "toggle", "Change the enabled state of a mod");
 	}
 	
 	@Override
 	public void runCommand(CommandManager cm, Arguments args) {
 		
-		if(args.getBoolean("pitch")){
-			mc.thePlayer.rotationPitch = -90;
-		}
+		Mod m = Client.getClient().getModManager().getModByName(args.get("name"));
 		
-		mc.thePlayer.setPosition(mc.thePlayer.posX, mc.thePlayer.posY+args.getInteger("height"), mc.thePlayer.posX);
+		if(m != null){
+			Client.getClient().getModManager().toggle(m);
+			chat("Mod "+m.getName()+" set to "+ (m.isEnabled()? "enabled":"disabled"));
+		}else{
+			chat("Mod not found!");
+		}
 	}
 
 	@Override
 	public Argument[] getArguments(CommandManager cm) {
 		return new Argument[]{
-				new Argument("height", false, cm.INTEGER),
-				new Argument("pitch", true, cm.BOOLEAN),
+				new Argument("name", false, cm.STRING),
 		};
 	}
 }

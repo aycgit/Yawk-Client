@@ -8,16 +8,16 @@ import net.yawk.client.command.CommandManager;
 import net.yawk.client.utils.ChatColor;
 import net.yawk.client.utils.Colours;
 
-public class Help extends Command {
+public class CommandHelp extends Command {
 	
-	public Help() {
+	public CommandHelp() {
 		super("Help", "help", "Shows you commands.");
 	}
 	
 	@Override
 	public void runCommand(CommandManager cm, Arguments args) {
 		for(Command c : cm.commandsList) {
-			if(c instanceof Help) {
+			if(c instanceof CommandHelp) {
 				continue;
 			}
 			Client.getClient().addChat(ChatColor.RED + c.getName() + ChatColor.GRAY + " | " + ChatColor.GOLD + "." + c.getCallName() + ChatColor.GRAY + " | " + ChatColor.DARK_GRAY + c.getDesc());
