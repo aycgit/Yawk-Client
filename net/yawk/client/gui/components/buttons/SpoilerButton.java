@@ -83,5 +83,15 @@ public class SpoilerButton extends Button{
 	public boolean mouseOverButton(int x, int y, int cx, int cy){
 		return x > cx && x < cx+rect.getWidth() && y > cy && y < cy+12;
 	}
-
+	
+	@Override
+	public void mouseClicked(int x, int y) {
+		
+		if(mouseOverButton(x, y, getX(), getY())){
+			Client.getClient().getMinecraft().thePlayer.playSound("random.click", 1, 1);
+			toggle();
+		}else if(extended){
+			panel.mouseClicked(x, y);
+		}
+	}
 }
