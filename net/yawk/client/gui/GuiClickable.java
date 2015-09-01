@@ -99,7 +99,7 @@ public class GuiClickable extends GuiScreen {
 		
 		SpoilerButton spoiler = new SpoilerButton("Select Player");
 		players.addComponent(spoiler);
-		spoiler.addComponent(new PlayerEntityScrollPane(85, playersSystem));
+		spoiler.addComponent(new PlayerEntityScrollPane(50, playersSystem));
 		
 		windows.add(players);
 		
