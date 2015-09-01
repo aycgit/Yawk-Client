@@ -17,7 +17,8 @@ public class CommandManager {
 	public BooleanDataType BOOLEAN = new BooleanDataType();
 	public IntegerDataType INTEGER = new IntegerDataType();
 	public StringDataType STRING = new StringDataType();
-
+	public StringDataType INFINITE_STRING = new StringDataType();
+	
 	public CommandManager() {
 		commandsList = new ArrayList<Command>();
 		this.addClassesFromPackage("net.yawk.client.command.commands");
@@ -58,10 +59,14 @@ public class CommandManager {
 				Argument arg = args[i];
 
 				if(i < parts.length-1){
-
-					String input = parts[i+1];
 					
-					System.out.println(input + " : " + i);
+					String input = null;
+					
+					if(arg.getType() == INFINITE_STRING){
+						input = getStringAfterIndex(parts, i+1);
+					}else{
+						input = parts[i+1];
+					}
 					
 					if(arg.getType().isValid(input)){
 						values.put(arg.getName(), arg.getType().getValue(input));
@@ -70,7 +75,7 @@ public class CommandManager {
 								" was provided as " +Chars.QUOTE + input + Chars.QUOTE + 
 								" but needs to be in " + arg.getType().getName() +" form";
 					}
-					
+										
 				}else{
 					
 					values.put(arg.getName(), arg.getType().getDefault());
@@ -84,6 +89,17 @@ public class CommandManager {
 		return null;
 	}
 
+	private String getStringAfterIndex(String[] array, int index){
+		
+		StringBuilder builder = new StringBuilder();
+		
+		for(int i = index; i < array.length; i++){
+			builder.append(array[index]);
+		}
+		
+		return builder.toString();
+	}
+	
 	private List<Argument> getRequiredArguments(Argument[] args){
 
 		List<Argument> required = new ArrayList<Argument>();

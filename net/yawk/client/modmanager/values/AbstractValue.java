@@ -1,12 +1,13 @@
 package net.yawk.client.modmanager.values;
 
+import net.yawk.client.command.Command;
 import net.yawk.client.gui.AbstractComponent;
 import net.yawk.client.gui.IRectangle;
 
 public abstract class AbstractValue<T>{
 	
 	protected T value;
-	private String name;
+	protected String name;
 	private ValuesRegistry registry;
 	private String saveName;
 	
@@ -51,4 +52,5 @@ public abstract class AbstractValue<T>{
 	}
 	
 	public abstract AbstractComponent getComponent(IRectangle panel);
+
 }
