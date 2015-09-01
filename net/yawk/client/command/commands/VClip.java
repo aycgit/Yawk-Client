@@ -1,5 +1,6 @@
 package net.yawk.client.command.commands;
 
+import net.minecraft.client.Minecraft;
 import net.yawk.client.Client;
 import net.yawk.client.command.Argument;
 import net.yawk.client.command.Arguments;
@@ -10,13 +11,16 @@ import net.yawk.client.utils.Colours;
 
 public class VClip extends Command {
 	
+	private Minecraft mc;
+	
 	public VClip() {
 		super("VClip", "vclip", "Move upwards");
+		mc = Minecraft.getMinecraft();
 	}
 	
 	@Override
 	public void runCommand(Arguments args) {
-		
+		mc.thePlayer.setPosition(mc.thePlayer.posX, mc.thePlayer.posY+args.getInteger("height"), mc.thePlayer.posX);
 	}
 
 	@Override
