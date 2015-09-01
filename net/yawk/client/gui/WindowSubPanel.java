@@ -73,7 +73,7 @@ public class WindowSubPanel implements IRectangle{
 
 	@Override
 	public int getRectX() {
-		return component.getX();
+		return component.getX()+2;
 	}
 
 	@Override
