@@ -95,11 +95,12 @@ public class GuiClickable extends GuiScreen {
 		Window players = new Window("Players", modManager, 85);
 		SelectorSystem<SelectorButton> playersSystem = new SelectorSystem<SelectorButton>();
 		
+		players.addComponent(new CameraDisplay(new PlayerCamera(players, playersSystem)));
+		
 		SpoilerButton spoiler = new SpoilerButton("Select Player");
 		players.addComponent(spoiler);
 		spoiler.addComponent(new PlayerEntityScrollPane(85, playersSystem));
 		
-		players.addComponent(new CameraDisplay(new PlayerCamera(players, playersSystem)));
 		windows.add(players);
 		
 		//MOVE THE WINDOWS TO DIFFERENT POSITIONS
