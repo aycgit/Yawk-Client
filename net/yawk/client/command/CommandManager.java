@@ -79,7 +79,7 @@ public class CommandManager {
 			}
 		}
 
-		command.runCommand(null, new Arguments(this, values));
+		command.runCommand(this, new Arguments(this, values));
 
 		return null;
 	}

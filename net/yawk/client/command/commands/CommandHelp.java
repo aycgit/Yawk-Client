@@ -16,10 +16,13 @@ public class CommandHelp extends Command {
 	
 	@Override
 	public void runCommand(CommandManager cm, Arguments args) {
+		
 		for(Command c : cm.commandsList) {
+			
 			if(c instanceof CommandHelp) {
 				continue;
 			}
+			
 			Client.getClient().addChat(ChatColor.RED + c.getName() + ChatColor.GRAY + " | " + ChatColor.GOLD + "." + c.getCallName() + ChatColor.GRAY + " | " + ChatColor.DARK_GRAY + c.getDesc());
 		}
 	}
