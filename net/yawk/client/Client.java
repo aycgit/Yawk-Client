@@ -33,6 +33,8 @@ import com.darkmagician6.eventapi.EventManager;
 
 public class Client {
 	
+	public static String Version = "v2.5";
+	
 	private static Client client;
 	
 	public GuiClickable gui;
