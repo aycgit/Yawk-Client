@@ -35,7 +35,7 @@ public class CommandManager {
 		}
 	}
 
-	public String run(String[] parts){
+	public String[] run(String[] parts){
 
 		Argument[] args = null;
 		Map<String,Object> values = new HashMap<String,Object>();
@@ -43,7 +43,7 @@ public class CommandManager {
 		Command command = getCommandByName(parts[0]);
 
 		if(command == null){
-			return "Command not found. Type " + Chars.QUOTE + PREFIX + "help" + Chars.QUOTE + " for a list of all commands";
+			return new String[]{ "Command not found. Type " + Chars.QUOTE + PREFIX + "help" + Chars.QUOTE + " for a list of all commands" };
 		}else{
 			args = command.getArguments(this);
 		}
@@ -51,7 +51,8 @@ public class CommandManager {
 		if(args != null){
 
 			if(parts.length-1 < getRequiredArguments(args).size()){
-				return "Not enough arguments specified!";
+				return new String[]{ "Not enough arguments specified!",
+						"Should be: "+command.getSummary(this)};
 			}
 
 			for(int i = 0; i < args.length; i++){
@@ -71,9 +72,9 @@ public class CommandManager {
 					if(arg.getType().isValid(input)){
 						values.put(arg.getName(), arg.getType().getValue(input));
 					}else{
-						return "Invalid argument type " + Chars.QUOTE + arg.getName() + Chars.QUOTE + 
+						return new String[]{ "Invalid argument type " + Chars.QUOTE + arg.getName() + Chars.QUOTE + 
 								" was provided as " +Chars.QUOTE + input + Chars.QUOTE + 
-								" but needs to be in " + arg.getType().getName() +" form";
+								" but needs to be in " + arg.getType().getName() +" form" };
 					}
 
 				}else{

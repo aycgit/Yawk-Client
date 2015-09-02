@@ -136,10 +136,14 @@ public class EntityPlayerSPHook extends EntityPlayerSP{
 
 			String[] parts = commandWithArgs.split(" ");
 
-			String response = Client.getClient().getCommandManager().run(parts);
+			String[] response = Client.getClient().getCommandManager().run(parts);
 
 			if(response != null){
-				Client.getClient().addChat(response);
+				
+				for(String line : response){
+					Client.getClient().addChat(line);
+				}
+				
 			}
 
 			return;

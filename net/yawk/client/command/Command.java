@@ -23,6 +23,19 @@ public abstract class Command {
 		return call;
 	}
 	
+	public String getSummary(CommandManager cm){
+		
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append(this.getCallName()+" ");
+		
+		for(Argument arg : getArguments(cm)){
+			builder.append(" ["+arg.getName()+"]");
+		}
+		
+		return builder.toString();
+	}
+	
 	public String getDesc() {
 		return desc;
 	}
