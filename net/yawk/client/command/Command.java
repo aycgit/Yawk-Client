@@ -1,6 +1,7 @@
 package net.yawk.client.command;
 
 import net.minecraft.network.play.client.C01PacketChatMessage;
+import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
 
 public abstract class Command {
@@ -27,10 +28,16 @@ public abstract class Command {
 		
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append(this.getCallName()+" ");
+		builder.append(EnumChatFormatting.BLUE+getCallName());
 		
 		for(Argument arg : getArguments(cm)){
-			builder.append(" ["+arg.getName()+"]");
+			
+			if(arg.isOptional()){
+				builder.append(EnumChatFormatting.AQUA+" ["+arg.getName()+"]");
+			}else{
+				builder.append(EnumChatFormatting.GOLD+" ["+arg.getName()+"]");
+			}
+			
 		}
 		
 		return builder.toString();
