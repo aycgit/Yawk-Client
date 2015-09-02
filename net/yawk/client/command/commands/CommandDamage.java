@@ -11,6 +11,10 @@ import net.yawk.client.utils.ChatColor;
 import net.yawk.client.utils.Colours;
 import net.yawk.client.utils.MinecraftUtils;
 
+/**
+ * This is taken from direkt so we can have nice things
+ * @author ceanko
+ */
 public class CommandDamage extends Command {
 	
 	private Minecraft mc;
