@@ -1,5 +1,6 @@
 package net.yawk.client.command;
 
+import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.yawk.client.Client;
 
 public abstract class Command {
@@ -28,6 +29,10 @@ public abstract class Command {
 	
 	protected void chat(String msg){
 		Client.getClient().addChat(msg);
+	}
+	
+	protected void message(String msg){
+		Client.getClient().getPlayer().sendQueue.addToSendQueue(new C01PacketChatMessage(msg));
 	}
 	
 	public abstract void runCommand(CommandManager cm, Arguments args);

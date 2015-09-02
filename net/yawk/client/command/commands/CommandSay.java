@@ -21,7 +21,7 @@ public class CommandSay extends Command {
 	
 	@Override
 	public void runCommand(CommandManager cm, Arguments args) {
-        mc.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage(args.get("message")));
+        message(args.get("message"));
 	}
 
 	@Override
