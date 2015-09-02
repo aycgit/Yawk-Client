@@ -25,6 +25,10 @@ public abstract class AbstractComponent {
 		
 	}
 	
+	public void onGuiClosed(){
+		
+	}
+	
 	public int getWidth(){
 		return 85;
 	}

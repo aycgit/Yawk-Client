@@ -109,7 +109,12 @@ public class Window implements IRectangle{
 	}
 	
 	public void onGuiClosed(){
+		
 		this.dragging = false;
+		
+		for(AbstractComponent comp : components){
+			comp.onGuiClosed();
+		}
 	}
 	
 	public void keyPress(char c, int key) {

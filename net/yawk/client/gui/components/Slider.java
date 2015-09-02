@@ -59,10 +59,15 @@ public class Slider extends AbstractComponent{
 	}
 	
 	@Override
+	public void onGuiClosed() {
+		dragging = false;
+	}
+
+	@Override
 	public void mouseReleased(int mouseX, int mouseY, int state) {
 		dragging = false;
 	}
-	
+
 	protected boolean mouseOverSlider(int x, int y, int cx, int cy){
 		return x > slide && x < slide+BAR_WIDTH && y > cy && y < cy+getHeight();
 	}
