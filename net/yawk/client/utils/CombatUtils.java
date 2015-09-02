@@ -66,7 +66,7 @@ public class CombatUtils {
 		double d1 = (Client.getClient().getPlayer().posY + (double)Client.getClient().getPlayer().getEyeHeight())-(e.posY+(double)e.getEyeHeight());
 		double d3 = MathHelper.sqrt_double(x*x+z*z);
 		float f = (float)((Math.atan2(z, x)*180D)/Math.PI)-90F;
-		float f1= (float)(-((Math.atan2(d1, d3)*180D)/Math.PI));
+		float f1 = (float)(-((Math.atan2(d1, d3)*180D)/Math.PI));
 		
 		if(silent){
 			ClientUtils.sendPacket(new C03PacketPlayer.C05PacketPlayerLook(f, f1, Client.getClient().getPlayer().onGround));
