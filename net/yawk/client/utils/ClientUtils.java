@@ -11,8 +11,9 @@ public class ClientUtils {
 
 	public static Random random = new Random();
 	public static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
-	public static DecimalFormat decimalFormat = new DecimalFormat("#0.00");
-
+	public static DecimalFormat sfThree = new DecimalFormat("#0.00");
+	public static DecimalFormat sfTwo = new DecimalFormat("#0.0");
+	
 	public static void sendPacket(Packet p)
 	{
 		Client.getClient().getPlayer().sendQueue.addToSendQueue(p);

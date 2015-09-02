@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
 
 import org.lwjgl.opengl.GL11;
@@ -81,10 +82,12 @@ public class ClientRenderer {
 		stopDrawing();
 	}
 	
-	public static void drawPlayerNametag(EntityPlayer p){
+	public static void drawPlayerNametag(EntityPlayer p, double scale, boolean health){
 		
 		RenderManager rm = Client.getClient().getMinecraft().renderManager;
 		FontRenderer fontRenderer = Client.getClient().getFontRenderer();
+		
+		String displayName = p.getName() + (health? " "+EnumChatFormatting.GREEN+(ClientUtils.sfTwo.format(p.getHealth() / 2f)):"");
 		
 		float r = Client.getClient().getMinecraft().timer.renderPartialTicks;
 		
@@ -92,14 +95,14 @@ public class ClientRenderer {
 		double y = p.lastTickPosY - (p.lastTickPosY - p.posY)*r - rm.renderPosY;
 		double z = p.lastTickPosZ - (p.lastTickPosZ - p.posZ)*r - rm.renderPosZ;
 		
-        float scale = (float) (Client.getClient().getPlayer().getDistanceToEntity(p) / 350 + 0.02f);
+        float tagScale = (float) (Client.getClient().getPlayer().getDistanceToEntity(p) * scale + 0.02f);
         
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y + p.height + 0.5F, z);
         GL11.glNormal3f(0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(-rm.playerViewY, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(rm.playerViewX, 1.0F, 0.0F, 0.0F);
-        GlStateManager.scale(-scale, -scale, scale);
+        GlStateManager.scale(-tagScale, -tagScale, tagScale);
         GlStateManager.disableLighting();
         GlStateManager.depthMask(false);
         GlStateManager.disableDepth();
@@ -111,13 +114,13 @@ public class ClientRenderer {
         
         GlStateManager.func_179090_x();
         
-        int halfNameWidth = fontRenderer.getStringWidth(p.getName()) / 2;
+        int halfNameWidth = fontRenderer.getStringWidth(displayName) / 2;
         
         GuiUtils.drawRect(-halfNameWidth - 2, -2, halfNameWidth + 1, fontRenderer.FONT_HEIGHT, 0x4F000000);
         
         GlStateManager.func_179098_w();
         
-        fontRenderer.drawString(p.getName(), -fontRenderer.getStringWidth(p.getName()) / 2, 0, p.isSneaking()? 0xFFFFFF00:-1);
+        fontRenderer.drawString(displayName, -halfNameWidth, 0, p.isSneaking()? 0xFFFFFF00:-1);
         
         GlStateManager.enableLighting();
         GlStateManager.disableBlend();
