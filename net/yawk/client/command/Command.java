@@ -1,5 +1,6 @@
 package net.yawk.client.command;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
@@ -10,10 +11,14 @@ public abstract class Command {
 	private String call;
 	private String desc;
 	
+	protected Minecraft mc;
+	
 	public Command(String name, String call, String desc) {
 		this.name = name;
 		this.call = call;
 		this.desc = desc;
+		
+		mc = Minecraft.getMinecraft();
 	}
 	
 	public String getName() {

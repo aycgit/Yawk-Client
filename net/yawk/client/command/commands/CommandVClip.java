@@ -11,11 +11,8 @@ import net.yawk.client.utils.Colours;
 
 public class CommandVClip extends Command {
 	
-	private Minecraft mc;
-	
 	public CommandVClip() {
 		super("VClip", "vclip", "Move upwards");
-		mc = Minecraft.getMinecraft();
 	}
 	
 	@Override

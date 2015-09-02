@@ -10,12 +10,9 @@ import net.yawk.client.utils.ChatColor;
 import net.yawk.client.utils.Colours;
 
 public class CommandTp extends Command {
-	
-	private Minecraft mc;
-	
+		
 	public CommandTp() {
 		super("Tp", "tp", "Teleport to the requested coordinates");
-		mc = Minecraft.getMinecraft();
 	}
 	
 	@Override

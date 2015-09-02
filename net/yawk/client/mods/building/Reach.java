@@ -48,7 +48,7 @@ public class Reach extends Mod {
         MovingObjectPosition trace = mc.objectMouseOver;
 
         if(trace.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK){
-        	        	
+        	
             mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(Math.floor(trace.hitVec.xCoord) + 0.5,
             		trace.hitVec.yCoord,
             		Math.floor(trace.hitVec.zCoord) + 0.5,

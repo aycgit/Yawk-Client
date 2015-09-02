@@ -16,12 +16,9 @@ import net.yawk.client.utils.MinecraftUtils;
  * @author ceanko
  */
 public class CommandDamage extends Command {
-	
-	private Minecraft mc;
-	
+		
 	public CommandDamage() {
 		super("Damage", "damage", "Damages your player");
-		mc = Minecraft.getMinecraft();
 	}
 	
 	@Override

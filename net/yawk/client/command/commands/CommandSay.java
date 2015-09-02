@@ -11,12 +11,9 @@ import net.yawk.client.utils.ChatColor;
 import net.yawk.client.utils.Colours;
 
 public class CommandSay extends Command {
-	
-	private Minecraft mc;
-	
+		
 	public CommandSay() {
 		super("Say", "say", "Send a chat message");
-		mc = Minecraft.getMinecraft();
 	}
 	
 	@Override
