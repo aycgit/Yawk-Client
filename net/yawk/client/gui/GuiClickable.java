@@ -191,21 +191,24 @@ public class GuiClickable extends GuiScreen {
 		Keyboard.enableRepeatEvents(true);
 
 		if(!opened){
-
+		
 			ScaledResolution sr = new ScaledResolution(Client.getClient().getMinecraft(), Client.getClient().getMinecraft().displayWidth, Client.getClient().getMinecraft().displayHeight);
-
+			
 			Window popup = new WindowPopup(
 					"Welcome",
 					"Get help here:",
 					Client.getClient().getModManager(),
-					100,
+					250,
 					sr.getScaledWidth(),
 					sr.getScaledHeight());
-
+			
 			popup.addComponent(new LinkButton("Yawk Forums", "http://yawk.net/forums"));
-
+			
+			popup.addComponent(new TextDisplay("Type .help in chat to get a list of all commands"));
+			popup.addComponent(new TextDisplay("Press X to open the Yawk Hub"));
+			
 			windows.add(popup);
-
+			
 			opened = true;
 		}
 	}

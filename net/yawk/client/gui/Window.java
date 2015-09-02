@@ -23,12 +23,14 @@ public class Window implements IRectangle{
 	public static int TITLE_COMPONENT_SPACE = 2;
 	public static int TITLE_SIZE = 12;
 	
+	public int minWidth;
 	public int width;
 	public int height;
 	
 	public Window(String title, ModManager modManager, int width){
 		this.title = title;
 		this.width = width;
+		this.minWidth = width;
 		this.modManager = modManager;
 	}
 	
@@ -61,10 +63,8 @@ public class Window implements IRectangle{
 		}
 		
 		if(extended){
+			
 			drawBodyRect(posX, posY+TITLE_SIZE+TITLE_COMPONENT_SPACE, posX+width, posY+TITLE_SIZE+TITLE_COMPONENT_SPACE+height, titleVisible);
-		}
-		
-		if(extended){
 			
 			for(AbstractComponent c : components){
 				c.draw(x, y);
@@ -188,7 +188,7 @@ public class Window implements IRectangle{
 	public void updateSize(){
 		
 		this.height = 0;
-		this.width = 85;
+		this.width = minWidth;
 		
 		for(AbstractComponent component : components){
 			
