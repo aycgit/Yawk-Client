@@ -34,6 +34,10 @@ public class CommandManager {
 			} catch (Exception e) {}
 		}
 	}
+	
+	public ArrayList<Command> getCommands() {
+		return commandsList;
+	}
 
 	public String[] run(String[] parts){
 
