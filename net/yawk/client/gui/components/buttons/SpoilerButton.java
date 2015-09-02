@@ -94,4 +94,13 @@ public class SpoilerButton extends Button{
 			panel.mouseClicked(x, y);
 		}
 	}
+
+	@Override
+	public void mouseReleased(int mouseX, int mouseY, int state) {
+		
+		if(extended){
+			panel.mouseReleased(mouseX, mouseY, state);
+		}
+	}
+	
 }

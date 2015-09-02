@@ -87,7 +87,11 @@ public class ClientRenderer {
 		RenderManager rm = Client.getClient().getMinecraft().renderManager;
 		FontRenderer fontRenderer = Client.getClient().getFontRenderer();
 		
-		String displayName = p.getName() + (health? " "+EnumChatFormatting.GREEN+(ClientUtils.sfTwo.format(p.getHealth() / 2f)):"");
+		String displayName = p.getName();
+		
+		if(health){
+			displayName += " " + EnumChatFormatting.GREEN+(ClientUtils.sfTwo.format(p.getHealth() / 2f));
+		}
 		
 		float r = Client.getClient().getMinecraft().timer.renderPartialTicks;
 		

@@ -41,6 +41,7 @@ public class Looksie extends Mod{
     	}
     	
     	if(lowestEntity != null && lowestDist < 30){
+    		System.out.println(lowestDist);
     		String text = lowestEntity.getName()+" IS LOOKING AT YOU "+getPercent(lowestDist)+"%";
     		Client.getClient().getFontRenderer().drawString(text, Client.getClient().getMinecraft().displayWidth/4 - Client.getClient().getFontRenderer().getStringWidth(text)/2, 12, lowestDist < 20? 0xFF0000FF:0xFF00FF00);
     		return;
