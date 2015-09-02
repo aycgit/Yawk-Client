@@ -23,6 +23,8 @@ public class CommandAllOff extends Command {
 				Client.getClient().getModManager().toggle(m);
 			}
 		}
+		
+		chat("All hacks switched off");
 	}
 
 	@Override
