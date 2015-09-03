@@ -26,6 +26,7 @@ import net.yawk.client.modmanager.ModManager;
 import net.yawk.client.modmanager.values.ValuesRegistry;
 import net.yawk.client.mods.combat.NoFlinch;
 import net.yawk.client.mods.world.HideClient;
+import net.yawk.client.mods.world.Perception;
 import net.yawk.client.saving.FileManager;
 import net.yawk.client.utils.ClientSession;
 
@@ -62,7 +63,8 @@ public class Client {
 		
 		logger = Logger.getGlobal();
 		
-		mc.renderGlobal = new RenderGlobalHook(mc);
+		RenderGlobalHook renderGlobalHook = new RenderGlobalHook(mc);
+		mc.renderGlobal = renderGlobalHook;
 		
 		//This NEEDS to go before entityRenderer because entityRenderer caches the value of Minecraft.getItemRenderer
 		mc.itemRenderer = new ItemRendererHook(mc);
@@ -81,6 +83,7 @@ public class Client {
 		addShutdownHook();
 		
 		entityRendererHook.noFlinch = modManager.getMod(NoFlinch.class);
+		renderGlobalHook.perception = (Perception)Client.getClient().getModManager().getMod(Perception.class);
 	}
 	
 	private void authenticateUser(){

@@ -13,7 +13,7 @@ public class RenderGlobalHook extends RenderGlobal{
 		super(mcIn);
 	}
 
-	private Perception perception = (Perception)Client.getClient().getModManager().getMod(Perception.class);
+	public Perception perception;
 	
 	@Override
 	public void onEntityAdded(Entity e) {
