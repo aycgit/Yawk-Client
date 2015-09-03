@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
+import net.yawk.client.friends.FriendType;
 
 import org.lwjgl.opengl.GL11;
 
@@ -88,6 +89,12 @@ public class ClientRenderer {
 		FontRenderer fontRenderer = Client.getClient().getFontRenderer();
 		
 		String displayName = p.getName();
+		
+		FriendType type = Client.getClient().getFriendManager().getFriendType(displayName);
+		
+		if(type != null){
+			displayName = type.getColour() + displayName;
+		}
 		
 		if(health){
 			displayName += " " + EnumChatFormatting.GREEN+(ClientUtils.sfTwo.format(p.getHealth() / 2f));
