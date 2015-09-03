@@ -14,6 +14,7 @@ import com.darkmagician6.eventapi.EventTarget;
 public class Weather extends Mod{
 	
 	private boolean raining;
+	private boolean loaded;
 	
 	public Weather(){
 		
@@ -40,11 +41,19 @@ public class Weather extends Mod{
 			}
 		}
 	}
+	
+	@EventTarget
+	public void onTick(EventTick e){
+		if(!loaded){
+			raining = Client.getClient().getMinecraft().theWorld.getRainStrength(1) > 0;
+			Client.getClient().getMinecraft().theWorld.setRainStrength(0);
+			loaded = true;
+		}
+	}
 
 	@Override
 	public void onEnable() {
-		raining = Client.getClient().getMinecraft().theWorld.getRainStrength(1) > 0;
-		Client.getClient().getMinecraft().theWorld.setRainStrength(0);
+		loaded = false;
 	}
 
 	@Override
