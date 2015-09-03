@@ -9,9 +9,9 @@ import net.yawk.client.modmanager.Mod;
 
 public class SelectorButton extends Button{
 	
-	private String text;
+	protected String text;
 	protected boolean isSelected;
-	private SelectorSystem<SelectorButton> system;
+	protected SelectorSystem<SelectorButton> system;
 	
 	public SelectorButton(String text, SelectorSystem system) {
 		super();

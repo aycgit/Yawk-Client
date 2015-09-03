@@ -14,7 +14,7 @@ import net.yawk.client.gui.components.selectors.SelectorSystem;
 
 public class PlayerScrollPane extends ScrollPane{
 	
-	private SelectorSystem<SelectorButton> system;
+	protected SelectorSystem<SelectorButton> system;
 	
 	public PlayerScrollPane(int height, SelectorSystem<SelectorButton> system) {
 		super(height);
@@ -36,11 +36,15 @@ public class PlayerScrollPane extends ScrollPane{
 		
 		for(String p : players){
 			if(playerNotFound(p)){
-				addComponent(system.add(new SelectorButton(p, system)));
+				addPlayer(p);
 			}
 		}
 		
 		super.draw(x, y);
+	}
+	
+	protected void addPlayer(String p){
+		addComponent(system.add(new SelectorButton(p, system)));
 	}
 	
 	private boolean playerNotFound(String p){
