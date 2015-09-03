@@ -21,7 +21,12 @@ public class FriendChangerButton extends ArrayBox<FriendType>{
 		super.mouseClicked(x, y);
 		
 		if(system.selectedButton != null){
-			Client.getClient().getFriendManager().setFriendType(system.selectedButton.getStaticText(), this.getSelectedOption());
+			
+			FriendType selectedType = this.getSelectedOption();
+			
+			if(selectedType != FriendType.NEUTRAL){
+				Client.getClient().getFriendManager().setFriendType(system.selectedButton.getStaticText(), selectedType);
+			}
 		}
 	}
 	

@@ -15,7 +15,7 @@ public class FriendSelectorButton extends SelectorButton{
 		
 		FriendType type = Client.getClient().getFriendManager().getFriendType(text);
 		
-		if(type != null && type != FriendType.NEUTRAL){
+		if(type != null){
 			return text + "(" + type.toString() + ")";
 		}else{
 			return text;
