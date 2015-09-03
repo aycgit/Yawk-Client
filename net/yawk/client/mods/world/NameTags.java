@@ -35,9 +35,9 @@ public class NameTags extends Mod{
 		
 		double scaleValue = scale.getValue()/1000;
 		
-    	for(Object obj : Client.getClient().getMinecraft().theWorld.playerEntities){
-    		if(obj != null && obj != Client.getClient().getPlayer()){
-    			ClientRenderer.drawPlayerNametag((EntityPlayer)obj, scaleValue, health.getValue());
+    	for(EntityPlayer pl : (List<EntityPlayer>)Client.getClient().getMinecraft().theWorld.playerEntities){
+    		if(pl != null && pl != Client.getClient().getPlayer() && !pl.isDead){
+    			ClientRenderer.drawPlayerNametag(pl, scaleValue, health.getValue());
     		}
     	}
 	}

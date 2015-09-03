@@ -51,6 +51,7 @@ public class Nuker extends Mod{
 	
 	@EventTarget
 	public void onTick(EventTick e){
+		
 		if(block != null)
 		{
 			int maxH = 5;
