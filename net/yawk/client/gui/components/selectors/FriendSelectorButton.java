@@ -1,5 +1,7 @@
 package net.yawk.client.gui.components.selectors;
 
+import net.yawk.client.Client;
+import net.yawk.client.friends.FriendType;
 import net.yawk.client.gui.components.buttons.FriendChangerButton;
 
 public class FriendSelectorButton extends SelectorButton{
@@ -11,20 +13,12 @@ public class FriendSelectorButton extends SelectorButton{
 	@Override
 	public String getText() {
 		
-		if(isFriend(text)){
-			return text + " (Friend)";
-		}else if(isEnemy(text)){
-			return text + " (Enemy)";
+		FriendType type = Client.getClient().getFriendManager().getFriendType(text);
+		
+		if(type != null){
+			return text + "(" + type.toString() + ")";
 		}else{
 			return text;
 		}
-	}
-	
-	private boolean isFriend(String pl){
-		return false;
-	}
-	
-	private boolean isEnemy(String pl){
-		return false;
 	}
 }

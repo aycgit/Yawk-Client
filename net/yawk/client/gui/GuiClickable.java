@@ -116,7 +116,7 @@ public class GuiClickable extends GuiScreen {
 
 		SelectorSystem<SelectorButton> friendsSystem = new SelectorSystem<SelectorButton>();
 		FriendScrollPane friendsPane;
-		Window friends = new Window("Friends", modManager, 85);
+		Window friends = new Window("Friends", modManager, 120);
 		
 		friends.addComponent(friendsPane = new FriendScrollPane(72, friendsSystem));
 		friends.addComponent(new FriendChangerButton(friendsSystem));

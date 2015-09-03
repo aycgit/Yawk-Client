@@ -2,7 +2,7 @@ package net.yawk.client.friends;
 
 public enum FriendType {
 	
-	FRIEND("Friend"), ENEMY("Enemy"), TEAM_MEMBER("Team Member");
+	FRIEND("Friend"), ENEMY("Enemy"), TEAM_MEMBER("Team");
 	
 	private String name;
 	
