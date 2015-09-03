@@ -44,10 +44,9 @@ public class Client {
 	private FontRenderer fontRenderer;
 	private Logger logger;
 	
-	private List<Camera> cameras;
-	
 	public GuiHub hub;
 	public GuiClickable gui;
+	private List<Camera> cameras;
 	private ClientSession session;
 	
 	private ModManager modManager;
