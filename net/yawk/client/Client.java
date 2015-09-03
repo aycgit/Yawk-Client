@@ -15,6 +15,7 @@ import net.yawk.client.api.PluginManager;
 import net.yawk.client.cameras.Camera;
 import net.yawk.client.command.CommandManager;
 import net.yawk.client.events.EventKeyPress;
+import net.yawk.client.friends.FriendManager;
 import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.hub.GuiHub;
 import net.yawk.client.hooks.EntityRendererHook;
@@ -49,6 +50,7 @@ public class Client {
 	private Logger logger;
 	private List<Camera> cameras;
 	private CommandManager commandManager;
+	private FriendManager friendManager;
 	
 	public Client(Minecraft mc){
 		this.mc = mc;
@@ -75,6 +77,7 @@ public class Client {
 		this.gui = new GuiClickable(modManager);
 		this.pluginManager = new PluginManager();
 		this.commandManager = new CommandManager();
+		this.friendManager = new FriendManager();
 		
 		(new Thread(){
 			
