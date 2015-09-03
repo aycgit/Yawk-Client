@@ -171,6 +171,10 @@ public class Client {
 		return fileManager;
 	}
 	
+	public FriendManager getFriendManager() {
+		return friendManager;
+	}
+	
 	public void addChat(String text){
 		Client.getClient().getPlayer().addChatComponentMessage(new ChatComponentTranslation("[Yawk] " + text));
 	}

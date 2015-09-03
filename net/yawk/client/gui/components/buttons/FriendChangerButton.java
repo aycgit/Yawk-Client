@@ -1,15 +1,17 @@
 package net.yawk.client.gui.components.buttons;
 
+import net.yawk.client.Client;
+import net.yawk.client.friends.FriendType;
 import net.yawk.client.gui.components.ArrayBox;
 import net.yawk.client.gui.components.selectors.SelectorButton;
 import net.yawk.client.gui.components.selectors.SelectorSystem;
 
-public class FriendChangerButton extends ArrayBox{
+public class FriendChangerButton extends ArrayBox<FriendType>{
 
 	private SelectorSystem<SelectorButton> system;
 	
 	public FriendChangerButton(SelectorSystem<SelectorButton> system) {
-		super(new String[]{ "Neutral", "Friend", "Enemy" });
+		super(FriendType.values());
 		this.system = system;
 	}
 
@@ -18,7 +20,9 @@ public class FriendChangerButton extends ArrayBox{
 		
 		super.mouseClicked(x, y);
 		
-		//TODO: set player status
+		if(system.selectedButton != null){
+			Client.getClient().getFriendManager().setFriendType(system.selectedButton.getStaticText(), this.getSelectedOption());
+		}
 	}
 	
 }
