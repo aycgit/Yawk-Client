@@ -20,6 +20,7 @@ import com.darkmagician6.eventapi.EventTarget;
 public class MultiAura extends Mod{
 
 	private static SliderValue delay;
+	private static SliderValue range;
 	private Minecraft mc;
 	private MillisecondTimer timer;
 
@@ -27,6 +28,7 @@ public class MultiAura extends Mod{
 
 		super(new AbstractValue[]{
 				delay = new SliderValue("Hit Delay", "multiaura.hitdelay", Client.getClient().getValuesRegistry(), 120, 0, 2000, true),
+				range = new SliderValue("Range", "multiaura.range", Client.getClient().getValuesRegistry(), 3.95, 0, 6, true),
 		});
 
 		timer = new ValueTimer(delay);
@@ -44,7 +46,7 @@ public class MultiAura extends Mod{
 
 				Entity e = (Entity)obj;
 
-				if(CombatUtils.isAttackable(e) && targets <= 6) {
+				if(CombatUtils.isAttackable(e) && mc.thePlayer.getDistanceToEntity(e) < range.getValue() && targets <= 6) {
 					CombatUtils.hit(e);
 					targets++;
 				}
