@@ -13,12 +13,15 @@ import net.yawk.client.gui.components.selectors.SelectorSystem;
 
 public class FriendScrollPane extends PlayerScrollPane{
 	
-	public FriendScrollPane(int height, SelectorSystem system) {
+	private FriendChangerButton changerButton;
+	
+	public FriendScrollPane(int height, SelectorSystem system, FriendChangerButton changerButton) {
 		super(height, system);
+		this.changerButton = changerButton;
 	}
 
 	@Override
 	protected void addPlayer(String p) {
-		addComponent(system.add(new FriendSelectorButton(p, system)));
+		addComponent(system.add(new FriendSelectorButton(p, system, changerButton)));
 	}
 }

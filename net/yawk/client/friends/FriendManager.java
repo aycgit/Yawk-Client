@@ -16,12 +16,10 @@ public class FriendManager {
 	}
 	
 	public void setFriendType(String username, FriendType type){
-		
-		System.out.println("Friend type set: "+username+" "+type.toString());
-		
+				
 		friends.remove(username);
 		
-		if(type != null){
+		if(type != null && type != FriendType.NEUTRAL){
 			friends.put(username, type);
 		}
 	}
