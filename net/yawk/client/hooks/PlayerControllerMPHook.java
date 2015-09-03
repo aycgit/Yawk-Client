@@ -65,6 +65,7 @@ public class PlayerControllerMPHook extends PlayerControllerMP{
 	
 	@Override
 	public boolean clickBlock(BlockPos pos, EnumFacing facing) {
+		
 		EventClickBlock event = new EventClickBlock(pos, facing);
 		EventManager.call(event);
 		
