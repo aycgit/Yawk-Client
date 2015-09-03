@@ -45,7 +45,8 @@ public class PrivatePluginInformationThread implements Runnable{
 				plugin = new PluginData(response.get("name").getAsString(),
 						response.get("description").getAsString(),
 						response.get("file").getAsString(),
-						response.get("filename").getAsString(),
+						response.get("filename").getAsString(),#
+						response.get("icon").getAsString(),
 						response.get("version").getAsInt(),
 						false,
 						true);
