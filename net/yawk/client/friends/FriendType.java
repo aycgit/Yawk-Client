@@ -4,7 +4,7 @@ import net.minecraft.util.EnumChatFormatting;
 
 public enum FriendType {
 	
-	FRIEND("Friend", EnumChatFormatting.GREEN.toString()), ENEMY("Enemy", EnumChatFormatting.RED.toString()), TEAM_MEMBER("Team", EnumChatFormatting.YELLOW.toString());
+	NEUTRAL("Neutral", null), FRIEND("Friend", EnumChatFormatting.GREEN.toString()), ENEMY("Enemy", EnumChatFormatting.RED.toString()), TEAM_MEMBER("Team", EnumChatFormatting.YELLOW.toString());
 	
 	private String name;
 	private String colour;

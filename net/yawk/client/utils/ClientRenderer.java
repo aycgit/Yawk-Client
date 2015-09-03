@@ -92,7 +92,7 @@ public class ClientRenderer {
 		
 		FriendType type = Client.getClient().getFriendManager().getFriendType(displayName);
 		
-		if(type != null){
+		if(type != null && type != FriendType.NEUTRAL){
 			displayName = type.getColour() + displayName;
 		}
 		
