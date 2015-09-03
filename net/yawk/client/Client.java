@@ -36,23 +36,26 @@ import com.darkmagician6.eventapi.EventManager;
 
 public class Client {
 	
-	public static String Version = "v2.5";
+	public static String VERSION = "v2.5";
 	
 	private static Client client;
 	
-	public GuiClickable gui;
-	public GuiHub hub;
-	private FontRenderer fontRenderer;
 	private Minecraft mc;
-	private ClientSession session;
-	private ModManager modManager;
-	private PluginManager pluginManager;
-	private FileManager fileManager;
-	private ValuesRegistry valuesRegistry;
+	private FontRenderer fontRenderer;
 	private Logger logger;
+	
 	private List<Camera> cameras;
-	private CommandManager commandManager;
+	
+	public GuiHub hub;
+	public GuiClickable gui;
+	private ClientSession session;
+	
+	private ModManager modManager;
+	private FileManager fileManager;
+	private PluginManager pluginManager;
 	private FriendManager friendManager;
+	private CommandManager commandManager;
+	private ValuesRegistry valuesRegistry;
 	
 	public Client(Minecraft mc){
 		this.mc = mc;
@@ -83,7 +86,7 @@ public class Client {
 		addShutdownHook();
 		
 		entityRendererHook.noFlinch = modManager.getMod(NoFlinch.class);
-		renderGlobalHook.perception = (Perception)Client.getClient().getModManager().getMod(Perception.class);
+		renderGlobalHook.perception = (Perception) Client.getClient().getModManager().getMod(Perception.class);
 	}
 	
 	private void authenticateUser(){

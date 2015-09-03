@@ -43,7 +43,7 @@ public class GuiIngameHook extends GuiIngame{
 		
 		if(!Client.getClient().getMinecraft().gameSettings.showDebugInfo) {
 			if(!hideClientMod.isEnabled()){
-				Client.getClient().getFontRenderer().drawStringWithShadow("Yawk " + EnumChatFormatting.GREEN + Client.Version + EnumChatFormatting.LIGHT_PURPLE + " ("+(Client.getClient().getSession().isPremium()? "Premium":"Beta")+")", 3, 2, 0xFFFFFFFF, true);
+				Client.getClient().getFontRenderer().drawStringWithShadow("Yawk " + EnumChatFormatting.GREEN + Client.VERSION + EnumChatFormatting.LIGHT_PURPLE + " ("+(Client.getClient().getSession().isPremium()? "Premium":"Beta")+")", 3, 2, 0xFFFFFFFF, true);
 			}
 			
 			if(Client.getClient().getMinecraft().currentScreen == null){
