@@ -14,8 +14,10 @@ import org.lwjgl.opengl.GL11;
 public class ScrollPane extends AbstractComponent implements IRectangle{
 	
 	protected List<AbstractComponent> components = new ArrayList<AbstractComponent>();
-	protected int height, viewportHeight, dragged, mouseYOffset, BAR_HEIGHT = 12, BAR_WIDTH = 4;
+	protected int height, viewportHeight, dragged, mouseYOffset;
 	private boolean dragging;
+	
+	private static int BAR_HEIGHT = 12, BAR_WIDTH = 4;
 	
 	public ScrollPane(int viewportHeight){
 		this.viewportHeight = viewportHeight;

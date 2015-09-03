@@ -6,6 +6,7 @@ import java.util.ListIterator;
 
 import net.yawk.client.gui.Window;
 import net.yawk.client.gui.components.TextDisplay;
+import net.yawk.client.gui.components.buttons.FriendChangerButton;
 import net.yawk.client.gui.components.selectors.FriendSelectorButton;
 import net.yawk.client.gui.components.selectors.SelectorButton;
 import net.yawk.client.gui.components.selectors.SelectorSystem;

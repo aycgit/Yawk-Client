@@ -1,5 +1,7 @@
 package net.yawk.client.gui.components.selectors;
 
+import net.yawk.client.gui.components.buttons.FriendChangerButton;
+
 public class FriendSelectorButton extends SelectorButton{
 
 	public FriendSelectorButton(String text, SelectorSystem system) {
