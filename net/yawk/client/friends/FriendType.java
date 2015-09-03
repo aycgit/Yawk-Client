@@ -4,14 +4,19 @@ import net.minecraft.util.EnumChatFormatting;
 
 public enum FriendType {
 	
-	NEUTRAL("Neutral", null), FRIEND("Friend", EnumChatFormatting.GREEN.toString()), ENEMY("Enemy", EnumChatFormatting.RED.toString()), TEAM_MEMBER("Team", EnumChatFormatting.YELLOW.toString());
+	NEUTRAL("Neutral", null, false),
+	FRIEND("Friend", EnumChatFormatting.GREEN.toString(), true),
+	ENEMY("Enemy", EnumChatFormatting.RED.toString(), false),
+	TEAM_MEMBER("Team", EnumChatFormatting.YELLOW.toString(), true);
 	
 	private String name;
 	private String colour;
+	private boolean protection;
 	
-	private FriendType(String name, String colour){
+	private FriendType(String name, String colour, boolean protection){
 		this.name = name;
 		this.colour = colour;
+		this.protection = protection;
 	}
 	
 	@Override
@@ -21,5 +26,9 @@ public enum FriendType {
 	
 	public String getColour() {
 		return colour;
+	}
+	
+	public boolean isProtected() {
+		return protection;
 	}
 }

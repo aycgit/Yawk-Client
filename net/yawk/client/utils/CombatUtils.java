@@ -40,14 +40,12 @@ public class CombatUtils {
 		return entity instanceof EntityLiving && isAttackable((EntityLiving)entity);
 	}
 
-	//TODO: make this more sophisticated
 	public static boolean isAttackable(EntityLivingBase entity){
 		return isAttackableBase(entity);
 	}
 
-	//TODO: add some stuff to the player check
 	public static boolean isAttackable(EntityPlayer player){
-		return isAttackableBase(player);
+		return isAttackableBase(player) && !Client.getClient().getFriendManager().getFriendType(player.getName()).isProtected();
 	}
 
 	private static boolean isAttackableBase(EntityLivingBase entity){
