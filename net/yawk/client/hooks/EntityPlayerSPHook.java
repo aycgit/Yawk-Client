@@ -151,4 +151,6 @@ public class EntityPlayerSPHook extends EntityPlayerSP{
 
 		super.sendChatMessage(message);
 	}
+	
+	
 }

@@ -24,6 +24,7 @@ import net.yawk.client.hooks.RenderGlobalHook;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModManager;
 import net.yawk.client.modmanager.values.ValuesRegistry;
+import net.yawk.client.mods.combat.NoFlinch;
 import net.yawk.client.mods.world.HideClient;
 import net.yawk.client.saving.FileManager;
 import net.yawk.client.utils.ClientSession;
@@ -59,46 +60,55 @@ public class Client {
 	
 	public void init(){
 		
-		initHooks(this.mc);
+		logger = Logger.getGlobal();
+		
+		mc.renderGlobal = new RenderGlobalHook(mc);
+		
+		//This NEEDS to go before entityRenderer because entityRenderer caches the value of Minecraft.getItemRenderer
+		mc.itemRenderer = new ItemRendererHook(mc);
+		
+		EntityRendererHook entityRendererHook = new EntityRendererHook(mc, mc.getResourceManager());
+		mc.entityRenderer = entityRendererHook;
+		
+		authenticateUser();
+		
+		loadPrimaryFiles();
+		
+		createClient();
+		
+		loadFiles();
+		
+		addShutdownHook();
+		
+		entityRendererHook.noFlinch = modManager.getMod(NoFlinch.class);
+	}
+	
+	private void authenticateUser(){
 		
 		//TODO: READ USERNAME AND PASSWORD FROM FILE
 		//TODO: AUTHENTICATION
 		session = new ClientSession("Name", "348443568", false);
+	}
+	
+	private void loadPrimaryFiles(){
 		
-		logger = Logger.getGlobal();
-				
-		this.valuesRegistry = new ValuesRegistry();
-		this.fileManager = new FileManager(this);
+		valuesRegistry = new ValuesRegistry();
+		fileManager = new FileManager(this);
 		fileManager.loadClientSettings();
+	}
+	
+	private void createClient(){
 		
-		this.fontRenderer = mc.fontRendererObj;
-		this.modManager = new ModManager();
-		this.hub = new GuiHub(this);
-		this.gui = new GuiClickable(modManager);
-		this.pluginManager = new PluginManager();
-		this.commandManager = new CommandManager();
-		this.friendManager = new FriendManager();
-		
-		(new Thread(){
-			
-			public void run(){
-				
-				fileManager.loadSecondarySettings();
-				
-				try {
-					pluginManager.load();
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-			
-		}).start();
+		fontRenderer = mc.fontRendererObj;
+		modManager = new ModManager();
+		hub = new GuiHub(this);
+		gui = new GuiClickable(modManager);
+		pluginManager = new PluginManager();
+		commandManager = new CommandManager();
+		friendManager = new FriendManager();
+	}
+	
+	private void addShutdownHook(){
 		
 		Runtime.getRuntime().addShutdownHook(new Thread(){
 			@Override
@@ -109,14 +119,22 @@ public class Client {
 		});
 	}
 	
-	private void initHooks(Minecraft mc){
+	private void loadFiles(){
 		
-		mc.renderGlobal = new RenderGlobalHook(mc);
-		
-		//This NEEDS to go before entityRenderer because entityRenderer caches the value of Minecraft.getItemRenderer
-		mc.itemRenderer = new ItemRendererHook(mc);
-		
-		mc.entityRenderer = new EntityRendererHook(mc, mc.getResourceManager());
+		(new Thread(){
+			
+			public void run(){
+				
+				fileManager.loadSecondarySettings();
+				
+				try {
+					pluginManager.load();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}).start();
 	}
 	
 	public void log(String print){
