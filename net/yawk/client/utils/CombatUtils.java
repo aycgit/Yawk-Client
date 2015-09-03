@@ -52,10 +52,9 @@ public class CombatUtils {
 		return Client.getClient().getMinecraft().thePlayer.canEntityBeSeen(entity) 
 				&& entity.getHealth() > 0 
 				&& !entity.isInvisible() 
-				&& entity.ticksExisted > 60 
-				&& Client.getClient().getPlayer().getDistanceToEntity(entity) <= 4.2;
+				&& entity.ticksExisted > 20;
 	}
-
+	
 	public static void faceEntity(Entity e, boolean silent){
 		
 		double x = e.posX - Client.getClient().getPlayer().posX;
