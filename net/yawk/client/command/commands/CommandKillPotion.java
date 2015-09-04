@@ -1,6 +1,5 @@
-package net.yawk.client.mods.combat;
+package net.yawk.client.command.commands;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,31 +8,28 @@ import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
-import net.yawk.client.modmanager.Mod;
-import net.yawk.client.modmanager.RegisterMod;
+import net.yawk.client.command.Argument;
+import net.yawk.client.command.Arguments;
+import net.yawk.client.command.Command;
+import net.yawk.client.command.CommandManager;
 
-@RegisterMod(name = "KillPotion", desc = "Get a creative killing potion", type = Mod.Type.COMBAT)
-public class KillPotion extends Mod{
-
-	Minecraft mc = Minecraft.getMinecraft();
-
-	public KillPotion(){
-		
+public class CommandKillPotion extends Command {
+	
+	public CommandKillPotion() {
+		super("KillPotion", "killpotion", "Gives you a potion which kills people");
 	}
 	
 	@Override
-	public void onEnable() {
-
+	public void runCommand(CommandManager cm, Arguments args) {
+		
 		if(mc.thePlayer.inventory.getStackInSlot(0) != null){
-			mc.thePlayer.addChatComponentMessage(new ChatComponentTranslation("[KillPotion] Remove item out of slot 1!"));
-			Client.getClient().getModManager().toggle(this);
+			chat("[KillPotion] Remove item out of slot 1!");
 			return;
 		}else if(!mc.thePlayer.capabilities.isCreativeMode){
-			mc.thePlayer.addChatComponentMessage(new ChatComponentTranslation("[KillPotion] Get into creative mode!"));
-			Client.getClient().getModManager().toggle(this);
+			chat("[KillPotion] Get into creative mode!");
 			return;
 		}
-
+		
 		ItemStack stack = new ItemStack(Items.potionitem);
 		stack.setItemDamage(16384);
 		NBTTagList effects = new NBTTagList();
@@ -45,7 +41,11 @@ public class KillPotion extends Mod{
 		stack.setTagInfo("CustomPotionEffects", effects);
 		stack.setStackDisplayName(EnumChatFormatting.GREEN+"Free Advertising - Contact Yawk Griefing on Youtube!");
 		mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, stack));
+		
+	}
 
-		Client.getClient().getModManager().toggle(this);
+	@Override
+	public Argument[] getArguments(CommandManager cm) {
+		return null;
 	}
 }
