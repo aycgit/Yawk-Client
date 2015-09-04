@@ -68,9 +68,17 @@ public class PlayerScrollPane extends ScrollPane{
 		for(Object obj : net.playerInfoMap.values()){
 			//func_178845_a() is the GameProfile of the player
 			//getName() is the username of the player
-			list.add(((NetworkPlayerInfo)obj).func_178845_a().getName());
+			String name = ((NetworkPlayerInfo)obj).func_178845_a().getName();
+			
+			if(isValidName(name)){
+				list.add(name);
+			}
 		}
 		
 		return list;
+	}
+	
+	protected boolean isValidName(String username){
+		return true;
 	}
 }
