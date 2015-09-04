@@ -102,7 +102,7 @@ public class EntityPlayerSPHook extends EntityPlayerSP{
 
 	@Override
 	public boolean interactWith(Entity en) {
-		
+
 		EventInteractWithEntity e = new EventInteractWithEntity(en);
 
 		EventManager.call(e);
@@ -140,17 +140,16 @@ public class EntityPlayerSPHook extends EntityPlayerSP{
 			String[] response = Client.getClient().getCommandManager().run(parts);
 
 			if(response != null){
-				
+
 				for(String line : response){
 					Client.getClient().addChat(line);
 				}
-				
+
 			}
 
-			return;
+		}else{
+			super.sendChatMessage(message);
 		}
-
-		super.sendChatMessage(message);
 	}
-	
+
 }
