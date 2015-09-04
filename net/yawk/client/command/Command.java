@@ -7,9 +7,7 @@ import net.yawk.client.Client;
 
 public abstract class Command {
 	
-	private String name;
-	private String call;
-	private String desc;
+	private String name, call, desc;
 	
 	protected Minecraft mc;
 	
