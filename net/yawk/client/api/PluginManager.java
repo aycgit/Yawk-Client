@@ -296,8 +296,8 @@ public class PluginManager {
 
 						PluginData data = downloadQueue.poll();
 						
-						File pluginFile = new File(plugins, data.getFileName());
-						File iconFile = new File(icons, data.getFileName());
+						File pluginFile = new File(plugins, data.getJarName());
+						File iconFile = new File(icons, data.getIconName());
 						
 						try {
 							

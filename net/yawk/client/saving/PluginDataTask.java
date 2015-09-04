@@ -43,7 +43,13 @@ public class PluginDataTask implements DataTask{
 				if(last.getVersion() < newData.getVersion()){
 					//GET NEW VERSION DOWNLOADED
 					System.out.println("DOWNLOADING NEW PLUGIN VERSION: "+newData.getName()+" ("+newData.getVersion()+")");
-					new File(new File(Client.getFullDir(), "plugins"), last.getName()).delete();
+					
+					File plugins = new File(Client.getFullDir(), "plugins");
+					new File(plugins, last.getJarName()).delete();
+					
+					File icons = new File(plugins, "icons");
+					new File(icons, last.getIconName()).delete();
+					
 					Client.getClient().getPluginManager().downloadPlugin(newData);
 				}
 			}

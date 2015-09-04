@@ -37,6 +37,14 @@ public class PluginData {
 		return version;
 	}
 	
+	public final String getJarName(){
+		return this.fileName + ".jar";
+	}
+	
+	public final String getIconName(){
+		return this.fileName + "_icon.png";
+	}
+	
 	public boolean getWasEnabled() {
 		return wasEnabled;
 	}
