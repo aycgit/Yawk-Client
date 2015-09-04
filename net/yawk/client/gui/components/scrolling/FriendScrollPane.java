@@ -30,7 +30,7 @@ public class FriendScrollPane extends PlayerScrollPane{
 
 	@Override
 	protected boolean isValidName(String username) {
-		return username != mc.session.getUsername();
+		return !username.equalsIgnoreCase(mc.session.getUsername());
 	}
 	
 }
