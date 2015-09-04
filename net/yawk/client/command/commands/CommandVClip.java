@@ -17,19 +17,13 @@ public class CommandVClip extends Command {
 	
 	@Override
 	public void runCommand(CommandManager cm, Arguments args) {
-		
-		if(args.getBoolean("pitch")){
-			mc.thePlayer.rotationPitch = -90;
-		}
-		
-		mc.thePlayer.setPosition(mc.thePlayer.posX, mc.thePlayer.posY+args.getInteger("height"), mc.thePlayer.posX);
+		mc.thePlayer.setPosition(mc.thePlayer.posX, mc.thePlayer.posY+args.getInteger("height"), mc.thePlayer.posZ);
 	}
 
 	@Override
 	public Argument[] getArguments(CommandManager cm) {
 		return new Argument[]{
 				new Argument("height", false, cm.INTEGER),
-				new Argument("pitch", true, cm.BOOLEAN),
 		};
 	}
 }
