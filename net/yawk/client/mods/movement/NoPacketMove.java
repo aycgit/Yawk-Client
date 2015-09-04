@@ -27,7 +27,9 @@ public class NoPacketMove extends Mod{
 	}
 	
 	private boolean isMoving(){
-		return mc.gameSettings.keyBindForward.getIsKeyPressed() || mc.gameSettings.keyBindLeft.getIsKeyPressed() || mc.gameSettings.keyBindRight.getIsKeyPressed() ||  mc.gameSettings.keyBindBack.getIsKeyPressed() || mc.gameSettings.keyBindJump.getIsKeyPressed() || mc.gameSettings.keyBindSneak.getIsKeyPressed();
+		return mc.thePlayer.motionX != 0 
+				|| mc.thePlayer.motionY != 0 
+				|| mc.thePlayer.motionZ != 0;
 	}
 
 }
