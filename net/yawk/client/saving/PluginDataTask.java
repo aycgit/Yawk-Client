@@ -31,7 +31,7 @@ public class PluginDataTask implements DataTask{
 		
 		for(JsonElement el : arr){
 			JsonObject json = el.getAsJsonObject();
-			lastInstalledData.add(new PluginData(json.get("name").getAsString(), json.get("description").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), json.get("enabled").getAsBoolean(), json.get("privatePlugin").getAsBoolean()));
+			lastInstalledData.add(new PluginData(json.get("name").getAsString(), json.get("description").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("icon").getAsString(), json.get("version").getAsInt(), json.get("enabled").getAsBoolean(), json.get("privatePlugin").getAsBoolean()));
 		}
 		
 		//Check if a new update is available
@@ -58,17 +58,7 @@ public class PluginDataTask implements DataTask{
 				if(newData != null){
 					try {
 						Client.getClient().getPluginManager().addPlugin(newData);
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					} catch (InstantiationException e) {
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						e.printStackTrace();
-					} catch (DependancyNotInstalledException e) {
-						e.printStackTrace();
-					} catch (DependancyNotFoundException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
@@ -89,6 +79,7 @@ public class PluginDataTask implements DataTask{
 			json.addProperty("description", data.getDescription());
 			json.addProperty("file", data.getFilePath());
 			json.addProperty("filename", data.getFileName());
+			json.addProperty("icon", data.getIconPath());
 			json.addProperty("version", data.getVersion());
 			json.addProperty("enabled", Client.getClient().getPluginManager().pluginWindows.containsKey(data));
 			json.addProperty("privatePlugin", data.isPrivatePlugin());
