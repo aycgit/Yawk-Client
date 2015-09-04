@@ -23,4 +23,9 @@ public class StringDataType extends DataType{
 		return "";
 	}
 
+	@Override
+	public String getError() {
+		return "%s should be a string of characters";
+	}
+
 }

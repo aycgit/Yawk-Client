@@ -19,20 +19,16 @@ public class CommandToggle extends Command {
 	@Override
 	public void runCommand(CommandManager cm, Arguments args) {
 		
-		Mod m = Client.getClient().getModManager().getModByName(args.get("name"));
+		Mod m = args.getMod("mod");
 		
-		if(m != null){
-			Client.getClient().getModManager().toggle(m);
-			chat("Mod "+m.getName()+" set to "+ (m.isEnabled()? "enabled":"disabled"));
-		}else{
-			chat("Mod not found!");
-		}
+		Client.getClient().getModManager().toggle(m);
+		chat("Mod "+m.getName()+" set to "+ (m.isEnabled()? "enabled":"disabled"));
 	}
 
 	@Override
 	public Argument[] getArguments(CommandManager cm) {
 		return new Argument[]{
-				new Argument("name", false, cm.STRING),
+				new Argument("mod", false, cm.MOD),
 		};
 	}
 }

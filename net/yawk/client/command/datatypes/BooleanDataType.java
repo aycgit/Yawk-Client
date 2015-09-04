@@ -22,5 +22,10 @@ public class BooleanDataType extends DataType<Boolean>{
 	public Boolean getDefault() {
 		return false;
 	}
+
+	@Override
+	public String getError() {
+		return "%s should be a boolean";
+	}
 	
 }

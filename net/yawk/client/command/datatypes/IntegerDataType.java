@@ -22,5 +22,10 @@ public class IntegerDataType extends DataType<Integer>{
 	public Integer getDefault() {
 		return 0;
 	}
+
+	@Override
+	public String getError() {
+		return "%s should be a number with no decimal places";
+	}
 	
 }

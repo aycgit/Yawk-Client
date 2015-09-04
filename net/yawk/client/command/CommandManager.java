@@ -11,14 +11,15 @@ import net.yawk.client.utils.ReflectionUtils;
 
 public class CommandManager {
 
-	public ArrayList<Command> commandsList;
+	public List<Command> commandsList;
 	public static String PREFIX = ".";
 
 	public BooleanDataType BOOLEAN = new BooleanDataType();
 	public IntegerDataType INTEGER = new IntegerDataType();
 	public StringDataType STRING = new StringDataType();
 	public StringDataType MULTISPACE_STRING = new StringDataType();
-
+	public ModDataType MOD = new ModDataType();
+	
 	public CommandManager() {
 		commandsList = new ArrayList<Command>();
 		this.addClassesFromPackage("net.yawk.client.command.commands");
@@ -35,7 +36,7 @@ public class CommandManager {
 		}
 	}
 	
-	public ArrayList<Command> getCommands() {
+	public List<Command> getCommands() {
 		return commandsList;
 	}
 
@@ -76,9 +77,9 @@ public class CommandManager {
 					if(arg.getType().isValid(input)){
 						values.put(arg.getName(), arg.getType().getValue(input));
 					}else{
-						return new String[]{ "Invalid argument type " + Chars.QUOTE + arg.getName() + Chars.QUOTE + 
-								" was provided as " +Chars.QUOTE + input + Chars.QUOTE + 
-								" but needs to be in " + arg.getType().getName() +" form" };
+						return new String[]{
+								String.format("Error: " + arg.getType().getError(), Chars.QUOTE + input + Chars.QUOTE)
+						};
 					}
 
 				}else{
