@@ -129,8 +129,8 @@ public class GuiClickable extends GuiScreen {
 	private void initEnabledModsWindow(ModManager modManager){
 
 		Window enabledMods = new Window("Enabled", modManager, 85);
-		windows.add(enabledMods);
 		enabledMods.addComponent(new EnabledModsDisplay());
+		windows.add(enabledMods);
 	}
 
 	private void moveWindows(){
@@ -143,6 +143,13 @@ public class GuiClickable extends GuiScreen {
 		}
 	}
 
+	public void onModManagerChange(){
+		
+		for(Window win : windows){
+			win.onModManagerChange();
+		}
+	}
+	
 	@Override
 	public void drawScreen(int x, int y, float f){
 

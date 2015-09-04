@@ -29,6 +29,10 @@ public abstract class AbstractComponent {
 		
 	}
 	
+	public void onModManagerChange(){
+		
+	}
+	
 	public int getWidth(){
 		return 85;
 	}

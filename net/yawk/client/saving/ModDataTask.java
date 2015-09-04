@@ -39,6 +39,8 @@ public class ModDataTask implements DataTask{
 				}
 			}
 		}
+		
+		Client.getClient().getGui().onModManagerChange();
 	}
 
 	@Override

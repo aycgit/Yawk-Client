@@ -117,7 +117,15 @@ public class Window implements IRectangle{
 		}
 	}
 	
+	public void onModManagerChange(){
+		
+		for(AbstractComponent comp : components){
+			comp.onModManagerChange();
+		}
+	}
+
 	public void keyPress(char c, int key) {
+		
 		for(AbstractComponent comp : components){
 			comp.keyPress(key, c);
 		}
