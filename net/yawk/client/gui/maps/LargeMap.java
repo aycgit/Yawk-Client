@@ -41,7 +41,7 @@ public class LargeMap {
 	private EventListener listener;
 	private Map<String,Integer> factionColours;
 	private BiMap<String,List<ChunkData>> factionChunkMap;
-	private int vID = -1, fontRendererID;
+	private int vID = -1;
 	private boolean showChunks, cavefinder, factions, changed;
 	
 	public LargeMap(ColourModifier colourModifier){
@@ -51,8 +51,6 @@ public class LargeMap {
 		factionColours = new HashMap<String,Integer>();
 		factionChunkMap = HashBiMap.create();
 		createFactionListener();
-		
-		fontRendererID =  mc.getTextureManager().getTexture(mc.fontRendererObj.locationFontTexture).getGlTextureId();
 	}
 	
 	public void draw(int x, int y, double scale){
@@ -91,7 +89,7 @@ public class LargeMap {
 		
 		glTranslated(-x, -y, 0);
 		
-		glBindTexture(GL_TEXTURE_2D, fontRendererID);
+		GuiUtils.rebindFontRenderer();
 	}
 	
 	private int getTexture(){

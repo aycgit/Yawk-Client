@@ -48,8 +48,8 @@ import com.google.gson.JsonParser;
  */
 public class PluginManager {
 
-	private File plugins = new File(Client.getFullDir(), "plugins");
-	private File icons = new File(plugins, "icons");
+	public File plugins = new File(Client.getFullDir(), "plugins");
+	public File icons = new File(plugins, "icons");
 	
 	public List<PluginData> pluginData = new ArrayList<PluginData>();
 	private Queue<PluginData> downloadQueue = new ConcurrentLinkedQueue<PluginData>();
