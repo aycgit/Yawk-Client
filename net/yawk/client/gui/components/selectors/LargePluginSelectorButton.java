@@ -3,6 +3,7 @@ package net.yawk.client.gui.components.selectors;
 import java.io.File;
 import java.io.IOException;
 
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
@@ -41,6 +42,7 @@ public class LargePluginSelectorButton extends SelectorButton{
 			GuiUtils.drawRect(getX(), getY(), getX()+rect.getWidth(), getY()+getHeight(), 0x2FFFFFFF);
 		}
 		
+		GL11.glColor4f(1, 1, 1, 1);
 		icon.bind();
 		GuiUtils.drawCorrectTexturedModalRect(getX() + 2, getY() + 2, getX() + 24, getY() + 24);
 		
