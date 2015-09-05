@@ -17,7 +17,7 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 	protected int height, viewportHeight, dragged, mouseYOffset;
 	private boolean dragging;
 	
-	private static int BAR_HEIGHT = 12, BAR_WIDTH = 4;
+	private static int BAR_WIDTH = 4;
 	
 	public ScrollPane(int viewportHeight){
 		this.viewportHeight = viewportHeight;
@@ -26,12 +26,14 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 	@Override
 	public void draw(int x, int y) {
 		
+		int barHeight = getBarHeight();
+		
 		if(dragging){
 			
 			dragged = y - getY() + mouseYOffset;
 			
-			if(dragged > viewportHeight-BAR_HEIGHT){
-				dragged = viewportHeight-BAR_HEIGHT;
+			if(dragged > viewportHeight-barHeight){
+				dragged = viewportHeight-barHeight;
 			}
 			
 			if(dragged < 0){
@@ -41,9 +43,9 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 		
 		GuiUtils.drawRect(getX() + rect.getWidth() - BAR_WIDTH - 1, getY(), getX() + rect.getWidth(), getY() + viewportHeight, 0x1FCFCFCF);
 		
-		GuiUtils.drawRect(getX() + rect.getWidth() - BAR_WIDTH - 1, getY() + dragged, getX() + rect.getWidth(), getY() + dragged + BAR_HEIGHT, 0x4FFFFFFF);
+		GuiUtils.drawRect(getX() + rect.getWidth() - BAR_WIDTH - 1, getY() + dragged, getX() + rect.getWidth(), getY() + dragged + barHeight, 0x4FFFFFFF);
 		
-		int drag = getScrollHeight();
+		int drag = getScrollHeight(barHeight);
 		
 		Scissor.enableScissoring();
 		Scissor.scissor(getX(), getY(), rect.getWidth(), viewportHeight);
@@ -65,12 +67,12 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 		Scissor.disableScissoring();
 	}
 	
-	public int getScrollHeight(){
-		return (int) ((float)(dragged/(float)(viewportHeight-BAR_HEIGHT)) * (height-viewportHeight));
+	public int getScrollHeight(int barHeight){
+		return (int) ((float)(dragged/(float)(viewportHeight-barHeight)) * (height-viewportHeight));
 	}
 	
-	public boolean mouseOverBar(int x, int y, int cx, int cy){
-		return x >= cx + rect.getWidth() - BAR_WIDTH - 1 && x < cx + rect.getWidth() && y > cy + dragged && y <= cy + dragged + BAR_HEIGHT;
+	public boolean mouseOverBar(int x, int y, int cx, int cy, int barHeight){
+		return x >= cx + rect.getWidth() - BAR_WIDTH - 1 && x < cx + rect.getWidth() && y > cy + dragged && y <= cy + dragged + barHeight;
 	}
 	
 	public boolean mouseOverBarArea(int x, int y, int cx, int cy){
@@ -83,14 +85,17 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 	
 	@Override
 	public void mouseClicked(int x, int y) {
-		if(mouseOverBar(x, y, getX(), getY())){
+		
+		int barHeight = getBarHeight();
+		
+		if(mouseOverBar(x, y, getX(), getY(), barHeight)){
 			dragging = true;
 			
 			mouseYOffset = (getY() + dragged) - y;
 		}else{
 			
 			int h = 0;
-			int drag = getScrollHeight();
+			int drag = getScrollHeight(barHeight);
 			
 			if(isWithinScrollPane(x, y, getX(), getY())){
 				for(AbstractComponent c : components){
@@ -104,6 +109,29 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 				}
 			}
 		}
+	}
+	
+	private int getBarHeight(){
+		
+		int h = 0;
+		
+		for(AbstractComponent comp : components){
+			h += comp.getHeight();
+		}
+		
+		float contentRatio = viewportHeight / h;
+		
+		int barHeight = (int) (viewportHeight * contentRatio);
+		
+		if(barHeight < 20){
+			barHeight = 20;
+		}
+		
+		if(barHeight > viewportHeight){
+			barHeight = viewportHeight;
+		}
+		
+		return barHeight;
 	}
 	
 	@Override
