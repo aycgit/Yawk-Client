@@ -48,7 +48,7 @@ public class PluginDownloadButton extends Button{
 					try {
 						Client.getClient().getPluginManager().addPlugin(selected);
 					} catch (DependancyNotInstalledException e) {
-						Client.getClient().addChat("Error - Plugin dependancy not installed: "+e.getPlugin().getName());
+						Client.getClient().addChat("Error - Plugin dependancy not installed: "+e.getDependancy().name());
 					} catch (DependancyNotFoundException e) {
 						Client.getClient().addChat("Error - Plugin dependancy not found or installed: "+e.getDependancy().name());
 					} catch (Exception e) {

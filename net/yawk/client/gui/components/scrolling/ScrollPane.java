@@ -122,7 +122,7 @@ public class ScrollPane extends AbstractComponent implements IRectangle{
 		for(AbstractComponent comp : components){
 			h += comp.getHeight();
 		}
-				
+		
 		float contentRatio = viewportHeight / h;
 		
 		int barHeight = (int) (viewportHeight * contentRatio);
