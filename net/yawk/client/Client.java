@@ -130,13 +130,14 @@ public class Client {
 			
 			public void run(){
 				
-				fileManager.loadSecondarySettings();
-				
 				try {
 					pluginManager.load();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
+				fileManager.loadSecondarySettings();
+				
 			}
 			
 		}).start();

@@ -96,7 +96,7 @@ public class PluginManager {
 		//Downloads any plugins we don't have downloaded yet
 		for(PluginData available : pluginData){
 
-			File pluginFile = new File(plugins, available.getFileName());
+			File pluginFile = new File(plugins, available.getJarName());
 
 			if(!pluginFile.exists()){
 				this.downloadPlugin(available);
