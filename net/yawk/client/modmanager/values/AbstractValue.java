@@ -22,8 +22,6 @@ public abstract class AbstractValue<T>{
 		this.registry = registry;
 		this.name = name;
 		this.saveName = saveName;
-		
-		System.out.println(saveName);
 	}
 	
 	public String getName() {

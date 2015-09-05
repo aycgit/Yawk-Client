@@ -130,7 +130,6 @@ public class PluginManager {
 		String name = ClientUtils.stripExtension(jar.getName());
 
 		for(PluginData data : pluginData){
-			System.out.println("NAME: "+data.getName());
 			if(data.getName().equals(name)){
 				return data;
 			}

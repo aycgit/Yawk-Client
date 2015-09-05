@@ -29,7 +29,6 @@ public class ValuesRegistry {
 	
 	public void set(String name, Object object){
 		//We can't use Map.replace because it's only in Java 8
-		System.out.println("Value set: "+name);
 		registry.remove(name);
 		registry.put(name, object);
 	}
