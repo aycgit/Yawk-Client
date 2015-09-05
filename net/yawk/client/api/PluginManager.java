@@ -160,7 +160,7 @@ public class PluginManager {
 	 */
 	public void addPlugin(PluginData plugin) throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException, DependancyNotInstalledException, DependancyNotFoundException{
 
-		File jar = new File(plugins, plugin.getFileName());
+		File jar = new File(plugins, plugin.getJarName());
 
 		Client.getClient().log("ADDING PLUGIN: "+jar.getPath());
 
