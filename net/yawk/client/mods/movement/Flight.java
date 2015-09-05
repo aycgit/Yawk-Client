@@ -65,7 +65,7 @@ public class Flight extends Mod{
 			p.motionY = look.yCoord * sp;
 			p.motionZ = look.zCoord * sp;
 			
-		}else if(Keyboard.isKeyDown(mc.gameSettings.keyBindForward.getKeyCode()) && focus){
+		}else if(Keyboard.isKeyDown(mc.gameSettings.keyBindBack.getKeyCode()) && focus){
 			
 			p.motionX = -look.xCoord * sp;
 			p.motionY = -look.yCoord * sp;
