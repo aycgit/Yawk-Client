@@ -197,6 +197,12 @@ public class Window implements IRectangle{
 		updateSize();
 	}
 	
+	public void addComponentRaw(AbstractComponent c){
+		this.components.add(c);
+		c.setRectangle(this);
+		c.init();
+	}
+	
 	@Override
 	public void updateSize(){
 		
