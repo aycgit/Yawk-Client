@@ -3,6 +3,7 @@ package net.yawk.client.utils;
 import java.text.DecimalFormat;
 import java.util.Random;
 
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.network.Packet;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.yawk.client.Client;
@@ -118,5 +119,15 @@ public class ClientUtils {
 		}
 		
 		return true;
+	}
+	
+	public static int getScreenWidth() {
+		ScaledResolution sr = new ScaledResolution(Client.getClient().getMinecraft(), Client.getClient().getMinecraft().displayWidth, Client.getClient().getMinecraft().displayHeight);
+		return sr.getScaledWidth();
+	}
+
+	public static int getScreenHeight() {
+		ScaledResolution sr = new ScaledResolution(Client.getClient().getMinecraft(), Client.getClient().getMinecraft().displayWidth, Client.getClient().getMinecraft().displayHeight);
+		return sr.getScaledHeight();
 	}
 }
