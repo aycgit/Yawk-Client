@@ -6,6 +6,7 @@ Current Main Devs:
 * FeS
 * Arnold
 
+
 The Minecraft source code has been hidden from this repository for copyright reasons, however you can download the full source code here (accurate as of commit #180):
 http://yawk.net/downloads/Yawk%20Client%20Source.rar
 
