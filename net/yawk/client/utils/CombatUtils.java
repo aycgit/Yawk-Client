@@ -40,24 +40,21 @@ public class CombatUtils {
 		return entity instanceof EntityLiving && isAttackable((EntityLiving)entity);
 	}
 
-	//TODO: make this more sophisticated
 	public static boolean isAttackable(EntityLivingBase entity){
 		return isAttackableBase(entity);
 	}
 
-	//TODO: add some stuff to the player check
 	public static boolean isAttackable(EntityPlayer player){
-		return isAttackableBase(player);
+		return isAttackableBase(player) && !Client.getClient().getFriendManager().getFriendType(player.getName()).isProtected();
 	}
 
 	private static boolean isAttackableBase(EntityLivingBase entity){
 		return Client.getClient().getMinecraft().thePlayer.canEntityBeSeen(entity) 
 				&& entity.getHealth() > 0 
 				&& !entity.isInvisible() 
-				&& entity.ticksExisted > 60 
-				&& Client.getClient().getPlayer().getDistanceToEntity(entity) <= 4.2;
+				&& entity.ticksExisted > 20;
 	}
-
+	
 	public static void faceEntity(Entity e, boolean silent){
 		
 		double x = e.posX - Client.getClient().getPlayer().posX;
@@ -66,7 +63,7 @@ public class CombatUtils {
 		double d1 = (Client.getClient().getPlayer().posY + (double)Client.getClient().getPlayer().getEyeHeight())-(e.posY+(double)e.getEyeHeight());
 		double d3 = MathHelper.sqrt_double(x*x+z*z);
 		float f = (float)((Math.atan2(z, x)*180D)/Math.PI)-90F;
-		float f1= (float)(-((Math.atan2(d1, d3)*180D)/Math.PI));
+		float f1 = (float)(-((Math.atan2(d1, d3)*180D)/Math.PI));
 		
 		if(silent){
 			ClientUtils.sendPacket(new C03PacketPlayer.C05PacketPlayerLook(f, f1, Client.getClient().getPlayer().onGround));

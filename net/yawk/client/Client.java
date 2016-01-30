@@ -1,77 +1,60 @@
 package net.yawk.client;
 
-import io.netty.buffer.Unpooled;
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.apache.commons.codec.binary.Base64;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.lwjgl.input.Keyboard;
-
-import com.darkmagician6.eventapi.EventManager;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPotion;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.nbt.NBTException;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.client.C03PacketPlayer;
-import net.minecraft.network.play.client.C11PacketEnchantItem;
-import net.minecraft.network.play.client.C16PacketClientStatus;
-import net.minecraft.network.play.client.C17PacketCustomPayload;
-import net.minecraft.network.play.client.C18PacketSpectate;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHealth;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ResourceLocation;
 import net.yawk.client.api.PluginManager;
 import net.yawk.client.cameras.Camera;
+import net.yawk.client.command.CommandManager;
 import net.yawk.client.events.EventKeyPress;
+import net.yawk.client.friends.FriendManager;
 import net.yawk.client.gui.GuiClickable;
 import net.yawk.client.gui.hub.GuiHub;
-import net.yawk.client.hooks.EntityPlayerSPHook;
 import net.yawk.client.hooks.EntityRendererHook;
 import net.yawk.client.hooks.ItemRendererHook;
 import net.yawk.client.hooks.RenderGlobalHook;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.ModManager;
 import net.yawk.client.modmanager.values.ValuesRegistry;
+import net.yawk.client.mods.combat.NoFlinch;
 import net.yawk.client.mods.world.HideClient;
+import net.yawk.client.mods.world.Perception;
 import net.yawk.client.saving.FileManager;
 import net.yawk.client.utils.ClientSession;
-import net.yawk.client.utils.ClientUtils;
+
+import org.lwjgl.input.Keyboard;
+
+import com.darkmagician6.eventapi.EventManager;
 
 public class Client {
 	
+	public static String VERSION = "v2.5";
+	
 	private static Client client;
 	
-	public GuiClickable gui;
-	public GuiHub hub;
-	private FontRenderer fontRenderer;
 	private Minecraft mc;
-	private ClientSession session;
-	private ModManager modManager;
-	private PluginManager pluginManager;
-	private FileManager fileManager;
-	private ValuesRegistry valuesRegistry;
+	private FontRenderer fontRenderer;
 	private Logger logger;
+	
+	public GuiHub hub;
+	public GuiClickable gui;
 	private List<Camera> cameras;
+	private ClientSession session;
+	
+	private ModManager modManager;
+	private FileManager fileManager;
+	private PluginManager pluginManager;
+	private FriendManager friendManager;
+	private CommandManager commandManager;
+	private ValuesRegistry valuesRegistry;
 	
 	public Client(Minecraft mc){
 		this.mc = mc;
@@ -80,44 +63,57 @@ public class Client {
 	
 	public void init(){
 		
-		initHooks(this.mc);
+		logger = Logger.getGlobal();
+		
+		RenderGlobalHook renderGlobalHook = new RenderGlobalHook(mc);
+		mc.renderGlobal = renderGlobalHook;
+		
+		//This NEEDS to go before entityRenderer because entityRenderer caches the value of Minecraft.getItemRenderer
+		mc.itemRenderer = new ItemRendererHook(mc);
+		
+		EntityRendererHook entityRendererHook = new EntityRendererHook(mc, mc.getResourceManager());
+		mc.entityRenderer = entityRendererHook;
+		
+		authenticateUser();
+		
+		loadPrimaryFiles();
+		
+		createClient();
+		
+		loadFiles();
+		
+		addShutdownHook();
+		
+		entityRendererHook.noFlinch = modManager.getMod(NoFlinch.class);
+		renderGlobalHook.perception = (Perception) Client.getClient().getModManager().getMod(Perception.class);
+	}
+	
+	private void authenticateUser(){
 		
 		//TODO: READ USERNAME AND PASSWORD FROM FILE
 		//TODO: AUTHENTICATION
 		session = new ClientSession("Name", "348443568", false);
+	}
+	
+	private void loadPrimaryFiles(){
 		
-		logger = Logger.getGlobal();
-				
-		this.valuesRegistry = new ValuesRegistry();
-		this.fileManager = new FileManager(this);
+		valuesRegistry = new ValuesRegistry();
+		fileManager = new FileManager(this);
 		fileManager.loadClientSettings();
+	}
+	
+	private void createClient(){
 		
-		this.fontRenderer = mc.fontRendererObj;
-		this.modManager = new ModManager();
-		this.hub = new GuiHub(this);
-		this.gui = new GuiClickable(modManager);
-		this.pluginManager = new PluginManager();
-		
-		(new Thread(){
-			
-			public void run(){
-				
-				fileManager.loadSecondarySettings();
-				
-				try {
-					pluginManager.load();
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-			
-		}).start();
+		fontRenderer = mc.fontRendererObj;
+		modManager = new ModManager();
+		hub = new GuiHub(this);
+		gui = new GuiClickable(modManager);
+		pluginManager = new PluginManager();
+		commandManager = new CommandManager();
+		friendManager = new FriendManager();
+	}
+	
+	private void addShutdownHook(){
 		
 		Runtime.getRuntime().addShutdownHook(new Thread(){
 			@Override
@@ -128,14 +124,23 @@ public class Client {
 		});
 	}
 	
-	private void initHooks(Minecraft mc){
+	private void loadFiles(){
 		
-		mc.renderGlobal = new RenderGlobalHook(mc);
-		
-		//This NEEDS to go before entityRenderer because entityRenderer caches the value of Minecraft.getItemRenderer
-		mc.itemRenderer = new ItemRendererHook(mc);
-		
-		mc.entityRenderer = new EntityRendererHook(mc, mc.getResourceManager());
+		(new Thread(){
+			
+			public void run(){
+				
+				try {
+					pluginManager.load();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				fileManager.loadSecondarySettings();
+				
+			}
+			
+		}).start();
 	}
 	
 	public void log(String print){
@@ -190,8 +195,12 @@ public class Client {
 		return fileManager;
 	}
 	
+	public FriendManager getFriendManager() {
+		return friendManager;
+	}
+	
 	public void addChat(String text){
-		Client.getClient().getPlayer().addChatComponentMessage(new ChatComponentTranslation(text));
+		Client.getClient().getPlayer().addChatComponentMessage(new ChatComponentTranslation("[Yawk] " + text));
 	}
 	
 	public void keyPressed(int key){
@@ -240,6 +249,10 @@ public class Client {
 	
 	public List<Camera> getCameras() {
 		return cameras;
+	}
+	
+	public CommandManager getCommandManager() {
+		return commandManager;
 	}
 	
 	public void registerCamera(Camera camera){

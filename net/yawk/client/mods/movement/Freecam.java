@@ -35,7 +35,7 @@ public class Freecam extends Mod{
 	@EventTarget
 	public void onTick(EventTick e){
 		if(!flightMod.isEnabled()){
-			Flight.fly();
+			//Flight.fly(); TODO: CLIENT fix freecam flying
 		}
 	}
 	

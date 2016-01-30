@@ -29,10 +29,8 @@ public class GuiHub extends GuiScreen {
 	public int cellSize = 100;
 	public int cellPadding = 5;
 
-	private int transition, slateIndex, rotation;
-	private Slate lastSlate;
-	private boolean direction;
-
+	private int slateIndex, rotation;
+	
 	private State state = State.IDLE;
 	private String trail = "";
 	private MillisecondTimer timer = new FlatTimer(5);
@@ -92,60 +90,27 @@ public class GuiHub extends GuiScreen {
 
 	public void renderSlates(int x, int y){
 
-		if(lastSlate != null){
-
-			if(direction){
-				
-				transition+=20;
-				
-				glTranslatef(transition, 0, 0);
-				lastSlate.renderSlate(x, y);
-				glTranslatef(-width, 0, 0);
-				slates.get(slateIndex).renderSlate(x, y);
-				glTranslatef(transition+width, 0, 0);
-				
+		if(needsLeft()){
+			if(mouseOverLeft(x, y)){
+				GuiUtils.drawBorderedRect(buttonPaddingX, this.height/2 - 20, buttonPaddingX+buttonWidth, this.height/2 + 20, 1, 0xFFFFFFFF, 0x5F000000);
+				GuiUtils.drawTriangle(buttonPaddingX + buttonWidth/2, this.height/2, 270, 0xFFFFFFFF);
 			}else{
-				
-				transition-=20;
-				
-				glTranslatef(transition, 0, 0);
-				lastSlate.renderSlate(x, y);
-				glTranslatef(width, 0, 0);
-				slates.get(slateIndex).renderSlate(x, y);
-				glTranslatef(transition-width, 0, 0);
+				GuiUtils.drawRect(buttonPaddingX, this.height/2 - 20, buttonPaddingX+buttonWidth, this.height/2 + 20, 0x5F000000);
+				GuiUtils.drawTriangle(buttonPaddingX + buttonWidth/2, this.height/2, 270, 0xFF9F9F9F);
 			}
-			
-			if(Math.abs(transition) >= width-20){
-				transition = 0;
-				lastSlate.close();
-				lastSlate = null;
-				colourModifier.clear();
-			}
-			
-		}else{
-			
-			if(needsLeft()){
-				if(mouseOverLeft(x, y)){
-					GuiUtils.drawBorderedRect(buttonPaddingX, this.height/2 - 20, buttonPaddingX+buttonWidth, this.height/2 + 20, 1, 0xFFFFFFFF, 0x5F000000);
-					GuiUtils.drawTriangle(buttonPaddingX + buttonWidth/2, this.height/2, 270, 0xFFFFFFFF);
-				}else{
-					GuiUtils.drawRect(buttonPaddingX, this.height/2 - 20, buttonPaddingX+buttonWidth, this.height/2 + 20, 0x5F000000);
-					GuiUtils.drawTriangle(buttonPaddingX + buttonWidth/2, this.height/2, 270, 0xFF9F9F9F);
-				}
-			}
-			
-			if(needsRight()){
-				if(mouseOverRight(x, y)){
-					GuiUtils.drawBorderedRect(this.width - buttonPaddingX - buttonWidth, this.height/2 - 20, this.width - buttonPaddingX, this.height/2 + 20, 1, 0xFFFFFFFF, 0x5F000000);
-					GuiUtils.drawTriangle(this.width - buttonPaddingX - buttonWidth/2, this.height/2, 90, 0xFFFFFFFF);
-				}else{
-					GuiUtils.drawRect(this.width - buttonPaddingX - buttonWidth, this.height/2 - 20, this.width - buttonPaddingX, this.height/2 + 20, 0x5F000000);
-					GuiUtils.drawTriangle(this.width - buttonPaddingX - buttonWidth/2, this.height/2, 90, 0xFF9F9F9F);
-				}
-			}
-			
-			slates.get(slateIndex).renderSlate(x, y);
 		}
+
+		if(needsRight()){
+			if(mouseOverRight(x, y)){
+				GuiUtils.drawBorderedRect(this.width - buttonPaddingX - buttonWidth, this.height/2 - 20, this.width - buttonPaddingX, this.height/2 + 20, 1, 0xFFFFFFFF, 0x5F000000);
+				GuiUtils.drawTriangle(this.width - buttonPaddingX - buttonWidth/2, this.height/2, 90, 0xFFFFFFFF);
+			}else{
+				GuiUtils.drawRect(this.width - buttonPaddingX - buttonWidth, this.height/2 - 20, this.width - buttonPaddingX, this.height/2 + 20, 0x5F000000);
+				GuiUtils.drawTriangle(this.width - buttonPaddingX - buttonWidth/2, this.height/2, 90, 0xFF9F9F9F);
+			}
+		}
+
+		slates.get(slateIndex).renderSlate(x, y);
 	}
 
 	private void drawLoadingScreen(){
@@ -232,31 +197,19 @@ public class GuiHub extends GuiScreen {
 		
 		if(needsLeft() && mouseOverLeft(x,y)){
 
-			lastSlate = slates.get(slateIndex);
-
 			slateIndex++;
 
 			if(slateIndex >= slates.size()){
 				slateIndex = slates.size() - 1;
-				lastSlate = null;
 			}
-
-			direction = true;
-			transition = 0;
-
+			
 		}else if(needsRight() && mouseOverRight(x,y)){
-
-			lastSlate = slates.get(slateIndex);
 
 			slateIndex--;
 
 			if(slateIndex < 0){
 				slateIndex = 0;
-				lastSlate = null;
 			}
-
-			direction = false;
-			transition = 0;
 			
 		}else if(slates.size() > 0){
 			slates.get(slateIndex).mouseClicked(x, y);

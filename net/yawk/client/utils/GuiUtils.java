@@ -1,5 +1,7 @@
 package net.yawk.client.utils;
 
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glBindTexture;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -287,5 +289,16 @@ public class GuiUtils {
         wr.addVertexWithUV(x1, y, 0, 0, 1);
         wr.addVertexWithUV(x, y, 0, 1, 1);
         tes.draw();
+	}
+	
+	private static int fontRendererID = -1;
+	
+	public static void rebindFontRenderer(){
+		
+		if(fontRendererID == -1){
+			fontRendererID =  mc.getTextureManager().getTexture(mc.fontRendererObj.locationFontTexture).getGlTextureId();
+		}
+		
+		glBindTexture(GL_TEXTURE_2D, fontRendererID);
 	}
 }

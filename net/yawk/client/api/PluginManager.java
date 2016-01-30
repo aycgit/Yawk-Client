@@ -48,8 +48,9 @@ import com.google.gson.JsonParser;
  */
 public class PluginManager {
 
-	private File plugins = new File(Client.getFullDir(), "plugins");
-
+	public File plugins = new File(Client.getFullDir(), "plugins");
+	public File icons = new File(plugins, "icons");
+	
 	public List<PluginData> pluginData = new ArrayList<PluginData>();
 	private Queue<PluginData> downloadQueue = new ConcurrentLinkedQueue<PluginData>();
 	public Map<PluginData,Window> pluginWindows = new HashMap<PluginData,Window>();
@@ -69,7 +70,12 @@ public class PluginManager {
 		if(!plugins.exists()){
 			plugins.mkdir();
 		}
-
+		
+		//Create the icons directory
+		if(!icons.exists()){
+			icons.mkdir();
+		}
+		
 		//Get plugins from the website
 		try {
 
@@ -80,7 +86,7 @@ public class PluginManager {
 			for(JsonElement el : arr){
 
 				JsonObject json = el.getAsJsonObject();
-				pluginData.add(new PluginData(json.get("name").getAsString(), json.get("description").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("version").getAsInt(), false, false));
+				pluginData.add(new PluginData(json.get("name").getAsString(), json.get("description").getAsString(), json.get("file").getAsString(), json.get("filename").getAsString(), json.get("icon").getAsString(), json.get("version").getAsInt(), false, false));
 			}
 
 		} catch (IOException e) {
@@ -90,7 +96,7 @@ public class PluginManager {
 		//Downloads any plugins we don't have downloaded yet
 		for(PluginData available : pluginData){
 
-			File pluginFile = new File(plugins, available.getFileName());
+			File pluginFile = new File(plugins, available.getJarName());
 
 			if(!pluginFile.exists()){
 				this.downloadPlugin(available);
@@ -124,7 +130,6 @@ public class PluginManager {
 		String name = ClientUtils.stripExtension(jar.getName());
 
 		for(PluginData data : pluginData){
-			System.out.println("NAME: "+data.getName());
 			if(data.getName().equals(name)){
 				return data;
 			}
@@ -154,7 +159,7 @@ public class PluginManager {
 	 */
 	public void addPlugin(PluginData plugin) throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException, DependancyNotInstalledException, DependancyNotFoundException{
 
-		File jar = new File(plugins, plugin.getFileName());
+		File jar = new File(plugins, plugin.getJarName());
 
 		Client.getClient().log("ADDING PLUGIN: "+jar.getPath());
 
@@ -289,22 +294,15 @@ public class PluginManager {
 					while(!downloadQueue.isEmpty()){
 
 						PluginData data = downloadQueue.poll();
-
-						File pluginFile = new File(plugins, data.getFileName());
-
+						
+						File pluginFile = new File(plugins, data.getJarName());
+						File iconFile = new File(icons, data.getIconName());
+						
 						try {
-
-							URL website = new URL(data.getFilePath());
-							URL url = new URL(data.getFilePath());
-							URLConnection hc = url.openConnection();
-							hc.setRequestProperty("User-Agent", ClientUtils.USER_AGENT);
-							ReadableByteChannel rbc;
-							rbc = Channels.newChannel(hc.getInputStream());
-							FileOutputStream fos = new FileOutputStream(pluginFile);
-							fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-							fos.close();
-							rbc.close();
-
+							
+							downloadFile(data.getFilePath(), pluginFile);
+							downloadFile(data.getIconPath(), iconFile);
+							
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -325,6 +323,19 @@ public class PluginManager {
 		}
 	}
 
+	private void downloadFile(String location, File file) throws IOException{
+		
+		URL url = new URL(location);
+		URLConnection hc = url.openConnection();
+		hc.setRequestProperty("User-Agent", ClientUtils.USER_AGENT);
+		ReadableByteChannel rbc;
+		rbc = Channels.newChannel(hc.getInputStream());
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+		fos.close();
+		rbc.close();
+	}
+	
 	/**
 	 * Removes a plugin from the mod system and the window system
 	 * @param plugin

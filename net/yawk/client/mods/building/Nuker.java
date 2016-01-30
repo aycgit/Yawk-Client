@@ -5,6 +5,7 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
+import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.yawk.client.Client;
@@ -14,12 +15,28 @@ import net.yawk.client.events.EventGuiRender;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
+import net.yawk.client.modmanager.values.AbstractValue;
+import net.yawk.client.modmanager.values.ArrayValue;
 import net.yawk.client.utils.ClientUtils;
+import net.yawk.client.utils.MinecraftUtils;
 
 import com.darkmagician6.eventapi.EventTarget;
 
 @RegisterMod(name = "Nuker", desc = "Break blocks around you", type = Mod.Type.BUILDING)
 public class Nuker extends Mod{
+	
+	private static ArrayValue modeValue;
+	
+	public Nuker(){
+		
+		super(new AbstractValue[]{
+				modeValue = new ArrayValue("Mode", "nuker.mode", Client.getClient().getValuesRegistry(), 0, new String[]{
+					"Normal",
+					"HalfBreak",
+					"Reverse",
+				}),
+		});
+	}
 	
 	private IBlockState block;
 	
@@ -34,6 +51,7 @@ public class Nuker extends Mod{
 	
 	@EventTarget
 	public void onTick(EventTick e){
+		
 		if(block != null)
 		{
 			int maxH = 5;
@@ -55,8 +73,14 @@ public class Nuker extends Mod{
 						
 						if(Client.getClient().getMinecraft().playerController.isInCreativeMode() || id.getBlock().getMaterial() == block.getBlock().getMaterial())
 						{
-							ClientUtils.sendPacket(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.START_DESTROY_BLOCK, new BlockPos(xPos, yPos, zPos), EnumFacing.NORTH));
-							ClientUtils.sendPacket(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK, new BlockPos(xPos, yPos, zPos), EnumFacing.NORTH));
+							if(modeValue.getValue() == 0){
+								MinecraftUtils.sendPacket(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.START_DESTROY_BLOCK, new BlockPos(xPos, yPos, zPos), EnumFacing.NORTH));
+								MinecraftUtils.sendPacket(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK, new BlockPos(xPos, yPos, zPos), EnumFacing.NORTH));
+							}else if(modeValue.getValue() == 1){
+								MinecraftUtils.sendPacket(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.START_DESTROY_BLOCK, new BlockPos(xPos, yPos, zPos), EnumFacing.NORTH));
+							}else if(modeValue.getValue() == 2){
+								MinecraftUtils.sendPacket(new C08PacketPlayerBlockPlacement(new BlockPos(xPos, yPos, zPos), EnumFacing.NORTH.getIndex(), Client.getClient().getPlayer().getHeldItem(), xPos, yPos, zPos));
+							}
 						}
 					}
 				}

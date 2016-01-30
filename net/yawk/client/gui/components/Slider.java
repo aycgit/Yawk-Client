@@ -45,7 +45,7 @@ public class Slider extends AbstractComponent{
 		//GuiUtils.drawRect(cx, cy, cx+panel.getWidth(), cy+getHeight(), 0x2FDFDFDF);
 		GuiUtils.drawRect(slide, getY(), slide+BAR_WIDTH, getY()+getHeight(), 0x7F9F9F9F);
 		
-		String displayString = val.getName()+": "+(val.isRounded()? val.getValue().intValue():ClientUtils.decimalFormat.format(val.getValue()));
+		String displayString = val.getName()+": "+(val.isRounded()? val.getValue().intValue():ClientUtils.sfThree.format(val.getValue()));
 		
 		Client.getClient().getFontRenderer().drawString(displayString, getX() + rect.getWidth()/2 - Client.getClient().getFontRenderer().getStringWidth(displayString)/2, getY() + 2, 0xFFFFFFFF);
 	}
@@ -59,10 +59,15 @@ public class Slider extends AbstractComponent{
 	}
 	
 	@Override
+	public void onGuiClosed() {
+		dragging = false;
+	}
+
+	@Override
 	public void mouseReleased(int mouseX, int mouseY, int state) {
 		dragging = false;
 	}
-	
+
 	protected boolean mouseOverSlider(int x, int y, int cx, int cy){
 		return x > slide && x < slide+BAR_WIDTH && y > cy && y < cy+getHeight();
 	}

@@ -65,7 +65,7 @@ public class Canvas implements IRectangle{
 		this.components.add(c);
 		c.setRectangle(this);
 		c.init();
-		updateHeight();
+		updateSize();
 	}
 	
 	public void clearComponents(){
@@ -74,7 +74,7 @@ public class Canvas implements IRectangle{
 	}
 	
 	@Override
-	public void updateHeight(){
+	public void updateSize(){
 		
 		height = 0;
 		

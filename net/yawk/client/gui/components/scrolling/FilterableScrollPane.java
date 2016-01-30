@@ -30,12 +30,17 @@ public class FilterableScrollPane extends ScrollPane{
 			
 			for(SelectorButton selectorButton : componentsPool){
 				if(selectorButton.getStaticText().toLowerCase().contains(filter)){
-					components.add(selectorButton);
+					this.addComponent(selectorButton);
 				}
 			}
 			
 		}else{
-			components.addAll(componentsPool);
+			
+			for(AbstractComponent comp : componentsPool){
+				this.addComponentRaw(comp);
+			}
+			
+			this.updateSize();
 		}
 	}
 }

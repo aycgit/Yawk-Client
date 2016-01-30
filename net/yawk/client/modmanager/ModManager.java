@@ -94,6 +94,8 @@ public class ModManager {
 			EventManager.call(new EventEnabled(m));
 			m.onEnable();
 		}
+		
+		Client.getClient().getGui().onModManagerChange();
 	}
 	
 	public Mod getMod(Class modClass){

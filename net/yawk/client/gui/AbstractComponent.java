@@ -25,6 +25,14 @@ public abstract class AbstractComponent {
 		
 	}
 	
+	public void onGuiClosed(){
+		
+	}
+	
+	public void onModManagerChange(){
+		
+	}
+	
 	public int getWidth(){
 		return 85;
 	}

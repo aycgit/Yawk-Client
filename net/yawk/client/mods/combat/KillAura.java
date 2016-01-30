@@ -25,23 +25,19 @@ import com.darkmagician6.eventapi.EventTarget;
 @RegisterMod(name = "KillAura", desc = "Kill people near you", type = Mod.Type.COMBAT)
 public class KillAura extends Mod{
 	
-	private MillisecondTimer timer;
-	private MillisecondTimer rotTimer;
+	private MillisecondTimer timer, rotTimer;
 	
-	private static SliderValue delay;
-	private static SliderValue rotDelay;
-	private static SliderValue range;
-	private static BooleanValue silent;
-	private static BooleanValue smooth;
+	private static SliderValue delay, rotDelay, range;
+	private static BooleanValue silent, smooth;
 	
 	public KillAura(){
 		
 		super(new AbstractValue[]{
 				delay = new SliderValue("Hit Delay", "killaura.hitdelay", Client.getClient().getValuesRegistry(), 120, 0, 2000, true),
 				range = new SliderValue("Range", "killaura.range", Client.getClient().getValuesRegistry(), 3.95, 0, 6, true),
+				rotDelay = new SliderValue("Rot Delay", "killaura.rotdelay", Client.getClient().getValuesRegistry(), 20, 0, 100, true),
 				silent = new BooleanValue("Silent", "killaura.silent", Client.getClient().getValuesRegistry(), false),
 				smooth = new BooleanValue("Smooth", "killaura.smooth", Client.getClient().getValuesRegistry(), false),
-				rotDelay = new SliderValue("Rot Delay", "killaura.rotdelay", Client.getClient().getValuesRegistry(), 20, 0, 100, true),
 		});
 		
 		timer = new ValueTimer(delay);
@@ -73,12 +69,7 @@ public class KillAura extends Mod{
 	}
 	
 	@Override
-	public void onEnable() {
-		
-	}
-
+	public void onEnable() {}
 	@Override
-	public void onDisable() {
-		
-	}
+	public void onDisable() {}
 }

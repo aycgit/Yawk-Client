@@ -22,11 +22,13 @@ public class Triggerbot extends Mod{
 	
 	private MillisecondTimer timer;
 	private static SliderValue delay;
+	private static SliderValue range;
 	
 	public Triggerbot(){
 		
 		super(new AbstractValue[]{
 				delay = new SliderValue("Hit Delay", "triggerbot.hitdelay", Client.getClient().getValuesRegistry(), 120, 0, 1000, true),
+				range = new SliderValue("Range", "triggerbot.range", Client.getClient().getValuesRegistry(), 3.95, 0, 6, true),
 		});
 		
 		timer = new ValueTimer(delay);
@@ -34,9 +36,12 @@ public class Triggerbot extends Mod{
 	
 	@EventTarget
 	public void onTick(EventTick e){
+		
 		if(Client.getClient().getMinecraft().objectMouseOver != null && Client.getClient().getMinecraft().objectMouseOver.typeOfHit == MovingObjectType.ENTITY){
+			
 			Entity entity = Client.getClient().getMinecraft().objectMouseOver.entityHit;
-			if(CombatUtils.isAttackable(entity) && timer.output()){
+			
+			if(CombatUtils.isAttackable(entity) && Client.getClient().getPlayer().getDistanceToEntity(entity) < range.getValue() && timer.output()){
 				CombatUtils.hit(entity);
 			}
 		}

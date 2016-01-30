@@ -14,19 +14,4 @@ public class NoFlinch extends Mod{
 		
 	}
 	
-	@EventTarget
-	public void onTick(EventTick e){
-		Client.getClient().getPlayer().hurtTime = 0;
-		Client.getClient().getPlayer().hurtResistantTime = 0;
-	}
-	
-	@Override
-	public void onEnable() {
-		
-	}
-
-	@Override
-	public void onDisable() {
-		
-	}
 }

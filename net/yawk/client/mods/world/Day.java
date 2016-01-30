@@ -1,24 +1,13 @@
 package net.yawk.client.mods.world;
 
-import javax.vecmath.Vector3d;
-
-import net.minecraft.network.play.client.C01PacketChatMessage;
-import net.minecraft.network.play.client.C03PacketPlayer;
-import net.minecraft.network.play.client.C03PacketPlayer.C04PacketPlayerPosition;
 import net.minecraft.network.play.server.S03PacketTimeUpdate;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.world.WorldSettings.GameType;
 import net.yawk.client.Client;
-import net.yawk.client.events.EventMoveEntity;
 import net.yawk.client.events.EventRecievePacket;
-import net.yawk.client.events.EventSendPacket;
 import net.yawk.client.events.EventTick;
 import net.yawk.client.modmanager.Mod;
 import net.yawk.client.modmanager.RegisterMod;
-import net.yawk.client.modmanager.values.ArrayValue;
-import net.yawk.client.modmanager.values.SliderValue;
 import net.yawk.client.modmanager.values.AbstractValue;
-import net.yawk.client.utils.ClientUtils;
+import net.yawk.client.modmanager.values.SliderValue;
 
 import com.darkmagician6.eventapi.EventTarget;
 

@@ -1,12 +1,17 @@
 package net.yawk.client.utils;
 
 import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumChatFormatting;
 import net.yawk.client.Client;
+import net.yawk.client.friends.FriendType;
 
 import org.lwjgl.opengl.GL11;
 
@@ -76,6 +81,62 @@ public class ClientRenderer {
 		
         glColor4f(1, 1, 1, 1);
 		stopDrawing();
+	}
+	
+	public static void drawPlayerNametag(EntityPlayer p, double scale, boolean health){
+		
+		RenderManager rm = Client.getClient().getMinecraft().renderManager;
+		FontRenderer fontRenderer = Client.getClient().getFontRenderer();
+		
+		String displayName = p.getName();
+		
+		FriendType type = Client.getClient().getFriendManager().getFriendType(displayName);
+		
+		if(type != null){
+			displayName = type.getColour() + displayName;
+		}
+		
+		if(health){
+			displayName += " " + EnumChatFormatting.GREEN+(ClientUtils.sfTwo.format(p.getHealth() / 2f));
+		}
+		
+		float r = Client.getClient().getMinecraft().timer.renderPartialTicks;
+		
+		double x = p.lastTickPosX - (p.lastTickPosX - p.posX)*r - rm.renderPosX;
+		double y = p.lastTickPosY - (p.lastTickPosY - p.posY)*r - rm.renderPosY;
+		double z = p.lastTickPosZ - (p.lastTickPosZ - p.posZ)*r - rm.renderPosZ;
+		
+        float tagScale = (float) (Client.getClient().getPlayer().getDistanceToEntity(p) * scale + 0.02f);
+        
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y + p.height + 0.5F, z);
+        GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(-rm.playerViewY, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(rm.playerViewX, 1.0F, 0.0F, 0.0F);
+        GlStateManager.scale(-tagScale, -tagScale, tagScale);
+        GlStateManager.disableLighting();
+        GlStateManager.depthMask(false);
+        GlStateManager.disableDepth();
+        GlStateManager.enableBlend();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        
+        Tessellator tes = Tessellator.getInstance();
+        WorldRenderer wr = tes.getWorldRenderer();
+        
+        GlStateManager.func_179090_x();
+        
+        int halfNameWidth = fontRenderer.getStringWidth(displayName) / 2;
+        
+        GuiUtils.drawRect(-halfNameWidth - 2, -2, halfNameWidth + 1, fontRenderer.FONT_HEIGHT, 0x4F000000);
+        
+        GlStateManager.func_179098_w();
+        
+        fontRenderer.drawString(displayName, -halfNameWidth, 0, p.isSneaking()? 0xFFFFFF00:-1);
+        
+        GlStateManager.enableLighting();
+        GlStateManager.disableBlend();
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.popMatrix();
 	}
 	
 	private static void drawCubeOutline(double x, double y, double z, double x1, double y1, double z1){

@@ -2,8 +2,7 @@ package net.yawk.client.utils;
 
 public class ClientSession {
 
-	private String username;
-	private String sessionID;
+	private String username, sessionID;
 	private boolean isPremium;
 	
 	public ClientSession(String username, String sessionID, boolean isPremium) {

@@ -23,12 +23,14 @@ public class Window implements IRectangle{
 	public static int TITLE_COMPONENT_SPACE = 2;
 	public static int TITLE_SIZE = 12;
 	
+	public int minWidth;
 	public int width;
 	public int height;
 	
 	public Window(String title, ModManager modManager, int width){
 		this.title = title;
 		this.width = width;
+		this.minWidth = width;
 		this.modManager = modManager;
 	}
 	
@@ -61,11 +63,9 @@ public class Window implements IRectangle{
 		}
 		
 		if(extended){
+			
 			drawBodyRect(posX, posY+TITLE_SIZE+TITLE_COMPONENT_SPACE, posX+width, posY+TITLE_SIZE+TITLE_COMPONENT_SPACE+height, titleVisible);
-		}
-		
-		if(extended){
-						
+			
 			for(AbstractComponent c : components){
 				c.draw(x, y);
 			}
@@ -109,10 +109,23 @@ public class Window implements IRectangle{
 	}
 	
 	public void onGuiClosed(){
+		
 		this.dragging = false;
+		
+		for(AbstractComponent comp : components){
+			comp.onGuiClosed();
+		}
 	}
 	
+	public void onModManagerChange(){
+		
+		for(AbstractComponent comp : components){
+			comp.onModManagerChange();
+		}
+	}
+
 	public void keyPress(char c, int key) {
+		
 		for(AbstractComponent comp : components){
 			comp.keyPress(key, c);
 		}
@@ -181,21 +194,29 @@ public class Window implements IRectangle{
 		this.components.add(c);
 		c.setRectangle(this);
 		c.init();
-		updateHeight();
-		
-		if(c.getWidth() > this.width){
-			this.width = c.getWidth();
-		}
+		updateSize();
+	}
+	
+	public void addComponentRaw(AbstractComponent c){
+		this.components.add(c);
+		c.setRectangle(this);
+		c.init();
 	}
 	
 	@Override
-	public void updateHeight(){
+	public void updateSize(){
 		
-		height = 0;
+		this.height = 0;
+		this.width = minWidth;
 		
 		for(AbstractComponent component : components){
+			
 			component.setY(height+TITLE_SIZE);
 			height += component.getHeight();
+			
+			if(component.getWidth() > this.width){
+				this.width = component.getWidth();
+			}
 		}
 	}
 	

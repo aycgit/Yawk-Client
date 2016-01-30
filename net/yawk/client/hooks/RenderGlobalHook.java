@@ -3,6 +3,8 @@ package net.yawk.client.hooks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.Entity;
+import net.yawk.client.Client;
+import net.yawk.client.mods.world.Perception;
 
 //TODO: Use this for something
 public class RenderGlobalHook extends RenderGlobal{
@@ -11,20 +13,12 @@ public class RenderGlobalHook extends RenderGlobal{
 		super(mcIn);
 	}
 
-	@Override
-	public void loadRenderers() {
-		super.loadRenderers();
-	}
-
-	@Override
-	public void onEntityAdded(Entity entityIn) {
-		super.onEntityAdded(entityIn);
-	}
-
-	@Override
-	public void onEntityRemoved(Entity entityIn) {
-		super.onEntityRemoved(entityIn);
-	}
-
+	public Perception perception;
 	
+	@Override
+	public void onEntityAdded(Entity e) {
+		super.onEntityAdded(e);
+		perception.onEntityAdded(e);
+	}
+
 }
